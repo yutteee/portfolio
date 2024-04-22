@@ -15,6 +15,7 @@
     "@astrojs/rss": "^4.0.5",
     "@astrojs/sitemap": "^3.1.4",
     "astro": "^4.6.3",
+    "gsap": "^3.12.5",
     "the-new-css-reset": "^1.11.2",
     "typescript": "^5.4.5"
   }

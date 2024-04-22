@@ -4,14 +4,57 @@ const pageTitle = "Home Page";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <h1 class="title">Hi! I'm Yutteee!</h1>
-  <div class="pc">
-    <div class="monitor"></div>
-    <div class="keyboard"></div>
+  <div class="container" id="container">
+    <h1 class="title" id="title">Hi! I'm Yutteee!</h1>
+    <div class="pc" id="pc">
+      <div class="monitor"></div>
+      <div class="keyboard"></div>
+    </div>
+  </div>
+  <h2 class="title">History</h2>
+  <div>
+    <h3>合同会社KANNON</h3>
+    <p>フェアナビというアクセシビリティオーバーレイSaaSの開発をしています。フロントエンドを中心として、デザインの提案などもしながら業務に取り組んでいます。</p>
   </div>
 </BaseLayout>
 
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const container = document.getElementById('container');
+  const pc = document.getElementById('pc');
+
+  if (!container || !pc) {
+    throw new Error('Element not found');
+  }
+
+  const containerWidth = container.offsetWidth;
+
+  gsap.to(pc, {
+    xPercent: -(containerWidth / 10),
+    ease: 'none',
+    scrollTrigger: {
+      trigger: container,
+      pin: true,
+      scrub: 1,
+      start: 'top top',
+      end: () => `+=${containerWidth}`,
+    }
+  });
+
+</script>
+
 <style>
+  .container {
+    height: calc(100vh);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
   .title {
     font-size: 96px;
     font-weight: 900;

@@ -1,10 +1,10 @@
-const hamburger = document.querySelector('.hamburger');
+const hamburger = document.querySelector(".hamburger");
 
 if (hamburger) {
-  hamburger.addEventListener('click', () => {
-    const navLinks = document.querySelector('.nav-links');
+  hamburger.addEventListener("click", () => {
+    const navLinks = document.querySelector(".nav-links");
     if (navLinks) {
-      navLinks.classList.toggle('expanded');
+      navLinks.classList.toggle("expanded");
     }
   });
 }

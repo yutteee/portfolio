@@ -4,10 +4,31 @@ import Hamburger from "./Hamburger.astro";
 import ThemeIcon from "./ThemeIcon.astro";
 ---
 
-<header>
-  <nav>
+<header class="header">
+  <a href="/" class="logo">Yutteee</a>
+  <nav class="nav">
     <Hamburger />
-    <ThemeIcon />
     <Navigation />
+    <ThemeIcon />
   </nav>
 </header>
+
+<style>
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+  }
+
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+</style>

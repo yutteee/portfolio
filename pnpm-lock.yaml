@@ -20,6 +20,9 @@ dependencies:
   astro:
     specifier: ^4.6.3
     version: 4.6.3(typescript@5.4.5)
+  the-new-css-reset:
+    specifier: ^1.11.2
+    version: 1.11.2
   typescript:
     specifier: ^5.4.5
     version: 5.4.5
@@ -3991,6 +3994,10 @@ packages:
       streamx: 2.16.1
     dev: false
     optional: true
+
+  /the-new-css-reset@1.11.2:
+    resolution: {integrity: sha512-m/JQ/srn+e5SAI7MVCZOJ1hoxoE1w1uA96birT52Y9769GN9e0M4K1PBxlz05Vq4HprX11ASBjM2TcQs4WXnXg==}
+    dev: false
 
   /to-fast-properties@2.0.0:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}

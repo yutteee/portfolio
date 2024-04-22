@@ -1,7 +1,6 @@
 ---
 import "the-new-css-reset";
 import Header from "../components/Header/index.astro";
-import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 const { pageTitle } = Astro.props;
 ---
@@ -16,9 +15,7 @@ const { pageTitle } = Astro.props;
   </head>
   <body>
     <Header />
-    <h1>{pageTitle}</h1>
     <slot />
-    <Footer />
     <script>
       import "../scripts/menu.js";
     </script>

@@ -4,5 +4,36 @@ const pageTitle = "Home Page";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <h1>Hi! I'm Yutteee!</h1>
+  <h1 class="title">Hi! I'm Yutteee!</h1>
+  <div class="pc">
+    <div class="monitor"></div>
+    <div class="keyboard"></div>
+  </div>
 </BaseLayout>
+
+<style>
+  .title {
+    font-size: 96px;
+    font-weight: 900;
+  }
+  .pc {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .monitor {
+    width: 300px;
+    height: 187.5px;
+    background-color: var(--color-white);
+    border-radius: 16px;
+  }
+
+  .keyboard {
+    width: 150px;
+    border-bottom: 30px solid var(--color-white);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+  }
+</style>

@@ -4,66 +4,140 @@ const pageTitle = "Home Page";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <div class="container" id="container">
-    <h1 class="title" id="title">Hi! I'm Yutteee!</h1>
-    <div class="pc" id="pc">
-      <div class="monitor"></div>
-      <div class="keyboard"></div>
+  <div class="container">
+    <div class="pc-wrapper">
+      <div class="pc" id="pc">
+        <div class="monitor"></div>
+        <div class="keyboard"></div>
+      </div>
     </div>
-  </div>
-  <h2 class="title">History</h2>
-  <div>
-    <h3>合同会社KANNON</h3>
-    <p>フェアナビというアクセシビリティオーバーレイSaaSの開発をしています。フロントエンドを中心として、デザインの提案などもしながら業務に取り組んでいます。</p>
+    <div class="main-wrapper">
+      <div class="main" id="main">
+        <div class="page">
+          <h1 class="title">Hi! I'm Yutteee!</h1>
+          <div class="description">
+            <p>中村優作といいます。</p>
+            <p>名古屋大学工学部化学生命工学科の4年生です。大学ではペプチドの合成をしています。</p>
+            <p>名古屋のアプリ開発団体jackで活動しており、web開発を楽しんでいます。特にフロントエンドとデザインが好きです。</p>
+            <p>趣味はj-popを聞くこと、お笑いを見ることです。</p>
+          </div>
+        </div>
+        <h2 class="title">History</h2>
+        <div>
+          <h3>合同会社KANNON</h3>
+          <p>フェアナビというアクセシビリティオーバーレイSaaSの開発をしています。フロントエンドを中心として、デザインの提案などもしながら業務に取り組んでいます。</p>
+        </div>
+      </div>
+    </div>
   </div>
 </BaseLayout>
 
 <script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  // import { gsap } from "gsap";
+  // import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  gsap.registerPlugin(ScrollTrigger);
+  // gsap.registerPlugin(ScrollTrigger);
 
-  const container = document.getElementById('container');
-  const pc = document.getElementById('pc');
+  // const pcContainer = document.getElementById('pc-container');
+  // const mainContainer = document.getElementById('main-container');
+  // const pc = document.getElementById('pc');
+  // const main = document.getElementById('main');
 
-  if (!container || !pc) {
-    throw new Error('Element not found');
-  }
+  // if (!pcContainer || !pc) {
+  //   throw new Error('Element not found');
+  // }
 
-  const containerWidth = container.offsetWidth;
+  // const pcContainerWidth = pcContainer.offsetWidth;
 
-  gsap.to(pc, {
-    xPercent: -(containerWidth / 10),
-    ease: 'none',
-    scrollTrigger: {
-      trigger: container,
-      pin: true,
-      scrub: 1,
-      start: 'top top',
-      end: () => `+=${containerWidth}`,
-    }
-  });
+  // gsap.to(pc, {
+  //   xPercent: -(pcContainerWidth / 10),
+  //   ease: 'none',
+  //   scrollTrigger: {
+  //     trigger: pcContainer,
+  //     pin: true,
+  //     scrub: 1,
+  //     start: 'top top',
+  //     end: () => `+=${pcContainerWidth}`,
+  //   }
+  // });
+
+  // gsap.to(main, {
+  //   xPercent: pcContainerWidth / 50,
+  //   ease: 'none',
+  //   scrollTrigger: {
+  //     trigger: mainContainer,
+  //     pin: true,
+  //     scrub: 1,
+  //     start: 'top top',
+  //     end: () => `+=${pcContainerWidth}`,
+  //   }
+  // });
 
 </script>
 
 <style>
   .container {
-    height: calc(100vh);
     display: flex;
+    justify-content: end;
+    gap: 64px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .pc-wrapper {
+    position: fixed;
+    width: calc((100%  / 12) * 4);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: end;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    padding-right: calc((100% / 12) / 2);
   }
-  .title {
-    font-size: 96px;
-    font-weight: 900;
-  }
+
   .pc {
     display: flex;
     align-items: center;
     flex-direction: column;
     gap: 48px;
+  }
+  .title {
+    font-size: 96px;
+    font-weight: 900;
+    margin-bottom: 48px;
+  }
+
+  .main-wrapper {
+    width: calc((100% / 12) * 8);
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    overflow: scroll ;
+  }
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    height: fit-content;
+    margin-left: calc((100% / 12) / 2);
+  }
+
+  .page {
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .description {
+    font-size: 18px;
+    line-height: 2;
+    font-weight: 900;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .monitor {

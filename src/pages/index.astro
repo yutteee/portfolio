@@ -6,8 +6,14 @@ const pageTitle = "Home Page";
 <BaseLayout pageTitle={pageTitle}>
   <div class="container">
     <div class="pc-wrapper">
-      <div class="pc" id="pc">
-        <div class="monitor"></div>
+      <div class="pc">
+        <div class="monitor">
+          <img src="/blog-placeholder-5.jpg" width="300" height="187.5" id="screen" class="screen">
+          <img src="/blog-placeholder-4.jpg" width="300" height="187.5" id="screen" class="screen">
+          <img src="/blog-placeholder-3.jpg" width="300" height="187.5" id="screen2" class="screen">
+          <img src="/blog-placeholder-2.jpg" width="300" height="187.5" id="screen1" class="screen">
+          <img src="/blog-placeholder-1.jpg" width="300" height="187.5" id="screen0" class="screen">
+        </div>
         <div class="keyboard"></div>
       </div>
     </div>
@@ -23,69 +29,66 @@ const pageTitle = "Home Page";
           </div>
         </div>
         <h2 class="title">History</h2>
-          <div class="history-item">
-            <div class="history-item-description">
-              <h3>合同会社KANNON</h3>
-              <p>フェアナビというアクセシビリティオーバーレイSaaSの開発をしています。フロントエンドを中心として、デザインの提案などもしながら業務に取り組んでいます。</p>
+        {
+          Array.from({ length: 3 }).map((_, index) => (
+            <div class="history-item" id={`history-item${index}`}>
+              <div class="history-item-description">
+                <h3>合同会社KANNON</h3>
+                <p>フェアナビというアクセシビリティオーバーレイSaaSの開発をしています。フロントエンドを中心として、デザインの提案などもしながら業務に取り組んでいます。</p>
+              </div>
             </div>
-          </div>
-          <div class="history-item">
-            <div class="history-item-description">
-              <h3>合同会社KANNON</h3>
-              <p>フェアナビというアクセシビリティオーバーレイSaaSの開発をしています。フロントエンドを中心として、デザインの提案などもしながら業務に取り組んでいます。</p>
-            </div>
-          </div>
-          <div class="history-item">
-            <div class="history-item-description">
-              <h3>合同会社KANNON</h3>
-              <p>フェアナビというアクセシビリティオーバーレイSaaSの開発をしています。フロントエンドを中心として、デザインの提案などもしながら業務に取り組んでいます。</p>
-            </div>
-          </div>
+          ))
+        }
       </div>
     </div>
   </div>
 </BaseLayout>
 
 <script>
-  // import { gsap } from "gsap";
-  // import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  // gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger);
 
-  // const pcContainer = document.getElementById('pc-container');
-  // const mainContainer = document.getElementById('main-container');
-  // const pc = document.getElementById('pc');
-  // const main = document.getElementById('main');
+  
+  const historyItem0 = document.getElementById(`history-item0`);
+  const historyItem1 = document.getElementById(`history-item1`);
+  const historyItem2 = document.getElementById(`history-item2`);
+  const screen0 = document.getElementById('screen0');
+  const screen1 = document.getElementById('screen1');
+  const screen2 = document.getElementById('screen2');
+  
+  gsap.to(screen0, {
+    scrollTrigger: {
+      trigger: historyItem0,
+      start: "top center",
+      end: "center center",
+      scrub: 1,
+      toggleActions: "play none none none",
+    },
+    y: -187.5,
+  });
 
-  // if (!pcContainer || !pc) {
-  //   throw new Error('Element not found');
-  // }
+  gsap.to(screen1, {
+    scrollTrigger: {
+      trigger: historyItem1,
+      start: "top center",
+      end: "center center",
+      scrub: 1,
+    },
+    y: -187.5,
+  });
 
-  // const pcContainerWidth = pcContainer.offsetWidth;
+  gsap.to(screen2, {
+    scrollTrigger: {
+      trigger: historyItem2,
+      start: "top center",
+      end: "center center",
+      scrub: 1,
+    },
+    y: -187.5,
+  });
 
-  // gsap.to(pc, {
-  //   xPercent: -(pcContainerWidth / 10),
-  //   ease: 'none',
-  //   scrollTrigger: {
-  //     trigger: pcContainer,
-  //     pin: true,
-  //     scrub: 1,
-  //     start: 'top top',
-  //     end: () => `+=${pcContainerWidth}`,
-  //   }
-  // });
-
-  // gsap.to(main, {
-  //   xPercent: pcContainerWidth / 50,
-  //   ease: 'none',
-  //   scrollTrigger: {
-  //     trigger: mainContainer,
-  //     pin: true,
-  //     scrub: 1,
-  //     start: 'top top',
-  //     end: () => `+=${pcContainerWidth}`,
-  //   }
-  // });
 
 </script>
 
@@ -122,6 +125,14 @@ const pageTitle = "Home Page";
     height: 187.5px;
     background-color: var(--color-white);
     border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .screen {
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
   .keyboard {
@@ -169,7 +180,7 @@ const pageTitle = "Home Page";
   }
 
   .history-item {
-    height: 70svh;
+    height: 80svh;
     border-top: 1px solid var(--color-black);
     padding: 48px 0;
     position: relative;

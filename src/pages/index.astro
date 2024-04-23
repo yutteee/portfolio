@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "Home Page";
+import { histories } from "../data/history";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
@@ -8,11 +9,10 @@ const pageTitle = "Home Page";
     <div class="pc-wrapper">
       <div class="pc">
         <div class="monitor">
-          <img src="/blog-placeholder-5.jpg" width="300" height="187.5" id="screen" class="screen">
-          <img src="/blog-placeholder-4.jpg" width="300" height="187.5" id="screen" class="screen">
-          <img src="/blog-placeholder-3.jpg" width="300" height="187.5" id="screen2" class="screen">
-          <img src="/blog-placeholder-2.jpg" width="300" height="187.5" id="screen1" class="screen">
-          <img src="/blog-placeholder-1.jpg" width="300" height="187.5" id="screen0" class="screen">
+          {histories.slice().reverse().map((history, index) => (
+            <img src={history.image} width="300" height="187.5" id={`screen${histories.length - index}`} class="screen">
+          ))}
+          <img src="/yutteee.png" width="300" height="187.5" id="screen0" class="screen">
         </div>
         <div class="keyboard"></div>
       </div>
@@ -30,11 +30,11 @@ const pageTitle = "Home Page";
         </div>
         <h2 class="title">History</h2>
         {
-          Array.from({ length: 3 }).map((_, index) => (
+          histories.map((history, index) => (
             <div class="history-item" id={`history-item${index}`}>
               <div class="history-item-description">
-                <h3>合同会社KANNON</h3>
-                <p>フェアナビというアクセシビリティオーバーレイSaaSの開発をしています。フロントエンドを中心として、デザインの提案などもしながら業務に取り組んでいます。</p>
+                <h3>{history.title}</h3>
+                <p>{history.description}</p>
               </div>
             </div>
           ))
@@ -47,46 +47,25 @@ const pageTitle = "Home Page";
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { histories } from "../data/history";
 
   gsap.registerPlugin(ScrollTrigger);
-
   
-  const historyItem0 = document.getElementById(`history-item0`);
-  const historyItem1 = document.getElementById(`history-item1`);
-  const historyItem2 = document.getElementById(`history-item2`);
-  const screen0 = document.getElementById('screen0');
-  const screen1 = document.getElementById('screen1');
-  const screen2 = document.getElementById('screen2');
-  
-  gsap.to(screen0, {
-    scrollTrigger: {
-      trigger: historyItem0,
-      start: "top center",
-      end: "center center",
-      scrub: 1,
-      toggleActions: "play none none none",
-    },
-    y: -187.5,
-  });
-
-  gsap.to(screen1, {
-    scrollTrigger: {
-      trigger: historyItem1,
-      start: "top center",
-      end: "center center",
-      scrub: 1,
-    },
-    y: -187.5,
-  });
-
-  gsap.to(screen2, {
-    scrollTrigger: {
-      trigger: historyItem2,
-      start: "top center",
-      end: "center center",
-      scrub: 1,
-    },
-    y: -187.5,
+  histories.forEach((history, index) => {
+    const historyItem = document.getElementById(`history-item${index}`);
+    const screen = document.getElementById(`screen${index}`);
+    
+    gsap.to(screen, {
+      scrollTrigger: {
+        trigger: historyItem,
+        start: "top center",
+        end: "center center",
+        scrub: 1,
+        // markers: true,
+        toggleActions: "play none none none",
+      },
+      y: -187.5,
+    });
   });
 
 
@@ -125,6 +104,7 @@ const pageTitle = "Home Page";
     height: 187.5px;
     background-color: var(--color-white);
     border-radius: 16px;
+    border: 8px solid var(--color-white);
     position: relative;
     overflow: hidden;
   }
@@ -133,6 +113,9 @@ const pageTitle = "Home Page";
     position: absolute;
     top: 0;
     left: 0;
+    background-color: var(--color-white);
+    width: 100%;
+    height: 100%;
   }
 
   .keyboard {

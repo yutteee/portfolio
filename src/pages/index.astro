@@ -23,10 +23,24 @@ const pageTitle = "Home Page";
           </div>
         </div>
         <h2 class="title">History</h2>
-        <div>
-          <h3>合同会社KANNON</h3>
-          <p>フェアナビというアクセシビリティオーバーレイSaaSの開発をしています。フロントエンドを中心として、デザインの提案などもしながら業務に取り組んでいます。</p>
-        </div>
+          <div class="history-item">
+            <div class="history-item-description">
+              <h3>合同会社KANNON</h3>
+              <p>フェアナビというアクセシビリティオーバーレイSaaSの開発をしています。フロントエンドを中心として、デザインの提案などもしながら業務に取り組んでいます。</p>
+            </div>
+          </div>
+          <div class="history-item">
+            <div class="history-item-description">
+              <h3>合同会社KANNON</h3>
+              <p>フェアナビというアクセシビリティオーバーレイSaaSの開発をしています。フロントエンドを中心として、デザインの提案などもしながら業務に取り組んでいます。</p>
+            </div>
+          </div>
+          <div class="history-item">
+            <div class="history-item-description">
+              <h3>合同会社KANNON</h3>
+              <p>フェアナビというアクセシビリティオーバーレイSaaSの開発をしています。フロントエンドを中心として、デザインの提案などもしながら業務に取り組んでいます。</p>
+            </div>
+          </div>
       </div>
     </div>
   </div>
@@ -102,10 +116,19 @@ const pageTitle = "Home Page";
     flex-direction: column;
     gap: 48px;
   }
-  .title {
-    font-size: 96px;
-    font-weight: 900;
-    margin-bottom: 48px;
+
+  .monitor {
+    width: 300px;
+    height: 187.5px;
+    background-color: var(--color-white);
+    border-radius: 16px;
+  }
+
+  .keyboard {
+    width: 150px;
+    border-bottom: 30px solid var(--color-white);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
   }
 
   .main-wrapper {
@@ -113,7 +136,6 @@ const pageTitle = "Home Page";
     display: flex;
     justify-content: start;
     align-items: center;
-    overflow: scroll ;
   }
 
   .main {
@@ -131,6 +153,12 @@ const pageTitle = "Home Page";
     justify-content: center;
   }
 
+  .title {
+    font-size: 96px;
+    font-weight: 900;
+    margin-bottom: 48px;
+  }
+
   .description {
     font-size: 18px;
     line-height: 2;
@@ -140,17 +168,22 @@ const pageTitle = "Home Page";
     gap: 8px;
   }
 
-  .monitor {
-    width: 300px;
-    height: 187.5px;
-    background-color: var(--color-white);
-    border-radius: 16px;
+  .history-item {
+    height: 70svh;
+    border-top: 1px solid var(--color-black);
+    padding: 48px 0;
+    position: relative;
   }
 
-  .keyboard {
-    width: 150px;
-    border-bottom: 30px solid var(--color-white);
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
+  .history-item-description {
+    position: sticky;
+    top: 48px;
+    font-size: 18px;
+    line-height: 2;
+    font-weight: 900;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: fit-content;
   }
 </style>

@@ -5,7 +5,7 @@
 }
 
 html {
-  background-color: var(--color-blue);
+  background-color: var(--color-white);
   color: var(--color-black);
   font-family: "Hiragino Kaku Gothic ProN", "Avenir Next", "Helvetica Neue",
     "Helvetica", "Arial", "Meiryo", sans-serif;

@@ -14,7 +14,11 @@
     "@astrojs/mdx": "^2.3.1",
     "@astrojs/rss": "^4.0.5",
     "@astrojs/sitemap": "^3.1.4",
+    "@typescript-eslint/parser": "^7.7.1",
     "astro": "^4.6.3",
+    "eslint": "^9.1.1",
+    "eslint-plugin-astro": "^0.34.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
     "gsap": "^3.12.5",
     "the-new-css-reset": "^1.11.2",
     "typescript": "^5.4.5"

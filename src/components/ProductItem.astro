@@ -1,0 +1,54 @@
+---
+const { image, index, title, description } = Astro.props;
+---
+
+
+<div class="product">
+  <img src={image} alt="" width="400" height="250" class="image"/>
+  <div class="index">0{index}</div>
+  <div class="texts">
+    <h2 class="name">{title}</h2>
+    <p class="description">{description}</p>
+  </div>
+</div>
+<style>
+  .title {
+    font-size: 96px;
+    font-weight: 700;
+  }
+
+  .product {
+    position: relative;
+    display: flex;
+    width: fit-content;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+    gap: 24px;
+
+    .image {
+        border-radius: 8px;
+    }
+
+
+    .texts {
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      gap: 16px;
+    }
+
+    .index {
+      font-size: 96px;
+      font-weight: 700;
+      position: absolute;
+      bottom: 40px;
+      left: -40px;
+    }
+
+    .name {
+      font-size: 24px;
+      font-weight: 700;
+    }
+  }
+</style>

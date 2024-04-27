@@ -1,18 +1,21 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "Products Page";
+import { products } from "../data/products";
+import ProductItem from "../components/ProductItem.astro";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <h1 class="title">Products</h1>
-  <div class="product">
-    <img src="/blog-placeholder-1.jpg" alt="Products" width="400" height="250" />
-    <div class="index">01</div>
-    <div class="texts">
-      <h2 class="name">jack-blog</h2>
-      <p class="description">アプリ開発団体jackのブログサイト</p>
-    </div>
-  </div>
+  <div class="products">
+    {products.map((product, index) => (
+      <ProductItem 
+        index={index + 1}
+        image={product.image}
+        title={product.title}
+        description={product.description}
+      />
+    ))}
 </BaseLayout>
 
 <style>
@@ -21,33 +24,11 @@ const pageTitle = "Products Page";
     font-weight: 700;
   }
 
-  .product {
-    position: relative;
+  .products {
     display: flex;
-    width: fit-content;
     flex-direction: column;
-    align-items: end;
+    gap: 32px;
+    align-items: center;
     justify-content: center;
-    gap: 24px;
-
-    .texts {
-      display: flex;
-      flex-direction: column;
-      align-items: end;
-      gap: 16px;
-    }
-
-    .index {
-      font-size: 96px;
-      font-weight: 700;
-      position: absolute;
-      bottom: 40px;
-      left: -40px;
-    }
-
-    .name {
-      font-size: 24px;
-      font-weight: 700;
-    }
   }
 </style>

@@ -6,29 +6,48 @@ import ProductItem from "../components/ProductItem.astro";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <h1 class="title">Products</h1>
-  <div class="products">
-    {products.map((product, index) => (
-      <ProductItem 
-        index={index + 1}
-        image={product.image}
-        title={product.title}
-        description={product.description}
-      />
-    ))}
+  <div class="container">
+    <h1 class="title">Products</h1>
+    <div class="products">
+      {products.map((product, index) => (
+        <ProductItem 
+          index={index + 1}
+          image={product.image}
+          title={product.title}
+          description={product.description}
+        />
+      ))}
+  </div>
 </BaseLayout>
 
 <style>
-  .title {
-    font-size: 96px;
-    font-weight: 700;
-  }
-
-  .products {
+  .container {
+    background-color: var(--color-blue);
     display: flex;
     flex-direction: column;
-    gap: 32px;
     align-items: center;
-    justify-content: center;
+    padding-top: 64px;
+    gap: 128px;
+    
+    .title {
+      font-size: 96px;
+      font-weight: 700;
+    }
+  
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: start;
+      max-width: 1000px;
+
+      > *:nth-child(odd) {
+        margin: 0 0 256px 0;
+      }
+
+      > *:nth-child(even) {
+        margin: 256px 0 0 128px;
+      }
+    }
   }
 </style>

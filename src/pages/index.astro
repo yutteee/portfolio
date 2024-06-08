@@ -2,6 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "Home Page";
 import { histories } from "../data/history";
+import { products } from "../data/products";
+import ProductItem from "../components/ProductItem.astro";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
@@ -24,8 +26,8 @@ import { histories } from "../data/history";
         <div class="keyboard"></div>
       </div>
     </div>
-    <div class="main-wrapper">
-      <div class="main" id="main">
+    <div class="about-wrapper">
+      <div class="about" id="about">
         <div class="page">
           <h2 class="title">Nakamura Yusaku</h2>
           <div class="description">
@@ -164,12 +166,12 @@ import { histories } from "../data/history";
   .pc-wrapper {
     position: sticky;
     width: calc((100%  / 12) * 4);
-    height: 100svh;
+    height: calc(50svh + 133px);
     top: 0;
     left: 0;
     display: flex;
     justify-content: end;
-    align-items: center;
+    align-items: end;
     padding-right: calc((100% / 12) / 2);
   }
 
@@ -206,19 +208,20 @@ import { histories } from "../data/history";
     border-right: 8px solid transparent;
   }
 
-  .main-wrapper {
+  .about-wrapper {
     width: calc((100% / 12) * 8);
     display: flex;
     justify-content: start;
     align-items: center;
   }
 
-  .main {
+  .about {
     display: flex;
     flex-direction: column;
     max-width: 800px;
     height: fit-content;
     margin-left: calc((100% / 12) / 2);
+    border-bottom: 1px solid var(--color-black);
   }
 
   .page {
@@ -261,6 +264,22 @@ import { histories } from "../data/history";
     flex-direction: column;
     gap: 24px;
     height: fit-content;
+  }
+
+  .products-wrapper {
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    overflow: scroll;
+
+    .products {
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+      width: fit-content !important;
+      gap: 64px;
+    }
   }
 </style>
 

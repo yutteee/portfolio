@@ -33,6 +33,7 @@ export const products: Product[] = [
     period: "2023/03",
     detail: "Gatherで動作するチャットボットです。",
     image: "/gather_chatGPT.gif",
+    url: "https://gather.town/app/1Q7Z2Z2Q1Q7Z2Z2Q/gather_chatGPT",
     github: "https://github.com/yutteee/gather_chatGPT",
   },
   {

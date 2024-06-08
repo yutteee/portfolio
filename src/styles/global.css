@@ -12,8 +12,8 @@ html {
 }
 
 html.dark {
-  background-color: #337ca7;
-  color: #fff;
+  background-color: var(--color-black);
+  color: var(--color-white);
 }
 
 .expanded {

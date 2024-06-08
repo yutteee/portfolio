@@ -1,13 +1,20 @@
 ---
-const { image, index, title, description } = Astro.props;
+const { image, index, title, description, url } = Astro.props;
 ---
 
 
 <div class="product">
-  <img src={image} alt="" width="400" height="250" class="image"/>
+  <img src={image} alt="" class="image" width="400" height="250"/>
   <div class="index">0{index}</div>
   <div class="texts">
-    <h2 class="name">{title}</h2>
+    <a
+      class="link"
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <h2 class="name">{title}</h2>
+    </a>
     <p class="description">{description}</p>
   </div>
 </div>
@@ -28,6 +35,9 @@ const { image, index, title, description } = Astro.props;
 
     .image {
         border-radius: 8px;
+        aspect-ratio: 8/5;
+        width: 100%;
+        height: 100%;
     }
 
 
@@ -36,6 +46,15 @@ const { image, index, title, description } = Astro.props;
       flex-direction: column;
       align-items: end;
       gap: 16px;
+
+      .link {
+        text-decoration: none;
+        color: inherit;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
 
     .index {
@@ -47,7 +66,7 @@ const { image, index, title, description } = Astro.props;
     }
 
     .name {
-      font-size: 24px;
+      font-size: 36px;
       font-weight: 700;
     }
   }

@@ -23,6 +23,9 @@ dependencies:
   astro:
     specifier: ^4.6.3
     version: 4.6.3(typescript@5.4.5)
+  destyle.css:
+    specifier: ^4.0.1
+    version: 4.0.1
   eslint:
     specifier: ^9.1.1
     version: 9.1.1
@@ -2257,6 +2260,10 @@ packages:
   /dequal@2.0.3:
     resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
     engines: {node: '>=6'}
+    dev: false
+
+  /destyle.css@4.0.1:
+    resolution: {integrity: sha512-G9iyW0JfRkgdxhbWQeuLdO1KZ40nzKssHtArbSFvaU/w44G0cZ5v3u4bHY829INSu480J/fxae+lTm225mN3Vw==}
     dev: false
 
   /detect-libc@2.0.3:

@@ -9,6 +9,18 @@ html {
   color: var(--color-black);
   font-family: SDSYuGothic, "Yu Gothic", YuGothic, "Noto Sans JP", "Avenir Next",
     "Helvetica Neue", "Helvetica", "Arial", "Meiryo", sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+
+  p {
+    line-height: 2;
+  }
+
+  p br {
+    content: "";
+    display: block;
+    margin-bottom: 1rem;
+  }
 }
 
 html.dark {

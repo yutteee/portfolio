@@ -1,159 +1,29 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "Home Page";
-import { histories } from "../data/history";
-import { products } from "../data/products";
-import ProductItem from "../components/ProductItem.astro";
+import TopAnimation from "../components/TopAnimation.astro";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <div class="first-container" id="first-container">
-    <div class="blue-monitor" id="blue-monitor"></div>
-    <div class="blue-keyboard"></div>
-    <h1 class="title absolute" id="title">Hi! I'm Yutteee!</h1>
-  </div>
-  <div class="container" id="container">
-    <div class="pc-wrapper">
-      <div class="pc">
-        <div class="monitor">
-          {histories.slice().reverse().map((history, index) => (
-            <img src={history.image} width="300" height="187.5" id={`screen${histories.length - index}`} class="screen">
-          ))}
-          <img src="/yutteee.png" width="300" height="187.5" id="screen0" class="screen">
-          <div class="splashbg1"></div>
-          <div class="splashbg2"></div>
-        </div>
-        <div class="keyboard"></div>
-      </div>
-    </div>
-    <div class="about-wrapper">
-      <div class="about" id="about">
-        <div class="page">
-          <h2 class="title">Nakamura Yusaku</h2>
-          <div class="description">
-            <p>名古屋大学工学部化学生命工学科の4年生です。大学ではペプチドの合成をしています。</p>
-            <p>名古屋のアプリ開発団体jackで活動しており、web開発を楽しんでいます。特にフロントエンドとデザインが好きです。</p>
-            <p>趣味はj-popを聞くこと、お笑いを見ることです。</p>
-          </div>
-        </div>
-        <h2 class="title">History</h2>
-        {
-          histories.map((history, index) => (
-            <div class="history-item" id={`history-item${index}`}>
-              <div class="history-item-description">
-                <h3>{history.title}</h3>
-                <p>{history.description}</p>
-              </div>
-            </div>
-          ))
-        }
-      </div>
+  <div class="container">
+    <TopAnimation />
+    <div class="main">
+      hogehoge
     </div>
   </div>
 </BaseLayout>
 
 <script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import { histories } from "../data/history";
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  const blueMonitor = document.getElementById("blue-monitor");
-  const firstContainer = document.getElementById("first-container");
-  const title = document.getElementById("title");
-
-  gsap.to(blueMonitor, {
-    scrollTrigger: {
-      trigger: firstContainer,
-      start: "top top",
-      end: "bottom top",
-      scrub: 1,
-      // markers: true,
-      toggleActions: "play none none none",
-    },
-    borderRadius: "0",
-    width: "100%",
-    height: "100svh",
-  });
-
-  gsap.to(title, {
-    scrollTrigger: {
-      trigger: firstContainer,
-      start: "top top",
-      end: "bottom top",
-      scrub: 1,
-      // markers: true,
-      toggleActions: "play none none none",
-    },
-    opacity: 0,
-  })
-  
-  histories.forEach((history, index) => {
-    const historyItem = document.getElementById(`history-item${index}`);
-    const screen = document.getElementById(`screen${index}`);
-    
-    gsap.to(screen, {
-      scrollTrigger: {
-        trigger: historyItem,
-        start: "top center",
-        end: "center center",
-        scrub: 1,
-        // markers: true,
-        toggleActions: "play none none none",
-      },
-      y: -187.5,
-    });
-  });
-
-
 </script>
 
 <style>
-  .first-container {
-    height: 100svh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--color-white);
-    position: relative;
-  }
-
-  .blue-monitor {
-    aspect-ratio: 8 / 5;
-    height: 20svh;
-    background-color: var(--color-blue);
-    border-radius: 16px;
-    border: 8px solid var(--color-blue);
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .blue-keyboard {
-    width: 150px;
-    border-bottom: 30px solid var(--color-blue);
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    position: fixed;
-    top: calc(50% + 160px);
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .absolute {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
   .container {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-blue);
+  }
+
+  .main {
     margin-top: 50svh;
     display: flex;
     justify-content: end;
@@ -161,125 +31,6 @@ import ProductItem from "../components/ProductItem.astro";
     width: 100%;
     height: 100%;
     position: relative;
-  }
-
-  .pc-wrapper {
-    position: sticky;
-    width: calc((100%  / 12) * 4);
-    height: calc(50svh + 133px);
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: end;
-    align-items: end;
-    padding-right: calc((100% / 12) / 2);
-  }
-
-  .pc {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 48px;
-  }
-
-  .monitor {
-    width: 300px;
-    height: 187.5px;
-    background-color: var(--color-white);
-    border-radius: 16px;
-    border: 8px solid var(--color-white);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .screen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: var(--color-white);
-    width: 100%;
-    height: 100%;
-  }
-
-  .keyboard {
-    width: 150px;
-    border-bottom: 30px solid var(--color-white);
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-  }
-
-  .about-wrapper {
-    width: calc((100% / 12) * 8);
-    display: flex;
-    justify-content: start;
-    align-items: center;
-  }
-
-  .about {
-    display: flex;
-    flex-direction: column;
-    max-width: 800px;
-    height: fit-content;
-    margin-left: calc((100% / 12) / 2);
-    border-bottom: 1px solid var(--color-black);
-  }
-
-  .page {
-    height: 100svh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-  }
-
-  .title {
-    font-size: 96px;
-    font-weight: 900;
-    margin-bottom: 48px;
-  }
-
-  .description {
-    font-size: 18px;
-    line-height: 2;
-    font-weight: 900;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .history-item {
-    height: 100svh;
-    border-top: 1px solid var(--color-black);
-    padding: 48px 0;
-    position: relative;
-  }
-
-  .history-item-description {
-    position: sticky;
-    top: 96px;
-    font-size: 18px;
-    line-height: 2;
-    font-weight: 900;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    height: fit-content;
-  }
-
-  .products-wrapper {
-    height: 100svh;
-    display: flex;
-    flex-direction: column;
-    gap: 64px;
-    overflow: scroll;
-
-    .products {
-      display: flex;
-      flex-direction: row;
-      height: 100%;
-      width: fit-content !important;
-      gap: 64px;
-    }
   }
 </style>
 

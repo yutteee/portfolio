@@ -1,0 +1,94 @@
+<div class="container" id="container">
+  <div class="monitor" id="monitor"></div>
+  <div class="keyboard"></div>
+  <h1 class="title absolute" id="title">Hi! I'm Yutteee!</h1>
+</div>
+
+<script>
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const monitor = document.getElementById("monitor");
+const container = document.getElementById("container");
+const title = document.getElementById("title");
+
+gsap.to(monitor, {
+  scrollTrigger: {
+    trigger: container,
+    start: "top top",
+    end: "bottom top",
+    scrub: 1,
+    // markers: true,
+    toggleActions: "play none none none",
+  },
+  borderRadius: "0",
+  width: "100%",
+  height: "100svh",
+});
+
+gsap.to(title, {
+  scrollTrigger: {
+    trigger: container,
+    start: "top top",
+    end: "bottom top",
+    scrub: 1,
+    // markers: true,
+    toggleActions: "play none none none",
+  },
+  opacity: 0,
+})
+</script>
+
+<style>
+.container {
+  height: 100svh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-blue);
+  position: relative;
+}
+
+.monitor {
+  aspect-ratio: 8 / 5;
+  height: 20svh;
+  background-color: var(--color-white);
+  border-radius: 16px;
+  border: 8px solid var(--color-white);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.keyboard {
+  width: 150px;
+  border-bottom: 30px solid var(--color-white);
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  position: fixed;
+  top: calc(50% + 160px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.absolute {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  font-size: 96px;
+  font-weight: 900;
+  margin-bottom: 48px;
+}
+</style>
+

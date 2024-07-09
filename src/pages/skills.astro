@@ -1,8 +1,201 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "Skills Page";
+import { histories } from "../data/history";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <h1>Skills</h1>
+  <div class="container" id="container">
+    <div class="pc-wrapper">
+      <div class="pc">
+        <div class="monitor">
+          {histories.slice().reverse().map((history, index) => (
+            <img src={history.image} width="300" height="187.5" id={`screen${histories.length - index}`} class="screen" alt="">
+          ))}
+          <img src="/yutteee.png" width="300" height="187.5" id="screen0" class="screen" alt="">
+          <div class="splashbg1"></div>
+          <div class="splashbg2"></div>
+        </div>
+        <div class="keyboard"></div>
+      </div>
+    </div>
+    <div class="about-wrapper">
+      <div class="about" id="about">
+        <div class="page">
+          <h2 class="title">Nakamura Yusaku</h2>
+          <div class="description">
+            <p>名古屋大学工学部化学生命工学科の4年生です。大学ではペプチドの合成をしています。</p>
+            <p>名古屋のアプリ開発団体jackで活動しており、web開発を楽しんでいます。特にフロントエンドとデザインが好きです。</p>
+            <p>趣味はj-popを聞くこと、お笑いを見ることです。</p>
+          </div>
+        </div>
+        <h2 class="title">History</h2>
+        {
+          histories.map((history, index) => (
+            <div class="history-item" id={`history-item${index}`}>
+              <div class="history-item-description">
+                <h3>{history.title}</h3>
+                <p>{history.description}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
 </BaseLayout>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { histories } from "../data/history";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  histories.forEach((history, index) => {
+    const historyItem = document.getElementById(`history-item${index}`);
+    const screen = document.getElementById(`screen${index}`);
+    
+    gsap.to(screen, {
+      scrollTrigger: {
+        trigger: historyItem,
+        start: "top center",
+        end: "center center",
+        scrub: 1,
+        // markers: true,
+        toggleActions: "play none none none",
+      },
+      y: -187.5,
+    });
+  });
+</script>
+
+<style>
+  .container {
+    display: flex;
+    justify-content: end;
+    gap: 64px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .pc-wrapper {
+    position: sticky;
+    width: calc((100%  / 12) * 4);
+    height: calc(50svh + 133px);
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    padding-right: calc((100% / 12) / 2);
+  }
+
+  .pc {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .monitor {
+    width: 300px;
+    height: 187.5px;
+    background-color: var(--color-white);
+    border-radius: 16px;
+    border: 8px solid var(--color-white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--color-white);
+    width: 100%;
+    height: 100%;
+  }
+
+  .keyboard {
+    width: 150px;
+    border-bottom: 30px solid var(--color-white);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+  }
+
+  .about-wrapper {
+    width: calc((100% / 12) * 8);
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+
+  .about {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    height: fit-content;
+    margin-left: calc((100% / 12) / 2);
+    border-bottom: 1px solid var(--color-black);
+  }
+
+  .page {
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .title {
+    font-size: 96px;
+    font-weight: 900;
+    margin-bottom: 48px;
+  }
+
+  .description {
+    font-size: 18px;
+    line-height: 2;
+    font-weight: 900;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .history-item {
+    height: 100svh;
+    border-top: 1px solid var(--color-black);
+    padding: 48px 0;
+    position: relative;
+  }
+
+  .history-item-description {
+    position: sticky;
+    top: 96px;
+    font-size: 18px;
+    line-height: 2;
+    font-weight: 900;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: fit-content;
+  }
+
+  .products-wrapper {
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    overflow: scroll;
+
+    .products {
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+      width: fit-content !important;
+      gap: 64px;
+    }
+  }
+</style>
+

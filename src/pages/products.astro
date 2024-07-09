@@ -31,7 +31,7 @@ import ProductItem from "../components/ProductItem.astro";
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 64px;
+      padding: 0 1rem;
 
       .title-container {
         margin-top: 32px;
@@ -58,15 +58,15 @@ import ProductItem from "../components/ProductItem.astro";
         /* grid 2つ並べて折り返す*/
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        max-width: 1280px;
+        max-width: 1180px;
         flex-wrap: wrap;
 
         > *:nth-child(odd) {
-          margin: 128px 64px 128px 0;
+          margin: 2rem 1.5rem 6rem 0;
         }
 
         > *:nth-child(even) {
-          margin: 256px 0 0 64px;
+          margin: 8rem 0 0 1.5rem;
         }
       }
     }

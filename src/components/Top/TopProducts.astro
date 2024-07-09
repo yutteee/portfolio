@@ -1,0 +1,53 @@
+---
+import ProductItem from "../ProductItem.astro";
+import { products } from "../../data/products";
+import LinkButton from "../LinkButton.astro";
+---
+
+<div class="container">
+  <div class="titles">
+    <h2 class="title">プロダクト</h2>
+    <LinkButton text="一覧を見る" url="/products/" />
+  </div>
+  <div class="products">
+    {
+      products
+        .slice(0, 2)
+        .map((product, index) => (
+          <ProductItem
+            index={index + 1}
+            image={product.image}
+            title={product.title}
+            description={product.description}
+            url={product.url}
+          />
+        ))
+    }
+  </div>
+</div>
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+
+    .titles {
+      display: flex;
+      flex-direction: row;
+      align-items: end;
+      gap: 1.5rem;
+
+      .title {
+        font-size: 4rem;
+        font-weight: 900;
+      }
+    }
+
+    .products {
+      display: flex;
+      gap: 3rem;
+      width: 100%;
+    }
+  }
+</style>

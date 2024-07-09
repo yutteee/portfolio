@@ -1,12 +1,20 @@
 :root {
-  --color-white: #f0f0f0;
-  --color-black: #041b47;
+  --color-white: #fff;
+  --color-background: #f0f0f0;
+  --color-text: #041b47;
   --color-blue: #84c5ea;
 }
 
+:root.dark {
+  --color-white: #000;
+  --color-background: #01112f;
+  --color-text: #f0f0f0;
+  --color-blue: #006aa7;
+}
+
 html {
-  background-color: var(--color-white);
-  color: var(--color-black);
+  background-color: var(--color-background);
+  color: var(--color-text);
   font-family: SDSYuGothic, "Yu Gothic", YuGothic, "Noto Sans JP", "Avenir Next",
     "Helvetica Neue", "Helvetica", "Arial", "Meiryo", sans-serif;
   font-size: 1rem;
@@ -21,11 +29,6 @@ html {
     display: block;
     margin-bottom: 1rem;
   }
-}
-
-html.dark {
-  background-color: var(--color-black);
-  color: var(--color-white);
 }
 
 .expanded {

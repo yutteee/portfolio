@@ -4,12 +4,12 @@ const { image, index, title, description, url } = Astro.props;
 
 <div class="product">
   <img src={image} alt="" class="image" width="400" height="250" />
-  <div class="index">0{index}</div>
+  <div class="index" aria-hidden>0{index}</div>
   <div class="texts">
     <a class="link" href={url} target="_blank" rel="noopener noreferrer">
-      <h2 class="name">{title}</h2>
+      {title}
     </a>
-    <p class="description">{description}</p>
+    <div class="description">{description}</div>
   </div>
 </div>
 <style>
@@ -26,6 +26,7 @@ const { image, index, title, description, url } = Astro.props;
     align-items: end;
     justify-content: center;
     gap: 24px;
+    padding-left: 40px;
 
     .image {
       border-radius: 8px;
@@ -43,6 +44,8 @@ const { image, index, title, description, url } = Astro.props;
       .link {
         text-decoration: none;
         color: inherit;
+        font-size: 1.5rem;
+        font-weight: 700;
 
         &:hover {
           text-decoration: underline;
@@ -51,16 +54,11 @@ const { image, index, title, description, url } = Astro.props;
     }
 
     .index {
-      font-size: 96px;
+      font-size: 6rem;
       font-weight: 700;
       position: absolute;
       bottom: 40px;
-      left: -40px;
-    }
-
-    .name {
-      font-size: 36px;
-      font-weight: 700;
+      left: 0;
     }
   }
 </style>

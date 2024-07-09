@@ -2,17 +2,11 @@
 const { image, index, title, description, url } = Astro.props;
 ---
 
-
 <div class="product">
-  <img src={image} alt="" class="image" width="400" height="250"/>
+  <img src={image} alt="" class="image" width="400" height="250" />
   <div class="index">0{index}</div>
   <div class="texts">
-    <a
-      class="link"
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
+    <a class="link" href={url} target="_blank" rel="noopener noreferrer">
       <h2 class="name">{title}</h2>
     </a>
     <p class="description">{description}</p>
@@ -34,12 +28,11 @@ const { image, index, title, description, url } = Astro.props;
     gap: 24px;
 
     .image {
-        border-radius: 8px;
-        aspect-ratio: 8/5;
-        width: 100%;
-        height: 100%;
+      border-radius: 8px;
+      aspect-ratio: 8/5;
+      width: 100%;
+      height: 100%;
     }
-
 
     .texts {
       display: flex;

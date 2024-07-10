@@ -1,12 +1,13 @@
 ---
+import Image from "astro/components/Image.astro";
 const { image, index, title, description, url } = Astro.props;
 ---
 
 <a class="product" href={url} target="_blank" rel="noopener noreferrer">
   <span class="mask">
-    <img src={image} alt="" class="image" width="400" height="250" />
+    <Image src={image} alt="" class="image" width="400" height="250" />
   </span>
-  <div class="index" aria-hidden>0{index}</div>
+  <div class="index">0{index}</div>
   <div class="texts">
     <div class="link">
       {title}
@@ -65,11 +66,10 @@ const { image, index, title, description, url } = Astro.props;
   .product:hover {
     .image {
       transform: scale(1.1);
-      overflow: hidden;
     }
 
     .texts {
-      color: #023aa2;
+      color: var(--color-link);
     }
 
     .link {

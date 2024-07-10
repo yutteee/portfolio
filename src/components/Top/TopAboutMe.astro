@@ -1,10 +1,20 @@
 ---
+import { Image } from "astro:assets";
 import LinkButton from "../LinkButton.astro";
 ---
 
 <div class="about">
   <div class="pc">
-    <div class="monitor"></div>
+    <div class="monitor">
+      <Image
+        src="/yutteee.png"
+        width="300"
+        height="187.5"
+        id="screen0"
+        class="screen"
+        alt=""
+      />
+    </div>
     <div class="keyboard"></div>
   </div>
   <div class="texts">
@@ -37,6 +47,17 @@ import LinkButton from "../LinkButton.astro";
         border-radius: 16px;
         border: 8px solid var(--color-white);
         position: relative;
+
+        .screen {
+          position: absolute;
+          top: 0;
+          left: 0;
+          background-color: var(--color-white);
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 8px;
+        }
       }
 
       .keyboard {

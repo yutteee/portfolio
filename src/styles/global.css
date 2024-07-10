@@ -3,6 +3,7 @@
   --color-background: #f0f0f0;
   --color-text: #041b47;
   --color-blue: #84c5ea;
+  --color-link: #023aa2;
 }
 
 :root.dark {

@@ -1,7 +1,66 @@
 ---
-const { title, url } = Astro.props;
+import { Image } from "astro:assets";
+
+const { title, url, image, date } = Astro.props;
 ---
 
-<li>
-  <a href={url} class="link">{title}</a>
+<li class="container">
+  <a href={url} class="link">
+    <div class="mask">
+      <Image src={image} alt="" class="image" width="300" height="157.5" />
+    </div>
+    <div class="texts">
+      <div>{date}</div>
+      <div class="title">{title}</div>
+    </div>
+  </a>
 </li>
+
+<style>
+  .container {
+    width: 100%;
+  }
+  .link {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+
+    .mask {
+      overflow: hidden;
+      display: block;
+      line-height: 0;
+      .image {
+        aspect-ratio: 40/21;
+        width: 100%;
+        height: auto;
+        transition: transform 0.3s;
+      }
+    }
+
+    .texts {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .title {
+        font-size: 1.125rem;
+        font-weight: 700;
+      }
+    }
+
+    &:hover {
+      .image {
+        transform: scale(1.1);
+      }
+
+      .texts {
+        color: var(--color-link);
+      }
+
+      .title {
+        text-decoration: underline;
+      }
+    }
+  }
+</style>

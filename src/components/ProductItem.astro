@@ -2,22 +2,19 @@
 const { image, index, title, description, url } = Astro.props;
 ---
 
-<div class="product">
-  <img src={image} alt="" class="image" width="400" height="250" />
+<a class="product" href={url} target="_blank" rel="noopener noreferrer">
+  <span class="mask">
+    <img src={image} alt="" class="image" width="400" height="250" />
+  </span>
   <div class="index" aria-hidden>0{index}</div>
   <div class="texts">
-    <a class="link" href={url} target="_blank" rel="noopener noreferrer">
+    <div class="link">
       {title}
-    </a>
+    </div>
     <div class="description">{description}</div>
   </div>
-</div>
+</a>
 <style>
-  .title {
-    font-size: 96px;
-    font-weight: 700;
-  }
-
   .product {
     position: relative;
     display: flex;
@@ -28,11 +25,18 @@ const { image, index, title, description, url } = Astro.props;
     gap: 24px;
     padding-left: 40px;
 
-    .image {
-      border-radius: 8px;
-      aspect-ratio: 8/5;
-      width: 100%;
-      height: 100%;
+    .mask {
+      overflow: hidden;
+      display: block;
+      line-height: 0;
+
+      .image {
+        border-radius: 8px;
+        aspect-ratio: 8/5;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.3s;
+      }
     }
 
     .texts {
@@ -46,10 +50,6 @@ const { image, index, title, description, url } = Astro.props;
         color: inherit;
         font-size: 1.5rem;
         font-weight: 700;
-
-        &:hover {
-          text-decoration: underline;
-        }
       }
     }
 
@@ -59,6 +59,21 @@ const { image, index, title, description, url } = Astro.props;
       position: absolute;
       bottom: 40px;
       left: 0;
+    }
+  }
+
+  .product:hover {
+    .image {
+      transform: scale(1.1);
+      overflow: hidden;
+    }
+
+    .texts {
+      color: #023aa2;
+    }
+
+    .link {
+      text-decoration: underline;
     }
   }
 </style>

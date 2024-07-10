@@ -2,10 +2,12 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "Skills Page";
 import { histories } from "../data/history";
+import PageTitle from "../components/PageTitle.astro";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <div class="container" id="container">
+  <PageTitle title="私について" />
+  <div class="wrapper">
     <div class="pc-wrapper">
       <div class="pc">
         <div class="monitor">
@@ -40,29 +42,39 @@ import { histories } from "../data/history";
     </div>
     <div class="about-wrapper">
       <div class="about" id="about">
-        <div class="page">
-          <h2 class="title">Nakamura Yusaku</h2>
+        <div>
+          <h2 class="h2">中村優作</h2>
           <div class="description">
+            <p>名古屋大学工学部化学生命工学科の4年生です。</p>
             <p>
-              名古屋大学工学部化学生命工学科の4年生です。大学ではペプチドの合成をしています。
+              名古屋のアプリ開発団体jackで活動しており、web開発を楽しんでいます。特にフロントエンドとデザインが好きです。最近はiOSとアクセシビリティに関心があります。
             </p>
             <p>
-              名古屋のアプリ開発団体jackで活動しており、web開発を楽しんでいます。特にフロントエンドとデザインが好きです。
+              誰にとっても使いやすいプロダクトを開発することがしたいです。そのために必要なことは全部やりたいというスタンスで開発しています。(将来像は全然考えれてないです...)
             </p>
-            <p>趣味はj-popを聞くこと、お笑いを見ることです。</p>
+            <p>
+              趣味は漫才を見ること、音楽を聴くことです。好きな漫才師は金魚番長、エバースで、好きなアーティストはMr.children、BUMP
+              OF CHIKENです。
+            </p>
           </div>
         </div>
-        <h2 class="title">History</h2>
-        {
-          histories.map((history, index) => (
-            <div class="history-item" id={`history-item${index}`}>
-              <div class="history-item-description">
-                <h3>{history.title}</h3>
-                <p>{history.description}</p>
-              </div>
-            </div>
-          ))
-        }
+        <div>
+          <h2 class="h2">経歴</h2>
+          <div class="histories">
+            {
+              histories.map((history, index) => (
+                <div id={`history-item${index}`}>
+                  <h3 class="h3">{history.title}</h3>
+                  <div class="description">
+                    {history.description.map((desc) => (
+                      <p>{desc}</p>
+                    ))}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -93,9 +105,10 @@ import { histories } from "../data/history";
   </script>
 
   <style>
-    .container {
+    .wrapper {
+      padding-top: 4rem;
       display: flex;
-      justify-content: end;
+      justify-content: center;
       gap: 64px;
       width: 100%;
       height: 100%;
@@ -104,14 +117,11 @@ import { histories } from "../data/history";
 
     .pc-wrapper {
       position: sticky;
-      width: calc((100% / 12) * 4);
-      height: calc(50svh + 133px);
-      top: 0;
+      top: 50vh;
       left: 0;
       display: flex;
-      justify-content: end;
-      align-items: end;
-      padding-right: calc((100% / 12) / 2);
+      height: fit-content;
+      transform: translateY(-50%);
     }
 
     .pc {
@@ -124,9 +134,9 @@ import { histories } from "../data/history";
     .monitor {
       width: 300px;
       height: 187.5px;
-      background-color: var(--color-background);
+      background-color: var(--color-white);
       border-radius: 16px;
-      border: 8px solid var(--color-background);
+      border: 8px solid var(--color-white);
       position: relative;
       overflow: hidden;
     }
@@ -135,20 +145,24 @@ import { histories } from "../data/history";
       position: absolute;
       top: 0;
       left: 0;
-      background-color: var(--color-background);
+      background-color: var(--color-white);
       width: 100%;
       height: 100%;
+
+      /* 写真は切り抜き */
+      object-fit: cover;
     }
 
     .keyboard {
       width: 150px;
-      border-bottom: 30px solid var(--color-background);
+      border-bottom: 30px solid var(--color-white);
       border-left: 8px solid transparent;
       border-right: 8px solid transparent;
     }
 
     .about-wrapper {
-      width: calc((100% / 12) * 8);
+      width: 100%;
+      max-width: 720px;
       display: flex;
       justify-content: start;
       align-items: center;
@@ -157,68 +171,31 @@ import { histories } from "../data/history";
     .about {
       display: flex;
       flex-direction: column;
-      max-width: 800px;
-      height: fit-content;
-      margin-left: calc((100% / 12) / 2);
-      border-bottom: 1px solid var(--color-text);
+      gap: 2.5rem;
     }
 
-    .page {
-      height: 100svh;
+    .h2 {
+      font-size: 2.25rem;
+      font-weight: 900;
+      margin-bottom: 2rem;
+    }
+
+    .h3 {
+      font-size: 1.5rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+
+    .histories {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      position: relative;
-    }
-
-    .title {
-      font-size: 96px;
-      font-weight: 900;
-      margin-bottom: 48px;
+      gap: 1.5rem;
     }
 
     .description {
-      font-size: 18px;
-      line-height: 2;
-      font-weight: 900;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-    }
-
-    .history-item {
-      height: 100svh;
-      border-top: 1px solid var(--color-text);
-      padding: 48px 0;
-      position: relative;
-    }
-
-    .history-item-description {
-      position: sticky;
-      top: 96px;
-      font-size: 18px;
-      line-height: 2;
-      font-weight: 900;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      height: fit-content;
-    }
-
-    .products-wrapper {
-      height: 100svh;
-      display: flex;
-      flex-direction: column;
-      gap: 64px;
-      overflow: scroll;
-
-      .products {
-        display: flex;
-        flex-direction: row;
-        height: 100%;
-        width: fit-content !important;
-        gap: 64px;
-      }
+      gap: 1rem;
     }
   </style>
 </BaseLayout>

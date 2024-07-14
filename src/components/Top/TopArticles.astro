@@ -1,0 +1,52 @@
+---
+const allPosts = await Astro.glob("../../pages/posts/*.md");
+import BlogPost from "../BlogPost.astro";
+import LinkButton from "../LinkButton.astro";
+---
+
+<div class="container">
+  <div class="titles">
+    <h2 class="title">記事</h2>
+    <LinkButton text="一覧を見る" url="/articles/" />
+  </div>
+  <ul class="articles">
+    {
+      allPosts
+        .slice(0, 3)
+        .map((post) => (
+          <BlogPost
+            url={post.url}
+            title={post.frontmatter.title}
+            image={post.frontmatter.image.url}
+            date={post.frontmatter.pubDate}
+          />
+        ))
+    }
+  </ul>
+</div>
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+
+    .titles {
+      display: flex;
+      flex-direction: row;
+      align-items: end;
+      gap: 1.5rem;
+
+      .title {
+        font-size: 4rem;
+        font-weight: 900;
+      }
+    }
+
+    .articles {
+      display: flex;
+      gap: 3rem;
+      width: 100%;
+    }
+  }
+</style>

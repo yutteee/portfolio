@@ -1,10 +1,11 @@
 ---
 const { text, url } = Astro.props;
+import { Icon } from "astro-icon/components";
 ---
 
 <a class="button" href={url}>
   {text}
-  <img src="/arrow.svg" alt="" />
+  <Icon name="formkit:arrowright" size={24} />
 </a>
 
 <style>

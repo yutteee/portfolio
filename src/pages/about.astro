@@ -6,73 +6,75 @@ import PageTitle from "../components/PageTitle.astro";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <PageTitle title="私について" />
-  <div class="wrapper">
-    <div class="pc-wrapper">
-      <div class="pc">
-        <div class="monitor">
-          {
-            histories
-              .slice()
-              .reverse()
-              .map((history, index) => (
-                <img
-                  src={history.image}
-                  width="300"
-                  height="187.5"
-                  id={`screen${histories.length - index}`}
-                  class="screen"
-                  alt=""
-                />
-              ))
-          }
-          <img
-            src="/yutteee.png"
-            width="300"
-            height="187.5"
-            id="screen0"
-            class="screen"
-            alt=""
-          />
-          <div class="splashbg1"></div>
-          <div class="splashbg2"></div>
-        </div>
-        <div class="keyboard"></div>
-      </div>
-    </div>
-    <div class="about-wrapper">
-      <div class="about" id="about">
-        <div>
-          <h2 class="h2">中村優作</h2>
-          <div class="description">
-            <p>名古屋大学工学部化学生命工学科の4年生です。</p>
-            <p>
-              名古屋のアプリ開発団体jackで活動しており、web開発を楽しんでいます。特にフロントエンドとデザインが好きです。最近はiOSとアクセシビリティに関心があります。
-            </p>
-            <p>
-              誰にとっても使いやすいプロダクトを開発することがしたいです。そのために必要なことは全部やりたいというスタンスで開発しています。(将来像は全然考えれてないです...)
-            </p>
-            <p>
-              趣味は漫才を見ること、音楽を聴くことです。好きな漫才師は金魚番長、エバースで、好きなアーティストはMr.children、BUMP
-              OF CHIKENです。
-            </p>
-          </div>
-        </div>
-        <div>
-          <h2 class="h2">経歴</h2>
-          <div class="histories">
+  <div class="container">
+    <PageTitle title="私について" />
+    <div class="wrapper">
+      <div class="pc-wrapper">
+        <div class="pc">
+          <div class="monitor">
             {
-              histories.map((history, index) => (
-                <div id={`history-item${index}`}>
-                  <h3 class="h3">{history.title}</h3>
-                  <div class="description">
-                    {history.description.map((desc) => (
-                      <p>{desc}</p>
-                    ))}
-                  </div>
-                </div>
-              ))
+              histories
+                .slice()
+                .reverse()
+                .map((history, index) => (
+                  <img
+                    src={history.image}
+                    width="300"
+                    height="187.5"
+                    id={`screen${histories.length - index}`}
+                    class="screen"
+                    alt=""
+                  />
+                ))
             }
+            <img
+              src="/yutteee.png"
+              width="300"
+              height="187.5"
+              id="screen0"
+              class="screen"
+              alt=""
+            />
+            <div class="splashbg1"></div>
+            <div class="splashbg2"></div>
+          </div>
+          <div class="keyboard"></div>
+        </div>
+      </div>
+      <div class="about-wrapper">
+        <div class="about" id="about">
+          <div>
+            <h2 class="h2">中村優作</h2>
+            <div class="description">
+              <p>名古屋大学工学部化学生命工学科の4年生です。</p>
+              <p>
+                名古屋のアプリ開発団体jackで活動しており、web開発を楽しんでいます。特にフロントエンドとデザインが好きです。最近はiOSとアクセシビリティに関心があります。
+              </p>
+              <p>
+                誰にとっても使いやすいプロダクトを開発することがしたいです。そのために必要なことは全部やりたいというスタンスで開発しています。(将来像は全然考えれてないです...)
+              </p>
+              <p>
+                趣味は漫才を見ること、音楽を聴くことです。好きな漫才師は金魚番長、エバースで、好きなアーティストはMr.children、BUMP
+                OF CHIKENです。
+              </p>
+            </div>
+          </div>
+          <div>
+            <h2 class="h2">経歴</h2>
+            <div class="histories">
+              {
+                histories.map((history, index) => (
+                  <div id={`history-item${index}`}>
+                    <h3 class="h3">{history.title}</h3>
+                    <div class="description">
+                      {history.description.map((desc) => (
+                        <p>{desc}</p>
+                      ))}
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
           </div>
         </div>
       </div>
@@ -105,6 +107,12 @@ import PageTitle from "../components/PageTitle.astro";
   </script>
 
   <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 1rem;
+    }
     .wrapper {
       padding-top: 4rem;
       display: flex;

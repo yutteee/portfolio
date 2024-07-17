@@ -46,6 +46,20 @@ import PageTitle from "../components/PageTitle.astro";
         > *:nth-child(even) {
           margin: 8rem 0 0 1.5rem;
         }
+
+        @media screen and (max-width: 768px) {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+
+          > *:nth-child(odd) {
+            margin: 0;
+          }
+
+          > *:nth-child(even) {
+            margin: 0;
+          }
+        }
       }
     }
   </style></BaseLayout

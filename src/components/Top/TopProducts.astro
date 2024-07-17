@@ -41,6 +41,10 @@ import LinkButton from "../LinkButton.astro";
       .title {
         font-size: 4rem;
         font-weight: 900;
+
+        @media screen and (max-width: 768px) {
+          font-size: 2rem;
+        }
       }
     }
 
@@ -48,6 +52,10 @@ import LinkButton from "../LinkButton.astro";
       display: flex;
       gap: 3rem;
       width: 100%;
+
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+      }
     }
   }
 </style>

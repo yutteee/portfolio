@@ -55,6 +55,7 @@
   .monitor {
     aspect-ratio: 8 / 5;
     height: 20svh;
+    min-height: 180px;
     background-color: var(--color-background);
     border-radius: 16px;
     border: 8px solid var(--color-background);
@@ -86,8 +87,12 @@
   }
 
   .title {
-    font-size: 96px;
+    font-size: 6rem;
     font-weight: 900;
     margin-bottom: 48px;
+
+    @media screen and (max-width: 768px) {
+      font-size: 2.5rem;
+    }
   }
 </style>

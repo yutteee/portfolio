@@ -79,6 +79,7 @@ import PageTitle from "../components/PageTitle.astro";
         </div>
       </div>
     </div>
+    <div class="space"></div>
   </div>
 
   <script>
@@ -125,11 +126,10 @@ import PageTitle from "../components/PageTitle.astro";
 
     .pc-wrapper {
       position: sticky;
-      top: 50vh;
+      top: calc(50vh - 133px);
       left: 0;
       display: flex;
       height: fit-content;
-      transform: translateY(-50%);
     }
 
     .pc {
@@ -203,6 +203,10 @@ import PageTitle from "../components/PageTitle.astro";
       display: flex;
       flex-direction: column;
       gap: 1rem;
+    }
+
+    .space {
+      height: 50svh;
     }
   </style>
 </BaseLayout>

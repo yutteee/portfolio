@@ -34,6 +34,10 @@ import LinkButton from "../LinkButton.astro";
     justify-content: center;
     align-items: center;
 
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+    }
+
     .pc {
       display: flex;
       align-items: center;
@@ -42,7 +46,6 @@ import LinkButton from "../LinkButton.astro";
       .monitor {
         width: 300px;
         height: 187.5px;
-        height: 20svh;
         background-color: var(--color-white);
         border-radius: 16px;
         border: 8px solid var(--color-white);
@@ -75,6 +78,10 @@ import LinkButton from "../LinkButton.astro";
       .title {
         font-size: 4rem;
         font-weight: 900;
+
+        @media screen and (max-width: 768px) {
+          font-size: 2rem;
+        }
       }
     }
   }

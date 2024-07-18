@@ -122,6 +122,12 @@ import PageTitle from "../components/PageTitle.astro";
       width: 100%;
       height: 100%;
       position: relative;
+
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+      }
     }
 
     .pc-wrapper {
@@ -130,6 +136,11 @@ import PageTitle from "../components/PageTitle.astro";
       left: 0;
       display: flex;
       height: fit-content;
+
+      @media screen and (max-width: 768px) {
+        top: 1rem;
+        position: relative;
+      }
     }
 
     .pc {

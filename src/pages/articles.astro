@@ -37,6 +37,12 @@ import PageTitle from "../components/PageTitle.astro";
       gap: 4rem 3rem;
       list-style: none;
       max-width: 1120px;
+
+      @media screen and (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
     }
   }
 </style>

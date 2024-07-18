@@ -17,6 +17,9 @@ dependencies:
   '@astrojs/sitemap':
     specifier: ^3.1.4
     version: 3.1.4
+  '@iconify-json/clarity':
+    specifier: ^1.1.13
+    version: 1.1.13
   '@iconify-json/formkit':
     specifier: ^1.1.8
     version: 1.1.8
@@ -1043,6 +1046,12 @@ packages:
   /@humanwhocodes/retry@0.2.3:
     resolution: {integrity: sha512-X38nUbachlb01YMlvPFojKoiXq+LzZvuSce70KPMPdeM1Rj03k4dR7lDslhbqXn3Ang4EU3+EAmwEAsbrjHW3g==}
     engines: {node: '>=18.18'}
+    dev: false
+
+  /@iconify-json/clarity@1.1.13:
+    resolution: {integrity: sha512-VoXlDP1ZYBhFMgW1axPQEUn5UFw5jAzmxG5Oolm+Oe7n4FnhGEBS2pYoEOs4tVXaN+LOSfvNAZF59rsGZOcBcg==}
+    dependencies:
+      '@iconify/types': 2.0.0
     dev: false
 
   /@iconify-json/formkit@1.1.8:

@@ -15,6 +15,7 @@
 		"@astrojs/mdx": "^2.3.1",
 		"@astrojs/rss": "^4.0.5",
 		"@astrojs/sitemap": "^3.1.4",
+		"@iconify-json/clarity": "^1.1.13",
 		"@iconify-json/formkit": "^1.1.8",
 		"@iconify-json/weui": "^1.1.0",
 		"@typescript-eslint/parser": "^7.7.1",

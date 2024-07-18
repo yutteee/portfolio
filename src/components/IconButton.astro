@@ -1,0 +1,19 @@
+---
+import { Icon } from "astro-icon/components";
+const { label, icon, id } = Astro.props;
+---
+
+<button aria-label={label} class="button" id={id}>
+  <Icon name={icon} size={36} />
+</button>
+
+<style>
+  .button {
+    width: 44px;
+    height: 44px;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

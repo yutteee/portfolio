@@ -1,29 +1,20 @@
 ---
-
+import { Icon } from "astro-icon/components";
 ---
 
-<div class="hamburger">
-  <span class="line"></span>
-  <span class="line"></span>
-  <span class="line"></span>
-</div>
+<button aria-label="メニュー" class="hamburger" id="hamburger">
+  <Icon name="clarity:menu-line" />
+</button>
 
-<style>
-  .hamburger {
-    padding-right: 20px;
-    cursor: pointer;
-  }
+<script>
+  const hamburger = document.getElementById("hamburger");
+  const menu = document.getElementById("menu");
 
-  .hamburger .line {
-    display: block;
-    width: 40px;
-    height: 5px;
-    margin-bottom: 10px;
-    background-color: #ff9776;
+  if (hamburger && menu) {
+    hamburger.addEventListener("click", () => {
+      menu.classList.toggle("open");
+    });
   }
-  @media screen and (min-width: 636px) {
-    .hamburger {
-      display: none;
-    }
-  }
-</style>
+</script>
+
+<style></style>

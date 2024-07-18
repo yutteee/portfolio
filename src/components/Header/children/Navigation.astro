@@ -1,18 +1,106 @@
-<div class="nav-links">
+---
+import { Icon } from "astro-icon/components";
+import IconButton from "../../IconButton.astro";
+---
+
+<div class="hamburger">
+  <IconButton label="メニューを開く" icon="clarity:menu-line" id="hamburger" />
+</div>
+<nav class="nav-links">
   <a href="/about/">私について</a>
   <a href="/products/">プロダクト</a>
   <a href="/articles/">記事</a>
+</nav>
+<div id="menu" class="sp-menu">
+  <nav class="sp-nav">
+    <a href="/">トップページ</a>
+    <a href="/about/">私について</a>
+    <a href="/products/">プロダクト</a>
+    <a href="/articles/">記事</a>
+  </nav>
+  <div class="close">
+    <IconButton label="メニューを閉じる" icon="clarity:close-line" id="close" />
+  </div>
 </div>
 
+<script>
+  const hamburger = document.getElementById("hamburger");
+  const menu = document.getElementById("menu");
+  const close = document.getElementById("close");
+
+  if (hamburger && menu) {
+    hamburger.addEventListener("click", () => {
+      menu.classList.toggle("open");
+    });
+  }
+
+  if (close && menu) {
+    close.addEventListener("click", () => {
+      menu.classList.remove("open");
+    });
+  }
+</script>
+
 <style>
+  .hamburger {
+    display: none;
+    @media screen and (max-width: 768px) {
+      display: block;
+    }
+  }
+
   .nav-links {
     display: flex;
     gap: 16px;
     font-size: 18px;
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
   }
 
   .nav-links a:hover,
   .nav-links a:focus {
     text-decoration: underline;
+  }
+
+  .sp-menu {
+    display: none;
+  }
+
+  .open {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--color-background);
+    padding: 16px;
+  }
+
+  .close {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+  }
+
+  .sp-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    a {
+      font-size: 1.5rem;
+      font-weight: bold;
+      width: fit-content;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 </style>

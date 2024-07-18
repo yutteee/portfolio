@@ -24,6 +24,10 @@ import ThemeIcon from "./children/ThemeIcon.astro";
     right: 0;
     z-index: 10000000;
     margin: 0 auto;
+
+    @media screen and (max-width: 768px) {
+      padding: 1rem;
+    }
   }
 
   .logo {
@@ -34,6 +38,10 @@ import ThemeIcon from "./children/ThemeIcon.astro";
   .nav {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 1.5rem;
+
+    @media screen and (max-width: 768px) {
+      gap: 1rem;
+    }
   }
 </style>

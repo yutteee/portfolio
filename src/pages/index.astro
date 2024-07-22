@@ -8,14 +8,14 @@ import TopArticles from "../components/Top/TopArticles.astro";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <div class="container">
+  <main class="container">
     <TopAnimation />
     <div class="main">
       <TopAboutMe />
       <TopProducts />
       <TopArticles />
     </div>
-  </div>
+  </main>
 </BaseLayout>
 
 <script></script>
@@ -28,7 +28,7 @@ import TopArticles from "../components/Top/TopArticles.astro";
     flex-direction: column;
     align-items: center;
     background-color: var(--color-blue);
-    padding: 0 1rem;
+    padding: 0 1rem 6rem 1rem;
 
     .main {
       margin-top: 50vh;

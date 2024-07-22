@@ -6,7 +6,7 @@ import PageTitle from "../components/PageTitle.astro";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <div class="container">
+  <main class="container">
     <PageTitle title="私について" />
     <div class="wrapper">
       <div class="pc-wrapper">
@@ -80,7 +80,7 @@ import PageTitle from "../components/PageTitle.astro";
       </div>
     </div>
     <div class="space"></div>
-  </div>
+  </main>
 
   <script>
     import { gsap } from "gsap";
@@ -112,7 +112,7 @@ import PageTitle from "../components/PageTitle.astro";
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0 1rem;
+      padding: 0 1rem 6rem 1rem;
     }
     .wrapper {
       padding-top: 4rem;
@@ -131,6 +131,7 @@ import PageTitle from "../components/PageTitle.astro";
     }
 
     .pc-wrapper {
+      width: fit-content;
       position: sticky;
       top: calc(50vh - 133px);
       left: 0;
@@ -214,10 +215,6 @@ import PageTitle from "../components/PageTitle.astro";
       display: flex;
       flex-direction: column;
       gap: 1rem;
-    }
-
-    .space {
-      height: 50svh;
     }
   </style>
 </BaseLayout>

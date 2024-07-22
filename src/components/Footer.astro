@@ -7,35 +7,41 @@
       target="_blank"
       rel="noopener noreferrer"
     >
-      <img src="/github.png" alt="GitHub" height="80" width="80" />
-    </a>
-    <a
-      href="https://qiita.com/yutteee"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <img src="/qiita.png" alt="Qiita" height="80" width="80" />
+      <img src="/github.png" alt="GitHub" height="80" width="80" class="icon" />
     </a>
     <a
       href="https://x.com/yutteeeeeeeee"
       target="_blank"
       rel="noopener noreferrer"
     >
-      <img src="/x.png" alt="X" height="80" width="80" />
+      <img src="/x.png" alt="X" height="80" width="80" class="icon" />
+    </a>
+    <a
+      href="https://qiita.com/yutteee"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img src="/qiita.png" alt="Qiita" height="80" width="80" class="icon" />
     </a>
     <a
       href="https://zenn.dev/yutteee"
       target="_blank"
       rel="noopener noreferrer"
     >
-      <img src="/zenn.svg" alt="Zenn" height="80" width="80" />
+      <img src="/zenn.svg" alt="Zenn" height="80" width="80" class="icon" />
     </a>
     <a
       href="https://www.wantedly.com/id/yutteee"
       target="_blank"
       rel="noopener noreferrer"
     >
-      <img src="/wantedly.png" alt="Wantedly" height="80" width="113" />
+      <img
+        src="/wantedly.png"
+        alt="Wantedly"
+        height="80"
+        width="113"
+        class="icon-wantedly"
+      />
     </a>
   </div>
 </footer>
@@ -60,5 +66,20 @@
   .accounts {
     display: flex;
     gap: 2.5rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    .accounts {
+      gap: 1.5rem;
+    }
+    .icon {
+      width: 44px;
+      height: 44px;
+    }
+
+    .icon-wantedly {
+      width: 62px;
+      height: 44px;
+    }
   }
 </style>

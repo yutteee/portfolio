@@ -1,6 +1,5 @@
 ---
 import Navigation from "./children/Navigation.astro";
-import Hamburger from "./children/Hamburger.astro";
 import ThemeIcon from "./children/ThemeIcon.astro";
 ---
 
@@ -17,13 +16,14 @@ import ThemeIcon from "./children/ThemeIcon.astro";
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 1rem 2rem 0 2rem;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 10000000;
     margin: 0 auto;
+    backdrop-filter: blur(4px);
 
     @media screen and (max-width: 768px) {
       padding: 1rem;

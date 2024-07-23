@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "Skills Page";
 import { histories } from "../data/history";
 import PageTitle from "../components/PageTitle.astro";
+import { Image } from "astro:assets";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
@@ -17,7 +18,7 @@ import PageTitle from "../components/PageTitle.astro";
                 .slice()
                 .reverse()
                 .map((history, index) => (
-                  <img
+                  <Image
                     src={history.image}
                     width="300"
                     height="187.5"
@@ -27,7 +28,7 @@ import PageTitle from "../components/PageTitle.astro";
                   />
                 ))
             }
-            <img
+            <Image
               src="/yutteee.png"
               width="300"
               height="187.5"
@@ -131,7 +132,8 @@ import PageTitle from "../components/PageTitle.astro";
     }
 
     .pc-wrapper {
-      width: fit-content;
+      width: 100%;
+      max-width: 300px;
       position: sticky;
       top: calc(50vh - 133px);
       left: 0;

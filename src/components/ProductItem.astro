@@ -1,5 +1,5 @@
 ---
-import Image from "astro/components/Image.astro";
+import { Image } from "astro:assets";
 const { image, index, title, description, url } = Astro.props;
 ---
 
@@ -30,6 +30,7 @@ const { image, index, title, description, url } = Astro.props;
       overflow: hidden;
       display: block;
       line-height: 0;
+      border-radius: 8px;
 
       .image {
         border-radius: 8px;

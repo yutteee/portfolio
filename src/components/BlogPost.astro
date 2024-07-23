@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-
 const { title, url, image, date } = Astro.props;
 ---
 
@@ -10,7 +9,7 @@ const { title, url, image, date } = Astro.props;
       <Image src={image} alt="" class="image" width="300" height="157.5" />
     </div>
     <div class="texts">
-      <div>{date}</div>
+      <div>{date.slice(0, 10)}</div>
       <div class="title">{title}</div>
     </div>
   </a>

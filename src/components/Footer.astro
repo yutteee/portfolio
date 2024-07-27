@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 
 <footer class="footer">
   <h2 class="title">アカウント</h2>
-  <div class="accounts">
+  <div class="accounts white">
     <a
       class="account"
       href="https://github.com/yutteee"
@@ -54,6 +54,56 @@ import { Image } from "astro:assets";
       />
     </a>
   </div>
+  <div class="accounts black">
+    <a
+      class="account"
+      href="https://github.com/yutteee"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Image
+        src="/github_dark.png"
+        alt="GitHub"
+        height="60"
+        width="60"
+        class="icon"
+      />
+    </a>
+    <a
+      href="https://x.com/yutteeeeeeeee"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Image src="/x_dark.png" alt="X" height="60" width="60" class="icon" />
+    </a>
+    <a
+      href="https://qiita.com/yutteee"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Image src="/qiita.png" alt="Qiita" height="60" width="60" class="icon" />
+    </a>
+    <a
+      href="https://zenn.dev/yutteee"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Image src="/zenn.svg" alt="Zenn" height="60" width="60" class="icon" />
+    </a>
+    <a
+      href="https://www.wantedly.com/id/yutteee"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Image
+        src="/wantedly_dark.png"
+        alt="Wantedly"
+        height="60"
+        width="87"
+        class="icon-wantedly"
+      />
+    </a>
+  </div>
 </footer>
 
 <style>
@@ -91,5 +141,21 @@ import { Image } from "astro:assets";
       width: 62px;
       height: 44px;
     }
+  }
+
+  .white {
+    display: flex;
+  }
+
+  .black {
+    display: none;
+  }
+
+  :global(.dark) .white {
+    display: none;
+  }
+
+  :global(.dark) .black {
+    display: flex;
   }
 </style>

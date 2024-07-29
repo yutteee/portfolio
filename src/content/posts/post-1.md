@@ -1,11 +1,7 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
 title: 'ポートフォリオを作成しました。'
-pubDate: 2022-07-01
+pubDate: "2022-07-01"
 description: 'Astroを用いてポートフォリオを作りました。デザイン、アクセシビリティにこだわって作ったのでぜひ楽しんでください。'
-image:
-    url: 'https://docs.astro.build/assets/full-logo-light.png'
-    alt: 'Astroのロゴ。'
 ---
 
 ## はじめに

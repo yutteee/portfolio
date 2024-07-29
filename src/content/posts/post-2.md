@@ -1,11 +1,10 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
 title: リア充裁判(朝井リョウ)を読んで
 description: "「あなたの内側から溢れ出る語るべき思いや言葉。それが本当のコミュニケーションの種、なのです」。男子大学生の表面的なコミュニケーションを「自分語りの押し付け」と一蹴した議長が主人公に向けた言葉は心に響くものがありました。"
 image:
     url: "https://docs.astro.build/assets/arc.webp"
     alt: "リア充裁判(朝井リョウ)を読んで"
-pubDate: 2024-07-27
+pubDate: "2024-07-27"
 ---
 
 ## はじめに

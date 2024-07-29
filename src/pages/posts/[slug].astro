@@ -1,5 +1,4 @@
 ---
-// @ts-nocheck
 import { SEO } from "astro-seo";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
@@ -20,6 +19,9 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <!doctype html>
@@ -41,6 +43,135 @@ const { Content } = await post.render();
     />
   </head>
   <body>
-    <Content />
+    <BaseLayout pageTitle={post.data.title}>
+      <main class="container">
+        <div class="breadcrumbs">
+          <a href="/">トップ</a>
+          <Icon name="weui:arrow-outlined" />
+          <a href="/posts">記事</a>
+          <Icon name="weui:arrow-outlined" />
+          <div>ポスト</div>
+        </div>
+        <div class="wrapper">
+          <div class="title-wrapper">
+            <div>{post.data.pubDate}</div>
+            <h1 class="title">{post.data.title}</h1>
+            {
+              post.data.image ? (
+                <img
+                  src={post.data.image.url}
+                  alt={post.data.image.alt}
+                  width="720"
+                  height="378"
+                  class="image"
+                />
+              ) : (
+                <img
+                  src={new URL(
+                    `/ogp/${post.slug}.png`,
+                    Astro.url.origin
+                  ).toString()}
+                  alt=""
+                  width="720"
+                  height="378"
+                  class="image"
+                />
+              )
+            }
+          </div>
+          <div class="main-wrapper">
+            <Content />
+          </div>
+        </div>
+      </main>
+    </BaseLayout>
   </body>
 </html>
+
+<style>
+  .container {
+    max-width: calc(1120px + 2rem);
+    margin: 0 auto;
+    padding: 6rem 1rem;
+  }
+  .breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-white);
+    height: fit-content;
+    width: fit-content;
+    border-radius: 9999px;
+
+    a {
+      color: var(--color-link);
+      text-decoration: underline;
+    }
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding-top: 2rem;
+
+    .title-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      gap: 1rem;
+      width: 100%;
+
+      .title {
+        font-size: 2rem;
+        font-weight: 900;
+      }
+
+      .image {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .main-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+
+      h2 {
+        margin-top: 2rem;
+        font-size: 2rem;
+        font-weight: 900;
+      }
+
+      h3 {
+        margin-top: 1rem;
+        font-size: 1.5rem;
+        font-weight: 900;
+      }
+
+      a {
+        color: var(--color-link);
+        text-decoration: underline;
+      }
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-left: 1.5rem;
+
+        li {
+          /* 点をつける */
+          list-style: disc;
+          padding-left: 0.5rem;
+        }
+      }
+    }
+  }
+</style>

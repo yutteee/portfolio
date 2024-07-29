@@ -6,10 +6,10 @@ const { title, url, image, date } = Astro.props;
 <li class="container">
   <a href={url} class="link">
     <div class="mask">
-      <Image src={image} alt="" class="image" width="300" height="157.5" />
+      <Image src={image} alt="" class="image" width="340" height=" 178" />
     </div>
     <div class="texts">
-      <div>{date.slice(0, 10)}</div>
+      <div>{date}</div>
       <div class="title">{title}</div>
     </div>
   </a>

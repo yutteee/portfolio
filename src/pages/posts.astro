@@ -1,26 +1,40 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-// const allPosts = await Astro.glob("../pages/posts/*.md");
+const allPosts = await Astro.glob("../content/posts/*.md");
 const pageTitle = "Articles Page";
 import BlogPost from "../components/BlogPost.astro";
 import PageTitle from "../components/PageTitle.astro";
+
+const getFileName = (file: string) => {
+  const fileNameWithExtentision = file.split("/").pop();
+  const fileName = fileNameWithExtentision?.replace(".md", "");
+
+  return fileName;
+};
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <div class="container">
     <PageTitle title="記事" />
-    <!-- <ul class="articles">
+    <ul class="articles">
       {
         allPosts.map((post) => (
           <BlogPost
-            url={post.url}
+            url={`/posts/${getFileName(post.file)}`}
             title={post.frontmatter.title}
-            image={post.frontmatter.image.url}
+            image={
+              post.frontmatter.image
+                ? post.frontmatter.image.url
+                : new URL(
+                    `/ogp/${getFileName(post.file)}.png`,
+                    Astro.url.origin
+                  ).toString()
+            }
             date={post.frontmatter.pubDate}
           />
         ))
       }
-    </ul> -->
+    </ul>
   </div>
 </BaseLayout>
 

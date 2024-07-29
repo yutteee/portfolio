@@ -10,6 +10,24 @@ type Product = {
 
 export const products: Product[] = [
 	{
+		title: "yutteee-portfolio",
+		description: "私のポートフォリオサイト",
+		period: "2023/09 - 2023/10",
+		detail: "私のポートフォリオサイト",
+		image: "/portfolio.png",
+		url: "https://yutteee.pages.dev/",
+		github: ""
+	},
+	{
+		title: "jack-web",
+		description: "アプリ開発団体jackの公式サイト",
+		period: "2023/09 - 2023/10",
+		detail: "アプリ開発団体jackの公式サイト",
+		image: "/jackweb.png",
+		url: "https://www.jackapp.jp/",
+		github: ""
+	},
+	{
 		title: "jack-blog",
 		description: "アプリ開発団体jackのブログサイト",
 		period: "2023/04 - 2024/03",
@@ -17,15 +35,6 @@ export const products: Product[] = [
 		image: "/jack-blog.png",
 		url: "https://jackun-blog.vercel.app/",
 		github: "https://github.com/jack-app/jack-blog-ts",
-	},
-	{
-		title: "Floral Gifter",
-		description: "適切な花を提案するWebアプリ",
-		period: "2023/05",
-		detail: "花を贈る際に適切な花を提案するWebアプリです。",
-		image: "/floral-gifter.png",
-		url: "https://floral-gifter.netlify.app/",
-		github: "https://github.com/jack-app/jackHack2023_B",
 	},
 	{
 		title: "gather_chatGPT",
@@ -54,10 +63,10 @@ export const products: Product[] = [
 		github: "https://github.com/CODEDUEL2022/CODEDUEL",
 	},
 	{
-		title: "yutteee-portfolio",
-		description: "旧ポートフォリオサイト",
+		title: "旧portfolio",
+		description: "私の旧ポートフォリオサイト",
 		period: "2022/02",
-		detail: "旧ポートフォリオサイトです。",
+		detail: "私の旧ポートフォリオサイト",
 		image: "/yutteee-portfolio.png",
 		url: "https://yutteee-portfolio.netlify.app/",
 		github: "https://github.com/yutteee/Yutteee-Portfolio",

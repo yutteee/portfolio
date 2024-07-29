@@ -34,7 +34,7 @@ import { Icon } from "astro-icon/components";
         basic: {
           title: post.data.title,
           type: "article",
-          image: new URL(`/ogp/${post.slug}.png`, Astro.url.origin).toString(),
+          image: `${import.meta.env.SITE_URL}/ogp/${post.slug}.png`,
         },
         image: {
           alt: post.data.title,
@@ -67,10 +67,7 @@ import { Icon } from "astro-icon/components";
                 />
               ) : (
                 <img
-                  src={new URL(
-                    `/ogp/${post.slug}.png`,
-                    Astro.url.origin
-                  ).toString()}
+                  src={`${import.meta.env.SITE_URL}/ogp/${post.slug}.png`}
                   alt=""
                   width="720"
                   height="378"
@@ -90,6 +87,7 @@ import { Icon } from "astro-icon/components";
 
 <style>
   .container {
+    width: 100%;
     max-width: calc(1120px + 2rem);
     margin: 0 auto;
     padding: 6rem 1rem;

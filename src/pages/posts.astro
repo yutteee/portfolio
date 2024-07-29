@@ -25,10 +25,7 @@ const getFileName = (file: string) => {
             image={
               post.frontmatter.image
                 ? post.frontmatter.image.url
-                : new URL(
-                    `/ogp/${getFileName(post.file)}.png`,
-                    Astro.url.origin
-                  ).toString()
+                : `${import.meta.env.SITE_URL}/ogp/${getFileName(post.file)}.png`
             }
             date={post.frontmatter.pubDate}
           />

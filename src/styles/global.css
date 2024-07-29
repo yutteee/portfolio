@@ -26,6 +26,16 @@ html {
   font-size: 1rem;
   line-height: 1.5;
 
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  footer {
+    margin-top: auto;
+  }
+
   p {
     line-height: 2;
   }

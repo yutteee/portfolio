@@ -1,5 +1,5 @@
 ---
-const allPosts = await Astro.glob("../../pages/posts/*.md");
+// const allPosts = await Astro.glob("../../pages/posts/*.md");
 import BlogPost from "../BlogPost.astro";
 import LinkButton from "../LinkButton.astro";
 ---
@@ -9,7 +9,7 @@ import LinkButton from "../LinkButton.astro";
     <h2 class="title">記事</h2>
     <LinkButton text="一覧を見る" url="/articles/" />
   </div>
-  <ul class="articles">
+  <!-- <ul class="articles">
     {
       allPosts
         .slice(0, 3)
@@ -22,7 +22,7 @@ import LinkButton from "../LinkButton.astro";
           />
         ))
     }
-  </ul>
+  </ul> -->
 </div>
 
 <style>

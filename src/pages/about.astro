@@ -44,7 +44,7 @@ import { Image } from "astro:assets";
       </div>
       <div class="about-wrapper">
         <div class="about" id="about">
-          <div>
+          <section>
             <h2 class="h2">中村優作</h2>
             <div class="description">
               <p>名古屋大学工学部化学生命工学科の4年生です。</p>
@@ -58,24 +58,24 @@ import { Image } from "astro:assets";
                 趣味は漫才を見ること、音楽を聴くこと、本を読むこと、お酒を飲むことです。社会人になったら漫才劇場に通ったり、書斎やお酒の棚がある家でダラダラしたりしたいです。
               </p>
             </div>
-          </div>
-          <div>
+          </section>
+          <section>
             <h2 class="h2">経歴</h2>
             <div class="histories">
               {
                 histories.map((history, index) => (
-                  <div id={`history-item${index}`}>
+                  <section id={`history-item${index}`}>
                     <h3 class="h3">{history.title}</h3>
                     <div class="description">
                       {history.description.map((desc) => (
                         <p>{desc}</p>
                       ))}
                     </div>
-                  </div>
+                  </section>
                 ))
               }
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </div>
@@ -126,7 +126,7 @@ import { Image } from "astro:assets";
       @media screen and (max-width: 768px) {
         flex-direction: column;
         align-items: center;
-        gap: 2rem;
+        gap: 4rem;
       }
     }
 
@@ -191,31 +191,31 @@ import { Image } from "astro:assets";
     .about {
       display: flex;
       flex-direction: column;
-      gap: 2.5rem;
     }
 
     .h2 {
-      font-size: 2.25rem;
+      margin-top: 2rem;
+      font-size: 2rem;
       font-weight: 900;
-      margin-bottom: 2rem;
     }
 
     .h3 {
+      margin-top: 1rem;
       font-size: 1.5rem;
       font-weight: 900;
-      margin-bottom: 1rem;
     }
 
     .histories {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1rem;
     }
 
     .description {
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      margin-top: 1rem;
     }
   </style>
 </BaseLayout>

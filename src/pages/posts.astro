@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 const allPosts = await Astro.glob("../content/posts/*.md");
 const pageTitle = "記事";
+const pageDescription = "中村優作による記事一覧です。";
 import BlogPost from "../components/BlogPost.astro";
 import PageTitle from "../components/PageTitle.astro";
 
@@ -13,7 +14,7 @@ const getFileName = (file: string) => {
 };
 ---
 
-<BaseLayout pageTitle={pageTitle}>
+<BaseLayout title={pageTitle} description={pageDescription}>
   <main class="container">
     <PageTitle title="記事" />
     <ul class="articles">

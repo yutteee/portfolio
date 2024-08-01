@@ -3,19 +3,34 @@ import "destyle.css";
 import Header from "../components/Header/index.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
-const { pageTitle } = Astro.props;
+const { title, description } = Astro.props;
+import { SEO } from "astro-seo";
 ---
 
 <html lang="ja">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
+    <SEO
+      charset="UTF-8"
+      title={`${title} | yutteee-portfolio`}
+      description={description}
+      openGraph={{
+        basic: {
+          title: title,
+          type: "article",
+          image: "/portfolio.png",
+        },
+        image: {
+          alt: "中村優作のポートフォリオ",
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        site: "@yutteee-portfolio",
+      }}
+    />
   </head>
   <body>
-    <Header currentPage={pageTitle} />
+    <Header currentPage={title} />
     <slot />
     <Footer />
   </body>

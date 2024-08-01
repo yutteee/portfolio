@@ -1,12 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "私について";
+const pageDescription = "中村優作の自己紹介ページです。";
 import { histories } from "../data/history";
 import PageTitle from "../components/PageTitle.astro";
 import { Image } from "astro:assets";
 ---
 
-<BaseLayout pageTitle={pageTitle}>
+<BaseLayout title={pageTitle} description={pageDescription}>
   <main class="container">
     <PageTitle title="私について" />
     <div class="wrapper">

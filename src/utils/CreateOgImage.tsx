@@ -22,25 +22,17 @@ export async function createOgImage(text: string) {
         color: "#041b47"
       }}
     >
-      <div
+      <img
+        src={`${import.meta.env.SITE_URL}/ogp.png`}
         style={{
-          backgroundColor: "#f0f0f0",
-          width: "400px",
-          height: "240px",
-          borderRadius: "12px",
-          marginTop: "64px",
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          position: "absolute",
+          zIndex: -1
         }}
-      >
-      </div>
-      <div
-        style={{
-          width: "150px",
-          borderBottom: "28px solid #f0f0f0",
-          borderLeft: "8px solid transparent",
-          borderRight: "8px solid transparent"
-        }}
-      >
-      </div>
+        alt=""
+      />
       <div
         style={{
           position: "absolute",

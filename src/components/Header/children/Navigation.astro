@@ -32,15 +32,38 @@ import IconButton from "../../IconButton.astro";
   const menu = document.getElementById("menu");
   const close = document.getElementById("close");
 
-  if (hamburger && menu) {
+  if (hamburger && menu && close) {
     hamburger.addEventListener("click", () => {
       menu.classList.toggle("open");
+      close.focus();
     });
-  }
 
-  if (close && menu) {
     close.addEventListener("click", () => {
       menu.classList.remove("open");
+      hamburger.focus();
+    });
+
+    // フォーカストラップ
+    document.addEventListener("keydown", (event) => {
+      const forcusableElements = menu.querySelectorAll("a, button");
+      const firstElement = forcusableElements[0] as HTMLElement;
+      const lastElement = forcusableElements[
+        forcusableElements.length - 1
+      ] as HTMLElement;
+
+      if (event.key === "Tab") {
+        if (event.shiftKey) {
+          if (document.activeElement === firstElement) {
+            lastElement.focus();
+            event.preventDefault();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            firstElement.focus();
+            event.preventDefault();
+          }
+        }
+      }
     });
   }
 </script>

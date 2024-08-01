@@ -60,6 +60,12 @@ import IconButton from "../../IconButton.astro";
 
     const isDark = element.classList.contains("dark");
     localStorage.setItem("theme", isDark ? "dark" : "light");
+
+    if (isDark) {
+      document.getElementById("toggleDarkMode").focus();
+    } else {
+      document.getElementById("toggleLightMode").focus();
+    }
   };
 
   document

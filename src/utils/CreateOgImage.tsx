@@ -32,6 +32,8 @@ export async function createOgImage(text: string) {
           zIndex: -1
         }}
         alt=""
+        width={1200}
+        height={630}
       />
       <div
         style={{

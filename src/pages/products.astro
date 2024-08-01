@@ -7,7 +7,7 @@ import PageTitle from "../components/PageTitle.astro";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <div class="container">
+  <main class="container">
     <PageTitle title="プロダクト" />
     <div class="products">
       {
@@ -22,7 +22,7 @@ import PageTitle from "../components/PageTitle.astro";
         ))
       }
     </div>
-  </div>
+  </main>
 
   <style>
     .container {

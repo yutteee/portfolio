@@ -7,11 +7,11 @@
 }
 
 :root.dark {
-  --color-white: #100f23;
+  --color-white: #000;
   --color-background: #04345c;
   --color-text: #f0f0f0;
-  --color-blue: #01649e;
-  --color-link: #49d1ff;
+  --color-blue: #015483;
+  --color-link: #A8FFF5;
 }
 
 html {

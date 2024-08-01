@@ -1,4 +1,5 @@
 ---
+const { currentPage } = Astro.props;
 import Navigation from "./children/Navigation.astro";
 import ThemeIcon from "./children/ThemeIcon.astro";
 ---
@@ -6,7 +7,7 @@ import ThemeIcon from "./children/ThemeIcon.astro";
 <header class="header">
   <a href="/" class="logo" aria-label="トップ">Yutteee</a>
   <div class="nav">
-    <Navigation />
+    <Navigation currentPage={currentPage} />
     <ThemeIcon />
   </div>
 </header>

@@ -11,10 +11,10 @@ const getFileName = (file: string) => {
 };
 ---
 
-<div class="container">
+<section class="container">
   <div class="titles">
     <h2 class="title">記事</h2>
-    <LinkButton text="一覧を見る" url="/posts/" />
+    <LinkButton text="一覧" url="/posts/" ariaLabel="記事一覧" />
   </div>
   <ul class="articles">
     {
@@ -34,7 +34,7 @@ const getFileName = (file: string) => {
         ))
     }
   </ul>
-</div>
+</section>
 
 <style>
   .container {

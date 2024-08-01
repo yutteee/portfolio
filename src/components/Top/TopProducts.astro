@@ -4,10 +4,10 @@ import { products } from "../../data/products";
 import LinkButton from "../LinkButton.astro";
 ---
 
-<div class="container">
+<section class="container">
   <div class="titles">
     <h2 class="title">プロダクト</h2>
-    <LinkButton text="一覧を見る" url="/products/" />
+    <LinkButton text="一覧" url="/products/" ariaLabel="プロダクト一覧" />
   </div>
   <div class="products">
     {
@@ -24,7 +24,7 @@ import LinkButton from "../LinkButton.astro";
         ))
     }
   </div>
-</div>
+</section>
 
 <style>
   .container {

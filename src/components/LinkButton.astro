@@ -1,9 +1,9 @@
 ---
-const { text, url } = Astro.props;
+const { text, url, ariaLabel } = Astro.props;
 import { Icon } from "astro-icon/components";
 ---
 
-<a class="button" href={url}>
+<a class="button" href={url} aria-label={ariaLabel}>
   {text}
   <Icon name="formkit:arrowright" size={24} />
 </a>

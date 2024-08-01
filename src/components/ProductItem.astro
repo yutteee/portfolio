@@ -3,7 +3,13 @@ import { Image } from "astro:assets";
 const { image, index, title, description, url } = Astro.props;
 ---
 
-<a class="product" href={url} target="_blank" rel="noopener noreferrer">
+<a
+  class="product"
+  href={url}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={title}
+>
   <span class="mask">
     <Image src={image} alt="" class="image" width="400" height="250" />
   </span>

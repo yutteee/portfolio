@@ -38,6 +38,7 @@ html {
 
   p {
     line-height: 2;
+    max-width: 40rem;
   }
 
   p br {

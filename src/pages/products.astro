@@ -10,19 +10,21 @@ import PageTitle from "../components/PageTitle.astro";
 <BaseLayout title={pageTitle} description={pageDescription}>
   <main class="container">
     <PageTitle title="プロダクト" />
-    <div class="products">
+    <ul class="products">
       {
         products.map((product, index) => (
-          <ProductItem
-            index={index + 1}
-            image={product.image}
-            title={product.title}
-            description={product.description}
-            url={product.url}
-          />
+          <li>
+            <ProductItem
+              index={index + 1}
+              image={product.image}
+              title={product.title}
+              description={product.description}
+              url={product.url}
+            />
+          </li>
         ))
       }
-    </div>
+    </ul>
   </main>
 
   <style>
@@ -36,31 +38,31 @@ import PageTitle from "../components/PageTitle.astro";
         /* grid 2つ並べて折り返す*/
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        max-width: 1120px;
+        max-width: 70rem;
         flex-wrap: wrap;
         padding-top: 4rem;
         padding-bottom: 6rem;
 
         > *:nth-child(odd) {
-          margin: 2rem 1.5rem 6rem 0;
+          padding: 32px 24px 64px 0;
         }
 
         > *:nth-child(even) {
-          margin: 8rem 0 0 1.5rem;
+          padding: 96px 0 0 24px;
         }
 
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 1000px) {
           display: flex;
           flex-direction: column;
           gap: 2rem;
           padding-bottom: 6rem;
 
           > *:nth-child(odd) {
-            margin: 0;
+            padding: 0;
           }
 
           > *:nth-child(even) {
-            margin: 0;
+            padding: 0;
           }
         }
       }

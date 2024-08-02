@@ -35,6 +35,7 @@ import LinkButton from "../LinkButton.astro";
     .titles {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
       align-items: end;
       gap: 1.5rem;
 
@@ -42,7 +43,7 @@ import LinkButton from "../LinkButton.astro";
         font-size: 4rem;
         font-weight: 900;
 
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 1000px) {
           font-size: 2rem;
         }
       }
@@ -53,7 +54,7 @@ import LinkButton from "../LinkButton.astro";
       gap: 3rem;
       width: 100%;
 
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: 1000px) {
         flex-direction: column;
       }
     }

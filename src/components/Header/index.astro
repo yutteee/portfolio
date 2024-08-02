@@ -17,7 +17,7 @@ import ThemeIcon from "./children/ThemeIcon.astro";
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem 0 2rem;
+    padding: 16px 32px 0 32px;
     position: fixed;
     top: 0;
     left: 0;
@@ -26,23 +26,24 @@ import ThemeIcon from "./children/ThemeIcon.astro";
     margin: 0 auto;
     backdrop-filter: blur(4px);
 
-    @media screen and (max-width: 768px) {
-      padding: 1rem;
+    @media screen and (max-width: 1000px) {
+      padding: 8px 16px;
     }
   }
 
   .logo {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: bold;
+    line-height: 1;
   }
 
   .nav {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 24px;
 
-    @media screen and (max-width: 768px) {
-      gap: 1rem;
+    @media screen and (max-width: 1000px) {
+      gap: 16px;
     }
   }
 </style>

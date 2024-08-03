@@ -113,6 +113,10 @@ import { Icon } from "astro-icon/components";
     width: fit-content;
     border-radius: 9999px;
 
+    @media screen and (max-width: 1000px) {
+      width: 100%;
+    }
+
     a {
       color: var(--color-link);
       text-decoration: underline;

@@ -26,6 +26,9 @@ dependencies:
   '@iconify-json/formkit':
     specifier: ^1.1.8
     version: 1.1.8
+  '@iconify-json/lets-icons':
+    specifier: ^1.1.2
+    version: 1.1.2
   '@iconify-json/weui':
     specifier: ^1.1.0
     version: 1.1.0
@@ -1291,6 +1294,12 @@ packages:
 
   /@iconify-json/formkit@1.1.8:
     resolution: {integrity: sha512-fEqxLrv8JACQQ1q8Q4q5f0GuPwvUEy80DfKqlyscjzVxNle36wBegRywhWO26eB/mAhzFs6Z9F1z0WlN2FFZgA==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: false
+
+  /@iconify-json/lets-icons@1.1.2:
+    resolution: {integrity: sha512-rju+DR2T5Up0y5CoNK9mpr4LVbAQISJEAXW5yHQQqPa8jqRYTTkJSc502H3QX4w91PUte9tAYNyv3hg5xk9how==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: false

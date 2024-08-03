@@ -1,7 +1,15 @@
+---
+import AnimationIcon from "./AnimationIcon.astro";
+---
+
 <div class="container" id="container">
   <div class="monitor" id="monitor"></div>
   <div class="keyboard"></div>
   <div class="title absolute" id="title">Hi! I'm Yutteee!</div>
+  <div class="scroll" id="scroll">Scroll</div>
+  <div class="animation-button">
+    <AnimationIcon />
+  </div>
 </div>
 <script>
   import { gsap } from "gsap";
@@ -62,6 +70,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 1;
   }
 
   .keyboard {
@@ -83,6 +92,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    z-index: 2;
   }
 
   .title {
@@ -92,6 +102,59 @@
 
     @media screen and (max-width: 1000px) {
       font-size: 40px;
+    }
+  }
+
+  .scroll {
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    letter-spacing: 0.1rem;
+
+    /* after */
+    &::after {
+      content: "";
+      position: absolute;
+      top: 1.8rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 36px;
+      background: var(--color-text);
+      animation: pathmove 1.5s ease-in-out infinite;
+      opacity: 1;
+    }
+  }
+  @keyframes pathmove {
+    0% {
+      height: 20px;
+      top: 1.8rem;
+      opacity: 0;
+    }
+    30% {
+      height: 36px;
+      opacity: 1;
+    }
+    100% {
+      height: 20px;
+      top: calc(1.8rem + 30px);
+      opacity: 0;
+    }
+  }
+
+  :global(.stop) .scroll::after {
+    animation-play-state: paused;
+  }
+
+  .animation-button {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+
+    @media screen and (max-width: 1000px) {
+      bottom: 16px;
+      right: 16px;
     }
   }
 </style>

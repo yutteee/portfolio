@@ -1,0 +1,81 @@
+---
+import IconButton from "../IconButton.astro";
+---
+
+<div class="play-button">
+  <IconButton
+    label="アニメーションを有効にする"
+    icon="clarity:play-line"
+    id="togglePlayAnimation"
+  />
+</div>
+<div class="stop-button">
+  <IconButton
+    label="アニメーションを停止する"
+    icon="clarity:stop-line"
+    id="toggleStopAnimation"
+  />
+</div>
+
+<style>
+  .play-button {
+    display: none;
+  }
+
+  .stop-button {
+    display: block;
+  }
+
+  :global(.stop) .play-button {
+    display: block;
+  }
+
+  :global(.stop) .stop-button {
+    display: none;
+  }
+</style>
+
+<script is:inline>
+  const animation = (() => {
+    if (
+      typeof localStorage !== "undefined" &&
+      localStorage.getItem("animation")
+    ) {
+      return localStorage.getItem("animation");
+    }
+    if (window.matchMedia("(prefers-color-scheme: stop)").matches) {
+      return "stop";
+    }
+    return "play";
+  })();
+
+  if (animation === "play") {
+    document.documentElement.classList.remove("stop");
+  } else {
+    document.documentElement.classList.add("stop");
+  }
+
+  window.localStorage.setItem("animation", animation);
+
+  const handleToggleAnimation = () => {
+    const element = document.documentElement;
+    element.classList.toggle("stop");
+
+    const isStop = element.classList.contains("stop");
+    localStorage.setItem("animation", isStop ? "stop" : "play");
+
+    if (isStop) {
+      document.getElementById("togglePlayAnimation").focus();
+    } else {
+      document.getElementById("toggleStopAnimation").focus();
+    }
+  };
+
+  document
+    .getElementById("togglePlayAnimation")
+    .addEventListener("click", handleToggleAnimation);
+
+  document
+    .getElementById("toggleStopAnimation")
+    .addEventListener("click", handleToggleAnimation);
+</script>

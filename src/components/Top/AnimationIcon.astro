@@ -43,7 +43,7 @@ import IconButton from "../IconButton.astro";
     ) {
       return localStorage.getItem("animation");
     }
-    if (window.matchMedia("(prefers-color-scheme: stop)").matches) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return "stop";
     }
     return "play";

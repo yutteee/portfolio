@@ -49,6 +49,22 @@ import { Icon } from "astro-icon/components";
       twitter={{
         card: "summary_large_image",
         site: "@yutteee-portfolio",
+        creator: "@yutteee",
+      }}
+      extend={{
+        link: [{ rel: "icon", href: "/favicon.svg" }],
+        meta: [
+          {
+            name: "twitter:image",
+            content: `${import.meta.env.SITE_URL}/ogp/${post.slug}.png`,
+          },
+          { name: "twitter:image:alt", content: post.data.title },
+          {
+            name: "twitter:title",
+            content: `${post.data.title} | yutteee-portfolio`,
+          },
+          { name: "twitter:description", content: post.data.description },
+        ],
       }}
     />
   </head>
@@ -92,111 +108,111 @@ import { Icon } from "astro-icon/components";
       </div>
     </main>
     <Footer />
-  </body>
-</html>
 
-<style>
-  .container {
-    width: 100%;
-    max-width: calc(70rem + 2rem);
-    margin: 0 auto;
-    padding: 96px 16px;
-  }
-  .breadcrumbs {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background-color: var(--color-white);
-    height: fit-content;
-    width: fit-content;
-    border-radius: 9999px;
-
-    @media screen and (max-width: 1000px) {
-      width: 100%;
-    }
-
-    a {
-      color: var(--color-link);
-      text-decoration: underline;
-    }
-  }
-  .wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-    max-width: 40rem;
-    margin: 0 auto;
-    padding-top: 2rem;
-
-    .title-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-      gap: 1rem;
-      width: 100%;
-
-      .title {
-        font-size: 2rem;
-        font-weight: 900;
-      }
-
-      .image {
+    <style>
+      .container {
         width: 100%;
-        height: auto;
+        max-width: calc(70rem + 2rem);
+        margin: 0 auto;
+        padding: 96px 16px;
       }
-    }
-
-    .main-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      width: 100%;
-
-      h2 {
-        margin-top: 2rem;
-        font-size: 2rem;
-        font-weight: 900;
-      }
-
-      h3 {
-        margin-top: 1rem;
-        font-size: 1.5rem;
-        font-weight: 900;
-      }
-
-      a {
-        color: var(--color-link);
-        text-decoration: underline;
-      }
-
-      ul {
+      .breadcrumbs {
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
         gap: 0.5rem;
-        padding-left: 1.5rem;
+        padding: 0.5rem 1rem;
+        background-color: var(--color-white);
+        height: fit-content;
+        width: fit-content;
+        border-radius: 9999px;
 
-        li {
-          /* 点をつける */
-          list-style: disc;
-          padding-left: 0.5rem;
+        @media screen and (max-width: 1000px) {
+          width: 100%;
+        }
+
+        a {
+          color: var(--color-link);
+          text-decoration: underline;
         }
       }
-
-      th,
-      td {
-        padding: 0.5rem;
-        border: 1px solid var(--color-text);
-      }
-
-      table {
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
         width: 100%;
-        border-collapse: collapse;
-        table-layout: fixed;
+        max-width: 40rem;
+        margin: 0 auto;
+        padding-top: 2rem;
+
+        .title-wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          gap: 1rem;
+          width: 100%;
+
+          .title {
+            font-size: 2rem;
+            font-weight: 900;
+          }
+
+          .image {
+            width: 100%;
+            height: auto;
+          }
+        }
+
+        .main-wrapper {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          width: 100%;
+
+          h2 {
+            margin-top: 2rem;
+            font-size: 2rem;
+            font-weight: 900;
+          }
+
+          h3 {
+            margin-top: 1rem;
+            font-size: 1.5rem;
+            font-weight: 900;
+          }
+
+          a {
+            color: var(--color-link);
+            text-decoration: underline;
+          }
+
+          ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding-left: 1.5rem;
+
+            li {
+              /* 点をつける */
+              list-style: disc;
+              padding-left: 0.5rem;
+            }
+          }
+
+          th,
+          td {
+            padding: 0.5rem;
+            border: 1px solid var(--color-text);
+          }
+
+          table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+          }
+        }
       }
-    }
-  }
-</style>
+    </style>
+  </body>
+</html>

@@ -11,7 +11,7 @@ import { Image } from "astro:assets";
   <main class="container">
     <PageTitle title="私について" />
     <div class="wrapper">
-      <div class="pc-wrapper">
+      <div class="pc-wrapper" aria-hidden>
         <div class="pc">
           <div class="monitor">
             {
@@ -25,7 +25,7 @@ import { Image } from "astro:assets";
                     height="187.5"
                     id={`screen${histories.length - index}`}
                     class="screen"
-                    alt=""
+                    alt={history.alt}
                   />
                 ))
             }
@@ -35,7 +35,7 @@ import { Image } from "astro:assets";
               height="187.5"
               id="screen0"
               class="screen"
-              alt=""
+              alt="中村優作の顔"
             />
             <div class="splashbg1"></div>
             <div class="splashbg2"></div>

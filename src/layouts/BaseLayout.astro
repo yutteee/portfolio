@@ -28,6 +28,16 @@ import { SEO } from "astro-seo";
       twitter={{
         card: "summary_large_image",
         site: "@yutteee-portfolio",
+        creator: "@yutteee",
+      }}
+      extend={{
+        link: [{ rel: "icon", href: "/favicon.svg" }],
+        meta: [
+          { name: "twitter:image", content: "/portfolio.png" },
+          { name: "twitter:image:alt", content: "中村優作のポートフォリオ" },
+          { name: "twitter:title", content: `${title} | yutteee-portfolio` },
+          { name: "twitter:description", content: description },
+        ],
       }}
     />
   </head>

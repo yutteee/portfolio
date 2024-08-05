@@ -116,6 +116,7 @@ import { Image } from "astro:assets";
       />
     </a>
   </div>
+  <a href="/siteMap" class="link">サイトマップ</a>
 </footer>
 
 <style>
@@ -170,5 +171,12 @@ import { Image } from "astro:assets";
 
   :global(.dark) .black {
     display: flex;
+  }
+
+  .link {
+    color: var(--color-link);
+    text-decoration: underline;
+    position: absolute;
+    bottom: 16px;
   }
 </style>

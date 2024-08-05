@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const pageTitle = "サイトマップ";
+const pageDescription = "中村優作のポートフォリオサイトのサイトマップです。";
+import PageTitle from "../components/PageTitle.astro";
+const allPosts = await Astro.glob("../content/posts/*.md");
+
+const getFileName = (file: string) => {
+  const fileNameWithExtentision = file.split("/").pop();
+  const fileName = fileNameWithExtentision?.replace(".md", "");
+
+  return fileName;
+};
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <main class="container">
+    <PageTitle title="サイトマップ" />
+    <ul class="links">
+      <li><a href="/">トップ</a></li>
+      <li><a href="/about/">私について</a></li>
+      <li><a href="/products/">プロダクト</a></li>
+      <li><a href="/posts/">記事</a></li>
+      <ul class="childLinks">
+        {
+          allPosts.map((post) => (
+            <li>
+              <a href={`/posts/${getFileName(post.file)}`}>
+                {post.frontmatter.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </ul>
+  </main>
+</BaseLayout>
+
+<script></script>
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px;
+    align-items: center;
+    .links {
+      padding-top: 64px;
+      padding-bottom: 96px;
+      width: 100%;
+      max-width: 70rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding-left: 1.5rem;
+
+      li {
+        list-style: disc;
+        text-decoration: underline;
+        color: var(--color-link);
+      }
+
+      .childLinks {
+        padding-left: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  }
+</style>

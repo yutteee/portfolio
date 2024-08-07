@@ -50,6 +50,8 @@ import { Icon } from "astro-icon/components";
         card: "summary_large_image",
         site: "@yutteee-portfolio",
         creator: "@yutteee",
+        image: `${import.meta.env.SITE_URL}/ogp/${post.slug}.png`,
+        imageAlt: post.data.title,
       }}
       extend={{
         link: [{ rel: "icon", href: "/favicon.svg" }],

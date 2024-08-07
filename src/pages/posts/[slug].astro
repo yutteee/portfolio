@@ -46,16 +46,15 @@ import { Icon } from "astro-icon/components";
           alt: post.data.title,
         },
       }}
-      twitter={{
-        card: "summary_large_image",
-        site: "@yutteee-portfolio",
-        creator: "@yutteee",
-        image: `${import.meta.env.SITE_URL}/ogp/${post.slug}.png`,
-        imageAlt: post.data.title,
-      }}
       extend={{
         link: [{ rel: "icon", href: "/favicon.svg" }],
         meta: [
+          {
+            name: "twitter:card",
+            content: "summary_large_image",
+          },
+          { name: "twitter:site", content: "@yutteee-portfolio" },
+          { name: "twitter:creator", content: "@yutteee" },
           {
             name: "twitter:image",
             content: `${import.meta.env.SITE_URL}/ogp/${post.slug}.png`,

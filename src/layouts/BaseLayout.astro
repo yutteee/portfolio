@@ -25,17 +25,19 @@ import { SEO } from "astro-seo";
           alt: "中村優作のポートフォリオ",
         },
       }}
-      twitter={{
-        card: "summary_large_image",
-        site: "@yutteee-portfolio",
-        creator: "@yutteee",
-        image: `${import.meta.env.SITE_URL}/portfolio.png`,
-        imageAlt: "中村優作のポートフォリオ",
-      }}
       extend={{
         link: [{ rel: "icon", href: "/favicon.svg" }],
         meta: [
-          { name: "twitter:image", content: "/portfolio.png" },
+          {
+            name: "twitter:card",
+            content: "summary_large_image",
+          },
+          { name: "twitter:site", content: "@yutteee-portfolio" },
+          { name: "twitter:creator", content: "@yutteee" },
+          {
+            name: "twitter:image",
+            content: `${import.meta.env.SITE_URL}/portfolio.png`,
+          },
           { name: "twitter:image:alt", content: "中村優作のポートフォリオ" },
           { name: "twitter:title", content: `${title} | yutteee-portfolio` },
           { name: "twitter:description", content: description },

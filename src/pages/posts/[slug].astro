@@ -47,7 +47,6 @@ import { Icon } from "astro-icon/components";
         },
       }}
       extend={{
-        link: [{ rel: "icon", href: "/favicon.svg" }],
         meta: [
           {
             name: "twitter:card",
@@ -55,16 +54,6 @@ import { Icon } from "astro-icon/components";
           },
           { name: "twitter:site", content: "@yutteee-portfolio" },
           { name: "twitter:creator", content: "@yutteee" },
-          {
-            name: "twitter:image",
-            content: `${import.meta.env.SITE_URL}/ogp/${post.slug}.png`,
-          },
-          { name: "twitter:image:alt", content: post.data.title },
-          {
-            name: "twitter:title",
-            content: `${post.data.title} | yutteee-portfolio`,
-          },
-          { name: "twitter:description", content: post.data.description },
         ],
       }}
     />

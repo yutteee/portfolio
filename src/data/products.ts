@@ -10,13 +10,12 @@ type Product = {
 
 export const products: Product[] = [
 	{
-		title: "yutteee-portfolio",
-		description: "私のポートフォリオサイト",
-		period: "2023/09 - 2023/10",
-		detail: "私のポートフォリオサイト",
-		image: "/portfolio.png",
-		url: "https://yutteee.pages.dev/",
-		github: ""
+		title: "ai-tango",
+		description: "例文が自動で生成される単語帳アプリ",
+		period: "2023/10 - 2023/11",
+		detail: "例文が自動で生成される単語帳アプリ",
+		image: "/ai-tango.png",
+		url: "https://apps.apple.com/us/app/ai-tango/id6670333761"
 	},
 	{
 		title: "jack-web",
@@ -25,6 +24,15 @@ export const products: Product[] = [
 		detail: "アプリ開発団体jackの公式サイト",
 		image: "/jackweb.png",
 		url: "https://www.jackapp.jp/",
+		github: ""
+	},
+	{
+		title: "yutteee-portfolio",
+		description: "私のポートフォリオサイト",
+		period: "2023/09 - 2023/10",
+		detail: "私のポートフォリオサイト",
+		image: "/portfolio.png",
+		url: "https://yutteee.pages.dev/",
 		github: ""
 	},
 	{

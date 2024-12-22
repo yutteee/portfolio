@@ -29,6 +29,11 @@ const getFileName = (file: string) => {
                 : `${import.meta.env.SITE_URL}/ogp/${getFileName(post.file)}.png`
             }
             date={post.frontmatter.pubDate}
+            alt={
+              post.frontmatter.image
+                ? post.frontmatter.image.alt
+                : `サムネイル画像。白いPCのイラストに、「${post.frontmatter.title}」の文字が重なっている。`
+            }
           />
         ))
       }

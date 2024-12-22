@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-const { image, index, title, description, url } = Astro.props;
+const { image, index, title, description, url, alt } = Astro.props;
 ---
 
 <a
@@ -12,7 +12,7 @@ const { image, index, title, description, url } = Astro.props;
 >
   <div class="index-parent">
     <span class="mask">
-      <Image src={image} alt="" class="image" width="400" height="250" />
+      <Image src={image} alt={alt} class="image" width="400" height="250" />
     </span>
     <div class="index">0{index}</div>
   </div>

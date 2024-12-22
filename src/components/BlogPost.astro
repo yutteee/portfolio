@@ -1,12 +1,12 @@
 ---
 import { Image } from "astro:assets";
-const { title, url, image, date } = Astro.props;
+const { title, url, image, date, alt } = Astro.props;
 ---
 
 <li class="container">
   <a href={url} class="link" aria-label={title}>
     <div class="mask">
-      <Image src={image} alt="" class="image" width="340" height="178" />
+      <Image src={image} alt={alt} class="image" width="340" height="178" />
     </div>
     <div class="texts">
       <div>{date}</div>

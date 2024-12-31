@@ -39,4 +39,14 @@ export const histories = [
 		image: "/kannon.png",
 		alt: "合同会社KANNONのロゴ",
 	},
+	{
+		title: "JPHACKS2024 2冠",
+		description: [
+			"2024年にJPHACKSというハッカソンに参加し、審査員投票によるBest Hack Awardと、参加者投票によるBest Audience Awardの2冠をいただきました。",
+			"折り紙の折り方を3Dモデルで見れるwebアプリを開発し、技術的難易度、アプリケーションの使いやすさなどを評価していただきました。",
+			"学生最後のハッカソンで、最高の結果を出せてとても嬉しかったです。"
+		],
+		image: "/jphacks.png",
+		alt: "JPHACKS2024のロゴ",
+	}
 ];

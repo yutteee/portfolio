@@ -12,6 +12,20 @@ const getFileName = (file: string) => {
 
   return fileName;
 };
+
+import { externalBlogs } from "../data/externalBlog";
+import { JSDOM } from "jsdom";
+
+const getOgpImageFromUrl = async (url: string) => {
+  const res = await fetch(url);
+  const html = await res.text();
+  const dom = new JSDOM(html);
+  const ogpImage = dom.window.document
+    .querySelector('meta[property="og:image"]')
+    ?.getAttribute("content");
+
+  return ogpImage;
+};
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -34,6 +48,17 @@ const getFileName = (file: string) => {
                 ? post.frontmatter.image.alt
                 : `サムネイル画像。白いPCのイラストに、「${post.frontmatter.title}」の文字が重なっている。`
             }
+          />
+        ))
+      }
+      {
+        externalBlogs.map((blog) => (
+          <BlogPost
+            url={blog.url}
+            title={blog.title}
+            image={getOgpImageFromUrl(blog.url)}
+            date={blog.pubDate}
+            alt={`サムネイル画像。${blog.title}`}
           />
         ))
       }

@@ -1,16 +1,26 @@
 ---
 import { Image } from "astro:assets";
-const { title, url, image, date, alt } = Astro.props;
+const { title, url, image, date, alt, isExternal } = Astro.props;
+import { Icon } from "astro-icon/components";
 ---
 
 <li class="container">
-  <a href={url} class="link" aria-label={title}>
+  <a
+    href={url}
+    class="link"
+    aria-label={title}
+    target={isExternal ? "_blank" : "_self"}
+    rel={isExternal ? "noopener noreferrer" : ""}
+  >
     <div class="mask">
       <Image src={image} alt={alt} class="image" width="340" height="178" />
     </div>
     <div class="texts">
       <div>{date}</div>
-      <div class="title">{title}</div>
+      <div class="title">
+        {title}
+        {isExternal && <Icon name="formkit:linkexternal" />}
+      </div>
     </div>
   </a>
 </li>

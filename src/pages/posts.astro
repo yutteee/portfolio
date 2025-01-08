@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-const allPosts = await Astro.glob("../content/posts/*.md");
+const posts = await Astro.glob("../content/posts/*.md");
 const pageTitle = "記事";
 const pageDescription = "中村優作による記事一覧です。";
 import BlogPost from "../components/BlogPost.astro";
@@ -26,6 +26,38 @@ const getOgpImageFromUrl = async (url: string) => {
 
   return ogpImage;
 };
+
+// externalBlogsとpostsを結合する
+const allPosts = [
+  ...posts.map((post) => ({
+    url: `/posts/${getFileName(post.file)}`,
+    title: post.frontmatter.title,
+    pubDate: post.frontmatter.pubDate,
+    image: post.frontmatter.image
+      ? post.frontmatter.image.url
+      : `${import.meta.env.SITE_URL}/ogp/${getFileName(post.file)}.png`,
+    alt: post.frontmatter.image
+      ? post.frontmatter.image.alt
+      : `サムネイル画像。白いPCのイラストに、「${post.frontmatter.title}」の文字が重なっている。`,
+    isExternal: false,
+  })),
+  ...externalBlogs.map((blog) => ({
+    url: blog.url,
+    title: blog.title,
+    pubDate: blog.pubDate,
+    image: getOgpImageFromUrl(blog.url),
+    alt: `サムネイル画像。${blog.title}`,
+    isExternal: true,
+  })),
+];
+
+// allPostsを日付順に並び替える
+allPosts.sort((a, b) => {
+  const dateA = new Date(a.pubDate);
+  const dateB = new Date(b.pubDate);
+
+  return dateB.getTime() - dateA.getTime();
+});
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -35,30 +67,12 @@ const getOgpImageFromUrl = async (url: string) => {
       {
         allPosts.map((post) => (
           <BlogPost
-            url={`/posts/${getFileName(post.file)}`}
-            title={post.frontmatter.title}
-            image={
-              post.frontmatter.image
-                ? post.frontmatter.image.url
-                : `${import.meta.env.SITE_URL}/ogp/${getFileName(post.file)}.png`
-            }
-            date={post.frontmatter.pubDate}
-            alt={
-              post.frontmatter.image
-                ? post.frontmatter.image.alt
-                : `サムネイル画像。白いPCのイラストに、「${post.frontmatter.title}」の文字が重なっている。`
-            }
-          />
-        ))
-      }
-      {
-        externalBlogs.map((blog) => (
-          <BlogPost
-            url={blog.url}
-            title={blog.title}
-            image={getOgpImageFromUrl(blog.url)}
-            date={blog.pubDate}
-            alt={`サムネイル画像。${blog.title}`}
+            url={post.url}
+            title={post.title}
+            image={post.image}
+            date={post.pubDate}
+            alt={post.alt}
+            isExternal={post.isExternal}
           />
         ))
       }

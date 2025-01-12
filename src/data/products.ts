@@ -20,6 +20,15 @@ export const products: Product[] = [
 		alt: "OriCubeのロゴ。複数の色の折り紙で作られた立方体とOriCubeという文字が表示されている。周りにはさまざまな種類の折り紙が散りばめられている。"
 	},
 	{
+		title: "フェアナビ",
+		description: "誠実なアクセシビリティオーバーレイ",
+		period: "2024/02 - 2025/01",
+		detail: "誠実なアクセシビリティオーバーレイ",
+		image: "/fairnavi.png",
+		url: "https://fairnavi.com/",
+		alt: "fair-naviのトップ画面。フェアナビのLPサイト上で、フェアナビのアクセシビリティメニューが開かれている。"
+	},
+	{
 		title: "ai-tango",
 		description: "例文が自動で生成される単語帳アプリ",
 		period: "2023/10 - 2023/11",

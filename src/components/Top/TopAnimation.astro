@@ -21,7 +21,8 @@ import AnimationIcon from "./AnimationIcon.astro";
   const container = document.getElementById("container");
   const title = document.getElementById("title");
 
-  gsap.to(monitor, {
+  // アニメーションのタイムラインを作成
+  const tl = gsap.timeline({
     scrollTrigger: {
       trigger: container,
       start: "top top",
@@ -30,22 +31,41 @@ import AnimationIcon from "./AnimationIcon.astro";
       // markers: true,
       toggleActions: "play none none none",
     },
+  });
+
+  // タイムラインにアニメーションを追加
+  tl.to(monitor, {
     borderRadius: "0",
     width: "100%",
     height: "100vh",
-  });
-
-  gsap.to(title, {
-    scrollTrigger: {
-      trigger: container,
-      start: "top top",
-      end: "bottom top",
-      scrub: 1,
-      // markers: true,
-      toggleActions: "play none none none",
+  }).to(
+    title,
+    {
+      opacity: 0,
     },
-    opacity: 0,
-  });
+    "<"
+  ); // 同時に実行
+
+  // アニメーション停止の制御を追加
+  const updateAnimation = () => {
+    const isStop = document.documentElement.classList.contains("stop");
+    if (isStop) {
+      tl.scrollTrigger?.disable();
+    } else {
+      tl.scrollTrigger?.enable();
+    }
+  };
+
+  // 初期状態の設定
+  updateAnimation();
+
+  // アニメーション切り替えイベントのリスナーを追加
+  document
+    ?.getElementById("togglePlayAnimation")
+    ?.addEventListener("click", updateAnimation);
+  document
+    ?.getElementById("toggleStopAnimation")
+    ?.addEventListener("click", updateAnimation);
 </script>
 
 <style>

@@ -29,9 +29,9 @@ import TopArticles from "../components/Top/TopArticles.astro";
     flex-direction: column;
     align-items: center;
     background-color: var(--color-blue);
-    padding: 0 16px 96px 16px;
 
     .main {
+      padding: 48px 16px 96px 16px;
       margin-top: 50vh;
       overflow: hidden;
       display: flex;
@@ -41,5 +41,10 @@ import TopArticles from "../components/Top/TopArticles.astro";
       z-index: 1000000;
       max-width: 70rem;
     }
+  }
+
+  :global(.stop) .main {
+    background-color: var(--color-background);
+    margin-top: 0;
   }
 </style>

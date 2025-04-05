@@ -15,10 +15,9 @@ import { Image } from "astro:assets";
         <h2 class="h2">中村優作</h2>
         <div class="section-flex">
           <div class="description">
-            <p>名古屋大学工学部化学生命工学科の4年生です。</p>
+            <p>フロントエンドとデザインが好きなエンジニアです。</p>
             <p>
-              名古屋のアプリ開発団体jackで活動しており、web開発を楽しんでいます。特にUI/UX,
-              アクセシビリティに関心があります。
+              株式会社リクルートのビューティー領域でフロントエンドエンジニアをしています。また、株式会社KANNONでデザインエンジニアとしても活動しています。
             </p>
             <p>
               誰にとっても使いやすいプロダクトを開発することがしたいです。そのために必要なことは全部やりたいというスタンスで開発しています。フロントエンドの開発を軸に、プロダクトの技術的な意思決定を行うことができるエンジニアを目指しています。
@@ -45,7 +44,10 @@ import { Image } from "astro:assets";
           {
             histories.map((history, index) => (
               <section id={`history-item${index}`}>
-                <h3 class="h3">{history.title}</h3>
+                <div class="title-flex">
+                  <h3 class="h3">{history.title}</h3>
+                  <div>{history.period}</div>
+                </div>
                 <div class="section-flex">
                   <div class="description">
                     {history.description.map((desc) => (
@@ -93,6 +95,14 @@ import { Image } from "astro:assets";
       width: fit-content;
     }
 
+    .title-flex {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      align-items: end;
+    }
+
     .description {
       display: flex;
       flex-direction: column;
@@ -108,7 +118,6 @@ import { Image } from "astro:assets";
     }
 
     .h3 {
-      margin-top: 3rem;
       font-size: 1.5rem;
       font-weight: 900;
     }

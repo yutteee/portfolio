@@ -11,10 +11,12 @@ import TopArticles from "../components/Top/TopArticles.astro";
 <BaseLayout title={pageTitle} description={pageDescription}>
   <main class="container">
     <TopAnimation />
-    <div class="main">
-      <TopAboutMe />
-      <TopProducts />
-      <TopArticles />
+    <div class="background">
+      <div class="main">
+        <TopAboutMe />
+        <TopProducts />
+        <TopArticles />
+      </div>
     </div>
   </main>
 </BaseLayout>
@@ -30,20 +32,25 @@ import TopArticles from "../components/Top/TopArticles.astro";
     align-items: center;
     background-color: var(--color-blue);
 
-    .main {
-      padding: 48px 16px 96px 16px;
+    .background {
       margin-top: 50vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 5rem;
       position: relative;
       z-index: 1000000;
-      max-width: 70rem;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      .main {
+        padding: 48px 16px 96px 16px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 5rem;
+        max-width: 70rem;
+      }
     }
   }
 
-  :global(.stop) .main {
+  :global(.stop) .background {
     background-color: var(--color-background);
     margin-top: 0;
   }

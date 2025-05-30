@@ -7,7 +7,7 @@
 
 ## TODO
 
-- [ ] storybookの導入
+- [x] storybookの導入
 - [ ] テストツールの導入
 - [ ] plopの導入
 - [ ] plopで雛形を生成できるように

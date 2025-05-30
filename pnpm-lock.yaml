@@ -106,9 +106,18 @@ devDependencies:
   '@storybook/addon-vitest':
     specifier: ^9.0.0
     version: 9.0.0(@vitest/browser@3.1.4)(react-dom@18.3.1)(react@18.3.1)(storybook@9.0.0)(vitest@3.1.4)
+  '@storybook/react':
+    specifier: ^9.0.0
+    version: 9.0.0(react-dom@18.3.1)(react@18.3.1)(storybook@9.0.0)(typescript@5.4.5)
   '@storybook/react-vite':
     specifier: ^9.0.0
     version: 9.0.0(react-dom@18.3.1)(react@18.3.1)(storybook@9.0.0)(typescript@5.4.5)(vite@5.2.10)
+  '@testing-library/jest-dom':
+    specifier: ^6.6.3
+    version: 6.6.3
+  '@testing-library/react':
+    specifier: ^16.3.0
+    version: 16.3.0(@testing-library/dom@10.4.0)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
   '@types/jsdom':
     specifier: ^21.1.7
     version: 21.1.7
@@ -1985,6 +1994,29 @@ packages:
       redent: 3.0.0
     dev: true
 
+  /@testing-library/react@16.3.0(@testing-library/dom@10.4.0)(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-kFSyxiEDwv1WLl2fgsq6pPBbw5aWKrsY2/noi1Id0TK0UParSF62oFQFGHXIyaG4pp2tEub/Zlel+fjjZILDsw==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@testing-library/dom': ^10.0.0
+      '@types/react': ^18.0.0 || ^19.0.0
+      '@types/react-dom': ^18.0.0 || ^19.0.0
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.24.4
+      '@testing-library/dom': 10.4.0
+      '@types/react': 18.3.3
+      '@types/react-dom': 18.3.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: true
+
   /@testing-library/user-event@14.6.1(@testing-library/dom@10.4.0):
     resolution: {integrity: sha512-vq7fv0rnt+QTXgPxr5Hjc210p6YKq2kmdziLgnsZGgLJ9e6VAShx1pACLuRjd/AS/sr7phAR58OIIpf0LlmQNw==}
     engines: {node: '>=12', npm: '>=6'}
@@ -2106,7 +2138,6 @@ packages:
     resolution: {integrity: sha512-EhwApuTmMBmXuFOikhQLIBUn6uFg81SwLMOAUgodJF14SOBOCMdU04gDoYi0WOJJHD144TL32z4yDqCW3dnkQg==}
     dependencies:
       '@types/react': 18.3.3
-    dev: false
 
   /@types/react@18.3.3:
     resolution: {integrity: sha512-hti/R0pS0q1/xx+TsI73XIqk26eBsISZ2R0wUijXIngRK9R/e7Xw/cXVxQK7R5JjW+SV4zGcn5hXjudkN/pLIw==}

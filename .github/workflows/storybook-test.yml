@@ -1,0 +1,32 @@
+name: Storybook Accessibility Test
+
+on:
+  pull_request:
+    paths:
+      - 'src/ui/**/*.stories.tsx'
+      - 'src/ui/**/*.tsx'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - '.storybook/**'
+  push:
+    branches: [main]
+
+jobs:
+  storybook-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build Storybook
+        run: pnpm build-storybook
+      - name: Run Storybook a11y test
+        run: npx storybook test 

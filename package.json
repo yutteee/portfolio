@@ -13,7 +13,8 @@
     "build-storybook": "storybook build",
     "test:unit": "vitest --config vitest.unit.config.ts",
     "test:storybook": "storybook test",
-    "chromatic": "npx chromatic"
+    "chromatic": "npx chromatic",
+    "plop": "plop"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.10",
@@ -62,6 +63,7 @@
     "chromatic": "^12.0.0",
     "eslint-plugin-storybook": "^9.0.0",
     "playwright": "^1.52.0",
+    "plop": "^4.0.1",
     "storybook": "^9.0.0",
     "vitest": "^3.1.4"
   }

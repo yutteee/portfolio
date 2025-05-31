@@ -1,0 +1,11 @@
+import { render, screen } from "@testing-library/react";
+import '@testing-library/jest-dom';
+import { describe, it, expect } from 'vitest';
+import { {{pascalCase name}} } from "./index";
+
+describe("{{pascalCase name}}", () => {
+  it("childrenが表示される", () => {
+    render(<{{pascalCase name}}>テスト</{{pascalCase name}}>);
+    expect(screen.getByText("テスト")).toBeInTheDocument();
+  });
+}); 

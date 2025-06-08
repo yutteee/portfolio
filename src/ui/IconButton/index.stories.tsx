@@ -4,10 +4,11 @@ import { IconButton } from ".";
 const meta: Meta<typeof IconButton> = {
   title: "ui/IconButton",
   component: IconButton,
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: "react-iconsのアイコン名を指定して表示できるボタン。アクセシビリティ対応。",
+        component: "react-iconsのアイコン名を指定して表示できるボタン。IconButtonを並べて使用したい場合、4px以上の余白を設けてください。",
       },
     },
   },

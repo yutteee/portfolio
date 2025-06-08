@@ -4,6 +4,7 @@ import { Footer } from ".";
 const meta: Meta<typeof Footer> = {
   title: "ui/Footer",
   component: Footer,
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {

@@ -7,7 +7,7 @@ describe("LinkButton", () => {
   const baseProps = {
     text: "詳細を見る",
     url: "https://example.com",
-    ariaLabel: "詳細を見る",
+    ariaLabel: "詳細ページ",
   };
 
   it("リンクのhrefとaria-labelが正しい", () => {

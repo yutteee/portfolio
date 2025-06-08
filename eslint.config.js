@@ -4,5 +4,8 @@ import storybook from "eslint-plugin-storybook";
 import eslintPluginAstro from "eslint-plugin-astro";
 export default [
   ...eslintPluginAstro.configs["flat/jsx-a11y-recommended"],
-  ...storybook.configs["flat/recommended"]
+  ...storybook.configs["flat/recommended"],
+  {
+    parser: "@typescript-eslint/parser",
+  },
 ];

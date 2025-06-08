@@ -9,10 +9,9 @@ export type BlogPostProps = {
   date: string;
   alt: string;
   isExternal?: boolean;
-  Icon?: React.ReactNode;
 };
 
-export const BlogPost: React.FC<BlogPostProps> = ({ title, url, image, date, alt, isExternal, Icon }) => {
+export const BlogPost: React.FC<BlogPostProps> = ({ title, url, image, date, alt, isExternal }) => {
   return (
     <li className={styles.container}>
       <a

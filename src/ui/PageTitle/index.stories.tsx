@@ -4,10 +4,11 @@ import { PageTitle } from ".";
 const meta: Meta<typeof PageTitle> = {
   title: "ui/PageTitle",
   component: PageTitle,
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: "ページタイトルとパンくずを表示するコンポーネント。アクセシビリティ対応。",
+        component: "ページタイトルとパンくずを表示するコンポーネント。各ページで使用してください。タイトルはh1要素のため、PageTitleを使用しているページではh1要素は使用しないでください。",
       },
     },
   },

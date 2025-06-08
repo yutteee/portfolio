@@ -4,10 +4,11 @@ import { ProductItem } from ".";
 const meta: Meta<typeof ProductItem> = {
   title: "ui/ProductItem",
   component: ProductItem,
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: "プロダクト情報を表示するカード型リンク。アクセシビリティ対応。",
+        component: "プロダクト情報を表示するカード型リンク。",
       },
     },
   },

@@ -8,7 +8,7 @@ const meta: Meta<typeof BlogPost> = {
   parameters: {
     docs: {
       description: {
-        component: "BlogPostコンポーネントの説明をここに記載してください。",
+        component: "ブログ記事のリンクを表示するコンポーネントです。list要素のため、ul要素でラップして使用してください。",
       },
     },
   },
@@ -26,6 +26,5 @@ export const Default: Story = {
     date: "2024-06-01",
     alt: "サムネイル画像",
     isExternal: true,
-    Icon: <span>🔗</span>,
   },
 }; 

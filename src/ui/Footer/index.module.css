@@ -1,0 +1,51 @@
+.footer {
+  background-color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 96px 16px;
+  position: relative;
+  z-index: 100;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.accounts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+@media screen and (max-width: 1000px) {
+  .accounts {
+    gap: 24px;
+  }
+  .icon {
+    width: 44px;
+    height: 44px;
+  }
+  .icon-wantedly {
+    width: 62px;
+    height: 44px;
+  }
+}
+
+.account {
+  /* 必要に応じて追加 */
+}
+
+.icon-wantedly {
+  width: 87px;
+  height: 60px;
+}
+
+.link {
+  color: var(--color-link);
+  text-decoration: underline;
+  position: absolute;
+  bottom: 16px;
+} 

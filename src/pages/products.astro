@@ -3,8 +3,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "プロダクト";
 const pageDescription = "中村優作が開発したプロダクトの一覧です。";
 import { products } from "../data/products";
-import ProductItem from "../components/ProductItem.astro";
-import PageTitle from "../components/PageTitle.astro";
+import { ProductItem } from "../ui/ProductItem";
+import { PageTitle } from "../ui/PageTitle";
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>

@@ -1,10 +1,10 @@
 ---
 const { currentPage } = Astro.props;
-import IconButton from "../../IconButton.astro";
+import { IconButton } from "../../../ui/IconButton";
 ---
 
 <div class="hamburger">
-  <IconButton label="メニューを開く" icon="clarity:menu-line" id="hamburger" />
+  <IconButton label="メニューを開く" icon="FiMenu" id="hamburger" />
 </div>
 <nav class="nav-links">
   <a href="/about/" class={currentPage === "私について" ? "current" : ""}
@@ -23,7 +23,7 @@ import IconButton from "../../IconButton.astro";
     <a href="/posts/">記事</a>
   </nav>
   <div class="close">
-    <IconButton label="メニューを閉じる" icon="clarity:close-line" id="close" />
+    <IconButton label="メニューを閉じる" icon="FiX" id="close" />
   </div>
 </div>
 

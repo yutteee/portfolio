@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "サイトマップ";
 const pageDescription = "中村優作のポートフォリオサイトのサイトマップです。";
-import PageTitle from "../components/PageTitle.astro";
+import { PageTitle } from "../ui/PageTitle";
 const allPosts = await Astro.glob("../content/posts/*.md");
 
 const getFileName = (file: string) => {

@@ -12,7 +12,6 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test:unit": "vitest --config vitest.unit.config.ts",
-    "test:storybook": "storybook test",
     "chromatic": "npx chromatic",
     "plop": "plop"
   },

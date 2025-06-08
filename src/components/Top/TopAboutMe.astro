@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import LinkButton from "../LinkButton.astro";
+import { LinkButton } from "../../ui/LinkButton";
 ---
 
 <div class="about">
@@ -23,7 +23,7 @@ import LinkButton from "../LinkButton.astro";
       フロントエンドとデザインが好きなエンジニアです。<br />
       株式会社リクルートのビューティー領域でフロントエンドエンジニアをしています。また、株式会社KANNONでデザインエンジニアとしても活動しています。
     </p>
-    <LinkButton text="私について" url="/about/" />
+    <LinkButton text="私について" url="/about/" ariaLabel="私について" />
   </section>
 </div>
 <style>

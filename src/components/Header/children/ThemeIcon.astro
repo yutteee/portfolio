@@ -1,20 +1,12 @@
 ---
-import IconButton from "../../IconButton.astro";
+import { IconButton } from "../../../ui/IconButton";
 ---
 
 <div class="moon">
-  <IconButton
-    label="ダークモードにする"
-    icon="clarity:moon-line"
-    id="toggleLightMode"
-  />
+  <IconButton label="ダークモードにする" icon="FiMoon" id="toggleLightMode" />
 </div>
 <div class="sun">
-  <IconButton
-    label="ライトモードにする"
-    icon="clarity:sun-line"
-    id="toggleDarkMode"
-  />
+  <IconButton label="ライトモードにする" icon="FiSun" id="toggleDarkMode" />
 </div>
 
 <style>

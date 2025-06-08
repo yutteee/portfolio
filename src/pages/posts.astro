@@ -3,8 +3,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 const posts = await Astro.glob("../content/posts/*.md");
 const pageTitle = "記事";
 const pageDescription = "中村優作による記事一覧です。";
-import BlogPost from "../components/BlogPost.astro";
-import PageTitle from "../components/PageTitle.astro";
+import { BlogPost } from "../ui/BlogPost";
+import { PageTitle } from "../ui/PageTitle";
 
 const getFileName = (file: string) => {
   const fileNameWithExtentision = file.split("/").pop();

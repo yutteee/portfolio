@@ -15,9 +15,10 @@
 - [x] storybookのテスト環境を整える
   - [x] a11yテスト
   - [x] chromatic
-- [ ] componentsディレクトリのコンポーネントをUIに移す
+- [x] componentsディレクトリのコンポーネントをUIに移す
 - [x] react-iconsに移行
 - [x] footerのiconを普通の静的ファイルにする
+- [ ] uiディレクトリのコンポーネントに置き換え
 - [ ] ライトモード/ダークモードの実装どうする？
 
 ## メモ

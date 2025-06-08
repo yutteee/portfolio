@@ -1,7 +1,7 @@
 ---
 const allPosts = await Astro.glob("../../content/posts/*.md");
-import BlogPost from "../BlogPost.astro";
-import LinkButton from "../LinkButton.astro";
+import { BlogPost } from "../../ui/BlogPost";
+import { LinkButton } from "../../ui/LinkButton";
 
 const getFileName = (file: string) => {
   const fileNameWithExtentision = file.split("/").pop();

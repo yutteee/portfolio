@@ -1,19 +1,23 @@
-import type React from "react";
 import styles from "./index.module.css";
+import { accounts } from "./accounts";
+import { useEffect, useState } from "react";
 
-export type FooterProps = {
-  accounts: Array<{
-    name: string;
-    url: string;
-    icon: React.ReactNode;
-    alt: string;
-    darkIcon?: React.ReactNode;
-    isWantedly?: boolean;
-  }>;
-  siteMapUrl?: string;
-};
+export const Footer: React.FC = () => {
+  const [isDark, setIsDark] = useState(false);
 
-export const Footer: React.FC<FooterProps> = ({ accounts, siteMapUrl }) => {
+  // TODO: storybook専用の処理を書きたくない
+  useEffect(() => {
+    // Storybook/本番両対応: html要素のclassListで判定
+    const checkDark = () =>
+      document.documentElement.classList.contains("dark") ||
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setIsDark(checkDark());
+    // Storybookの背景切り替えにも対応
+    const observer = new MutationObserver(() => setIsDark(checkDark()));
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <footer className={styles.footer}>
       <h2 className={styles.title}>アカウント</h2>
@@ -27,15 +31,17 @@ export const Footer: React.FC<FooterProps> = ({ accounts, siteMapUrl }) => {
             rel="noopener noreferrer"
             aria-label={acc.name}
           >
-            {acc.icon}
+            <img
+              src={isDark ? acc.darkImg : acc.img}
+              alt={acc.alt}
+              height={60}
+              width={acc.isWantedly ? 87 : 60}
+              className={acc.isWantedly ? styles["icon-wantedly"] : styles.icon}
+            />
           </a>
         ))}
       </div>
-      {siteMapUrl && (
-        <a href={siteMapUrl} className={styles.link}>
-          サイトマップ
-        </a>
-      )}
+      <a href="/siteMap" className={styles.link}>サイトマップ</a>
     </footer>
   );
 }; 

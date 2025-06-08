@@ -16,15 +16,10 @@ export default meta;
 
 type Story = StoryObj<typeof LinkButton>;
 
-const DummyIcon = () => (
-  <svg width="24" height="24" role="img" aria-label="icon"><title>icon</title><circle cx="12" cy="12" r="12" fill="#ccc" /></svg>
-);
-
 export const Default: Story = {
   args: {
     text: "詳細を見る",
     url: "https://example.com",
     ariaLabel: "詳細を見る",
-    icon: <DummyIcon />,
   },
 }; 

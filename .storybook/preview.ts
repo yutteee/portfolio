@@ -1,8 +1,22 @@
 import 'destyle.css';
 import '../src/styles/global.css';
 import type { Preview } from '@storybook/react-vite'
+import type { Decorator } from '@storybook/react';
+
+const withHtmlClass: Decorator = (Story, context) => {
+  const mode = context.parameters.mode;
+  if (mode === 'dark') {
+    document.documentElement.classList.remove('light');
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.add('light');
+    document.documentElement.classList.remove('dark');
+  }
+  return Story();
+};
 
 const preview: Preview = {
+  decorators: [withHtmlClass],
   parameters: {
     controls: {
       matchers: {
@@ -12,20 +26,8 @@ const preview: Preview = {
     },
 
     a11y: {
-      // 'todo' - show a11y violations in the test UI only
-      // 'error' - fail CI on a11y violations
-      // 'off' - skip a11y checks entirely
       test: 'error'
     },
-
-    backgrounds: {
-      default: 'background',
-      values: [
-        { name: 'background', value: 'var(--color-background)' },
-        { name: 'white', value: '#fff' },
-        { name: 'dark', value: '#04345c' }
-      ]
-    }
   },
 };
 

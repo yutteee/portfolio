@@ -5,7 +5,6 @@ import { FooterPresenter } from "./presenter";
 const meta: Meta<typeof Footer> = {
   title: "features/Footer",
   component: Footer,
-  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
@@ -20,11 +19,6 @@ type Story = StoryObj<typeof Footer>;
 
 export const Default: Story = {};
 
-export const PresenterLight = {
-  render: () => <FooterPresenter isDark={false} />,
-  name: "ライトモード",
-  parameters: { mode: "light" }
-};
 export const PresenterDark = {
   render: () => <FooterPresenter isDark={true} />,
   name: "ダークモード", 

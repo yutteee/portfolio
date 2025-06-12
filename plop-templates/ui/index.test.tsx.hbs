@@ -5,7 +5,8 @@ import { {{pascalCase name}} } from "./index";
 
 describe("{{pascalCase name}}", () => {
   it("childrenが表示される", () => {
-    render(<{{pascalCase name}}>テスト</{{pascalCase name}}>);
+    render(<{{pascalCase name}}>テスト</{{pascalCase name}}>
+    );
     expect(screen.getByText("テスト")).toBeInTheDocument();
   });
 }); 

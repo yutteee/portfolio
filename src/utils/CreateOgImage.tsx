@@ -23,7 +23,7 @@ export async function createOgImage(text: string) {
       }}
     >
       <img
-        src={`${import.meta.env.SITE_URL}/ogp.png`}
+        src={`${import.meta.env.PUBLIC_SITE_URL}/ogp.png`}
         style={{
           width: "100%",
           height: "100%",

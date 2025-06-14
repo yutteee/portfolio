@@ -1,7 +1,7 @@
 ---
-import ProductItem from "../ProductItem.astro";
+import { ProductItem } from "../../ui/ProductItem";
 import { products } from "../../data/products";
-import LinkButton from "../LinkButton.astro";
+import { LinkButton } from "../../ui/LinkButton";
 ---
 
 <section class="container">
@@ -19,7 +19,7 @@ import LinkButton from "../LinkButton.astro";
             image={product.image}
             title={product.title}
             description={product.description}
-            url={product.url}
+            url={product.url ?? ""}
             alt={product.alt}
           />
         ))

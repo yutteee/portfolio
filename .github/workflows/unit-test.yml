@@ -1,0 +1,29 @@
+name: Unit Test
+
+on:
+  pull_request:
+    paths:
+      - 'src/features/**/*.tsx'
+      - 'src/ui/**/*.tsx'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+  push:
+    branches: [main]
+
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run unit test
+        run: pnpm run test:unit

@@ -1,18 +1,17 @@
-name: Storybook Accessibility Test
+name: Unit Test
 
 on:
   pull_request:
     paths:
-      - 'src/ui/**/*.stories.tsx'
+      - 'src/features/**/*.tsx'
       - 'src/ui/**/*.tsx'
       - 'package.json'
       - 'pnpm-lock.yaml'
-      - '.storybook/**'
   push:
     branches: [main]
 
 jobs:
-  storybook-test:
+  unit-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,7 +25,5 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
-      - name: Build Storybook
-        run: pnpm build-storybook
-      - name: Run Storybook a11y test
-        run: npx storybook test 
+      - name: Run unit test
+        run: pnpm run test:unit

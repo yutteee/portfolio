@@ -5,9 +5,8 @@ import sitemap from '@astrojs/sitemap';
 
 import react from "@astrojs/react";
 
-// https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://yutteee.pages.dev',
   integrations: [mdx(), sitemap(), icon(), react()],
   vite: { optimizeDeps: { exclude: ['@resvg/resvg-js'] } }
 });

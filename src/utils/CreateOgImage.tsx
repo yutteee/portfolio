@@ -7,6 +7,8 @@ export async function createOgImage(text: string) {
     const regularFont = await fs.readFile("public/ZenKakuGothicNew-Regular.ttf");
     const boldFont = await fs.readFile("public/ZenKakuGothicNew-Bold.ttf");
 
+    const siteUrl = import.meta.env.PUBLIC_SITE_URL || "https://yutteee.pages.dev";
+
     const svg = await satori(
       <div
       style={{
@@ -23,7 +25,7 @@ export async function createOgImage(text: string) {
       }}
     >
       <img
-        src={`${import.meta.env.PUBLIC_SITE_URL}/ogp.png`}
+        src={`${siteUrl}/ogp.png`}
         style={{
           width: "100%",
           height: "100%",

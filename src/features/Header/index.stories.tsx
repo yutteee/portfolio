@@ -1,76 +1,46 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { HeaderPresenter } from "./presenter";
+import { Header } from ".";
 import type { CurrentPage } from "./presenter";
-import React from "react";
 
-const meta: Meta<typeof HeaderPresenter> = {
+const meta: Meta<typeof Header> = {
   title: "features/Header",
-  component: HeaderPresenter,
+  component: Header,
   tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component: "HeaderPresenterの説明をここに記載してください。",
+        component: [
+          "グローバルナビゲーションを表示するヘッダーコンポーネント。",
+          "- spサイズではメニューが表示される。",
+          "- ライトモード/ダークモードの切り替えをする。",
+          "- currentPageパラメータで「私について」「プロダクト」「記事」を切り替え可能。"
+        ].join("  \n"),
+      },
+    },
+  },
+  argTypes: {
+    currentPage: {
+      control: { type: "radio" },
+      options: ["私について", "プロダクト", "記事"],
+      description: "現在選択中のページ",
+      table: {
+        type: { summary: '"私について" | "プロダクト" | "記事"' },
+        defaultValue: { summary: undefined },
       },
     },
   },
 };
 export default meta;
 
-const dummyRef = React.createRef<HTMLButtonElement>();
-const dummyDivRef = React.createRef<HTMLDivElement>();
-const dummyFn = () => {};
+type Story = StoryObj<typeof Header>;
 
-export const PC_Default: StoryObj<typeof HeaderPresenter> = {
+export const Default: Story = {
   args: {
-    menuOpen: false,
-    onOpen: dummyFn,
-    onClose: dummyFn,
-    closeBtnRef: dummyRef,
-    isDark: false,
-    onThemeToggle: dummyFn,
-    darkBtnRef: dummyRef,
-    lightBtnRef: dummyRef,
     currentPage: undefined,
-    spMenuRef: dummyDivRef,
-  },
-  parameters: {
-    viewport: { defaultViewport: "responsive" },
   },
 };
 
-export const PC_CurrentAbout: StoryObj<typeof HeaderPresenter> = {
-  args: {
-    ...PC_Default.args,
-    currentPage: "私について" as CurrentPage,
-  },
-  parameters: {
-    viewport: { defaultViewport: "responsive" },
-  },
+export const AboutCurrent: Story = {
+  args: { currentPage: "私について" as CurrentPage },
+  name: "currentPage: 私について"
 };
-
-export const PC_DarkMode: StoryObj<typeof HeaderPresenter> = {
-  args: {
-    ...PC_Default.args,
-    isDark: true,
-  },
-  decorators: [
-    (Story) => {
-      React.useEffect(() => {
-        document.documentElement.classList.add("dark");
-        return () => document.documentElement.classList.remove("dark");
-      }, []);
-      return <Story />;
-    },
-  ],
-  parameters: {
-    viewport: { defaultViewport: "responsive" },
-  },
-};
-
-export const SP_MenuOpen: StoryObj<typeof HeaderPresenter> = {
-  args: {
-    ...PC_Default.args,
-    menuOpen: true,
-  },
-}; 

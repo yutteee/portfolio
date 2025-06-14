@@ -1,7 +1,7 @@
 ---
 import "destyle.css";
-import Header from "../components/Header/index.astro";
-import { Footer } from "../ui/Footer";
+import { Header } from "../features/Header";
+import { Footer } from "../features/Footer";
 import "../styles/global.css";
 const { title, description } = Astro.props;
 import { SEO } from "astro-seo";
@@ -38,7 +38,7 @@ import { SEO } from "astro-seo";
     />
   </head>
   <body>
-    <Header currentPage={title} />
+    <Header currentPage={title} client:load />
     <slot />
     <Footer client:load />
   </body>

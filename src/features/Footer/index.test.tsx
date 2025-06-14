@@ -1,8 +1,20 @@
 import { render, screen } from "@testing-library/react";
 import '@testing-library/jest-dom';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeAll } from 'vitest';
 import { Footer } from ".";
 import { accounts } from "./accounts";
+
+beforeAll(() => {
+  window.matchMedia = window.matchMedia || (() => ({
+    matches: false,
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    addListener: () => {},
+    removeListener: () => {},
+    onchange: null,
+    dispatchEvent: () => false,
+  }));
+});
 
 describe("Footer", () => {
   it("アカウント名がaria-labelとして設定されている", () => {

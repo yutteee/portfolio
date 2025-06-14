@@ -19,6 +19,11 @@ export default meta;
 type Story = StoryObj<typeof BlogPost>;
 
 export const Default: Story = {
+  render: (args) => (
+    <ul>
+      <BlogPost {...args} />
+    </ul>
+  ),
   args: {
     title: "ブログタイトル",
     url: "https://example.com",

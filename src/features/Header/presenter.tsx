@@ -31,7 +31,7 @@ export const HeaderPresenter: React.FC<HeaderPresenterProps> = ({ menuOpen, onOp
         <div className={styles.hamburger}>
           <IconButton label="メニューを開く" icon="FiMenu" id="hamburger" handleClick={onOpen} ref={hamburgerRef} />
         </div>
-        <div style={{ display: isDark ? 'inline-flex' : 'none' }}>
+        <div style={{ display: isDark ? 'none' : 'inline-flex' }}>
           <IconButton
             label="ダークモードにする"
             icon="FiMoon"
@@ -41,7 +41,7 @@ export const HeaderPresenter: React.FC<HeaderPresenterProps> = ({ menuOpen, onOp
             ref={darkBtnRef}
           />
         </div>
-        <div style={{ display: isDark ? 'none' : 'inline-flex' }}>
+        <div style={{ display: isDark ? 'inline-flex' : 'none' }}>
           <IconButton
             label="ライトモードにする"
             icon="FiSun"

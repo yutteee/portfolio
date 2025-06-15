@@ -21,9 +21,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
-      - name: Run unit test
-        run: pnpm run test:unit
+      - name: Install Playwright
+        run: pnpm exec playwright install
+      - name: Run unit test and storybook test
+        run: pnpm run test

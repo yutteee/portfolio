@@ -13,6 +13,13 @@ describe("Header", () => {
     expect(screen.getByRole("banner")).toBeInTheDocument();
   });
 
+  it("初期ロード時にダークモードボタンにフォーカスが当たっていない", () => {
+    render(<Header />);
+    const darkButton = screen.getByLabelText("ダークモードにする");
+    // ダークモードボタン自体にはフォーカスが当たっていない
+    expect(document.activeElement).not.toBe(darkButton);
+  });
+
   it("Yutteeeという名前のリンクが存在し、homeに戻る", () => {
     render(<Header />);
     const link = screen.getByRole("link", { name: "トップ" });

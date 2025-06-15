@@ -73,6 +73,10 @@ export const SpMenu: Story = {
     // さらにTabで最初（閉じるボタン）に戻る
     await userEvent.tab();
     await expect(closeButton).toHaveFocus();
+    // メニューを閉じる
+    await userEvent.click(closeButton);
+    // 開くボタンにフォーカスが移動する
+    await expect(openButton).toHaveFocus();
   }
 }
 

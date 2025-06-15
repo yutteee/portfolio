@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import type { RefObject } from "react";
 
 type UseThemeModeProps = {
@@ -8,9 +8,19 @@ type UseThemeModeProps = {
 
 export function useThemeMode({ darkBtnRef, lightBtnRef }: UseThemeModeProps) {
   const [isDark, setIsDark] = useState(false);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
     const root = document.documentElement;
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      if (isDark) {
+        root.classList.add("dark");
+      } else {
+        root.classList.remove("dark");
+      }
+      return;
+    }
     if (isDark && lightBtnRef?.current) {
       root.classList.add("dark");
       lightBtnRef.current.focus();

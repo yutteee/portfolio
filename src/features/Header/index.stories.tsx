@@ -1,7 +1,6 @@
 import { userEvent, within, expect } from 'storybook/test';
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj, Decorator } from "@storybook/react";
 import { Header } from ".";
-import type { CurrentPage } from "./presenter";
 
 const meta: Meta<typeof Header> = {
   title: "features/Header",
@@ -44,6 +43,9 @@ export const Default: Story = {
 export const SpMenu: Story = {
   args: {
     currentPage: undefined,
+  },
+  globals: {
+    viewport: { value: 'mobile1', isRotated: false },
   },
   name: "スマホサイズのメニューでフォーカストラップが効く",
   play: async ({ canvasElement }) => {

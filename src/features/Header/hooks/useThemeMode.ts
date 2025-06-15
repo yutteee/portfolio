@@ -11,12 +11,12 @@ export function useThemeMode({ darkBtnRef, lightBtnRef }: UseThemeModeProps) {
 
   useEffect(() => {
     const root = document.documentElement;
-    if (isDark && darkBtnRef?.current) {
+    if (isDark && lightBtnRef?.current) {
       root.classList.add("dark");
-      darkBtnRef.current.focus();
-    } else if (!isDark && lightBtnRef?.current) {
-      root.classList.remove("dark");
       lightBtnRef.current.focus();
+    } else if (!isDark && darkBtnRef?.current) {
+      root.classList.remove("dark");
+      darkBtnRef.current.focus();
     }
   }, [isDark, darkBtnRef, lightBtnRef]);
 

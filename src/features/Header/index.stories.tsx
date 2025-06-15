@@ -1,3 +1,4 @@
+import { userEvent, within, expect } from 'storybook/test';
 import type { Meta, StoryObj } from "@storybook/react";
 import { Header } from ".";
 import type { CurrentPage } from "./presenter";
@@ -40,7 +41,75 @@ export const Default: Story = {
   },
 };
 
-export const AboutCurrent: Story = {
-  args: { currentPage: "私について" as CurrentPage },
-  name: "currentPage: 私について"
+export const SpMenu: Story = {
+  args: {
+    currentPage: undefined,
+  },
+  name: "スマホサイズのメニューでフォーカストラップが効く",
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement.ownerDocument.body);
+    // メニューを開く
+    const openButton = await canvas.findByRole('button', { name: 'メニューを開く' });
+    await userEvent.click(openButton);
+    // 閉じるボタンにフォーカスが移動する
+    const closeButton = await canvas.findByRole('button', { name: 'メニューを閉じる' });
+    await expect(closeButton).toHaveFocus();
+    // スマホメニューのTabループ
+    const spMenu = await canvas.findByTestId('sp-menu');
+    // 最初のフォーカスは閉じるボタン
+    await expect(within(spMenu).getByLabelText('メニューを閉じる')).toHaveFocus();
+    // Tabで次の要素（トップページリンク）に移動
+    await userEvent.tab();
+    await expect(within(spMenu).getByRole('link', { name: 'トップページ' })).toHaveFocus();
+    // さらにTabで次のリンク
+    await userEvent.tab();
+    await expect(within(spMenu).getByRole('link', { name: '私について' })).toHaveFocus();
+    await userEvent.tab();
+    await expect(within(spMenu).getByRole('link', { name: 'プロダクト' })).toHaveFocus();
+    await userEvent.tab();
+    await expect(within(spMenu).getByRole('link', { name: '記事' })).toHaveFocus();
+    // さらにTabで最初（閉じるボタン）に戻る
+    await userEvent.tab();
+    await expect(closeButton).toHaveFocus();
+  }
+}
+
+export const ThemeToggleInteraction: Story = {
+  args: {
+    currentPage: undefined,
+  },
+  name: 'ダークモード/ライトモードの切り替えでフォーカスが移動する',
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement.ownerDocument.body);
+    // ダークモードボタンを押す
+    const darkButton = await canvas.findByLabelText('ダークモードにする');
+    await userEvent.click(darkButton);
+    // ライトモードボタンが表示される
+    const lightButton = await canvas.findByLabelText('ライトモードにする');
+    await expect(lightButton).toBeInTheDocument();
+    await expect(lightButton).toHaveFocus();
+    // ライトモードボタンを押す
+    await userEvent.click(lightButton);
+    // ダークモードボタンにフォーカスが当たる
+    const darkButtonAfter = await canvas.findByLabelText('ダークモードにする');
+    await expect(darkButtonAfter).toHaveFocus();
+  }
 };
+
+export const DarkModeAndLightMode: Story = {
+  args: {
+    currentPage: undefined,
+  },
+  name: "ダークモード/ライトモードの切り替えが可能",
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement.ownerDocument.body);
+    // ダークモードボタンを押す→htmlタグにdarkクラス
+    const darkButton = await canvas.findByLabelText('ダークモードにする');
+    await userEvent.click(darkButton);
+    await expect(document.documentElement.classList.contains('dark')).toBe(true);
+    // ライトモードボタンを押す→クラスが外れる
+    const lightButton = await canvas.findByLabelText('ライトモードにする');
+    await userEvent.click(lightButton);
+    await expect(document.documentElement.classList.contains('dark')).toBe(false);
+  }
+}

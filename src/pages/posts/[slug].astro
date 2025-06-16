@@ -40,7 +40,7 @@ import { Icon } from "astro-icon/components";
         basic: {
           title: post.data.title,
           type: "article",
-          image: `${import.meta.env.SITE_URL}/ogp/${post.slug}.png`,
+          image: `${import.meta.env.PUBLIC_SITE_URL}/ogp/${post.slug}.png`,
         },
         image: {
           alt: post.data.title,
@@ -83,7 +83,7 @@ import { Icon } from "astro-icon/components";
               />
             ) : (
               <img
-                src={`${import.meta.env.SITE_URL}/ogp/${post.slug}.png`}
+                src={`${import.meta.env.PUBLIC_SITE_URL}/ogp/${post.slug}.png`}
                 alt=""
                 width="720"
                 height="378"

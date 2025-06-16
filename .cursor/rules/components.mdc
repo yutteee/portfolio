@@ -10,6 +10,10 @@ alwaysApply: true
 - ユニットテストはVitest、インタラクションテストはStorybookでTDDを行う。
 - StorybookとVitestの役割分担を明確にし、両者を組み合わせて多角的な品質保証を実現する。
 
+## コンポーネント作成方法
+- UIコンポーネントやfeaturesコンポーネントの雛形作成には、plopを利用する。
+- plopコマンドは `pnpm run plop` で実行すること。
+
 ## ディレクトリ構成・責務分離
 - `/ui`：見た目・アクセシビリティ・props設計に特化した再利用可能なUIコンポーネント群
 - `/features`：機能を担う複合コンポーネント群

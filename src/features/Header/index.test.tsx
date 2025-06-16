@@ -20,6 +20,12 @@ describe("Header", () => {
     expect(document.activeElement).not.toBe(darkButton);
   });
 
+  it("初期ロード時にメニューボタンにフォーカスが当たっていない", () => {
+    render(<Header />);
+    const menuButton = screen.getByRole("button", { name: "メニューを開く" });
+    expect(document.activeElement).not.toBe(menuButton);
+  })
+
   it("Yutteeeという名前のリンクが存在し、homeに戻る", () => {
     render(<Header />);
     const link = screen.getByRole("link", { name: "トップ" });

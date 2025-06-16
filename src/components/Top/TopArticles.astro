@@ -27,7 +27,7 @@ const getFileName = (file: string) => {
             image={
               post.frontmatter.image
                 ? post.frontmatter.image.url
-                : `${import.meta.env.SITE_URL}/ogp/${getFileName(post.file)}.png`
+                : `${import.meta.env.PUBLIC_SITE_URL}/ogp/${getFileName(post.file)}.png`
             }
             date={post.frontmatter.pubDate}
             alt={

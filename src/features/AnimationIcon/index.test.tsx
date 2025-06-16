@@ -13,4 +13,9 @@ describe("AnimationIcon", () => {
     render(<AnimationIcon />);
     expect(screen.getByRole('button', { name: 'アニメーションを有効にする' })).toBeInTheDocument();
   });
+
+  it("「アニメーションを停止する」というラベルのIconButtonがレンダリングされる", () => {
+    render(<AnimationIcon />);
+    expect(screen.getByRole('button', { name: 'アニメーションを停止する' })).toBeInTheDocument();
+  });
 }); 

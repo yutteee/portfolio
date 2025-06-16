@@ -8,5 +8,10 @@ export const AnimationIconPresenter: React.FC = () => (
       icon="FiPlay"
       handleClick={() => {}}
     />
+    <IconButton
+      label="アニメーションを停止する"
+      icon="FiPause"
+      handleClick={() => {}}
+    />
   </div>
 ); 

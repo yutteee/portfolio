@@ -1,12 +1,12 @@
-import type React from "react";
+import { IconButton } from "../../ui/IconButton";
 import styles from "./index.module.css";
 
-type AnimationIconPresenterProps = {
-  // 必要に応じてpropsを追加
-};
-
-export const AnimationIconPresenter: React.FC<AnimationIconPresenterProps> = (props) => (
+export const AnimationIconPresenter: React.FC = () => (
   <div className={styles.container}>
-    AnimationIconPresenter
+    <IconButton
+      label="アニメーションを有効にする"
+      icon="FiPlay"
+      handleClick={() => {}}
+    />
   </div>
 ); 

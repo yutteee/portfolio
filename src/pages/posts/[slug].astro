@@ -211,6 +211,17 @@ import { Icon } from "astro-icon/components";
             border-collapse: collapse;
             table-layout: fixed;
           }
+
+          :not(pre) > code {
+            background-color: var(--color-text);
+            color: var(--color-background);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+          }
+
+          pre {
+            padding: 1rem;
+          }
         }
       }
     </style>

@@ -40,6 +40,6 @@ import { SEO } from "astro-seo";
   <body>
     <Header currentPage={title} client:load />
     <slot />
-    <Footer client:load />
+    <Footer client:only />
   </body>
 </html>

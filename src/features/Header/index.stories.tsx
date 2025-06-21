@@ -1,6 +1,14 @@
-import { userEvent, within, expect } from 'storybook/test';
+import { userEvent, within, expect, fn } from 'storybook/test';
 import type { Meta, StoryObj, Decorator } from "@storybook/react";
 import { Header } from ".";
+
+const decorators: Decorator[] = [
+  (Story) => {
+    localStorage.clear();
+    document.documentElement.className = '';
+    return <Story />;
+  }
+];
 
 const meta: Meta<typeof Header> = {
   title: "features/Header",
@@ -29,6 +37,7 @@ const meta: Meta<typeof Header> = {
       },
     },
   },
+  decorators,
 };
 export default meta;
 

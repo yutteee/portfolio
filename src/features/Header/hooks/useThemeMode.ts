@@ -1,36 +1,45 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useLayoutEffect, useEffect } from "react";
 import type { RefObject } from "react";
 
 type UseThemeModeProps = {
   darkBtnRef: RefObject<HTMLButtonElement>;
   lightBtnRef: RefObject<HTMLButtonElement>;
-}
+};
 
-export function useThemeMode({ darkBtnRef, lightBtnRef }: UseThemeModeProps) {
+export const useThemeMode = ({ darkBtnRef, lightBtnRef }: UseThemeModeProps) => {
   const [isDark, setIsDark] = useState(false);
-  const isFirstRender = useRef(true);
+
+  useLayoutEffect(() => {
+    const theme = localStorage.getItem("theme");
+    const isOsDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (theme === "dark" || (theme === null && isOsDark)) {
+      setIsDark(true);
+    }
+  }, []);
 
   useEffect(() => {
-    const root = document.documentElement;
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      if (isDark) {
-        root.classList.add("dark");
-      } else {
-        root.classList.remove("dark");
-      }
-      return;
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
-    if (isDark && lightBtnRef?.current) {
-      root.classList.add("dark");
-      lightBtnRef.current.focus();
-    } else if (!isDark && darkBtnRef?.current) {
-      root.classList.remove("dark");
-      darkBtnRef.current.focus();
-    }
-  }, [isDark, darkBtnRef, lightBtnRef]);
+  }, [isDark]);
 
-  const toggleTheme = useCallback(() => setIsDark((prev) => !prev), []);
+  const toggleTheme = () => {
+    setIsDark((prev) => {
+      const newIsDark = !prev;
+      setTimeout(() => {
+        if (newIsDark) {
+          lightBtnRef.current?.focus();
+        } else {
+          darkBtnRef.current?.focus();
+        }
+      }, 0); // ブラウザのレンダリングが完了するまで待つ
+      return newIsDark;
+    });
+  };
 
   return { isDark, toggleTheme };
-} 
+}; 

@@ -1,0 +1,52 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Cursorルール: UIコンポーネント開発・テスト戦略
+
+## 基本方針
+- UIコンポーネント開発はTDD（テスト駆動開発）を徹底する。
+- ユニットテストはVitest、インタラクションテストはStorybookでTDDを行う。
+- StorybookとVitestの役割分担を明確にし、両者を組み合わせて多角的な品質保証を実現する。
+
+## コンポーネント作成方法
+- UIコンポーネントやfeaturesコンポーネントの雛形作成には、plopを利用する。
+- plopコマンドは `pnpm run plop` で実行すること。
+
+## ディレクトリ構成・責務分離
+- `/ui`：見た目・アクセシビリティ・props設計に特化した再利用可能なUIコンポーネント群
+- `/features`：機能を担う複合コンポーネント群
+
+### ui ディレクトリ
+- `index.tsx`：見た目・アクセシビリティ・props設計に特化したUI
+- `index.module.css`：スタイル定義
+- `index.stories.tsx`：Storybook用。各propsパターンの確認
+- `index.test.tsx`：ユニットテスト（Vitest/TDD）
+
+### features ディレクトリ
+- `index.tsx`：機能を持つコンポーネントのエントリ
+- `presenter.tsx`：UI部品を組み合わせて機能を実現。状態管理やロジックはpropsで受け取る。
+- `index.module.css`：スタイル定義
+- `index.stories.tsx`：StorybookでインタラクションごとにStoryを作成
+- `index.test.tsx`：ユニットテスト（Vitest/TDD）
+
+## テスト戦略
+### 1. ユニットテスト（Vitest）
+- UIコンポーネントの期待する振る舞い（HTMLタグ、属性、propsの反映など）をTDDで記述。
+- 例: `@testing-library/react`で要素の有無や属性、アクセシビリティを検証。
+- 失敗するテスト→最小限の実装→リファクタのサイクルを小さく回す。
+
+### 2. インタラクションテスト（Storybook）
+- Storybook上でTDDを実践。インタラクションごとにStoryを作成し、期待する動作を明示。
+- `storybook-addon-test-codegen`等でインタラクションの記録・アサーション追加を推奨。
+- ビジュアルリグレッション・アクセシビリティテストもStorybookで自動化。
+
+## CI/CD
+- プルリクエスト時にStorybookのビジュアル・インタラクション・アクセシビリティテスト、Vitestのユニットテストを自動実行。
+- テストが落ちた場合は必ず修正してからマージする。
+
+## 補足
+- display: none での切り替え要素はテスト時に複数DOMが存在する点に注意。withinやdata-testidで限定取得する。
+- 副作用的なフォーカス移動はhooksに集約し、テスト容易性・責務分離を意識する。
+- Storybookの各Storyは「確認したいインタラクションごと」に作成する。

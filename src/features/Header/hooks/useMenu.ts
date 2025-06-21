@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import type { RefObject } from "react";
 
 type UseMenuProps = {
@@ -8,10 +8,15 @@ type UseMenuProps = {
 
 export function useMenu({ closeBtnRef, hamburgerRef }: UseMenuProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const isFirstRender = useRef(true);
   const openMenu = useCallback(() => setMenuOpen(true), []);
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     if (menuOpen && closeBtnRef?.current) {
       closeBtnRef.current.focus();
     }

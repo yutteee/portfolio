@@ -1,67 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-const posts = await Astro.glob("../content/posts/*.md");
-const pageTitle = "記事";
-const pageDescription = "中村優作による記事一覧です。";
 import { BlogPost } from "../ui/BlogPost";
 import { PageTitle } from "../ui/PageTitle";
+import { getAllPosts } from "../utils/post";
+import type { Frontmatter } from "../utils/post";
 
-const getFileName = (file: string) => {
-  const fileNameWithExtentision = file.split("/").pop();
-  const fileName = fileNameWithExtentision?.replace(".md", "");
+const pageTitle = "記事";
+const pageDescription = "中村優作による記事一覧です。";
 
-  return fileName;
-};
-
-import { externalBlogs } from "../data/externalBlog";
-import { JSDOM } from "jsdom";
-
-const getOgpImageFromUrl = async (url: string) => {
-  const res = await fetch(url);
-  const html = await res.text();
-  const dom = new JSDOM(html);
-  const ogpImage = dom.window.document
-    .querySelector('meta[property="og:image"]')
-    ?.getAttribute("content");
-
-  return ogpImage;
-};
-
-const externalPosts = await Promise.all(
-  externalBlogs.map(async (blog) => ({
-    url: blog.url,
-    title: blog.title,
-    pubDate: blog.pubDate,
-    image: await getOgpImageFromUrl(blog.url),
-    alt: `サムネイル画像。${blog.title}`,
-    isExternal: true,
-  }))
-);
-
-// externalBlogsとpostsを結合する
-const allPosts = [
-  ...posts.map((post) => ({
-    url: `/posts/${getFileName(post.file)}`,
-    title: post.frontmatter.title,
-    pubDate: post.frontmatter.pubDate,
-    image: post.frontmatter.image
-      ? post.frontmatter.image.url
-      : `${import.meta.env.PUBLIC_SITE_URL}/ogp/${getFileName(post.file)}.png`,
-    alt: post.frontmatter.image
-      ? post.frontmatter.image.alt
-      : `サムネイル画像。白いPCのイラストに、「${post.frontmatter.title}」の文字が重なっている。`,
-    isExternal: false,
-  })),
-  ...externalPosts,
-];
-
-// allPostsを日付順に並び替える
-allPosts.sort((a, b) => {
-  const dateA = new Date(a.pubDate);
-  const dateB = new Date(b.pubDate);
-
-  return dateB.getTime() - dateA.getTime();
-});
+const localPosts = await Astro.glob<Frontmatter>("../content/posts/*.md");
+const allPosts = await getAllPosts(localPosts);
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>

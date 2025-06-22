@@ -1,3 +1,4 @@
+import { getCollection, type CollectionEntry } from "astro:content";
 import { JSDOM } from "jsdom";
 import { externalBlogs } from "../data/externalBlog";
 
@@ -9,13 +10,6 @@ export interface Post {
   alt: string;
   isExternal: boolean;
 }
-
-const getFileName = (file: string) => {
-  const fileNameWithExtentision = file.split("/").pop();
-  const fileName = fileNameWithExtentision?.replace(".md", "");
-
-  return fileName;
-};
 
 const getOgpImageFromUrl = async (url: string) => {
   try {
@@ -33,30 +27,21 @@ const getOgpImageFromUrl = async (url: string) => {
   }
 };
 
-export interface Frontmatter {
-  title: string;
-  pubDate: string;
-  image?: {
-    url: string;
-    alt: string;
-  };
-}
-
-const processLocalPosts = (
-  posts: MarkdownInstance<Frontmatter>[]
-): Post[] => {
-  return posts.map((post) => ({
-    url: `/posts/${getFileName(post.file)}`,
-    title: post.frontmatter.title,
-    pubDate: post.frontmatter.pubDate,
-    image: post.frontmatter.image
-      ? post.frontmatter.image.url
-      : `${import.meta.env.PUBLIC_SITE_URL}/ogp/${getFileName(post.file)}.png`,
-    alt: post.frontmatter.image
-      ? post.frontmatter.image.alt
-      : `サムネイル画像。白いPCのイラストに、「${post.frontmatter.title}」の文字が重なっている。`,
+const processLocalPosts = (posts: CollectionEntry<"posts">[]): Post[] => {
+  return posts.map((post) => {
+    const slug = post.slug.replace(/\/index$/, "");
+    return {
+    url: `/posts/${slug}`,
+    title: post.data.title,
+    pubDate: post.data.pubDate,
+    image: post.data.image
+      ? post.data.image.url
+      : `${import.meta.env.PUBLIC_SITE_URL}/ogp/${slug}.png`,
+    alt: post.data.image
+      ? post.data.image.alt
+      : `サムネイル画像。白いPCのイラストに、「${post.data.title}」の文字が重なっている。`,
     isExternal: false,
-  }));
+  }});
 };
 
 const getExternalPosts = async (): Promise<Post[]> => {
@@ -82,19 +67,9 @@ const sortPostsByDate = (posts: Post[]): Post[] => {
   });
 };
 
-type MarkdownInstance<T> = {
-  file: string;
-  frontmatter: T;
-  rawContent: () => string;
-  compiledContent: () => string;
-  Content: unknown;
-  getHeadings: () => unknown[];
-};
-
-export const getAllPosts = async (
-  localPostsGlob: MarkdownInstance<Frontmatter>[]
-): Promise<Post[]> => {
-  const localPosts = processLocalPosts(localPostsGlob);
+export const getAllPosts = async (): Promise<Post[]> => {
+  const localPostsCollection = await getCollection("posts");
+  const localPosts = processLocalPosts(localPostsCollection);
   const externalPosts = await getExternalPosts();
 
   const allPosts = [...localPosts, ...externalPosts];

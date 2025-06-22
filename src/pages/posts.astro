@@ -2,14 +2,12 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { BlogPost } from "../ui/BlogPost";
 import { PageTitle } from "../ui/PageTitle";
-import { getAllPosts } from "../utils/post";
-import type { Frontmatter } from "../utils/post";
+import { getAllPosts } from "../content/post";
 
 const pageTitle = "記事";
 const pageDescription = "中村優作による記事一覧です。";
 
-const localPosts = await Astro.glob<Frontmatter>("../content/posts/*.md");
-const allPosts = await getAllPosts(localPosts);
+const allPosts = await getAllPosts();
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>

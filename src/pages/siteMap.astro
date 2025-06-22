@@ -1,16 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 const pageTitle = "サイトマップ";
 const pageDescription = "中村優作のポートフォリオサイトのサイトマップです。";
 import { PageTitle } from "../ui/PageTitle";
-const allPosts = await Astro.glob("../content/posts/*.md");
-
-const getFileName = (file: string) => {
-  const fileNameWithExtentision = file.split("/").pop();
-  const fileName = fileNameWithExtentision?.replace(".md", "");
-
-  return fileName;
-};
+const allPosts = await getCollection("posts");
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -25,9 +19,7 @@ const getFileName = (file: string) => {
         {
           allPosts.map((post) => (
             <li>
-              <a href={`/posts/${getFileName(post.file)}`}>
-                {post.frontmatter.title}
-              </a>
+              <a href={`/posts/${post.slug}`}>{post.data.title}</a>
             </li>
           ))
         }

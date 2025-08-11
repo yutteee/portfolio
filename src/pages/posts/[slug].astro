@@ -2,6 +2,7 @@
 import { SEO } from "astro-seo";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
+import { Marp } from "@marp-team/marp-core";
 
 interface Props {
   post: CollectionEntry<"posts">;
@@ -9,7 +10,7 @@ interface Props {
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
-  return posts.map((post) => ({
+  return posts.map((post: CollectionEntry<"posts">) => ({
     params: { slug: post.slug },
     props: {
       post,
@@ -19,6 +20,19 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+
+// スライドかどうかを判定
+const isSlide = post.data.type === "slide";
+
+// スライドの場合はMarpでレンダリング
+let slideHtml = "";
+let slideCss = "";
+if (isSlide) {
+  const marp = new Marp();
+  const result = marp.render(post.body);
+  slideHtml = result.html;
+  slideCss = result.css;
+}
 
 import "destyle.css";
 import "../../styles/global.css";
@@ -32,6 +46,7 @@ import { Icon } from "astro-icon/components";
   <head>
     <link rel="icon" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
+    {isSlide && <style set:html={slideCss} />}
     <SEO
       charset="UTF-8"
       title={`${post.data.title} | yutteee-portfolio`}
@@ -70,7 +85,10 @@ import { Icon } from "astro-icon/components";
       </div>
       <div class="wrapper">
         <div class="title-wrapper">
-          <div>{post.data.pubDate}</div>
+          <div class="post-meta">
+            <span>{post.data.pubDate}</span>
+            {isSlide && <span class="slide-badge">スライド</span>}
+          </div>
           <h1 class="title">{post.data.title}</h1>
           {
             post.data.image ? (
@@ -93,7 +111,13 @@ import { Icon } from "astro-icon/components";
           }
         </div>
         <div class="main-wrapper">
-          <Content />
+          {
+            isSlide ? (
+              <div class="slide-container" set:html={slideHtml} />
+            ) : (
+              <Content />
+            )
+          }
         </div>
       </div>
     </main>
@@ -143,6 +167,21 @@ import { Icon } from "astro-icon/components";
           gap: 1rem;
           width: 100%;
 
+          .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+          }
+
+          .slide-badge {
+            background-color: var(--color-link);
+            color: var(--color-background);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            font-weight: bold;
+          }
+
           .title {
             font-size: 2rem;
             font-weight: 900;
@@ -159,6 +198,71 @@ import { Icon } from "astro-icon/components";
           flex-direction: column;
           gap: 1rem;
           width: 100%;
+
+          .slide-container {
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+
+            :global(section) {
+              margin-bottom: 2rem;
+              padding: 2rem;
+              background: var(--color-background);
+              border: 1px solid var(--color-text);
+              border-radius: 0.5rem;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            :global(h1) {
+              font-size: 2.5rem;
+              font-weight: 900;
+              margin-bottom: 1rem;
+              color: var(--color-link);
+            }
+
+            :global(h2) {
+              font-size: 2rem;
+              font-weight: 700;
+              margin-bottom: 1rem;
+            }
+
+            :global(h3) {
+              font-size: 1.5rem;
+              font-weight: 600;
+              margin-bottom: 0.5rem;
+            }
+
+            :global(ul) {
+              margin: 1rem 0;
+              padding-left: 2rem;
+            }
+
+            :global(li) {
+              margin-bottom: 0.5rem;
+            }
+
+            :global(code) {
+              background-color: var(--color-text);
+              color: var(--color-background);
+              padding: 0.25rem 0.5rem;
+              border-radius: 0.25rem;
+              font-family: "Courier New", monospace;
+            }
+
+            :global(pre) {
+              background-color: var(--color-text);
+              color: var(--color-background);
+              padding: 1rem;
+              border-radius: 0.5rem;
+              overflow-x: auto;
+              margin: 1rem 0;
+            }
+
+            :global(pre code) {
+              background: none;
+              padding: 0;
+            }
+          }
 
           h2 {
             margin-top: 2rem;

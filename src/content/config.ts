@@ -8,6 +8,8 @@ const postsCollection = defineCollection({
                 alt: z.string(),
         }).optional(),
         description: z.string(),
+        type: z.enum(['blog', 'slide']).default('blog'),
+        theme: z.string().optional(),
     }),
 });
 

@@ -27,6 +27,7 @@
     "@iconify-json/formkit": "^1.1.8",
     "@iconify-json/lets-icons": "^1.1.2",
     "@iconify-json/weui": "^1.1.0",
+    "@marp-team/marp-core": "^4.1.0",
     "@resvg/resvg-js": "^2.6.2",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

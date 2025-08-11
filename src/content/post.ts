@@ -9,6 +9,7 @@ export interface Post {
   image: string;
   alt: string;
   isExternal: boolean;
+  type: 'blog' | 'slide';
 }
 
 const getOgpImageFromUrl = async (url: string) => {
@@ -41,6 +42,7 @@ const processLocalPosts = (posts: CollectionEntry<"posts">[]): Post[] => {
       ? post.data.image.alt
       : `サムネイル画像。白いPCのイラストに、「${post.data.title}」の文字が重なっている。`,
     isExternal: false,
+    type: post.data.type || 'blog',
   }});
 };
 

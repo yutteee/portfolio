@@ -38,6 +38,8 @@ import "destyle.css";
 import "../../styles/global.css";
 import { Header } from "../../features/Header";
 import { Footer } from "../../features/Footer";
+import BlogPost from "../../components/BlogPost.astro";
+import SlidePost from "../../components/SlidePost.astro";
 import { Icon } from "astro-icon/components";
 ---
 
@@ -83,43 +85,14 @@ import { Icon } from "astro-icon/components";
         <Icon name="weui:arrow-outlined" />
         <div>ポスト</div>
       </div>
-      <div class="wrapper">
-        <div class="title-wrapper">
-          <div class="post-meta">
-            <span>{post.data.pubDate}</span>
-            {isSlide && <span class="slide-badge">スライド</span>}
-          </div>
-          <h1 class="title">{post.data.title}</h1>
-          {
-            post.data.image ? (
-              <img
-                src={post.data.image.url}
-                alt={post.data.image.alt}
-                width="720"
-                height="378"
-                class="image"
-              />
-            ) : (
-              <img
-                src={`${import.meta.env.PUBLIC_SITE_URL}/ogp/${post.slug}.png`}
-                alt=""
-                width="720"
-                height="378"
-                class="image"
-              />
-            )
-          }
-        </div>
-        <div class="main-wrapper">
-          {
-            isSlide ? (
-              <div class="slide-container" set:html={slideHtml} />
-            ) : (
-              <Content />
-            )
-          }
-        </div>
-      </div>
+
+      {
+        isSlide ? (
+          <SlidePost post={post} slideHtml={slideHtml} slideCss={slideCss} />
+        ) : (
+          <BlogPost post={post} Content={Content} />
+        )
+      }
     </main>
     <Footer client:only />
 
@@ -148,184 +121,6 @@ import { Icon } from "astro-icon/components";
         a {
           color: var(--color-link);
           text-decoration: underline;
-        }
-      }
-      .wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        width: 100%;
-        max-width: 40rem;
-        margin: 0 auto;
-        padding-top: 2rem;
-
-        .title-wrapper {
-          display: flex;
-          flex-direction: column;
-          align-items: start;
-          gap: 1rem;
-          width: 100%;
-
-          .post-meta {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-          }
-
-          .slide-badge {
-            background-color: var(--color-link);
-            color: var(--color-background);
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            font-size: 0.875rem;
-            font-weight: bold;
-          }
-
-          .title {
-            font-size: 2rem;
-            font-weight: 900;
-          }
-
-          .image {
-            width: 100%;
-            height: auto;
-          }
-        }
-
-        .main-wrapper {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-          width: 100%;
-
-          .slide-container {
-            width: 100%;
-            max-width: 100%;
-            overflow: hidden;
-
-            :global(section) {
-              margin-bottom: 2rem;
-              padding: 2rem;
-              background: var(--color-background);
-              border: 1px solid var(--color-text);
-              border-radius: 0.5rem;
-              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            }
-
-            :global(h1) {
-              font-size: 2.5rem;
-              font-weight: 900;
-              margin-bottom: 1rem;
-              color: var(--color-link);
-            }
-
-            :global(h2) {
-              font-size: 2rem;
-              font-weight: 700;
-              margin-bottom: 1rem;
-            }
-
-            :global(h3) {
-              font-size: 1.5rem;
-              font-weight: 600;
-              margin-bottom: 0.5rem;
-            }
-
-            :global(ul) {
-              margin: 1rem 0;
-              padding-left: 2rem;
-            }
-
-            :global(li) {
-              margin-bottom: 0.5rem;
-            }
-
-            :global(code) {
-              background-color: var(--color-text);
-              color: var(--color-background);
-              padding: 0.25rem 0.5rem;
-              border-radius: 0.25rem;
-              font-family: "Courier New", monospace;
-            }
-
-            :global(pre) {
-              background-color: var(--color-text);
-              color: var(--color-background);
-              padding: 1rem;
-              border-radius: 0.5rem;
-              overflow-x: auto;
-              margin: 1rem 0;
-            }
-
-            :global(pre code) {
-              background: none;
-              padding: 0;
-            }
-          }
-
-          h2 {
-            margin-top: 2rem;
-            font-size: 2rem;
-            font-weight: 900;
-          }
-
-          h3 {
-            margin-top: 1rem;
-            font-size: 1.5rem;
-            font-weight: 900;
-          }
-
-          a {
-            color: var(--color-link);
-            text-decoration: underline;
-          }
-
-          ul {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            padding-left: 1.5rem;
-
-            li {
-              /* 点をつける */
-              list-style: disc;
-              padding-left: 0.5rem;
-            }
-          }
-
-          img {
-            width: 100%;
-            height: auto;
-          }
-
-          em {
-            font-style: normal;
-            font-size: 0.875rem;
-          }
-
-          th,
-          td {
-            padding: 0.5rem;
-            border: 1px solid var(--color-text);
-          }
-
-          table {
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: fixed;
-          }
-
-          :not(pre) > code {
-            background-color: var(--color-text);
-            color: var(--color-background);
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-          }
-
-          pre {
-            padding: 1rem;
-          }
         }
       }
     </style>

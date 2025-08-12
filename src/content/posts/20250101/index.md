@@ -18,13 +18,12 @@ LT会 2025/08/12
 
 <div class="flex-container">
 
-![中村優作のプロフィール画像 w:300 h:300](./icon.png)
+![オカメインコの写真。机の上に載ってこちらを見上げている。 w:300 h:300](./icon.png)
 
 <div>
 
-## 中村優作
+## ゆってぃー
 
-- 都内でエンジニアをしています
 - UI/UX, アクセシビリティ
 - お笑いと読書とお酒が好き
 
@@ -33,137 +32,115 @@ LT会 2025/08/12
 
 ---
 
+## やったこと
+
+[私のポートフォリオ](https://yutteee.pages.dev/)に、marpでスライドを作成して公開できる仕組みを作りました。
+
+---
+
 ## 目次
 
-- 実装した機能
-- 技術的な詳細
-- カスタムテーマ
-- 今後の展望
+- 開発背景
+- 機能と実装
+- スライドデザイン
 
 ---
 
-## 実装した機能
+<!--  _class: strong -->
 
-### スライド記事の公開
-- 通常のブログ記事とスライド記事を区別
-- `type: 'slide'` でスライドとして認識
-- MarpでMarkdownをスライドに変換
-
-### カスタムテーマ対応
-- 独自のCSSテーマを作成
-- ポートフォリオサイトのデザインに統一
-- `theme: 'custom-theme'` で適用
+## 開発背景
 
 ---
 
-## 技術的な詳細
+## なぜ作成した？
 
-### 使用ライブラリ
-```bash
-@marp-team/marp-core: ^4.1.0
+### 自分だけのスライドテンプレートが欲しかった
+
+- 自分の好みの形式のスライドを作りやすくしたい
+- 個人的なブランディングをしたい（**他の人と被りたくない**）
+- スライドの装飾ではなく、内容に集中できる環境を作りたい
+
+---
+
+## marpとは？
+
+### Markdownでスライドを作成できるツール
+
+- Markdown記法でスライドを書ける
+- HTML/CSSやPDFに変換可能
+- 見た目はCSSでカスタマイズ可能
+
+---
+
+## marpの良さ
+
+### 構造化されたテキストでスライドを作成することができる
+
+- スライドの一貫性とアクセシビリティを担保しやすい
+- AIエージェントを使ってスライドを作れる
+
+---
+
+<!--  _class: strong -->
+
+## 実装
+
+---
+
+## 使用技術1
+
+### Astro
+- 静的コンテンツ配信に特化したフロントエンドフレームワーク
+- MarkdownをHTMLに変換して公開することもできる
+- 本ポートフォリオでの作成に使用
+
+---
+
+## Astroでのmarkdownの公開
+
+### Astroのコンテンツ管理システムのContent Collectionsを使用
+
+Markdownをコンテンツ管理できる
+
+- `src/content/posts/` にMarkdownファイルを配置
+- `getCollection()` で`/src/content/posts`にあるファイル一覧の内容を取得
+- ページとしてサイト公開
+---
+
+## 使用技術2
+
+### marp-team/marp-core
+Node.js環境でMarp形式のMarkdownをHTML/CSSに変換
+
+```typescript
+const marp = new Marp();
+const result = marp.render(post.body);
 ```
 
-### 実装ポイント
-- `[slug].astro` でスライド判定
-- `SlidePost.astro` コンポーネントで表示
-- カスタムテーマの動的適用
-
----
-
-## ファイル構成
-
-```
-src/
-├── pages/posts/[slug].astro    # スライド判定・レンダリング
-├── components/SlidePost.astro  # スライド表示コンポーネント
-├── marp-themes/
-│   ├── custom-theme.css        # カスタムテーマ
-│   └── index.ts               # テーマ管理
-└── content/config.ts          # スキーマ定義
+```jsx
+<div class="slide-container" set:html={result.html} />
+<style set:html={result.css}></style>
 ```
 
 ---
 
-## カスタムテーマ
+<!--  _class: strong -->
 
-### デザイン方針
-- ポートフォリオサイトの色合いに統一
-- 読みやすいフォントサイズとレイアウト
-- レスポンシブ対応
-
-### CSS変数の活用
-```css
-section {
-  background-color: var(--color-white);
-  color: var(--color-text);
-  font-size: 1.5rem;
-  padding: 3rem;
-}
-```
+## スライドデザイン
 
 ---
 
-## 実装の流れ
+## 意識したこと
 
-1. **スライド判定**
-   ```typescript
-   const isSlide = post.data.type === "slide";
-   ```
+### 各スライドの主張を明確にする
 
-2. **Marpレンダリング**
-   ```typescript
-   const marp = new Marp();
-   const result = marp.render(post.body);
-   ```
-
-3. **テーマ適用**
-   ```typescript
-   if (theme === "custom-theme") {
-     slideCss = marpThemes["custom-theme"];
-   }
-   ```
+- 結論を一番強く装飾して先に書いた
+- 情報をあまり詰めれないようにした
 
 ---
 
-## 今後の展望
-
-### 追加予定機能
-- スライドナビゲーション
-- フルスクリーンモード
-- プレゼンテーションモード
-- スライドエクスポート機能
-
-### テーマ拡張
-- ダークモード対応
-- アニメーション効果
-- より多くのカスタマイズオプション
-
----
+<!--  _class: strong -->
 
 ## まとめ
 
-### 実現できたこと
-- Markdownでスライド作成
-- カスタムテーマ適用
-- 既存ブログとの統合
-- レスポンシブ対応
-
-### 技術的な学び
-- Marpの活用方法
-- Astroでの動的コンテンツ生成
-- CSS変数を使ったテーマ管理
-
----
-
-## 参考リンク
-
-- [Marp公式サイト](https://marp.app/)
-- [Astro公式ドキュメント](https://docs.astro.build/)
-- [GitHubリポジトリ](https://github.com/yutteee/portfolio)
-
----
-
-# ありがとうございました！
-
-### 質問・フィードバック歓迎です
-
+- スライドが楽に作れるようになった！

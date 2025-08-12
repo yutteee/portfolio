@@ -9,10 +9,10 @@ export type BlogPostProps = {
   date: string;
   alt: string;
   isExternal?: boolean;
-  type?: 'blog' | 'slide';
+  marp?: boolean;
 };
 
-export const BlogPost: React.FC<BlogPostProps> = ({ title, url, image, date, alt, isExternal, type }) => {
+export const BlogPost: React.FC<BlogPostProps> = ({ title, url, image, date, alt, isExternal, marp }) => {
   return (
     <li className={styles.container}>
       <a
@@ -28,7 +28,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({ title, url, image, date, alt
         <div className={styles.texts}>
           <div className={styles.meta}>
             <div>{date}</div>
-            {type === 'slide' && <span className={styles.slideBadge}>スライド</span>}
+            {marp && <span className={styles.slideBadge}>スライド</span>}
           </div>
           <div className={styles.title}>
             {title}

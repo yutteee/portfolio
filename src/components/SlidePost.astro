@@ -2,8 +2,6 @@
 import type { CollectionEntry } from "astro:content";
 import { Marp } from "@marp-team/marp-core";
 import { marpThemes } from "../marp-themes";
-import hljs from "highlight.js";
-import "highlight.js/styles/github.css";
 
 interface Props {
   post: CollectionEntry<"posts">;
@@ -29,23 +27,9 @@ const resolvedBody = post.body.replace(
 const result = marp.render(resolvedBody);
 slideHtml = result.html;
 slideCss = slideCss || result.css;
-
-// highlight.jsでシンタックスハイライトを適用
-const highlightedHtml = slideHtml.replace(
-  /<pre><code class="language-(\w+)">([\s\S]*?)<\/code><\/pre>/g,
-  (match, language, code) => {
-    try {
-      const highlighted = hljs.highlight(code, { language });
-      return `<pre><code class="hljs language-${language}">${highlighted.value}</code></pre>`;
-    } catch (error) {
-      // 言語が認識できない場合は、そのまま返す
-      return match;
-    }
-  }
-);
 ---
 
-<div class="slide-container" set:html={highlightedHtml} />
+<div class="slide-container" set:html={slideHtml} />
 <style set:html={slideCss}></style>
 
 <style>

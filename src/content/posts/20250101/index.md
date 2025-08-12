@@ -4,6 +4,7 @@ pubDate: "2025-08-12"
 description: 'astroで作成したブログサイトでmarpで作成したスライドを公開できる仕組みを作りました。'
 type: 'slide'
 theme: 'custom-theme'
+marp: true
 ---
 
 <!-- _class: title -->
@@ -32,9 +33,19 @@ LT会 2025/08/12
 
 ---
 
+<div class="flex-container">
+
+<div>
+
 ## やったこと
 
 [私のポートフォリオ](https://yutteee.pages.dev/)に、marpでスライドを作成して公開できる仕組みを作りました。
+
+</div>
+
+![オカメインコの写真。机の上に載ってこちらを見上げている。 w:700 h:full](./image.png)
+
+</div>
 
 ---
 
@@ -57,8 +68,7 @@ LT会 2025/08/12
 ### 自分だけのスライドテンプレートが欲しかった
 
 - 自分の好みの形式のスライドを作りやすくしたい
-- 個人的なブランディングをしたい（**他の人と被りたくない**）
-- スライドの装飾ではなく、内容に集中できる環境を作りたい
+- スライドを公開しやすくしたい
 
 ---
 
@@ -99,8 +109,6 @@ LT会 2025/08/12
 ## Astroでのmarkdownの公開
 
 ### Astroのコンテンツ管理システムのContent Collectionsを使用
-
-Markdownをコンテンツ管理できる
 
 - `src/content/posts/` にMarkdownファイルを配置
 - `getCollection()` で`/src/content/posts`にあるファイル一覧の内容を取得
@@ -143,4 +151,4 @@ const result = marp.render(post.body);
 
 ## まとめ
 
-- スライドが楽に作れるようになった！
+楽にスライドを公開できるようになった！

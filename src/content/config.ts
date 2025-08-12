@@ -9,7 +9,7 @@ const postsCollection = defineCollection({
       alt: z.string(),
     }).optional(),
     description: z.string(),
-    type: z.enum(['blog', 'slide']).default('blog'),
+    marp: z.boolean().default(false),
     theme: z.enum(['default', 'custom-theme']).default('default'),
   }),
 });

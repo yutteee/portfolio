@@ -20,7 +20,7 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 
 // スライドかどうかを判定
-const isSlide = post.data.type === "slide";
+const isSlide = post.data.marp;
 
 import "destyle.css";
 import "../../styles/global.css";

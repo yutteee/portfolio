@@ -119,7 +119,7 @@ const result = marp.render(post.body);
 
 ```jsx
 <div class="slide-container" set:html={result.html} />
-<style set:html={result.css}></style>
+<style set:html={result.css} />
 ```
 
 ---

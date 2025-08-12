@@ -74,6 +74,9 @@ importers:
       gsap:
         specifier: ^3.12.5
         version: 3.13.0
+      highlight.js:
+        specifier: ^11.11.1
+        version: 11.11.1
       jsdom:
         specifier: ^25.0.1
         version: 25.0.1

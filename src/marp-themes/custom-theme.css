@@ -82,6 +82,10 @@ section h3 {
   color: #041b47;
 }
 
+section p {
+    max-width: none;
+}
+
 /* リスト */
 section ul, section ol {
   text-align: left;
@@ -175,17 +179,6 @@ section em {
   font-style: italic;
 }
 
-/* チェックマーク付きリスト */
-section ul li:has(input[type="checkbox"]:checked)::before {
-  content: "✅ ";
-  margin-right: 0.5rem;
-}
-
-section ul li:has(input[type="checkbox"]:not(:checked))::before {
-  content: "⬜ ";
-  margin-right: 0.5rem;
-}
-
 /* フッター */
 section::after {
   content: "yutteee-portfolio";
@@ -229,4 +222,29 @@ section::after {
   align-items: center;
   justify-content: center;
   gap: 4rem;
+}
+
+/* コードブロックの基本スタイル（highlight.jsのスタイルを上書きしない） */
+section pre {
+  margin: 1rem 0;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+section code {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 1.5rem;
+    background-color: var(--color-background);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+marp-pre code {
+    padding: 0;
+}
+
+marp-pre {
+    background-color: var(--color-background);
+    padding: 0 1rem;
+    border-radius: 0.5rem;
 }

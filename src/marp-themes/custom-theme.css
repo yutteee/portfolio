@@ -1,0 +1,270 @@
+/* @theme custom-theme */
+
+/* 基本設定 */
+section {
+  background-color: var(--color-white);
+  color: var(--color-text);
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  font-size: 1.5rem;
+  padding: 3rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  box-sizing: border-box;
+  line-height: 1.6;
+}
+
+/* タイトルスライド */      
+section.title {
+  background: linear-gradient(135deg, var(--color-blue) 0%, rgb(170, 219, 216) 60%, #FFD156 100%);
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+section.title h1 {
+  font-size: 5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+section.title p {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* 強調用スライド */
+section.strong {
+  background: linear-gradient(135deg, var(--color-blue) 0%, rgb(170, 219, 216) 60%, #FFD156 100%);
+  position: relative;
+  padding: 4.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+section.strong::before {
+  content: '';
+  position: absolute;
+  top: 2.5rem;
+  left: 2.5rem;
+  right: 2.5rem;
+  bottom: 2.5rem;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+section.strong > * {
+  position: relative;
+  z-index: 2;
+}
+
+section.strong h2 {
+  font-size: 4rem;
+}
+
+/* 見出し */
+section h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: var(--color-text);
+  padding-bottom: 0.5rem;
+}
+
+section h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #041b47;
+}
+
+section h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #041b47;
+}
+
+/* リスト */
+section ul, section ol {
+  text-align: left;
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+section li {
+  margin-bottom: 0.5rem;
+  line-height: 1.8;
+  /* リストのマーク */
+  list-style-type: disc;
+}
+
+/* コードブロック */
+section code {
+  background-color: #f5f5f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  font-size: 0.9em;
+  color: #e74c3c;
+}
+
+section pre {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: left;
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  font-size: 0.9em;
+  line-height: 1.4;
+  overflow-x: auto;
+  margin: 1rem 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+section pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+/* リンク */
+section a {
+  color: #84c5ea;
+  text-decoration: none;
+  border-bottom: 1px solid #84c5ea;
+  transition: color 0.3s ease;
+}
+
+section a:hover {
+  color: #041b47;
+  border-bottom-color: #041b47;
+}
+
+/* 画像 */
+section img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* テーブル */
+section table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+section th, section td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+section th {
+  background-color: #84c5ea;
+  color: white;
+  font-weight: bold;
+}
+
+section tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* 引用 */
+section blockquote {
+  border-left: 4px solid #84c5ea;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: #666;
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 0 8px 8px 0;
+}
+
+/* 水平線 */
+section hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #84c5ea, transparent);
+  margin: 2rem 0;
+}
+
+/* 強調 */
+section strong {
+  color: #041b47;
+  font-weight: bold;
+}
+
+section em {
+  color: #e74c3c;
+  font-style: italic;
+}
+
+/* チェックマーク付きリスト */
+section ul li:has(input[type="checkbox"]:checked)::before {
+  content: "✅ ";
+  margin-right: 0.5rem;
+}
+
+section ul li:has(input[type="checkbox"]:not(:checked))::before {
+  content: "⬜ ";
+  margin-right: 0.5rem;
+}
+
+/* フッター */
+section::after {
+  content: "yutteee-portfolio";
+  position: absolute;
+  bottom: 1rem;
+  right: 2rem;
+  font-size: 0.8rem;
+  color: #999;
+  font-weight: bold;
+}
+
+/* カスタムクラス */
+.highlight {
+  background: linear-gradient(120deg, #84c5ea 0%, #a8e6cf 100%);
+  padding: 1rem;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+}
+
+.warning {
+  background-color: #fff3cd;
+  border: 1px solid #ffeaa7;
+  color: #856404;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.success {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+}

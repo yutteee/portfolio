@@ -1,10 +1,32 @@
 ---
+import type { CollectionEntry } from "astro:content";
+import { Marp } from "@marp-team/marp-core";
+import { marpThemes } from "../marp-themes";
+
 interface Props {
-  slideHtml: string;
-  slideCss: string;
+  post: CollectionEntry<"posts">;
+}
+const { post } = Astro.props;
+
+let slideHtml = "";
+let slideCss = "";
+const marp = new Marp();
+// カスタムテーマを設定
+const theme = post.data.theme || "default";
+if (theme === "custom-theme") {
+  // カスタムテーマのCSSを直接適用
+  slideCss = marpThemes["custom-theme"];
 }
 
-const { slideHtml, slideCss } = Astro.props;
+// 画像パスを解決
+const resolvedBody = post.body.replace(
+  /!\[([^\]]*)\]\(\.\/([^)]+)\)/g,
+  `![$1](/src/content/posts/${post.slug}/$2)`
+);
+
+const result = marp.render(resolvedBody);
+slideHtml = result.html;
+slideCss = slideCss || result.css;
 ---
 
 <div class="slide-container" set:html={slideHtml} />

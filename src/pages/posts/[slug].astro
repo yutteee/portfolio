@@ -2,8 +2,6 @@
 import { SEO } from "astro-seo";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
-import { Marp } from "@marp-team/marp-core";
-
 interface Props {
   post: CollectionEntry<"posts">;
 }
@@ -24,16 +22,6 @@ const { Content } = await post.render();
 // スライドかどうかを判定
 const isSlide = post.data.type === "slide";
 
-// スライドの場合はMarpでレンダリング
-let slideHtml = "";
-let slideCss = "";
-if (isSlide) {
-  const marp = new Marp();
-  const result = marp.render(post.body);
-  slideHtml = result.html;
-  slideCss = result.css;
-}
-
 import "destyle.css";
 import "../../styles/global.css";
 import { Header } from "../../features/Header";
@@ -48,7 +36,6 @@ import { Icon } from "astro-icon/components";
   <head>
     <link rel="icon" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
-    {isSlide && <style set:html={slideCss} />}
     <SEO
       charset="UTF-8"
       title={`${post.data.title} | yutteee-portfolio`}
@@ -88,7 +75,7 @@ import { Icon } from "astro-icon/components";
 
       {
         isSlide ? (
-          <SlidePost slideHtml={slideHtml} slideCss={slideCss} />
+          <SlidePost post={post} />
         ) : (
           <BlogPost post={post} Content={Content} />
         )

@@ -1,111 +1,169 @@
 ---
-title: 'Reactコンポーネント設計のベストプラクティス'
-pubDate: "2025-01-01"
-description: 'Reactコンポーネントの設計について解説します'
+title: 'astroブログでmarp対応した'
+pubDate: "2025-08-12"
+description: 'astroで作成したブログサイトでmarpで作成したスライドを公開できる仕組みを作りました。'
 type: 'slide'
-theme: 'default'
+theme: 'custom-theme'
 ---
 
-# Reactコンポーネント設計のベストプラクティス
+<!-- _class: title -->
 
-中村優作
+# astroブログでmarp対応した
+
+LT会 2025/08/12
+
+---
+
+<!--  _class: strong -->
+
+<div class="flex-container">
+
+![中村優作のプロフィール画像 w:300 h:300](./icon.png)
+
+<div>
+
+## 中村優作
+
+- 都内でエンジニアをしています
+- UI/UX, アクセシビリティ
+- お笑いと読書とお酒が好き
+
+</div>
+</div>
 
 ---
 
 ## 目次
 
-1. コンポーネントの責務分離
-2. Props設計の原則
-3. 状態管理の考え方
-4. パフォーマンス最適化
+- 実装した機能
+- 技術的な詳細
+- カスタムテーマ
+- 今後の展望
 
 ---
 
-## 1. コンポーネントの責務分離
+## 実装した機能
 
-### Presentational Component
-- 見た目のみを担当
-- ビジネスロジックを持たない
-- 再利用可能
+### スライド記事の公開
+- 通常のブログ記事とスライド記事を区別
+- `type: 'slide'` でスライドとして認識
+- MarpでMarkdownをスライドに変換
 
-### Container Component
-- データ取得と状態管理
-- ビジネスロジック
-- Presentational Componentにデータを渡す
+### カスタムテーマ対応
+- 独自のCSSテーマを作成
+- ポートフォリオサイトのデザインに統一
+- `theme: 'custom-theme'` で適用
 
 ---
 
-## 2. Props設計の原則
+## 技術的な詳細
 
-```typescript
-// 良い例
-interface ButtonProps {
-  variant: 'primary' | 'secondary';
-  size: 'small' | 'medium' | 'large';
-  children: React.ReactNode;
-  onClick?: () => void;
+### 使用ライブラリ
+```bash
+@marp-team/marp-core: ^4.1.0
+```
+
+### 実装ポイント
+- `[slug].astro` でスライド判定
+- `SlidePost.astro` コンポーネントで表示
+- カスタムテーマの動的適用
+
+---
+
+## ファイル構成
+
+```
+src/
+├── pages/posts/[slug].astro    # スライド判定・レンダリング
+├── components/SlidePost.astro  # スライド表示コンポーネント
+├── marp-themes/
+│   ├── custom-theme.css        # カスタムテーマ
+│   └── index.ts               # テーマ管理
+└── content/config.ts          # スキーマ定義
+```
+
+---
+
+## カスタムテーマ
+
+### デザイン方針
+- ポートフォリオサイトの色合いに統一
+- 読みやすいフォントサイズとレイアウト
+- レスポンシブ対応
+
+### CSS変数の活用
+```css
+section {
+  background-color: var(--color-white);
+  color: var(--color-text);
+  font-size: 1.5rem;
+  padding: 3rem;
 }
-
-// 悪い例
-interface ButtonProps {
-  className?: string;
-  style?: React.CSSProperties;
-  [key: string]: any;
-}
 ```
 
 ---
 
-## 3. 状態管理の考え方
+## 実装の流れ
 
-### 状態の種類
-- **Local State**: コンポーネント内でのみ使用
-- **Shared State**: 複数コンポーネントで共有
-- **Server State**: APIから取得するデータ
+1. **スライド判定**
+   ```typescript
+   const isSlide = post.data.type === "slide";
+   ```
 
-### 状態管理ライブラリの選択
-- useState: ローカル状態
-- Context API: 中規模アプリ
-- Redux/Zustand: 大規模アプリ
+2. **Marpレンダリング**
+   ```typescript
+   const marp = new Marp();
+   const result = marp.render(post.body);
+   ```
+
+3. **テーマ適用**
+   ```typescript
+   if (theme === "custom-theme") {
+     slideCss = marpThemes["custom-theme"];
+   }
+   ```
 
 ---
 
-## 4. パフォーマンス最適化
+## 今後の展望
 
-### React.memo
-```typescript
-const ExpensiveComponent = React.memo(({ data }) => {
-  return <div>{/* 重い処理 */}</div>;
-});
-```
+### 追加予定機能
+- スライドナビゲーション
+- フルスクリーンモード
+- プレゼンテーションモード
+- スライドエクスポート機能
 
-### useMemo / useCallback
-```typescript
-const memoizedValue = useMemo(() => {
-  return expensiveCalculation(data);
-}, [data]);
-
-const memoizedCallback = useCallback(() => {
-  doSomething(id);
-}, [id]);
-```
+### テーマ拡張
+- ダークモード対応
+- アニメーション効果
+- より多くのカスタマイズオプション
 
 ---
 
 ## まとめ
 
-1. **責務を明確に分離**する
-2. **型安全なProps設計**を行う
-3. **適切な状態管理**を選択する
-4. **パフォーマンス**を意識する
+### 実現できたこと
+- Markdownでスライド作成
+- カスタムテーマ適用
+- 既存ブログとの統合
+- レスポンシブ対応
 
-### 参考資料
-- React公式ドキュメント
-- React Design Patterns
-- 実践的なReact開発
+### 技術的な学び
+- Marpの活用方法
+- Astroでの動的コンテンツ生成
+- CSS変数を使ったテーマ管理
+
+---
+
+## 参考リンク
+
+- [Marp公式サイト](https://marp.app/)
+- [Astro公式ドキュメント](https://docs.astro.build/)
+- [GitHubリポジトリ](https://github.com/yutteee/portfolio)
 
 ---
 
 # ありがとうございました！
 
-質問があればお気軽にどうぞ 
+### 質問・フィードバック歓迎です
+

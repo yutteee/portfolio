@@ -9,9 +9,10 @@ export type BlogPostProps = {
   date: string;
   alt: string;
   isExternal?: boolean;
+  marp?: boolean;
 };
 
-export const BlogPost: React.FC<BlogPostProps> = ({ title, url, image, date, alt, isExternal }) => {
+export const BlogPost: React.FC<BlogPostProps> = ({ title, url, image, date, alt, isExternal, marp }) => {
   return (
     <li className={styles.container}>
       <a
@@ -25,7 +26,10 @@ export const BlogPost: React.FC<BlogPostProps> = ({ title, url, image, date, alt
           <img src={image} alt={alt} className={styles.image} width={340} height={178} />
         </div>
         <div className={styles.texts}>
-          <div>{date}</div>
+          <div className={styles.meta}>
+            <div>{date}</div>
+            {marp && <span className={styles.slideBadge}>スライド</span>}
+          </div>
           <div className={styles.title}>
             {title}
             {isExternal && <FiExternalLink style={{ marginLeft: 4 }} />}

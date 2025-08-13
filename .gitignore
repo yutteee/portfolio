@@ -25,3 +25,5 @@ pnpm-debug.log*
 
 *storybook.log
 storybook-static
+
+public/posts/

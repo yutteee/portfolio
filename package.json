@@ -3,9 +3,9 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "node scripts/copy-images.js && astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "node scripts/copy-images.js && astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "check": "biome check ./src",
@@ -15,7 +15,8 @@
     "test:unit": "vitest --config vitest.unit.config.ts",
     "test:storybook": "vitest --config vitest.storybook.config.ts",
     "chromatic": "npx chromatic",
-    "plop": "plop"
+    "plop": "plop",
+    "copy-images": "node scripts/copy-images.js"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.10",

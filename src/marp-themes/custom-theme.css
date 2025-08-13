@@ -1,6 +1,7 @@
 /* @theme custom-theme */
 
 @import "../styles/global.css";
+@import url('https://cdn.jsdelivr.net/npm/destyle.css@4.0.1/destyle.css');
 @import url('https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github.min.css');
 
 /* 基本設定 */
@@ -10,8 +11,8 @@ section {
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
   font-size: 2rem;
   padding: 3rem;
+  display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   min-height: 100%;
   box-sizing: border-box;
@@ -123,7 +124,6 @@ section img {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* テーブル */

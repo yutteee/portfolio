@@ -9,6 +9,16 @@ import { SEO } from "astro-seo";
 
 <html lang="ja">
   <head>
+    <script is:inline>
+      // ブロッキングスクリプト: DOMが表示される前にテーマを適用
+      (function() {
+        const theme = localStorage.getItem("theme");
+        const isOsDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (theme === "dark" || (theme === null && isOsDark)) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
     <link rel="icon" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <SEO

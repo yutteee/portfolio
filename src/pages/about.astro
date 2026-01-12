@@ -135,18 +135,18 @@ import { Image } from "astro:assets";
     }
 
     .image-wrapper {
-      width: 100%;
-      max-width: 400px;
+      width: 400px;
+      flex-shrink: 0;
       position: relative;
+      aspect-ratio: 8/5;
 
       @media screen and (max-width: 40rem) {
-        max-width: 100%;
+        width: 100%;
       }
 
       .image {
         width: 100%;
-        height: auto;
-        aspect-ratio: 8/5;
+        height: 100%;
         object-fit: cover;
         border-radius: 8px;
         position: sticky;

@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect, useEffect } from "react";
+import { useState, useEffect } from "react";
 import type { RefObject } from "react";
 
 type UseThemeModeProps = {
@@ -7,15 +7,13 @@ type UseThemeModeProps = {
 };
 
 export const useThemeMode = ({ darkBtnRef, lightBtnRef }: UseThemeModeProps) => {
-  const [isDark, setIsDark] = useState(false);
-
-  useLayoutEffect(() => {
-    const theme = localStorage.getItem("theme");
-    const isOsDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (theme === "dark" || (theme === null && isOsDark)) {
-      setIsDark(true);
+  // 初期状態: DOMの現在のクラスを読み取る（SSR時はfalse）
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof document !== "undefined") {
+      return document.documentElement.classList.contains("dark");
     }
-  }, []);
+    return false;
+  });
 
   useEffect(() => {
     if (isDark) {

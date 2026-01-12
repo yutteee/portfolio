@@ -16,7 +16,7 @@ export const products: Product[] = [
 		period: "2024/11 - 2024/12",
 		detail: "折り紙の折り方を3Dで見れるwebアプリ",
 		image: "/oricube.png",
-		url: "https://oricube.vercel.app/",
+		url: "https://ori-cube.com/",
 		alt: "OriCubeのロゴ。複数の色の折り紙で作られた立方体とOriCubeという文字が表示されている。周りにはさまざまな種類の折り紙が散りばめられている。"
 	},
 	{

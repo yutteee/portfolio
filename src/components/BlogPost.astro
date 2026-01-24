@@ -349,3 +349,53 @@ const { post, Content, headings } = Astro.props;
     }
   }
 </style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // 目次リンクと見出しIDのマッピングを作成
+  const tocLinks = document.querySelectorAll(".toc a[data-heading-id]");
+  const headingIds = Array.from(tocLinks).map(
+    (link) => link.getAttribute("data-heading-id") as string,
+  );
+
+  // アクティブなリンクを更新
+  function setActiveLink(activeId: string | null) {
+    tocLinks.forEach((link) => {
+      const id = link.getAttribute("data-heading-id");
+      link.classList.toggle("active", id === activeId);
+    });
+  }
+
+  // 目次リンククリック時にアクティブ状態を即座に更新
+  tocLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      const id = link.getAttribute("data-heading-id");
+      setActiveLink(id);
+    });
+  });
+
+  // 各見出しにScrollTriggerを設定
+  headingIds.forEach((id, index) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    // 次の見出しまでをトリガー範囲とする
+    const nextId = headingIds[index + 1];
+    const nextEl = nextId ? document.getElementById(nextId) : null;
+
+    ScrollTrigger.create({
+      trigger: el,
+      start: "top top",
+      end: nextEl
+        ? `top+=${nextEl.offsetTop - el.offsetTop} top`
+        : "bottom top",
+      onToggle: (self) => {
+        if (self.isActive) setActiveLink(id);
+      },
+    });
+  });
+</script>

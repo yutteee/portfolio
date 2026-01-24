@@ -1,0 +1,22 @@
+# 1. pnpmセキュリティ設定
+# - https://pnpm.io/supply-chain-security
+# - https://pnpm.io/blog/2025/12/05/newsroom-npm-supply-chain-security
+
+# 1.1. `preinstall`や`postinstall`といったスクリプトをブロックする
+strictDepBuilds: true
+
+# 1.1.1. ビルドスクリプトの実行を許可するパッケージのリスト
+onlyBuiltDependencies:
+  - '@biomejs/biome'
+  - '@swc/core'
+  - esbuild
+  - sharp
+
+# 1.2. 新しいパッケージが公開されてから一定期間待ってから利用する
+minimumReleaseAge: 10080 # 7日 = 168時間 = 10080分
+
+# 1.3. 新しいバージョンの認証レベルが古いバージョンより低い場合、インストールを拒否
+trustPolicy: no-downgrade
+
+# 1.4. 間接的な依存関係のGitリポジトリやURL直リンクをダウンロードしようとした場合にブロックする
+blockExoticSubdeps: true

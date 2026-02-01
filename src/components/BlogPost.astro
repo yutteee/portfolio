@@ -19,21 +19,25 @@ const { post, Content, headings } = Astro.props;
     <h1 class="title">{post.data.title}</h1>
     {
       post.data.image ? (
-        <img
-          src={post.data.image.url}
-          alt={post.data.image.alt}
-          width="720"
-          height="378"
-          class="image"
-        />
+        <div class="image-container">
+          <img
+            src={post.data.image.url}
+            alt={post.data.image.alt}
+            width="720"
+            height="378"
+            class="image"
+          />
+        </div>
       ) : (
-        <img
-          src={`${import.meta.env.PUBLIC_SITE_URL}/ogp/${post.slug}.png`}
-          alt=""
-          width="720"
-          height="378"
-          class="image"
-        />
+        <div class="image-container">
+          <img
+            src={`${import.meta.env.PUBLIC_SITE_URL}/ogp/${post.slug}.png`}
+            alt=""
+            width="720"
+            height="378"
+            class="image"
+          />
+        </div>
       )
     }
   </div>
@@ -120,9 +124,27 @@ const { post, Content, headings } = Astro.props;
         font-weight: 900;
       }
 
-      .image {
+      /* 画像の3D Tilt Effect */
+      .image-container {
+        perspective: 1000px;
         width: 100%;
-        height: auto;
+
+        .image {
+          width: 100%;
+          height: auto;
+          border: 8px solid var(--color-white);
+          border-radius: 0.5rem;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          transition:
+            transform 0.1s ease-out,
+            box-shadow 0.3s ease-out;
+          transform-style: preserve-3d;
+          will-change: transform;
+        }
+
+        &:hover .image {
+          box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        }
       }
     }
 
@@ -341,6 +363,8 @@ const { post, Content, headings } = Astro.props;
         color: var(--color-background);
         padding: 0.25rem 0.5rem;
         border-radius: 0.25rem;
+        margin: 0 0.25rem;
+        font-size: 0.875rem;
       }
 
       pre {
@@ -355,6 +379,36 @@ const { post, Content, headings } = Astro.props;
   import { ScrollTrigger } from "gsap/ScrollTrigger";
 
   gsap.registerPlugin(ScrollTrigger);
+
+  // 3D Tilt Effect
+  const mainElement = document.querySelector<HTMLElement>("main");
+  const imageContainer =
+    document.querySelector<HTMLElement>(".image-container");
+  const image = imageContainer?.querySelector<HTMLImageElement>(".image");
+
+  if (mainElement && imageContainer && image) {
+    const maxRotation = 5; // 最大傾き角度（度）
+
+    mainElement.addEventListener("mousemove", (e) => {
+      const rect = imageContainer.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      // マウス位置を -1 〜 1 の範囲に正規化
+      const mouseX = (e.clientX - centerX) / (rect.width / 2);
+      const mouseY = (e.clientY - centerY) / (rect.height / 2);
+
+      // 回転角度を計算（Y軸回転はマウスのX位置、X軸回転はマウスのY位置に対応）
+      const rotateY = mouseX * maxRotation;
+      const rotateX = -mouseY * maxRotation;
+
+      image.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    mainElement.addEventListener("mouseleave", () => {
+      image.style.transform = "rotateX(0deg) rotateY(0deg)";
+    });
+  }
 
   // 目次リンクと見出しIDのマッピングを作成
   const tocLinks = document.querySelectorAll(".toc a[data-heading-id]");

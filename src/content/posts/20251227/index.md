@@ -17,7 +17,7 @@ description: 'Shai-Hulud 2.0 攻撃を受けました。自身のセキュリテ
 
 ## 何が起こったのか？
 
-[Shai-hulud 2.0](https://www.trendmicro.com/ja_jp/research/25/k/shai-hulud-2-0-targets-cloud-and-developer-systems.html)と呼ばれるnpmサプライチェーン攻撃の被害を受けていました。
+[Shai-Hulud 2.0](https://www.trendmicro.com/ja_jp/research/25/k/shai-hulud-2-0-targets-cloud-and-developer-systems.html)と呼ばれるnpmサプライチェーン攻撃の被害を受けていました。
 
 実際に私が受けた被害は以下の通りです。
 
@@ -26,7 +26,7 @@ description: 'Shai-Hulud 2.0 攻撃を受けました。自身のセキュリテ
 - privateリポジトリがpublicに変更された
 - 自分のアカウントに新しいリポジトリが作成され、環境変数やAPIキーなどの機密情報が外部から閲覧可能な状態で公開された
 
-### Shai-hulud 2.0とは
+### Shai-Hulud 2.0とは
 
 一言で言うと、信頼されているnpmパッケージにマルウェアを仕込み、インストールした開発者の認証情報を盗み取る攻撃です。さらに、被害者がnpmパッケージのメンテナだった場合、連鎖的に被害が拡大していきます。
 
@@ -36,17 +36,17 @@ description: 'Shai-Hulud 2.0 攻撃を受けました。自身のセキュリテ
 
 さらに、被害者がnpmパッケージのメンテナだった場合、.npmrcから盗んだnpmトークンを使ってそのパッケージにも悪意あるバージョンが公開され、連鎖的に被害が広がります。
 
-![Shai-hulud 2.0の攻撃フロー図。1.実行：感染したnpmパッケージをインストールするとPCでマルウェアが実行される。2.認証情報アクセス：GitHubのSSHキー、NPMトークン、AWS/GCP/Azureのシークレットが収集され外部に送信される。3.サプライチェーン侵害：盗んだNPMトークンで被害者のパッケージに不正バージョンが公開され、さらに感染が連鎖する。](shai-hulud-flow.png)
+![Shai-Hulud 2.0の攻撃フロー図。1.実行：感染したnpmパッケージをインストールするとPCでマルウェアが実行される。2.認証情報アクセス：GitHubのSSHキー、NPMトークン、AWS/GCP/Azureのシークレットが収集され外部に送信される。3.サプライチェーン侵害：盗んだNPMトークンで被害者のパッケージに不正バージョンが公開され、さらに感染が連鎖する。](shai-hulud-flow.png)
 
 
 
-照際は、[Shai-hulud 2.0キャンペーンがクラウドと開発者エコシステムを標的に](https://www.trendmicro.com/ja_jp/research/25/k/shai-hulud-2-0-targets-cloud-and-developer-systems.html)をご覧ください。
+詳細は、[Shai-Hulud 2.0キャンペーンがクラウドと開発者エコシステムを標的に](https://www.trendmicro.com/ja_jp/research/25/k/shai-hulud-2-0-targets-cloud-and-developer-systems.html)をご覧ください。
 
 ### 私の感染経路
 
 私の場合、npm経由ではなくVSCode拡張機能経由での感染でした。
 
-2年ほど前の開発で導入した拡張機能「vs-asyncapi-preview」に、悪意のあるバージョンがpushされていた。Cursorを起動した際、拡張機能が自動アップデートされるタイミングで感染したようです。
+2年ほど前の開発で導入した拡張機能「vs-asyncapi-preview」に、悪意のあるバージョンがpushされていました。Cursorを起動した際、拡張機能が自動アップデートされるタイミングで感染したようです。
 
 詳細については、[AsyncAPI公式ブログのポストモーテム記事](https://www.asyncapi.com/blog/shai-hulud-postmortem)で解説されています。
 
@@ -79,7 +79,7 @@ Shai-Hulud 2.0の本来の攻撃経路であるnpm経由の場合も同様です
 
 ### 2. 1Passwordでのクレデンシャル管理
 
-`./ssh`にSSH秘密鍵を、`~/.zshrc`にPAT（Personal Access Token）を平文で保存していました。今回のようなサプライチェーン攻撃を受けると、これらの認証情報は一瞬で盗まれてしまいます。
+`~/.ssh`にSSH秘密鍵を、`~/.zshrc`にPAT（Personal Access Token）を平文で保存していました。今回のようなサプライチェーン攻撃を受けると、これらの認証情報は一瞬で盗まれてしまいます。
 
 SSHやHTTPSでの認証は「自分が使っている限り安全」というだけであり、ローカル環境に侵入されてしまえばワンパンです。この状況を解消するため、クレデンシャルを平文で保存することをやめ、1Passwordでの一元管理に移行しました。
 
@@ -90,13 +90,13 @@ Host *
   IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 ```
 
-このファイルには機密情報が一切含まれていない。実際の秘密鍵は1Password内で暗号化されて保存されており、`git push`などのSSH接続時にはTouch IDによる生体認証が必要になります。たとえマルウェアが`~/.ssh/`ディレクトリを読み取ったとしても、得られるものは何もありません。
+このファイルには機密情報が一切含まれていません。実際の秘密鍵は1Password内で暗号化されて保存されており、`git push`などのSSH接続時にはTouch IDによる生体認証が必要になります。たとえマルウェアが`~/.ssh/`ディレクトリを読み取ったとしても、得られるものは何もありません。
 
 今後はあらゆる認証情報も順次1Passwordへ移行していく予定です。
 
 ### 3. pnpmの設定見直し
 
-私の感染経路は拡張機能起因でしたが、npm周りのセキュリティ管理もずさんでした。
+私の感染経路は拡張機能起因でしたが、npm周りのセキュリティ管理も杜撰でした。
 
 npmパッケージの`preinstall`や`postinstall`スクリプトは、パッケージが安全性の評価を受ける前に、開発者の全権限でインターネット上の任意のコードを実行します。悪意あるバージョンが公開されると、`npm install`を実行しただけで感染してしまいます。
 
@@ -120,7 +120,7 @@ trustPolicy: no-downgrade
 blockExoticSubdeps: true
 ```
 
-詳細は[pnpmのサプライチェーンセキュリティに関するドキュメント](https://pnpm.io/supply-chain-security)および[pnpm公式ブログの解説記事](https://pnpm.io/blog/2025/12/05/newsroom-npm-supply-chain-security)を参照のこと。
+詳細は[pnpmのサプライチェーンセキュリティに関するドキュメント](https://pnpm.io/supply-chain-security)および[pnpm公式ブログの解説記事](https://pnpm.io/blog/2025/12/05/newsroom-npm-supply-chain-security)をご参照ください。
 
 #### 3.1. ライフサイクルスクリプト管理
 
@@ -153,7 +153,7 @@ npmはパッケージの公開方法に応じて3つの信頼レベルを区別�
 ## まとめ
 
 
-npmサプライチェーン攻撃の存在は知っていたが、自分には関係ないと思い込み、何の対策も講じていませんでした。その結果、攻撃を受けてから慌てて対応することになり、周囲にも迷惑をかけてしまいました。
+npmサプライチェーン攻撃の存在は知っていましたが、自分には関係ないと思い込み、何の対策も講じていませんでした。その結果、攻撃を受けてから慌てて対応することになり、周囲にも迷惑をかけてしまいました。
 
 今回の攻撃を受けて、以下の3つの対策を実施しました。
 
@@ -162,4 +162,4 @@ npmサプライチェーン攻撃の存在は知っていたが、自分には�
 3. **pnpmのセキュリティ設定**: pnpmの設定を活用し、サプライチェーン攻撃のリスクを低減した
 
 
-対策を行うことで、なんとなく聞いたことがあった知識を自分の経験にすることができました。今後はメリットのあるものをどんどん活用していき、多角的な知識をしっかりつけるようにしたいと思いました。
+対策を行うことで、なんとなく聞いたことがあった知識を自分の経験として身につけることができました。今後も積極的に新しい技術や対策を取り入れ、幅広い知識をしっかり身につけていきたいと思います。

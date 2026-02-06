@@ -1,0 +1,139 @@
+---
+interface Props {
+  headings: { depth: number; slug: string; text: string }[];
+}
+
+const { headings } = Astro.props;
+---
+
+{
+  headings.length > 0 && (
+    <nav class="toc" aria-labelledby="toc-title">
+      <h2 id="toc-title" class="toc-title">
+        目次
+      </h2>
+      <ul class="toc-list">
+        {headings.map((heading) => (
+          <li class={`toc-item toc-depth-${heading.depth}`}>
+            <a href={`#${heading.slug}`} data-heading-id={heading.slug}>
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+<style>
+  /* 目次スタイル */
+  .toc {
+    grid-area: toc;
+    padding: 1.5rem;
+    background-color: var(--color-white);
+    border-radius: 0.5rem;
+
+    /* PC: 右サイドバー固定 */
+    @media screen and (min-width: 1001px) {
+      position: sticky;
+      top: 2rem;
+      max-height: calc(100vh - 4rem);
+      overflow-y: auto;
+    }
+
+    .toc-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .toc-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      list-style: none;
+      padding: 0;
+    }
+
+    .toc-item {
+      a {
+        display: inline-block;
+        color: var(--color-link);
+        text-decoration: none;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        transition: background-color 0.2s;
+        line-height: 1.5;
+        text-decoration: underline;
+
+        &.active {
+          font-weight: 700;
+        }
+      }
+    }
+
+    /* 階層インデント */
+    .toc-depth-2 a {
+      margin-left: 0.5rem;
+    }
+
+    .toc-depth-3 a {
+      margin-left: 1.5rem;
+    }
+
+    .toc-depth-4 a {
+      margin-left: 2.5rem;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // 目次リンクと見出しIDのマッピングを作成
+  const tocLinks = document.querySelectorAll(".toc a[data-heading-id]");
+  const headingIds = Array.from(tocLinks).map(
+    (link) => link.getAttribute("data-heading-id") as string,
+  );
+
+  // アクティブなリンクを更新
+  function setActiveLink(activeId: string | null) {
+    tocLinks.forEach((link) => {
+      const id = link.getAttribute("data-heading-id");
+      link.classList.toggle("active", id === activeId);
+    });
+  }
+
+  // 目次リンククリック時にアクティブ状態を即座に更新
+  tocLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      const id = link.getAttribute("data-heading-id");
+      setActiveLink(id);
+    });
+  });
+
+  // 各見出しにScrollTriggerを設定
+  headingIds.forEach((id, index) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    // 次の見出しまでをトリガー範囲とする
+    const nextId = headingIds[index + 1];
+    const nextEl = nextId ? document.getElementById(nextId) : null;
+
+    ScrollTrigger.create({
+      trigger: el,
+      start: "top top",
+      end: nextEl
+        ? `top+=${nextEl.offsetTop - el.offsetTop} top`
+        : "bottom top",
+      onToggle: (self) => {
+        if (self.isActive) setActiveLink(id);
+      },
+    });
+  });
+</script>
+

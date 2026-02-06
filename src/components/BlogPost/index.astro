@@ -1,0 +1,92 @@
+---
+import type { CollectionEntry } from "astro:content";
+import TiltImage from "./TiltImage.astro";
+import TableOfContents from "./TableOfContents.astro";
+import "./content.css";
+
+interface Props {
+  post: CollectionEntry<"posts">;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  Content: any;
+  headings: { depth: number; slug: string; text: string }[];
+}
+
+const { post, Content, headings } = Astro.props;
+---
+
+<div class="wrapper">
+  <div class="title-wrapper">
+    <div class="post-meta">
+      <span>{post.data.pubDate}</span>
+    </div>
+    <h1 class="title">{post.data.title}</h1>
+    <TiltImage post={post} />
+  </div>
+
+  <TableOfContents headings={headings} />
+
+  <div class="main-wrapper">
+    <Content />
+  </div>
+</div>
+
+<style>
+  .wrapper {
+    display: grid;
+    gap: 2rem;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 2rem;
+    align-items: start;
+
+    /* SP: 縦1列 (title -> toc -> content) */
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "toc"
+      "content";
+    max-width: 40rem;
+
+    /* PC: 2カラム (title が上に跨ぐ, content左 + toc右) */
+    @media screen and (min-width: 1001px) {
+      grid-template-columns: 1fr 280px;
+      grid-template-areas:
+        "title title"
+        "content toc";
+      max-width: calc(
+        44rem + 280px + 2rem
+      ); /* 44rem = 40rem + 2rem (padding) */
+    }
+
+    .title-wrapper {
+      grid-area: title;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      max-width: 40rem;
+      margin: 0 auto;
+
+      .post-meta {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .slide-badge {
+        background-color: var(--color-link);
+        color: var(--color-background);
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        font-size: 0.875rem;
+        font-weight: bold;
+      }
+
+      .title {
+        font-size: 2rem;
+        font-weight: 900;
+      }
+    }
+  }
+</style>

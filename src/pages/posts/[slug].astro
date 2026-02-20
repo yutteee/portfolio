@@ -28,7 +28,7 @@ import { Header } from "../../features/Header";
 import { Footer } from "../../features/Footer";
 import BlogPost from "../../components/BlogPost/index.astro";
 import SlidePost from "../../components/SlidePost.astro";
-import { Icon } from "astro-icon/components";
+import { Breadcrumb } from "../../ui/Breadcrumb";
 ---
 
 <!doctype html>
@@ -65,13 +65,13 @@ import { Icon } from "astro-icon/components";
   <body>
     <Header currentPage="記事" client:load />
     <main class="container">
-      <div class="breadcrumbs">
-        <a href="/">トップ</a>
-        <Icon name="weui:arrow-outlined" />
-        <a href="/posts">記事</a>
-        <Icon name="weui:arrow-outlined" />
-        <div>ポスト</div>
-      </div>
+      <Breadcrumb
+        items={[
+          { label: "トップ", href: "/" },
+          { label: "記事", href: "/posts" },
+          { label: post.data.title },
+        ]}
+      />
 
       {
         isSlide ? (
@@ -89,26 +89,6 @@ import { Icon } from "astro-icon/components";
         max-width: calc(70rem + 2rem);
         margin: 0 auto;
         padding: 96px 16px;
-      }
-      .breadcrumbs {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 1rem;
-        background-color: var(--color-white);
-        height: fit-content;
-        width: fit-content;
-        border-radius: 9999px;
-
-        @media screen and (max-width: 1000px) {
-          width: 100%;
-        }
-
-        a {
-          color: var(--color-link);
-          text-decoration: underline;
-        }
       }
     </style>
   </body>

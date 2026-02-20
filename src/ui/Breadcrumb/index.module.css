@@ -1,0 +1,32 @@
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-white);
+  height: fit-content;
+  width: fit-content;
+  border-radius: 9999px;
+  list-style: none;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+@media screen and (max-width: 1000px) {
+  .breadcrumbs {
+    width: 100%;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.item a {
+  color: var(--color-link);
+  text-decoration: underline;
+}

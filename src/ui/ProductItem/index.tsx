@@ -6,16 +6,15 @@ export type ProductItemProps = {
   index: number;
   title: string;
   description: string;
-  // TODO: slugではなくhrefを受け取るよう変更し、URL構築を親側に委譲する
-  slug: string;
+  href: string;
   alt: string;
 };
 
-export const ProductItem: React.FC<ProductItemProps> = ({ image, index, title, description, slug, alt }) => {
+export const ProductItem: React.FC<ProductItemProps> = ({ image, index, title, description, href, alt }) => {
   return (
     <a
       className={styles.product}
-      href={`/products/${slug}`}
+      href={href}
       aria-label={title}
     >
       <div className={styles["index-parent"]}>

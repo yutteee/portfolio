@@ -21,7 +21,7 @@ const productsCollection = await getCollection("products");
               image={product.data.image.url}
               title={product.data.title}
               description={product.data.description}
-              slug={product.slug}
+              href={`/products/${product.slug}`}
               alt={product.data.image.alt}
             />
           </li>

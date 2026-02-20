@@ -7,10 +7,13 @@ type UseThemeModeProps = {
 };
 
 export const useThemeMode = ({ darkBtnRef, lightBtnRef }: UseThemeModeProps) => {
-  // 初期状態: DOMの現在のクラスを読み取る（SSR時はfalse）
+  // 初期状態: localStorageまたはOSの設定を読み取る（SSR時はfalse）
   const [isDark, setIsDark] = useState(() => {
     if (typeof document !== "undefined") {
-      return document.documentElement.classList.contains("dark");
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") return true;
+      if (savedTheme === "light") return false;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
     }
     return false;
   });

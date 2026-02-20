@@ -2,9 +2,11 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "プロダクト";
 const pageDescription = "中村優作が開発したプロダクトの一覧です。";
-import { products } from "../data/products";
+import { getCollection } from "astro:content";
 import { ProductItem } from "../ui/ProductItem";
 import { PageTitle } from "../ui/PageTitle";
+
+const productsCollection = await getCollection("products");
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -12,15 +14,15 @@ import { PageTitle } from "../ui/PageTitle";
     <PageTitle title="プロダクト" />
     <ul class="products">
       {
-        products.map((product, index) => (
+        productsCollection.map((product, index) => (
           <li>
             <ProductItem
               index={index + 1}
-              image={product.image}
-              title={product.title}
-              description={product.description}
-              url={product.url ?? ""}
-              alt={product.alt}
+              image={product.data.image.url}
+              title={product.data.title}
+              description={product.data.description}
+              href={`/products/${product.slug}`}
+              alt={product.data.image.alt}
             />
           </li>
         ))

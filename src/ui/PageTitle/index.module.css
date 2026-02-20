@@ -19,6 +19,10 @@
     align-items: flex-start;
   }
 }
+.breadcrumbWrapper {
+  position: relative;
+  z-index: 1;
+}
 .title {
   font-size: 96px;
   font-weight: 700;

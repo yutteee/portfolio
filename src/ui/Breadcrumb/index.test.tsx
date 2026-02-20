@@ -5,17 +5,18 @@ import { Breadcrumb } from ".";
 
 describe("Breadcrumb", () => {
   it("nav要素にaria-labelが設定されている", () => {
-    render(<Breadcrumb items={[{ label: "トップ", href: "/" }]} />);
+    render(<Breadcrumb items={[{ label: "トップ", href: "/" }]} currentLabel="現在のページ" />);
     expect(screen.getByRole("navigation", { name: "パンくずリスト" })).toBeInTheDocument();
   });
 
-  it("hrefがあるアイテムはリンクとして表示される", () => {
+  it("itemsのリンクが正しく表示される", () => {
     render(
       <Breadcrumb
         items={[
           { label: "トップ", href: "/" },
           { label: "記事", href: "/posts" },
         ]}
+        currentLabel="記事タイトル"
       />,
     );
     const topLink = screen.getByRole("link", { name: "トップ" });
@@ -24,13 +25,11 @@ describe("Breadcrumb", () => {
     expect(postsLink).toHaveAttribute("href", "/posts");
   });
 
-  it("hrefがないアイテムは現在ページとして表示される", () => {
+  it("currentLabelは現在のページとして表示され、リンクではない", () => {
     render(
       <Breadcrumb
-        items={[
-          { label: "トップ", href: "/" },
-          { label: "現在のページ" },
-        ]}
+        items={[{ label: "トップ", href: "/" }]}
+        currentLabel="現在のページ"
       />,
     );
     expect(screen.queryByRole("link", { name: "現在のページ" })).toBeNull();
@@ -38,18 +37,8 @@ describe("Breadcrumb", () => {
     expect(current).toHaveAttribute("aria-current", "page");
   });
 
-  it("複数階層のパンくずが正しく表示される", () => {
-    render(
-      <Breadcrumb
-        items={[
-          { label: "トップ", href: "/" },
-          { label: "記事", href: "/posts" },
-          { label: "記事タイトル" },
-        ]}
-      />,
-    );
-    expect(screen.getByRole("link", { name: "トップ" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "記事" })).toBeInTheDocument();
-    expect(screen.getByText("記事タイトル")).toBeInTheDocument();
+  it("ol要素にrole=listが設定されている", () => {
+    render(<Breadcrumb items={[{ label: "トップ", href: "/" }]} currentLabel="現在のページ" />);
+    expect(screen.getByRole("list")).toBeInTheDocument();
   });
 });

@@ -2,29 +2,29 @@ import type React from "react";
 import styles from "./index.module.css";
 import { FiChevronRight } from "react-icons/fi";
 
-export type BreadcrumbItem = {
+export type BreadcrumbAncestor = {
   label: string;
-  href?: string;
+  href: string;
 };
 
 export type BreadcrumbProps = {
-  items: BreadcrumbItem[];
+  items: BreadcrumbAncestor[];
+  currentLabel: string;
 };
 
-export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
+export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, currentLabel }) => {
   return (
     <nav aria-label="パンくずリスト">
-      <ol className={styles.breadcrumbs}>
-        {items.map((item, index) => (
-          <li key={item.label} className={styles.item}>
-            {index > 0 && <FiChevronRight aria-hidden="true" />}
-            {item.href ? (
-              <a href={item.href}>{item.label}</a>
-            ) : (
-              <span aria-current="page">{item.label}</span>
-            )}
+      <ol className={styles.breadcrumbs} role="list">
+        {items.map((item) => (
+          <li key={item.href} className={styles.item}>
+            <a href={item.href}>{item.label}</a>
+            <FiChevronRight aria-hidden="true" />
           </li>
         ))}
+        <li className={styles.item}>
+          <span aria-current="page">{currentLabel}</span>
+        </li>
       </ol>
     </nav>
   );

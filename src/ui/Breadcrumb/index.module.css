@@ -10,8 +10,6 @@
   border-radius: 9999px;
   list-style: none;
   margin: 0;
-  position: relative;
-  z-index: 1;
 }
 
 @media screen and (max-width: 1000px) {

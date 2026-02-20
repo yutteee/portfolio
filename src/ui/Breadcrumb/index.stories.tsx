@@ -9,7 +9,7 @@ const meta: Meta<typeof Breadcrumb> = {
     docs: {
       description: {
         component:
-          "パンくずリストコンポーネント。itemsにラベルとhrefを指定します。hrefを省略したアイテムは現在のページとして表示されます。",
+          "パンくずリストコンポーネント。itemsに祖先ページのラベルとhrefを指定し、currentLabelに現在のページ名を指定します。",
       },
     },
   },
@@ -21,7 +21,8 @@ type Story = StoryObj<typeof Breadcrumb>;
 export const TwoLevels: Story = {
   name: "2階層（トップ > ページ）",
   args: {
-    items: [{ label: "トップ", href: "/" }, { label: "記事" }],
+    items: [{ label: "トップ", href: "/" }],
+    currentLabel: "記事",
   },
 };
 
@@ -31,7 +32,7 @@ export const ThreeLevels: Story = {
     items: [
       { label: "トップ", href: "/" },
       { label: "記事", href: "/posts" },
-      { label: "記事タイトル" },
     ],
+    currentLabel: "記事タイトル",
   },
 };

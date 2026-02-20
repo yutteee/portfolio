@@ -10,7 +10,9 @@ export const PageTitle: React.FC<PageTitleProps> = ({ title }) => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        <Breadcrumb items={[{ label: "トップ", href: "/" }, { label: title }]} />
+        <div className={styles.breadcrumbWrapper}>
+          <Breadcrumb items={[{ label: "トップ", href: "/" }]} currentLabel={title} />
+        </div>
         <h1 className={styles.title}>{title}</h1>
       </div>
       <div className={styles.line} />

@@ -6,17 +6,15 @@ export type ProductItemProps = {
   index: number;
   title: string;
   description: string;
-  url: string;
+  slug: string;
   alt: string;
 };
 
-export const ProductItem: React.FC<ProductItemProps> = ({ image, index, title, description, url, alt }) => {
+export const ProductItem: React.FC<ProductItemProps> = ({ image, index, title, description, slug, alt }) => {
   return (
     <a
       className={styles.product}
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
+      href={`/products/${slug}`}
       aria-label={title}
     >
       <div className={styles["index-parent"]}>
@@ -31,4 +29,4 @@ export const ProductItem: React.FC<ProductItemProps> = ({ image, index, title, d
       </div>
     </a>
   );
-}; 
+};

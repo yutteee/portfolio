@@ -1,0 +1,243 @@
+---
+import { SEO } from "astro-seo";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const products = await getCollection("products");
+  return products.map((product: CollectionEntry<"products">) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+const { Content } = await product.render();
+
+import "destyle.css";
+import "../../styles/global.css";
+import { Header } from "../../features/Header";
+import { Footer } from "../../features/Footer";
+import { Icon } from "astro-icon/components";
+import "../../components/BlogPost/content.css";
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <link rel="icon" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <SEO
+      charset="UTF-8"
+      title={`${product.data.title} | yutteee-portfolio`}
+      description={product.data.description}
+      openGraph={{
+        basic: {
+          title: product.data.title,
+          type: "article",
+          image: `${import.meta.env.PUBLIC_SITE_URL}${product.data.image.url}`,
+        },
+        image: {
+          alt: product.data.image.alt,
+        },
+      }}
+    />
+  </head>
+  <body>
+    <Header currentPage="プロダクト" client:load />
+    <main class="container">
+      <div class="breadcrumbs">
+        <a href="/">トップ</a>
+        <Icon name="weui:arrow-outlined" />
+        <a href="/products">プロダクト</a>
+        <Icon name="weui:arrow-outlined" />
+        <div>{product.data.title}</div>
+      </div>
+
+      <div class="wrapper">
+        <div class="title-wrapper">
+          <p class="period">{product.data.period}</p>
+          <h1 class="title">{product.data.title}</h1>
+          <p class="description">{product.data.description}</p>
+
+          <div class="image-wrapper">
+            <img
+              src={product.data.image.url}
+              alt={product.data.image.alt}
+              class="image"
+              width={800}
+              height={500}
+            />
+          </div>
+
+          <div class="links">
+            {
+              product.data.url && (
+                <a
+                  href={product.data.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="link-button"
+                >
+                  <Icon name="weui:link-outlined" />
+                  サイトを見る
+                </a>
+              )
+            }
+            {
+              product.data.github && (
+                <a
+                  href={product.data.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="link-button"
+                >
+                  <Icon name="mdi:github" />
+                  GitHub
+                </a>
+              )
+            }
+          </div>
+
+          {
+            product.data.tech && product.data.tech.length > 0 && (
+              <div class="tech-stack">
+                {product.data.tech.map((t: string) => (
+                  <span class="tech-badge">{t}</span>
+                ))}
+              </div>
+            )
+          }
+        </div>
+
+        <div class="main-wrapper">
+          <Content />
+        </div>
+      </div>
+    </main>
+    <Footer client:only />
+  </body>
+</html>
+
+<style>
+  .container {
+    width: 100%;
+    max-width: calc(50rem + 2rem);
+    margin: 0 auto;
+    padding: 96px 16px;
+  }
+
+  .breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-white);
+    height: fit-content;
+    width: fit-content;
+    border-radius: 9999px;
+
+    @media screen and (max-width: 1000px) {
+      width: 100%;
+    }
+
+    a {
+      color: var(--color-link);
+      text-decoration: underline;
+    }
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-top: 2rem;
+    max-width: 50rem;
+    margin: 0 auto;
+  }
+
+  .title-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .period {
+    font-size: 0.875rem;
+    color: var(--color-text);
+    opacity: 0.6;
+  }
+
+  .title {
+    font-size: 2rem;
+    font-weight: 900;
+    text-align: center;
+  }
+
+  .description {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .image-wrapper {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 8/5;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .link-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    border: 1px solid var(--color-text);
+    border-radius: 9999px;
+    text-decoration: none;
+    color: inherit;
+    font-size: 0.875rem;
+    transition: background-color 0.2s, color 0.2s;
+
+    &:hover {
+      background-color: var(--color-text);
+      color: var(--color-background);
+    }
+  }
+
+  .tech-stack {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tech-badge {
+    padding: 0.25rem 0.75rem;
+    background-color: var(--color-white);
+    border-radius: 9999px;
+    font-size: 0.8rem;
+  }
+
+  .main-wrapper {
+    background-color: var(--color-white);
+    padding: 2rem;
+    border-radius: 0.5rem;
+  }
+</style>

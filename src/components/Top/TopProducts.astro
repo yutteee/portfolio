@@ -1,7 +1,9 @@
 ---
 import { ProductItem } from "../../ui/ProductItem";
-import { products } from "../../data/products";
+import { getCollection } from "astro:content";
 import { LinkButton } from "../../ui/LinkButton";
+
+const productsCollection = await getCollection("products");
 ---
 
 <section class="container">
@@ -11,16 +13,16 @@ import { LinkButton } from "../../ui/LinkButton";
   </div>
   <div class="products">
     {
-      products
+      productsCollection
         .slice(0, 2)
         .map((product, index) => (
           <ProductItem
             index={index + 1}
-            image={product.image}
-            title={product.title}
-            description={product.description}
-            url={product.url ?? ""}
-            alt={product.alt}
+            image={product.data.image.url}
+            title={product.data.title}
+            description={product.data.description}
+            slug={product.slug}
+            alt={product.data.image.alt}
           />
         ))
     }

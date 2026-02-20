@@ -6,6 +6,7 @@ export type ProductItemProps = {
   index: number;
   title: string;
   description: string;
+  // TODO: slugではなくhrefを受け取るよう変更し、URL構築を親側に委譲する
   slug: string;
   alt: string;
 };

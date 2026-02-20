@@ -2,11 +2,16 @@ import type React from "react";
 import styles from "./index.module.css";
 import { FiChevronRight } from "react-icons/fi";
 
-export type BreadcrumbAncestor = {
+type BreadcrumbAncestor = {
   label: string;
   href: string;
 };
 
+/**
+ * パンくずリストコンポーネント。
+ * @param items - 現在ページより上位の祖先ページの配列。各要素はリンクとして表示される。
+ * @param currentLabel - 現在表示しているページの名前。リンクではなくテキストで表示される。
+ */
 export type BreadcrumbProps = {
   items: BreadcrumbAncestor[];
   currentLabel: string;

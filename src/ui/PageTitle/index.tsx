@@ -3,19 +3,22 @@ import styles from "./index.module.css";
 import { Breadcrumb } from "../Breadcrumb";
 
 export type PageTitleProps = {
-  title: string;
+	title: string;
 };
 
 export const PageTitle: React.FC<PageTitleProps> = ({ title }) => {
-  return (
-    <div className={styles.container}>
-      <div className={styles.wrapper}>
-        <div className={styles.breadcrumbWrapper}>
-          <Breadcrumb items={[{ label: "トップ", href: "/" }]} currentLabel={title} />
-        </div>
-        <h1 className={styles.title}>{title}</h1>
-      </div>
-      <div className={styles.line} />
-    </div>
-  );
+	return (
+		<div className={styles.container}>
+			<div className={styles.wrapper}>
+				<div className={styles.breadcrumbWrapper}>
+					<Breadcrumb
+						items={[{ label: "トップ", href: "/" }]}
+						currentLabel={title}
+					/>
+				</div>
+				<h1 className={styles.title}>{title}</h1>
+			</div>
+			<div className={styles.line} />
+		</div>
+	);
 };

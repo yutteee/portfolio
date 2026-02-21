@@ -17,7 +17,7 @@ export const products: Product[] = [
 		detail: "折り紙の折り方を3Dで見れるwebアプリ",
 		image: "/oricube.png",
 		url: "https://ori-cube.com/",
-		alt: "OriCubeのロゴ。複数の色の折り紙で作られた立方体とOriCubeという文字が表示されている。周りにはさまざまな種類の折り紙が散りばめられている。"
+		alt: "OriCubeのロゴ。複数の色の折り紙で作られた立方体とOriCubeという文字が表示されている。周りにはさまざまな種類の折り紙が散りばめられている。",
 	},
 	{
 		title: "フェアナビ",
@@ -26,7 +26,7 @@ export const products: Product[] = [
 		detail: "誠実なアクセシビリティオーバーレイ",
 		image: "/fairnavi.png",
 		url: "https://fairnavi.com/",
-		alt: "fair-naviのトップ画面。フェアナビのLPサイト上で、フェアナビのアクセシビリティメニューが開かれている。"
+		alt: "fair-naviのトップ画面。フェアナビのLPサイト上で、フェアナビのアクセシビリティメニューが開かれている。",
 	},
 	{
 		title: "ai-tango",
@@ -35,7 +35,7 @@ export const products: Product[] = [
 		detail: "例文が自動で生成される単語帳アプリ",
 		image: "/ai-tango.png",
 		url: "https://apps.apple.com/us/app/ai-tango/id6670333761",
-		alt: "ai-tangoのモックアップ。左右に2台のスマートフォンがあり、ai-tangoの画面が表示されている。左のスマートフォンには英単語とその意味、例文が表示された詳細画面が表示されており、右のスマートフォンには単語一覧画面が表示されている。",						
+		alt: "ai-tangoのモックアップ。左右に2台のスマートフォンがあり、ai-tangoの画面が表示されている。左のスマートフォンには英単語とその意味、例文が表示された詳細画面が表示されており、右のスマートフォンには単語一覧画面が表示されている。",
 	},
 	{
 		title: "jack-web",
@@ -45,7 +45,7 @@ export const products: Product[] = [
 		image: "/jackweb.png",
 		url: "https://www.jackapp.jp/",
 		github: "",
-		alt: "jack-webのトップ画面。「やりたいことを、やれるようになって、やる」というキャッチフレーズが大きく表示されている。文字の周りには吹き出しや電球、PCなどのアイコンによる装飾があり、jackという文字が右下に表示されている。"
+		alt: "jack-webのトップ画面。「やりたいことを、やれるようになって、やる」というキャッチフレーズが大きく表示されている。文字の周りには吹き出しや電球、PCなどのアイコンによる装飾があり、jackという文字が右下に表示されている。",
 	},
 	{
 		title: "yutteee-portfolio",
@@ -55,7 +55,7 @@ export const products: Product[] = [
 		image: "/portfolio.png",
 		url: "https://yutteee.pages.dev/",
 		github: "",
-		alt: "yutteee-portfolioのトップ画面。中央にPCのイラストがあり、それに重なって「Hi!I'm Yutteee!」という文字が表示されている。"
+		alt: "yutteee-portfolioのトップ画面。中央にPCのイラストがあり、それに重なって「Hi!I'm Yutteee!」という文字が表示されている。",
 	},
 	{
 		title: "CODE_DUEL",
@@ -65,6 +65,6 @@ export const products: Product[] = [
 		image: "/CODE_DUEL.png",
 		url: "https://code-duel.onrender.com/",
 		github: "https://github.com/CODEDUEL2022/CODEDUEL",
-		alt: "CODE_DUELのゲーム画面。手札にKotlin, Sass, Rust, HTMLがあり、場にElixir, phoenixが出されている。"
+		alt: "CODE_DUELのゲーム画面。手札にKotlin, Sass, Rust, HTMLがあり、場にElixir, phoenixが出されている。",
 	},
 ];

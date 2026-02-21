@@ -3,17 +3,17 @@ import { SEO } from "astro-seo";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 interface Props {
-  post: CollectionEntry<"posts">;
+	post: CollectionEntry<"posts">;
 }
 
 export async function getStaticPaths() {
-  const posts = await getCollection("posts");
-  return posts.map((post: CollectionEntry<"posts">) => ({
-    params: { slug: post.slug },
-    props: {
-      post,
-    },
-  }));
+	const posts = await getCollection("posts");
+	return posts.map((post: CollectionEntry<"posts">) => ({
+		params: { slug: post.slug },
+		props: {
+			post,
+		},
+	}));
 }
 
 const { post } = Astro.props;

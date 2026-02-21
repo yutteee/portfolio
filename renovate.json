@@ -1,0 +1,66 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+
+  "timezone": "Asia/Tokyo",
+  "schedule": ["before 9am on Monday"],
+
+  // pnpm-workspace.yaml の minimumReleaseAge: 10080min (7日) に合わせる
+  "stabilityDays": 7,
+
+  "labels": ["dependencies"],
+
+  // pnpm-lock.yaml の月次メンテナンス（間接依存の更新）
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 9am on the first day of the month"]
+  },
+
+  "packageRules": [
+    {
+      "description": "Astro 本体・公式インテグレーションをまとめて更新",
+      "matchPackagePatterns": ["^astro$", "^@astrojs/"],
+      "groupName": "astro"
+    },
+    {
+      "description": "Storybook・Chromatic 関連をまとめて更新",
+      "matchPackagePatterns": [
+        "^storybook$",
+        "^@storybook/",
+        "^@chromatic-com/"
+      ],
+      "groupName": "storybook"
+    },
+    {
+      "description": "Vitest・Testing Library 関連をまとめて更新",
+      "matchPackagePatterns": [
+        "^vitest$",
+        "^@vitest/",
+        "^@testing-library/",
+        "^playwright$"
+      ],
+      "groupName": "testing"
+    },
+    {
+      "description": "React・型定義をまとめて更新",
+      "matchPackageNames": [
+        "react",
+        "react-dom",
+        "@types/react",
+        "@types/react-dom"
+      ],
+      "groupName": "react"
+    },
+    {
+      "description": "パッチ更新は CI が通れば自動マージ",
+      "matchUpdateTypes": ["patch"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "description": "メジャー更新は必ず手動レビュー",
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    }
+  ]
+}

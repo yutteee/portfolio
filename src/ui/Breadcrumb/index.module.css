@@ -12,6 +12,7 @@
   margin: 0;
 }
 
+/* TODO: コンポーネントが画面を気にしているのが気持ち悪いため見直す。 */
 @media screen and (max-width: 1000px) {
   .breadcrumbs {
     width: 100%;

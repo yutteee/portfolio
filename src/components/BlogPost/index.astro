@@ -5,10 +5,10 @@ import TableOfContents from "./TableOfContents.astro";
 import "./content.css";
 
 interface Props {
-	post: CollectionEntry<"posts">;
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	Content: any;
-	headings: { depth: number; slug: string; text: string }[];
+  post: CollectionEntry<"posts">;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  Content: any;
+  headings: { depth: number; slug: string; text: string }[];
 }
 
 const { post, Content, headings } = Astro.props;

@@ -4,7 +4,7 @@ import { Marp } from "@marp-team/marp-core";
 import { marpThemes } from "../marp-themes";
 
 interface Props {
-	post: CollectionEntry<"posts">;
+  post: CollectionEntry<"posts">;
 }
 const { post } = Astro.props;
 
@@ -14,16 +14,16 @@ let slideCss = "";
 // 画像パスを絶対パスに変換
 // 例: ![画像の説明](image.png) -> ![画像の説明](/posts/20250812/image.png)
 const processedBody = post.body.replace(
-	/!\[([^\]]*)\]\(([^)]+)\)/g,
-	`![$1](/posts/${post.slug}/$2)`,
+  /!\[([^\]]*)\]\(([^)]+)\)/g,
+  `![$1](/posts/${post.slug}/$2)`,
 );
 
 const marp = new Marp();
 // カスタムテーマを設定
 const theme = post.data.theme || "default";
 if (theme === "custom-theme") {
-	// カスタムテーマのCSSを直接適用
-	slideCss = marpThemes["custom-theme"];
+  // カスタムテーマのCSSを直接適用
+  slideCss = marpThemes["custom-theme"];
 }
 const result = marp.render(processedBody);
 slideHtml = result.html;

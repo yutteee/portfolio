@@ -8,12 +8,15 @@
       "extensions": [
         "astro-build.astro-vscode",
         "biomejs.biome",
-        "unifiedjs.vscode-mdx",
-        "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode"
+        "unifiedjs.vscode-mdx"
       ],
       "settings": {
-        "terminal.integrated.defaultProfile.linux": "zsh"
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "editor.defaultFormatter": "biomejs.biome",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "quickfix.biome": "explicit"
+        }
       }
     }
   },

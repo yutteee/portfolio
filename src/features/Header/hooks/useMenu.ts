@@ -4,7 +4,7 @@ import type { RefObject } from "react";
 type UseMenuProps = {
   closeBtnRef: RefObject<HTMLButtonElement>;
   hamburgerRef: RefObject<HTMLButtonElement>;
-}
+};
 
 export function useMenu({ closeBtnRef, hamburgerRef }: UseMenuProps) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -26,4 +26,4 @@ export function useMenu({ closeBtnRef, hamburgerRef }: UseMenuProps) {
   }, [menuOpen, closeBtnRef, hamburgerRef]);
 
   return { menuOpen, openMenu, closeMenu };
-} 
+}

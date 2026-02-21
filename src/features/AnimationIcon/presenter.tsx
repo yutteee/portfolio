@@ -14,4 +14,4 @@ export const AnimationIconPresenter: React.FC = () => (
       handleClick={() => {}}
     />
   </div>
-); 
+);

@@ -17,4 +17,4 @@ export default meta;
 
 type Story = StoryObj<typeof AnimationIconPresenter>;
 
-export const Default: Story = {}; 
+export const Default: Story = {};

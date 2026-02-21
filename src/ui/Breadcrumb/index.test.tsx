@@ -5,8 +5,15 @@ import { Breadcrumb } from ".";
 
 describe("Breadcrumb", () => {
   it("nav要素にaria-labelが設定されている", () => {
-    render(<Breadcrumb items={[{ label: "トップ", href: "/" }]} currentLabel="現在のページ" />);
-    expect(screen.getByRole("navigation", { name: "パンくずリスト" })).toBeInTheDocument();
+    render(
+      <Breadcrumb
+        items={[{ label: "トップ", href: "/" }]}
+        currentLabel="現在のページ"
+      />,
+    );
+    expect(
+      screen.getByRole("navigation", { name: "パンくずリスト" }),
+    ).toBeInTheDocument();
   });
 
   it("itemsのリンクが正しく表示される", () => {
@@ -38,7 +45,12 @@ describe("Breadcrumb", () => {
   });
 
   it("ol要素にrole=listが設定されている", () => {
-    render(<Breadcrumb items={[{ label: "トップ", href: "/" }]} currentLabel="現在のページ" />);
+    render(
+      <Breadcrumb
+        items={[{ label: "トップ", href: "/" }]}
+        currentLabel="現在のページ"
+      />,
+    );
     expect(screen.getByRole("list")).toBeInTheDocument();
   });
 });

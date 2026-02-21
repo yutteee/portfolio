@@ -3,7 +3,7 @@ import { FooterPresenter } from "./presenter";
 
 export const Footer: React.FC = () => {
   const [isDark, setIsDark] = useState(() =>
-    document.documentElement.classList.contains("dark")
+    document.documentElement.classList.contains("dark"),
   );
 
   useEffect(() => {
@@ -20,4 +20,4 @@ export const Footer: React.FC = () => {
   }, []);
 
   return <FooterPresenter isDark={isDark} />;
-}; 
+};

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import '@testing-library/jest-dom';
-import { describe, it, expect } from 'vitest';
+import "@testing-library/jest-dom";
+import { describe, it, expect } from "vitest";
 import { LinkButton } from ".";
 
 describe("LinkButton", () => {
@@ -21,4 +21,4 @@ describe("LinkButton", () => {
     render(<LinkButton {...baseProps} />);
     expect(screen.getByText(baseProps.text)).toBeInTheDocument();
   });
-}); 
+});

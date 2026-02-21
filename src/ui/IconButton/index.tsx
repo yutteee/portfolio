@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./index.module.css";
-import * as FiIcons from 'react-icons/fi';
+import * as FiIcons from "react-icons/fi";
 
 export type IconButtonProps = {
   label: string;
@@ -13,7 +13,18 @@ export type IconButtonProps = {
 };
 
 export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ label, icon, id, handleClick, style, "data-testid": dataTestId, className }, ref) => {
+  (
+    {
+      label,
+      icon,
+      id,
+      handleClick,
+      style,
+      "data-testid": dataTestId,
+      className,
+    },
+    ref,
+  ) => {
     const IconComponent = FiIcons[icon];
     return (
       <button
@@ -29,6 +40,6 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
         <IconComponent size={36} />
       </button>
     );
-  }
+  },
 );
-IconButton.displayName = "IconButton"; 
+IconButton.displayName = "IconButton";

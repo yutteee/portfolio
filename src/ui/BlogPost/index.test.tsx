@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import '@testing-library/jest-dom';
-import { describe, it, expect } from 'vitest';
+import "@testing-library/jest-dom";
+import { describe, it, expect } from "vitest";
 import { BlogPost } from "./index";
 
 describe("BlogPost", () => {
@@ -48,4 +48,4 @@ describe("BlogPost", () => {
     const img = screen.getByAltText(baseProps.alt);
     expect(img).toBeInTheDocument();
   });
-}); 
+});

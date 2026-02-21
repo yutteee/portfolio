@@ -6,7 +6,10 @@ type UseThemeModeProps = {
   lightBtnRef: RefObject<HTMLButtonElement>;
 };
 
-export const useThemeMode = ({ darkBtnRef, lightBtnRef }: UseThemeModeProps) => {
+export const useThemeMode = ({
+  darkBtnRef,
+  lightBtnRef,
+}: UseThemeModeProps) => {
   // 初期状態: DOMの現在のクラスを読み取る（SSR時はfalse）
   const [isDark, setIsDark] = useState(() => {
     if (typeof document !== "undefined") {
@@ -40,4 +43,4 @@ export const useThemeMode = ({ darkBtnRef, lightBtnRef }: UseThemeModeProps) => 
   };
 
   return { isDark, toggleTheme };
-}; 
+};

@@ -1,21 +1,42 @@
 import { render, screen } from "@testing-library/react";
-import '@testing-library/jest-dom';
-import { describe, it, expect } from 'vitest';
+import "@testing-library/jest-dom";
+import { describe, it, expect } from "vitest";
 import { IconButton } from ".";
 
 describe("IconButton", () => {
   it("icon名でFiMenuが表示される", () => {
-    render(<IconButton label="メニュー" icon="FiMenu" id="icon-btn-menu" handleClick={() => {}} />);
+    render(
+      <IconButton
+        label="メニュー"
+        icon="FiMenu"
+        id="icon-btn-menu"
+        handleClick={() => {}}
+      />,
+    );
     expect(screen.getByLabelText("メニュー")).toBeInTheDocument();
   });
 
   it("icon名でFiArrowRightが表示される", () => {
-    render(<IconButton label="次へ" icon="FiArrowRight" id="icon-btn-arrow" handleClick={() => {}} />);
+    render(
+      <IconButton
+        label="次へ"
+        icon="FiArrowRight"
+        id="icon-btn-arrow"
+        handleClick={() => {}}
+      />,
+    );
     expect(screen.getByLabelText("次へ")).toBeInTheDocument();
   });
 
   it("icon名でFiGithubが表示される", () => {
-    render(<IconButton label="GitHub" icon="FiGithub" id="icon-btn-github" handleClick={() => {}} />);
+    render(
+      <IconButton
+        label="GitHub"
+        icon="FiGithub"
+        id="icon-btn-github"
+        handleClick={() => {}}
+      />,
+    );
     expect(screen.getByLabelText("GitHub")).toBeInTheDocument();
   });
 
@@ -25,7 +46,14 @@ describe("IconButton", () => {
   });
 
   it("aria-labelが正しく設定される", () => {
-    render(<IconButton label="テストアイコン" icon="FiMenu" id="icon-btn-test" handleClick={() => {}} />);
+    render(
+      <IconButton
+        label="テストアイコン"
+        icon="FiMenu"
+        id="icon-btn-test"
+        handleClick={() => {}}
+      />,
+    );
     expect(screen.getByLabelText("テストアイコン")).toBeInTheDocument();
   });
-}); 
+});

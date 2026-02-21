@@ -1,19 +1,21 @@
 import { render, screen } from "@testing-library/react";
-import '@testing-library/jest-dom';
-import { describe, it, expect, beforeAll } from 'vitest';
+import "@testing-library/jest-dom";
+import { describe, it, expect, beforeAll } from "vitest";
 import { Footer } from ".";
 import { accounts } from "./accounts";
 
 beforeAll(() => {
-  window.matchMedia = window.matchMedia || (() => ({
-    matches: false,
-    addEventListener: () => {},
-    removeEventListener: () => {},
-    addListener: () => {},
-    removeListener: () => {},
-    onchange: null,
-    dispatchEvent: () => false,
-  }));
+  window.matchMedia =
+    window.matchMedia ||
+    (() => ({
+      matches: false,
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      addListener: () => {},
+      removeListener: () => {},
+      onchange: null,
+      dispatchEvent: () => false,
+    }));
 });
 
 describe("Footer", () => {
@@ -36,6 +38,9 @@ describe("Footer", () => {
 
   it("サイトマップリンクが表示される", () => {
     render(<Footer />);
-    expect(screen.getByText("サイトマップ")).toHaveAttribute("href", "/siteMap");
+    expect(screen.getByText("サイトマップ")).toHaveAttribute(
+      "href",
+      "/siteMap",
+    );
   });
-}); 
+});

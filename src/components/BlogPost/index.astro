@@ -1,13 +1,13 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import type { MarkdownInstance } from "astro";
 import TiltImage from "./TiltImage.astro";
 import TableOfContents from "./TableOfContents.astro";
 import "./content.css";
 
 interface Props {
   post: CollectionEntry<"posts">;
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  Content: any;
+  Content: MarkdownInstance<Record<string, unknown>>["Content"];
   headings: { depth: number; slug: string; text: string }[];
 }
 

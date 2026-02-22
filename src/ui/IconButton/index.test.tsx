@@ -2,13 +2,14 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { describe, it, expect } from "vitest";
 import { IconButton } from ".";
+import { FiMenu, FiArrowRight, FiGithub } from "react-icons/fi";
 
 describe("IconButton", () => {
-  it("icon名でFiMenuが表示される", () => {
+  it("FiMenuが表示される", () => {
     render(
       <IconButton
         label="メニュー"
-        icon="FiMenu"
+        icon={FiMenu}
         id="icon-btn-menu"
         handleClick={() => {}}
       />,
@@ -16,11 +17,11 @@ describe("IconButton", () => {
     expect(screen.getByLabelText("メニュー")).toBeInTheDocument();
   });
 
-  it("icon名でFiArrowRightが表示される", () => {
+  it("FiArrowRightが表示される", () => {
     render(
       <IconButton
         label="次へ"
-        icon="FiArrowRight"
+        icon={FiArrowRight}
         id="icon-btn-arrow"
         handleClick={() => {}}
       />,
@@ -28,11 +29,11 @@ describe("IconButton", () => {
     expect(screen.getByLabelText("次へ")).toBeInTheDocument();
   });
 
-  it("icon名でFiGithubが表示される", () => {
+  it("FiGithubが表示される", () => {
     render(
       <IconButton
         label="GitHub"
-        icon="FiGithub"
+        icon={FiGithub}
         id="icon-btn-github"
         handleClick={() => {}}
       />,
@@ -41,7 +42,7 @@ describe("IconButton", () => {
   });
 
   it("button要素のtypeがbuttonである", () => {
-    render(<IconButton label="test" icon="FiMenu" handleClick={() => {}} />);
+    render(<IconButton label="test" icon={FiMenu} handleClick={() => {}} />);
     expect(screen.getByRole("button")).toHaveAttribute("type", "button");
   });
 
@@ -49,7 +50,7 @@ describe("IconButton", () => {
     render(
       <IconButton
         label="テストアイコン"
-        icon="FiMenu"
+        icon={FiMenu}
         id="icon-btn-test"
         handleClick={() => {}}
       />,

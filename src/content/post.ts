@@ -38,7 +38,7 @@ const processLocalPosts = (posts: CollectionEntry<"posts">[]): Post[] => {
       pubDate: post.data.pubDate,
       image: post.data.image
         ? post.data.image.url
-        : `${import.meta.env.PUBLIC_SITE_URL}/ogp/${slug}.png`,
+        : `${import.meta.env.PUBLIC_SITE_URL}/ogp/${post.slug}.png`,
       alt: post.data.image
         ? post.data.image.alt
         : `サムネイル画像。白いPCのイラストに、「${post.data.title}」の文字が重なっている。`,

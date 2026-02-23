@@ -1,86 +1,86 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code when working with this repository.
+このファイルはリポジトリで作業する際の Claude Code へのガイダンスを提供します。
 
-## Project Overview
+## プロジェクト概要
 
-Portfolio site for yutteee, built with Astro + React. Deployed at https://yutteee.pages.dev
+yutteee のポートフォリオサイトです。Astro + React で構築されており、https://yutteee.pages.dev にデプロイされています。
 
-## Tech Stack
+## 技術スタック
 
-- **Framework**: Astro 4 with MDX, React integration, sitemap, and icon support
-- **Styling**: Custom CSS with `destyle.css` and `the-new-css-reset`
-- **Animations**: GSAP
-- **Icons**: `astro-icon` with Iconify icon sets
-- **OGP Images**: Satori + `@resvg/resvg-js` + Sharp
-- **Components**: React (interactive islands)
-- **Package Manager**: pnpm (required — do not use npm or yarn)
-- **Linter/Formatter**: Biome
-- **Testing**: Vitest (unit) + Storybook (visual/component)
-- **Component Development**: Storybook + Chromatic
+- **フレームワーク**: Astro 4（MDX・React・サイトマップ・アイコン統合）
+- **スタイリング**: カスタム CSS（`destyle.css` / `the-new-css-reset`）
+- **アニメーション**: GSAP
+- **アイコン**: `astro-icon`（Iconify アイコンセット）
+- **OGP 画像生成**: Satori + `@resvg/resvg-js` + Sharp
+- **コンポーネント**: React（インタラクティブアイランド）
+- **パッケージマネージャー**: pnpm（必須 — npm や yarn は使用しないこと）
+- **リンター / フォーマッター**: Biome
+- **テスト**: Vitest（ユニット） + Storybook（ビジュアル / コンポーネント）
+- **コンポーネント開発**: Storybook + Chromatic
 
-## Common Commands
+## よく使うコマンド
 
 ```bash
-# Development server (also copies images)
+# 開発サーバー起動（画像コピーも実行）
 pnpm dev
 
-# Production build (type-check + build)
+# 本番ビルド（型チェック + ビルド）
 pnpm build
 
-# Lint and format check
+# リント・フォーマットチェック
 pnpm check
 
-# Run all tests (unit + storybook)
+# 全テスト実行（ユニット + Storybook）
 pnpm test
 
-# Run unit tests only
+# ユニットテストのみ実行
 pnpm test:unit
 
-# Run storybook visual tests only
+# Storybook ビジュアルテストのみ実行
 pnpm test:storybook
 
-# Storybook dev server
+# Storybook 開発サーバー起動
 pnpm storybook
 
-# Generate component boilerplate via plop
+# plop でコンポーネントの雛形生成
 pnpm plop
 ```
 
-## Source Structure
+## ソースディレクトリ構成
 
 ```
 src/
-  components/    # Shared Astro components
-  content/       # Content collections (posts, etc.)
-  data/          # Static data (history, products, external blogs)
-  features/      # Feature-level components (Header, Footer, etc.)
-  layouts/       # Astro page layouts
-  marp-themes/   # Marp presentation themes
-  pages/         # Astro pages and API routes
-  styles/        # Global CSS
-  ui/            # Primitive UI components
-  utils/         # Utility functions
+  components/    # 共通 Astro コンポーネント
+  content/       # コンテンツコレクション（記事など）
+  data/          # 静的データ（経歴・作品・外部ブログ）
+  features/      # 機能単位のコンポーネント（Header・Footer など）
+  layouts/       # Astro ページレイアウト
+  marp-themes/   # Marp プレゼンテーションテーマ
+  pages/         # Astro ページ・API ルート
+  styles/        # グローバル CSS
+  ui/            # 基本 UI コンポーネント
+  utils/         # ユーティリティ関数
 ```
 
-## Code Style
+## コードスタイル
 
-Biome is used for linting and formatting (configured in `biome.json`):
-- 2-space indentation
-- Recommended lint rules enabled
-- Run `pnpm check` before committing
+リント・フォーマットには Biome を使用（`biome.json` で設定）：
+- インデント: スペース 2 つ
+- 推奨リントルールを有効化
+- コミット前に `pnpm check` を実行すること
 
-## Testing Notes
+## テストについて
 
-- Unit tests are in `src/**/*.test.tsx` and run with jsdom environment
-- Storybook tests use the vitest storybook config
-- Some Header theme-persistence tests are currently failing (pre-existing, unrelated to session setup)
+- ユニットテストは `src/**/*.test.tsx` に配置し、jsdom 環境で実行
+- Storybook テストは vitest storybook 設定を使用
+- Header のテーマ永続化テストが一部失敗中（既存の問題でセッション設定とは無関係）
 
-## Session Start Hook
+## セッション開始フック
 
-A session-start hook is configured at `.claude/hooks/session-start.sh` that:
-- Only runs in remote (Claude Code on the web) environments
-- Sets git author identity
-- Installs dependencies via `pnpm install` (async)
+`.claude/hooks/session-start.sh` にセッション開始フックが設定されています：
+- リモート環境（Claude Code on the web）でのみ実行
+- git のユーザー情報を設定
+- `pnpm install` で依存関係をインストール（非同期）
 
-Hook is registered in `.claude/settings.json`.
+フックは `.claude/settings.json` に登録されています。

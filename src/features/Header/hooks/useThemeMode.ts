@@ -1,21 +1,16 @@
 import { useState, useEffect } from "react";
-import type { RefObject } from "react";
 
-type UseThemeModeProps = {
-  darkBtnRef: RefObject<HTMLButtonElement>;
-  lightBtnRef: RefObject<HTMLButtonElement>;
-};
-
-export const useThemeMode = ({
-  darkBtnRef,
-  lightBtnRef,
-}: UseThemeModeProps) => {
-  // 初期状態: DOMの現在のクラスを読み取る（SSR時はfalse）
+export const useThemeMode = () => {
   const [isDark, setIsDark] = useState(() => {
-    if (typeof document !== "undefined") {
-      return document.documentElement.classList.contains("dark");
-    }
-    return false;
+    if (typeof document === "undefined") return false;
+    // BaseLayoutのインラインスクリプトで既にクラスが付いていればそれを使う
+    if (document.documentElement.classList.contains("dark")) return true;
+    // localStorageの設定を確認
+    const stored = localStorage.getItem("theme");
+    if (stored === "dark") return true;
+    if (stored === "light") return false;
+    // OSのカラースキーム設定にフォールバック
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
   });
 
   useEffect(() => {
@@ -29,17 +24,7 @@ export const useThemeMode = ({
   }, [isDark]);
 
   const toggleTheme = () => {
-    setIsDark((prev) => {
-      const newIsDark = !prev;
-      setTimeout(() => {
-        if (newIsDark) {
-          lightBtnRef.current?.focus();
-        } else {
-          darkBtnRef.current?.focus();
-        }
-      }, 0); // ブラウザのレンダリングが完了するまで待つ
-      return newIsDark;
-    });
+    setIsDark((prev) => !prev);
   };
 
   return { isDark, toggleTheme };

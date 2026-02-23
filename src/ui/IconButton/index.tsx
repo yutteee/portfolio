@@ -10,6 +10,7 @@ export type IconButtonProps = {
   style?: React.CSSProperties;
   "data-testid"?: string;
   className?: string;
+  "aria-pressed"?: boolean;
 };
 
 export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
@@ -22,6 +23,7 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
       style,
       "data-testid": dataTestId,
       className,
+      "aria-pressed": ariaPressed,
     },
     ref,
   ) => {
@@ -29,6 +31,7 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
     return (
       <button
         aria-label={label}
+        aria-pressed={ariaPressed}
         className={className ? `${styles.button} ${className}` : styles.button}
         id={id}
         type="button"

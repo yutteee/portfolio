@@ -12,8 +12,6 @@ export type HeaderPresenterProps = {
   closeBtnRef: React.RefObject<HTMLButtonElement>;
   isDark: boolean;
   onThemeToggle: () => void;
-  darkBtnRef: React.RefObject<HTMLButtonElement>;
-  lightBtnRef: React.RefObject<HTMLButtonElement>;
   currentPage?: CurrentPage;
   spMenuRef: React.RefObject<HTMLDivElement>;
   hamburgerRef: React.RefObject<HTMLButtonElement>;
@@ -26,8 +24,6 @@ export const HeaderPresenter: React.FC<HeaderPresenterProps> = ({
   closeBtnRef,
   isDark,
   onThemeToggle,
-  darkBtnRef,
-  lightBtnRef,
   currentPage,
   spMenuRef,
   hamburgerRef,
@@ -71,26 +67,14 @@ export const HeaderPresenter: React.FC<HeaderPresenterProps> = ({
             ref={hamburgerRef}
           />
         </div>
-        <div style={{ display: isDark ? "none" : "inline-flex" }}>
-          <IconButton
-            label="ダークモードにする"
-            icon={FiMoon}
-            id="theme-toggle-dark"
-            data-testid="theme-toggle-dark"
-            handleClick={onThemeToggle}
-            ref={darkBtnRef}
-          />
-        </div>
-        <div style={{ display: isDark ? "inline-flex" : "none" }}>
-          <IconButton
-            label="ライトモードにする"
-            icon={FiSun}
-            id="theme-toggle-light"
-            data-testid="theme-toggle-light"
-            handleClick={onThemeToggle}
-            ref={lightBtnRef}
-          />
-        </div>
+        <IconButton
+          label={isDark ? "ライトモードにする" : "ダークモードにする"}
+          icon={isDark ? FiSun : FiMoon}
+          id="theme-toggle"
+          data-testid="theme-toggle"
+          handleClick={onThemeToggle}
+          aria-pressed={isDark}
+        />
       </div>
       <div
         data-testid="sp-menu"

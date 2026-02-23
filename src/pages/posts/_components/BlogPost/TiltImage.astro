@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { SITE_URL } from "../../../../consts";
 
 interface Props {
   post: CollectionEntry<"posts">;
@@ -22,7 +23,7 @@ const { post } = Astro.props;
   ) : (
     <div class="image-container">
       <img
-        src={`${import.meta.env.PUBLIC_SITE_URL}/ogp/${post.slug}.png`}
+        src={`${SITE_URL}/ogp/${post.slug}.png`}
         alt=""
         width="720"
         height="378"

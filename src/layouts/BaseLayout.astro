@@ -5,6 +5,7 @@ import { Footer } from "../features/Footer";
 import "../styles/global.css";
 const { title, description } = Astro.props;
 import { SEO } from "astro-seo";
+import { SITE_URL } from "../consts";
 ---
 
 <html lang="ja">
@@ -29,7 +30,7 @@ import { SEO } from "astro-seo";
         basic: {
           title: `${title} | yutteee-portfolio`,
           type: "article",
-          image: `${import.meta.env.PUBLIC_SITE_URL}/portfolio.png`,
+          image: `${SITE_URL}/portfolio.png`,
         },
         image: {
           alt: "中村優作のポートフォリオ",

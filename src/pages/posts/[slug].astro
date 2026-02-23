@@ -29,6 +29,7 @@ import { Footer } from "../../features/Footer";
 import BlogPost from "./_components/BlogPost/index.astro";
 import SlidePost from "./_components/SlidePost.astro";
 import { Breadcrumb } from "../../ui/Breadcrumb";
+import { SITE_URL } from "../../consts";
 ---
 
 <!doctype html>
@@ -44,7 +45,7 @@ import { Breadcrumb } from "../../ui/Breadcrumb";
         basic: {
           title: post.data.title,
           type: "article",
-          image: `${import.meta.env.PUBLIC_SITE_URL}/ogp/${post.slug}.png`,
+          image: `${SITE_URL}/ogp/${post.slug}.png`,
         },
         image: {
           alt: post.data.title,

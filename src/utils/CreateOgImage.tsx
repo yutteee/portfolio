@@ -1,14 +1,12 @@
 import satori from "satori";
 import { Resvg } from "@resvg/resvg-js";
 import fs from "node:fs/promises";
+import { SITE_URL } from "../consts";
 
 export async function createOgImage(text: string) {
   // publicにあるフォントファイルを読み込む
   const regularFont = await fs.readFile("public/ZenKakuGothicNew-Regular.ttf");
   const boldFont = await fs.readFile("public/ZenKakuGothicNew-Bold.ttf");
-
-  const siteUrl =
-    import.meta.env.PUBLIC_SITE_URL || "https://yutteee.pages.dev";
 
   const svg = await satori(
     <div
@@ -26,7 +24,7 @@ export async function createOgImage(text: string) {
       }}
     >
       <img
-        src={`${siteUrl}/ogp.png`}
+        src={`${SITE_URL}/ogp.png`}
         style={{
           width: "100%",
           height: "100%",

@@ -1,5 +1,6 @@
 import styles from "./index.module.css";
 import { IconButton } from "../../ui/IconButton";
+import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi";
 
 export const NAV_PAGES = ["私について", "プロダクト", "記事"] as const;
 export type CurrentPage = (typeof NAV_PAGES)[number];
@@ -64,7 +65,7 @@ export const HeaderPresenter: React.FC<HeaderPresenterProps> = ({
         <div className={styles.hamburger}>
           <IconButton
             label="メニューを開く"
-            icon="FiMenu"
+            icon={FiMenu}
             id="hamburger"
             handleClick={onOpen}
             ref={hamburgerRef}
@@ -73,7 +74,7 @@ export const HeaderPresenter: React.FC<HeaderPresenterProps> = ({
         <div style={{ display: isDark ? "none" : "inline-flex" }}>
           <IconButton
             label="ダークモードにする"
-            icon="FiMoon"
+            icon={FiMoon}
             id="theme-toggle-dark"
             data-testid="theme-toggle-dark"
             handleClick={onThemeToggle}
@@ -83,7 +84,7 @@ export const HeaderPresenter: React.FC<HeaderPresenterProps> = ({
         <div style={{ display: isDark ? "inline-flex" : "none" }}>
           <IconButton
             label="ライトモードにする"
-            icon="FiSun"
+            icon={FiSun}
             id="theme-toggle-light"
             data-testid="theme-toggle-light"
             handleClick={onThemeToggle}
@@ -99,7 +100,7 @@ export const HeaderPresenter: React.FC<HeaderPresenterProps> = ({
         <div className={styles.close}>
           <IconButton
             label="メニューを閉じる"
-            icon="FiX"
+            icon={FiX}
             id="close"
             handleClick={onClose}
             ref={closeBtnRef}

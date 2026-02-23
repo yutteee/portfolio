@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./index.module.css";
-import * as FiIcons from "react-icons/fi";
+import type { IconType } from "react-icons";
 
 export type IconButtonProps = {
   label: string;
-  icon: keyof typeof FiIcons;
+  icon: IconType;
   id?: string;
   handleClick: () => void;
   style?: React.CSSProperties;
@@ -25,7 +25,7 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
     },
     ref,
   ) => {
-    const IconComponent = FiIcons[icon];
+    const IconComponent = icon;
     return (
       <button
         aria-label={label}

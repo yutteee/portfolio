@@ -1,11 +1,12 @@
 ---
 import { IconButton } from "../../ui/IconButton";
+import { FiPlay, FiPause } from "react-icons/fi";
 ---
 
 <div class="play-button">
   <IconButton
     label="アニメーションを有効にする"
-    icon="FiPlay"
+    icon={FiPlay}
     id="togglePlayAnimation"
     handleClick={() => {}}
   />
@@ -13,7 +14,7 @@ import { IconButton } from "../../ui/IconButton";
 <div class="stop-button">
   <IconButton
     label="アニメーションを停止する"
-    icon="FiPause"
+    icon={FiPause}
     id="toggleStopAnimation"
     handleClick={() => {}}
   />

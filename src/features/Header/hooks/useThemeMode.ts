@@ -1,6 +1,24 @@
 import { useState, useEffect } from "react";
 
-export const useThemeMode = () => {
+/** `useThemeMode` の返り値 */
+interface UseThemeModeReturn {
+  /** 現在ダークモードかどうか */
+  isDark: boolean;
+  /** ダーク/ライトモードをトグルする */
+  toggleTheme: () => void;
+}
+
+/**
+ * ダーク/ライトモードの状態を管理するカスタムフック。
+ *
+ * 初期値は以下の優先順位で決定する。
+ * 1. `<html>` 要素の `.dark` クラス（BaseLayout のインラインスクリプトが付与）
+ * 2. localStorage の `"theme"` キー（`"dark"` または `"light"`）
+ * 3. OS のカラースキーム設定（`prefers-color-scheme: dark`）
+ *
+ * 状態変化時は `<html>` への `.dark` クラスの付け外しと localStorage への保存を行う。
+ */
+export const useThemeMode = (): UseThemeModeReturn => {
   const [isDark, setIsDark] = useState(() => {
     if (typeof document === "undefined") return false;
     // BaseLayoutのインラインスクリプトで既にクラスが付いていればそれを使う

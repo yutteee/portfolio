@@ -1,6 +1,7 @@
 ---
 import "destyle.css";
 import { Header } from "../features/Header";
+import type { CurrentPage } from "../features/Header/presenter";
 import { Footer } from "../features/Footer";
 import "../styles/global.css";
 import { SEO } from "astro-seo";
@@ -55,7 +56,7 @@ const { title, description, ogpType = "website" } = Astro.props;
     />
   </head>
   <body>
-    <Header currentPage={title} client:load />
+    <Header currentPage={title as CurrentPage} client:load />
     <slot />
     <Footer client:only />
   </body>

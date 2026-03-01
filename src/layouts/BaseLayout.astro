@@ -3,8 +3,15 @@ import "destyle.css";
 import { Header } from "../features/Header";
 import { Footer } from "../features/Footer";
 import "../styles/global.css";
-const { title, description } = Astro.props;
 import { SEO } from "astro-seo";
+
+interface Props {
+  title: string;
+  description: string;
+  ogpType?: "website" | "article";
+}
+
+const { title, description, ogpType = "website" } = Astro.props;
 ---
 
 <html lang="ja">
@@ -28,7 +35,7 @@ import { SEO } from "astro-seo";
       openGraph={{
         basic: {
           title: `${title} | yutteee-portfolio`,
-          type: "article",
+          type: ogpType,
           image: `${import.meta.env.PUBLIC_SITE_URL}/portfolio.png`,
         },
         image: {

@@ -2,6 +2,7 @@
   "name": "purple-proxima",
   "type": "module",
   "version": "0.0.1",
+  "packageManager": "pnpm@10.29.3",
   "scripts": {
     "dev": "node scripts/copy-images.js && astro dev",
     "start": "astro dev",

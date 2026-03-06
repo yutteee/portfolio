@@ -107,19 +107,19 @@ export const ThemeToggleInteraction: Story = {
   args: {
     currentPage: undefined,
   },
-  name: "ダークモード/ライトモードの切り替えでフォーカスが移動する",
+  name: "テーマトグルボタンがフォーカスを保持したまま切り替わる",
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement.ownerDocument.body);
-    // ダークモードボタンを押す
+    // ダークモードにするボタンを押す
     const darkButton = await canvas.findByLabelText("ダークモードにする");
     await userEvent.click(darkButton);
-    // ライトモードボタンが表示される
+    // 同じボタンがラベル変更されフォーカスを維持している
     const lightButton = await canvas.findByLabelText("ライトモードにする");
     await expect(lightButton).toBeInTheDocument();
     await expect(lightButton).toHaveFocus();
-    // ライトモードボタンを押す
+    // ライトモードにするボタンを押す
     await userEvent.click(lightButton);
-    // ダークモードボタンにフォーカスが当たる
+    // 同じボタンがラベル変更されフォーカスを維持している
     const darkButtonAfter = await canvas.findByLabelText("ダークモードにする");
     await expect(darkButtonAfter).toHaveFocus();
   },

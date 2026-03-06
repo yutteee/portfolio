@@ -1,5 +1,6 @@
 import styles from "./index.module.css";
 import { IconButton } from "../../ui/IconButton";
+import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi";
 
 export const NAV_PAGES = ["私について", "プロダクト", "記事"] as const;
 export type CurrentPage = (typeof NAV_PAGES)[number];
@@ -11,8 +12,6 @@ export type HeaderPresenterProps = {
   closeBtnRef: React.RefObject<HTMLButtonElement>;
   isDark: boolean;
   onThemeToggle: () => void;
-  darkBtnRef: React.RefObject<HTMLButtonElement>;
-  lightBtnRef: React.RefObject<HTMLButtonElement>;
   currentPage?: CurrentPage;
   spMenuRef: React.RefObject<HTMLDivElement>;
   hamburgerRef: React.RefObject<HTMLButtonElement>;
@@ -25,8 +24,6 @@ export const HeaderPresenter: React.FC<HeaderPresenterProps> = ({
   closeBtnRef,
   isDark,
   onThemeToggle,
-  darkBtnRef,
-  lightBtnRef,
   currentPage,
   spMenuRef,
   hamburgerRef,
@@ -64,32 +61,20 @@ export const HeaderPresenter: React.FC<HeaderPresenterProps> = ({
         <div className={styles.hamburger}>
           <IconButton
             label="メニューを開く"
-            icon="FiMenu"
+            icon={FiMenu}
             id="hamburger"
             handleClick={onOpen}
             ref={hamburgerRef}
           />
         </div>
-        <div style={{ display: isDark ? "none" : "inline-flex" }}>
-          <IconButton
-            label="ダークモードにする"
-            icon="FiMoon"
-            id="theme-toggle-dark"
-            data-testid="theme-toggle-dark"
-            handleClick={onThemeToggle}
-            ref={darkBtnRef}
-          />
-        </div>
-        <div style={{ display: isDark ? "inline-flex" : "none" }}>
-          <IconButton
-            label="ライトモードにする"
-            icon="FiSun"
-            id="theme-toggle-light"
-            data-testid="theme-toggle-light"
-            handleClick={onThemeToggle}
-            ref={lightBtnRef}
-          />
-        </div>
+        <IconButton
+          label={isDark ? "ライトモードにする" : "ダークモードにする"}
+          icon={isDark ? FiSun : FiMoon}
+          id="theme-toggle"
+          data-testid="theme-toggle"
+          handleClick={onThemeToggle}
+          aria-pressed={isDark}
+        />
       </div>
       <div
         data-testid="sp-menu"
@@ -99,7 +84,7 @@ export const HeaderPresenter: React.FC<HeaderPresenterProps> = ({
         <div className={styles.close}>
           <IconButton
             label="メニューを閉じる"
-            icon="FiX"
+            icon={FiX}
             id="close"
             handleClick={onClose}
             ref={closeBtnRef}

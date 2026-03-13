@@ -9,14 +9,14 @@ describe("ProductItem", () => {
     index: 1,
     title: "プロダクト名",
     description: "プロダクトの説明文が入ります。",
-    url: "https://example.com",
+    href: "https://example.com",
     alt: "ダミー画像",
   };
 
   it("リンクのhrefとaria-labelが正しい", () => {
     render(<ProductItem {...baseProps} />);
     const link = screen.getByRole("link");
-    expect(link).toHaveAttribute("href", baseProps.url);
+    expect(link).toHaveAttribute("href", baseProps.href);
     expect(link).toHaveAttribute("aria-label", baseProps.title);
     expect(link).toHaveAttribute("target", "_blank");
     expect(link).toHaveAttribute("rel", "noopener noreferrer");

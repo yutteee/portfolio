@@ -48,4 +48,4 @@ export const accounts: Account[] = [
     darkImg: "/wantedly_dark.png",
     isWantedly: true,
   },
-]; 
+];

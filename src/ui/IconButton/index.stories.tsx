@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { IconButton } from ".";
+import { FiMenu, FiArrowRight, FiGithub } from "react-icons/fi";
 
 const meta: Meta<typeof IconButton> = {
   title: "ui/IconButton",
@@ -8,7 +9,8 @@ const meta: Meta<typeof IconButton> = {
   parameters: {
     docs: {
       description: {
-        component: "react-iconsのアイコン名を指定して表示できるボタン。IconButtonを並べて使用したい場合、4px以上の余白を設けてください。",
+        component:
+          "react-iconsのアイコンコンポーネントを渡して表示できるボタン。IconButtonを並べて使用したい場合、4px以上の余白を設けてください。",
       },
     },
   },
@@ -20,7 +22,7 @@ type Story = StoryObj<typeof IconButton>;
 export const Menu: Story = {
   args: {
     label: "メニュー",
-    icon: "FiMenu",
+    icon: FiMenu,
     id: "icon-btn-menu",
   },
 };
@@ -28,7 +30,7 @@ export const Menu: Story = {
 export const ArrowRight: Story = {
   args: {
     label: "次へ",
-    icon: "FiArrowRight",
+    icon: FiArrowRight,
     id: "icon-btn-arrow",
   },
 };
@@ -36,7 +38,7 @@ export const ArrowRight: Story = {
 export const Github: Story = {
   args: {
     label: "GitHub",
-    icon: "FiGithub",
+    icon: FiGithub,
     id: "icon-btn-github",
   },
-}; 
+};

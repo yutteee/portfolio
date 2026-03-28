@@ -9,7 +9,7 @@ export function useFocusTrap(ref: RefObject<HTMLElement>, enabled: boolean) {
     const handleTrapFocus = (e: KeyboardEvent) => {
       if (e.key !== "Tab") return;
       const focusable = container.querySelectorAll<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
       );
       if (focusable.length === 0) return;
       const first = focusable[0];
@@ -31,4 +31,4 @@ export function useFocusTrap(ref: RefObject<HTMLElement>, enabled: boolean) {
       document.removeEventListener("keydown", handleTrapFocus);
     };
   }, [ref, enabled]);
-} 
+}

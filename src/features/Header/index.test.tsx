@@ -1,13 +1,13 @@
 import { render, screen, within } from "@testing-library/react";
-import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
-import { describe, it, expect, afterEach, vi, beforeEach } from 'vitest';
+import "@testing-library/jest-dom";
+import userEvent from "@testing-library/user-event";
+import { describe, it, expect, afterEach, vi, beforeEach } from "vitest";
 import { Header } from ".";
 
 describe("Header", () => {
   beforeEach(() => {
     // デフォルトはライトモード扱い
-    window.matchMedia = vi.fn().mockImplementation(query => ({
+    window.matchMedia = vi.fn().mockImplementation((query) => ({
       matches: false,
       media: query,
       onchange: null,
@@ -20,7 +20,7 @@ describe("Header", () => {
   });
 
   afterEach(() => {
-    document.documentElement.className = '';
+    document.documentElement.className = "";
   });
 
   it("header要素でレンダリングされる", () => {
@@ -39,7 +39,7 @@ describe("Header", () => {
     render(<Header />);
     const menuButton = screen.getByRole("button", { name: "メニューを開く" });
     expect(document.activeElement).not.toBe(menuButton);
-  })
+  });
 
   it("Yutteeeという名前のリンクが存在し、homeに戻る", () => {
     render(<Header />);
@@ -50,10 +50,16 @@ describe("Header", () => {
 
   it("PC用ナビゲーションに私について・プロダクト・記事のリンクが存在する", () => {
     render(<Header />);
-    const nav = screen.getByRole("navigation", { name: "メインナビゲーション" });
+    const nav = screen.getByRole("navigation", {
+      name: "メインナビゲーション",
+    });
     expect(nav).toBeInTheDocument();
-    expect(within(nav).getByRole("link", { name: "私について" })).toBeInTheDocument();
-    expect(within(nav).getByRole("link", { name: "プロダクト" })).toBeInTheDocument();
+    expect(
+      within(nav).getByRole("link", { name: "私について" }),
+    ).toBeInTheDocument();
+    expect(
+      within(nav).getByRole("link", { name: "プロダクト" }),
+    ).toBeInTheDocument();
     expect(within(nav).getByRole("link", { name: "記事" })).toBeInTheDocument();
   });
 });
@@ -63,9 +69,9 @@ describe("Headerのテーマ永続化", () => {
 
   beforeEach(() => {
     localStorage.clear();
-    document.documentElement.className = '';
+    document.documentElement.className = "";
     // デフォルトはライトモード扱い
-    window.matchMedia = vi.fn().mockImplementation(query => ({
+    window.matchMedia = vi.fn().mockImplementation((query) => ({
       matches: false,
       media: query,
       onchange: null,
@@ -97,8 +103,8 @@ describe("Headerのテーマ永続化", () => {
     });
 
     it("localStorageに設定がなくOSがダークモードの場合、ダークモードで表示される", () => {
-      window.matchMedia = vi.fn().mockImplementation(query => ({
-        matches: query === '(prefers-color-scheme: dark)',
+      window.matchMedia = vi.fn().mockImplementation((query) => ({
+        matches: query === "(prefers-color-scheme: dark)",
         media: query,
         onchange: null,
         addListener: vi.fn(),
@@ -134,7 +140,7 @@ describe("Headerのテーマ永続化", () => {
       // 初期状態をダークモードにする
       localStorage.setItem("theme", "dark");
       render(<Header />);
-      
+
       const lightButton = screen.getByLabelText("ライトモードにする");
       await userEvent.click(lightButton);
 
@@ -143,4 +149,4 @@ describe("Headerのテーマ永続化", () => {
       expect(screen.getByLabelText("ダークモードにする")).toBeInTheDocument();
     });
   });
-}); 
+});

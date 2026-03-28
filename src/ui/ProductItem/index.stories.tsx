@@ -26,4 +26,4 @@ export const Default: Story = {
     url: "https://example.com",
     alt: "ダミー画像",
   },
-}; 
+};

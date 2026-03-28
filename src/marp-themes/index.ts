@@ -1,8 +1,8 @@
-import customTheme from './custom-theme.css?raw';
+import customTheme from "./custom-theme.css?raw";
 
 export const marpThemes = {
-  'custom-theme': customTheme,
-  'default': undefined, // デフォルトテーマを使用
+  "custom-theme": customTheme,
+  default: undefined, // デフォルトテーマを使用
 } as const;
 
-export type MarpTheme = keyof typeof marpThemes; 
+export type MarpTheme = keyof typeof marpThemes;

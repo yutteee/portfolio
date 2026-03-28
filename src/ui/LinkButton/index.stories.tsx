@@ -8,7 +8,8 @@ const meta: Meta<typeof LinkButton> = {
   parameters: {
     docs: {
       description: {
-        component: "リンクボタンはa要素です。aria-labelにはリンク先のページ名を指定してください。",
+        component:
+          "リンクボタンはa要素です。aria-labelにはリンク先のページ名を指定してください。",
       },
     },
   },
@@ -23,4 +24,4 @@ export const Default: Story = {
     url: "https://example.com",
     ariaLabel: "詳細ページ",
   },
-}; 
+};

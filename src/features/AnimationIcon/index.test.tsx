@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import '@testing-library/jest-dom';
-import { describe, it, expect } from 'vitest';
+import "@testing-library/jest-dom";
+import { describe, it, expect } from "vitest";
 import { AnimationIcon } from ".";
 
 describe("AnimationIcon", () => {
@@ -11,11 +11,15 @@ describe("AnimationIcon", () => {
 
   it("「アニメーションを有効にする」というラベルのIconButtonがレンダリングされる", () => {
     render(<AnimationIcon />);
-    expect(screen.getByRole('button', { name: 'アニメーションを有効にする' })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "アニメーションを有効にする" }),
+    ).toBeInTheDocument();
   });
 
   it("「アニメーションを停止する」というラベルのIconButtonがレンダリングされる", () => {
     render(<AnimationIcon />);
-    expect(screen.getByRole('button', { name: 'アニメーションを停止する' })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "アニメーションを停止する" }),
+    ).toBeInTheDocument();
   });
-}); 
+});

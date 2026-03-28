@@ -10,7 +10,7 @@ export interface Post {
   alt: string;
   isExternal: boolean;
   marp: boolean;
-  theme: 'default' | 'custom-theme';
+  theme: "default" | "custom-theme";
 }
 
 const getOgpImageFromUrl = async (url: string) => {
@@ -33,19 +33,20 @@ const processLocalPosts = (posts: CollectionEntry<"posts">[]): Post[] => {
   return posts.map((post) => {
     const slug = post.slug.replace(/\/index$/, "");
     return {
-    url: `/posts/${slug}`,
-    title: post.data.title,
-    pubDate: post.data.pubDate,
-    image: post.data.image
-      ? post.data.image.url
-      : `${import.meta.env.PUBLIC_SITE_URL}/ogp/${slug}.png`,
-    alt: post.data.image
-      ? post.data.image.alt
-      : `サムネイル画像。白いPCのイラストに、「${post.data.title}」の文字が重なっている。`,
-    isExternal: false,
-    marp: post.data.marp,
-    theme: post.data.theme,
-  }});
+      url: `/posts/${slug}`,
+      title: post.data.title,
+      pubDate: post.data.pubDate,
+      image: post.data.image
+        ? post.data.image.url
+        : `${import.meta.env.PUBLIC_SITE_URL}/ogp/${slug}.png`,
+      alt: post.data.image
+        ? post.data.image.alt
+        : `サムネイル画像。白いPCのイラストに、「${post.data.title}」の文字が重なっている。`,
+      isExternal: false,
+      marp: post.data.marp,
+      theme: post.data.theme,
+    };
+  });
 };
 
 const getExternalPosts = async (): Promise<Post[]> => {
@@ -57,7 +58,7 @@ const getExternalPosts = async (): Promise<Post[]> => {
       image: (await getOgpImageFromUrl(blog.url)) || "",
       alt: `サムネイル画像。${blog.title}`,
       isExternal: true,
-    }))
+    })),
   );
 
   return externalPosts.filter((post): post is Post => post.image !== "");
@@ -79,4 +80,4 @@ export const getAllPosts = async (): Promise<Post[]> => {
   const allPosts = [...localPosts, ...externalPosts];
 
   return sortPostsByDate(allPosts);
-}; 
+};

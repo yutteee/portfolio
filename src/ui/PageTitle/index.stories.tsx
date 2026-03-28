@@ -8,7 +8,8 @@ const meta: Meta<typeof PageTitle> = {
   parameters: {
     docs: {
       description: {
-        component: "ページタイトルとパンくずを表示するコンポーネント。各ページで使用してください。タイトルはh1要素のため、PageTitleを使用しているページではh1要素は使用しないでください。",
+        component:
+          "ページタイトルとパンくずを表示するコンポーネント。各ページで使用してください。タイトルはh1要素のため、PageTitleを使用しているページではh1要素は使用しないでください。",
       },
     },
   },
@@ -21,4 +22,4 @@ export const Default: Story = {
   args: {
     title: "サンプルページ",
   },
-}; 
+};

@@ -5,6 +5,7 @@ import type { CurrentPage } from "../features/Header/presenter";
 import { Footer } from "../features/Footer";
 import "../styles/global.css";
 import { SEO } from "astro-seo";
+import { SITE_URL } from "../consts";
 
 interface Props {
   title: string;
@@ -19,9 +20,11 @@ const { title, description, ogpType = "website" } = Astro.props;
   <head>
     <script is:inline>
       // ブロッキングスクリプト: DOMが表示される前にテーマを適用
-      (function() {
+      (function () {
         const theme = localStorage.getItem("theme");
-        const isOsDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const isOsDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
         if (theme === "dark" || (theme === null && isOsDark)) {
           document.documentElement.classList.add("dark");
         }
@@ -36,8 +39,8 @@ const { title, description, ogpType = "website" } = Astro.props;
       openGraph={{
         basic: {
           title: `${title} | yutteee-portfolio`,
-          type: ogpType,
-          image: `${import.meta.env.PUBLIC_SITE_URL}/portfolio.png`,
+          type: "article",
+          image: `${SITE_URL}/portfolio.png`,
         },
         image: {
           alt: "中村優作のポートフォリオ",

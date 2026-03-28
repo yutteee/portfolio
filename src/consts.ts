@@ -3,4 +3,5 @@
 
 export const SITE_TITLE = "Astro Blog";
 export const SITE_DESCRIPTION = "Welcome to my website!";
-export const SITE_URL = "https://yutteee.pages.dev";
+export const SITE_URL =
+  import.meta.env.PUBLIC_SITE_URL || "https://yutteee.pages.dev";

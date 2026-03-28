@@ -1,0 +1,164 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Icon } from "astro-icon/components";
+import "../../../posts/_components/BlogPost/content.css";
+
+interface Props {
+  product: CollectionEntry<"products">;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  Content: any;
+}
+
+const { product, Content } = Astro.props;
+---
+
+<div class="wrapper">
+  <div class="title-wrapper">
+    <div class="post-meta">
+      <span>{product.data.period}</span>
+    </div>
+    <h1 class="title">{product.data.title}</h1>
+    <p class="description">{product.data.description}</p>
+
+    <div class="image-container">
+      <img
+        src={product.data.image.url}
+        alt={product.data.image.alt}
+        width="720"
+        height="450"
+        class="image"
+      />
+    </div>
+
+    <div class="links">
+      {
+        product.data.url && (
+          <a
+            href={product.data.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="link-button"
+          >
+            <Icon name="weui:link-outlined" />
+            サイト
+          </a>
+        )
+      }
+      {
+        product.data.github && (
+          <a
+            href={product.data.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="link-button"
+          >
+            <Icon name="mdi:github" />
+            GitHub
+          </a>
+        )
+      }
+    </div>
+
+    {
+      product.data.tech && product.data.tech.length > 0 && (
+        <div class="tech-stack">
+          {product.data.tech.map((t: string) => (
+            <span class="tech-badge">{t}</span>
+          ))}
+        </div>
+      )
+    }
+  </div>
+
+  <div class="main-wrapper">
+    <Content />
+  </div>
+</div>
+
+<style>
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    max-width: 40rem;
+    margin: 0 auto;
+    padding-top: 2rem;
+  }
+
+  .title-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+
+    .post-meta {
+      font-size: 0.875rem;
+      color: var(--color-text);
+      opacity: 0.6;
+    }
+
+    .title {
+      font-size: 2rem;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .description {
+      font-size: 1rem;
+      text-align: center;
+    }
+  }
+
+  .image-container {
+    width: 100%;
+
+    .image {
+      width: 100%;
+      height: auto;
+      border: 8px solid var(--color-white);
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .link-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border: solid 1px var(--color-text);
+    border-radius: 9999px;
+    text-decoration: none;
+    color: var(--color-text);
+    background-color: var(--color-white);
+    transition: background-color 0.2s;
+
+    &:hover,
+    &:focus {
+      background-color: var(--color-blue);
+    }
+  }
+
+  .tech-stack {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tech-badge {
+    padding: 0.25rem 0.75rem;
+    background-color: var(--color-white);
+    border-radius: 9999px;
+    font-size: 0.875rem;
+  }
+</style>

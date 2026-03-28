@@ -23,7 +23,7 @@ export const Default: Story = {
     index: 1,
     title: "プロダクト名",
     description: "プロダクトの説明文が入ります。",
-    url: "https://example.com",
+    href: "https://example.com",
     alt: "ダミー画像",
   },
 };

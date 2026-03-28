@@ -32,6 +32,9 @@ importers:
       '@iconify-json/lets-icons':
         specifier: ^1.1.2
         version: 1.2.1
+      '@iconify-json/mdi':
+        specifier: ^1.2.3
+        version: 1.2.3
       '@iconify-json/weui':
         specifier: ^1.1.0
         version: 1.2.2
@@ -855,6 +858,9 @@ packages:
 
   '@iconify-json/lets-icons@1.2.1':
     resolution: {integrity: sha512-ahSTwg1OTccHNEy3E1GuoRgazGpodIEbdjWp1V/7abur7efjTbtJyHfWVPRBF7yIWg0I8MKXrSGAkVVS1D1q8w==}
+
+  '@iconify-json/mdi@1.2.3':
+    resolution: {integrity: sha512-O3cLwbDOK7NNDf2ihaQOH5F9JglnulNDFV7WprU2dSoZu3h3cWH//h74uQAB87brHmvFVxIOkuBX2sZSzYhScg==}
 
   '@iconify-json/weui@1.2.2':
     resolution: {integrity: sha512-N1osy+KRtucMrJmW3WcaJSBDpJPyeLcUSNko+U2MgzUju2adr7wF+nSs8aG3/9z0Cy1x66H/5xw8xUAVPxtFJQ==}
@@ -6282,6 +6288,10 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify-json/lets-icons@1.2.1':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/mdi@1.2.3':
     dependencies:
       '@iconify/types': 2.0.0
 

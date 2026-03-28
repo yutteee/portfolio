@@ -7,8 +7,8 @@ export async function getStaticPaths() {
   const posts = await getCollection("posts" as never);
 
   return posts.map((post) => ({
-    params: {slug: post.slug},
-  }))
+    params: { slug: post.slug },
+  }));
 }
 
 export async function GET({ params }: APIContext) {

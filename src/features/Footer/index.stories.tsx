@@ -8,7 +8,8 @@ const meta: Meta<typeof Footer> = {
   parameters: {
     docs: {
       description: {
-        component: "SNSアカウント一覧とサイトマップを表示するフッターコンポーネント。ダークモード対応。",
+        component:
+          "SNSアカウント一覧とサイトマップを表示するフッターコンポーネント。ダークモード対応。",
       },
     },
   },
@@ -17,4 +18,4 @@ export default meta;
 
 type Story = StoryObj<typeof Footer>;
 
-export const Default: Story = {}; 
+export const Default: Story = {};

@@ -19,7 +19,13 @@ export const ProductItem: React.FC<ProductItemProps> = ({ image, index, title, d
     >
       <div className={styles["index-parent"]}>
         <span className={styles.mask}>
-          <img src={image} alt={alt} className={styles.image} width={400} height={250} />
+          <img
+            src={image}
+            alt={alt}
+            className={styles.image}
+            width={400}
+            height={250}
+          />
         </span>
         <div className={styles.index}>0{index}</div>
       </div>

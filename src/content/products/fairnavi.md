@@ -1,7 +1,7 @@
 ---
 title: "フェアナビ"
 description: "誠実なアクセシビリティオーバーレイ"
-period: "2024/02 - 2025/01"
+period: "2024/02 - 現在"
 image:
   url: "/fairnavi.png"
   alt: "fair-naviのトップ画面。フェアナビのLPサイト上で、フェアナビのアクセシビリティメニューが開かれている。"

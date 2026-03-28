@@ -1,7 +1,7 @@
 ---
 title: "CODE_DUEL"
 description: "プログラミング言語やフレームワークで戦うカードゲーム"
-period: "2022/08 - 2022/09"
+period: "2022/06 - 2022/09"
 image:
   url: "/CODE_DUEL.png"
   alt: "CODE_DUELのゲーム画面。手札にKotlin, Sass, Rust, HTMLがあり、場にElixir, phoenixが出されている。"

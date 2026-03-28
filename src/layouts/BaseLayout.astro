@@ -1,19 +1,30 @@
 ---
 import "destyle.css";
 import { Header } from "../features/Header";
+import type { CurrentPage } from "../features/Header/presenter";
 import { Footer } from "../features/Footer";
 import "../styles/global.css";
-const { title, description } = Astro.props;
 import { SEO } from "astro-seo";
+import { SITE_URL } from "../consts";
+
+interface Props {
+  title: string;
+  description: string;
+  ogpType?: "website" | "article";
+}
+
+const { title, description, ogpType = "website" } = Astro.props;
 ---
 
 <html lang="ja">
   <head>
     <script is:inline>
       // ブロッキングスクリプト: DOMが表示される前にテーマを適用
-      (function() {
+      (function () {
         const theme = localStorage.getItem("theme");
-        const isOsDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const isOsDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
         if (theme === "dark" || (theme === null && isOsDark)) {
           document.documentElement.classList.add("dark");
         }
@@ -29,7 +40,7 @@ import { SEO } from "astro-seo";
         basic: {
           title: `${title} | yutteee-portfolio`,
           type: "article",
-          image: `${import.meta.env.PUBLIC_SITE_URL}/portfolio.png`,
+          image: `${SITE_URL}/portfolio.png`,
         },
         image: {
           alt: "中村優作のポートフォリオ",
@@ -48,7 +59,7 @@ import { SEO } from "astro-seo";
     />
   </head>
   <body>
-    <Header currentPage={title} client:load />
+    <Header currentPage={title as CurrentPage} client:load />
     <slot />
     <Footer client:only />
   </body>

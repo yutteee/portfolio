@@ -1,6 +1,6 @@
 import type React from "react";
 import styles from "./index.module.css";
-import { FiExternalLink } from 'react-icons/fi';
+import { FiExternalLink } from "react-icons/fi";
 
 export type BlogPostProps = {
   title: string;
@@ -12,7 +12,15 @@ export type BlogPostProps = {
   marp?: boolean;
 };
 
-export const BlogPost: React.FC<BlogPostProps> = ({ title, url, image, date, alt, isExternal, marp }) => {
+export const BlogPost: React.FC<BlogPostProps> = ({
+  title,
+  url,
+  image,
+  date,
+  alt,
+  isExternal,
+  marp,
+}) => {
   return (
     <li className={styles.container}>
       <a
@@ -23,7 +31,13 @@ export const BlogPost: React.FC<BlogPostProps> = ({ title, url, image, date, alt
         rel={isExternal ? "noopener noreferrer" : undefined}
       >
         <div className={styles.mask}>
-          <img src={image} alt={alt} className={styles.image} width={340} height={178} />
+          <img
+            src={image}
+            alt={alt}
+            className={styles.image}
+            width={340}
+            height={178}
+          />
         </div>
         <div className={styles.texts}>
           <div className={styles.meta}>
@@ -38,4 +52,4 @@ export const BlogPost: React.FC<BlogPostProps> = ({ title, url, image, date, alt
       </a>
     </li>
   );
-}; 
+};

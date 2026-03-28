@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { Marp } from "@marp-team/marp-core";
-import { marpThemes } from "../marp-themes";
+import { marpThemes } from "../../../marp-themes";
 
 interface Props {
   post: CollectionEntry<"posts">;
@@ -15,7 +15,7 @@ let slideCss = "";
 // 例: ![画像の説明](image.png) -> ![画像の説明](/posts/20250812/image.png)
 const processedBody = post.body.replace(
   /!\[([^\]]*)\]\(([^)]+)\)/g,
-  `![$1](/posts/${post.slug}/$2)`
+  `![$1](/posts/${post.slug}/$2)`,
 );
 
 const marp = new Marp();

@@ -6,7 +6,9 @@ import { getCollection } from "astro:content";
 import { ProductItem } from "../ui/ProductItem";
 import { PageTitle } from "../ui/PageTitle";
 
-const productsCollection = await getCollection("products");
+const productsCollection = (await getCollection("products")).sort((a, b) =>
+  b.data.period.localeCompare(a.data.period),
+);
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>

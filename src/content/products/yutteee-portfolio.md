@@ -1,7 +1,7 @@
 ---
 title: "yutteee-portfolio"
 description: "私のポートフォリオサイト"
-period: "2023/09 - 2023/10"
+period: "2024/06 - 現在"
 image:
   url: "/portfolio.png"
   alt: "yutteee-portfolioのトップ画面。中央にPCのイラストがあり、それに重なって「Hi!I'm Yutteee!」という文字が表示されている。"

@@ -8,7 +8,8 @@ const meta: Meta<typeof BlogPost> = {
   parameters: {
     docs: {
       description: {
-        component: "ブログ記事のリンクを表示するコンポーネントです。list要素のため、ul要素でラップして使用してください。",
+        component:
+          "ブログ記事のリンクを表示するコンポーネントです。list要素のため、ul要素でラップして使用してください。",
       },
     },
   },
@@ -32,4 +33,4 @@ export const Default: Story = {
     alt: "サムネイル画像",
     isExternal: true,
   },
-}; 
+};

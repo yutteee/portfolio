@@ -29,6 +29,8 @@ export const FooterPresenter: React.FC<FooterPresenterProps> = ({ isDark }) => (
         </a>
       ))}
     </div>
-    <a href="/siteMap" className={styles.link}>サイトマップ</a>
+    <a href="/siteMap" className={styles.link}>
+      サイトマップ
+    </a>
   </footer>
-); 
+);

@@ -29,6 +29,7 @@ import { Footer } from "../../features/Footer";
 import BlogPost from "./_components/BlogPost/index.astro";
 import SlidePost from "./_components/SlidePost.astro";
 import { Breadcrumb } from "../../ui/Breadcrumb";
+import { GiscusComments } from "../../ui/GiscusComments";
 import { SITE_URL } from "../../consts";
 ---
 
@@ -81,6 +82,10 @@ import { SITE_URL } from "../../consts";
           <BlogPost post={post} Content={Content} headings={headings} />
         )
       }
+
+      <section class="comments-section">
+        <GiscusComments client:visible />
+      </section>
     </main>
     <Footer client:only />
 
@@ -90,6 +95,12 @@ import { SITE_URL } from "../../consts";
         max-width: calc(70rem + 2rem);
         margin: 0 auto;
         padding: 96px 16px;
+      }
+
+      .comments-section {
+        width: 100%;
+        max-width: 40rem;
+        margin: 3rem auto 0;
       }
     </style>
   </body>

@@ -24,6 +24,7 @@
     "@astrojs/react": "^3.6.0",
     "@astrojs/rss": "^4.0.5",
     "@astrojs/sitemap": "3.1.4",
+    "@giscus/react": "^3.1.0",
     "@iconify-json/clarity": "^1.1.13",
     "@iconify-json/formkit": "^1.1.8",
     "@iconify-json/lets-icons": "^1.1.2",

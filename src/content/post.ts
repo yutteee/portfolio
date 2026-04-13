@@ -1,5 +1,4 @@
 import { getCollection, type CollectionEntry } from "astro:content";
-import { JSDOM } from "jsdom";
 import { externalBlogs } from "../data/externalBlog";
 import { SITE_URL } from "../consts";
 
@@ -13,22 +12,6 @@ export interface Post {
   marp: boolean;
   theme: "default" | "custom-theme";
 }
-
-const getOgpImageFromUrl = async (url: string) => {
-  try {
-    const res = await fetch(url);
-    const html = await res.text();
-    const dom = new JSDOM(html);
-    const ogpImage = dom.window.document
-      .querySelector('meta[property="og:image"]')
-      ?.getAttribute("content");
-
-    return ogpImage;
-  } catch (e) {
-    console.error(e);
-    return "";
-  }
-};
 
 const processLocalPosts = (posts: CollectionEntry<"posts">[]): Post[] => {
   return posts.map((post) => {
@@ -50,19 +33,17 @@ const processLocalPosts = (posts: CollectionEntry<"posts">[]): Post[] => {
   });
 };
 
-const getExternalPosts = async (): Promise<Post[]> => {
-  const externalPosts = await Promise.all(
-    externalBlogs.map(async (blog) => ({
-      url: blog.url,
-      title: blog.title,
-      pubDate: blog.pubDate,
-      image: (await getOgpImageFromUrl(blog.url)) || "",
-      alt: `サムネイル画像。${blog.title}`,
-      isExternal: true,
-    })),
-  );
-
-  return externalPosts.filter((post): post is Post => post.image !== "");
+const getExternalPosts = (): Post[] => {
+  return externalBlogs.map((blog) => ({
+    url: blog.url,
+    title: blog.title,
+    pubDate: blog.pubDate,
+    image: blog.image || `${SITE_URL}/ogp.png`,
+    alt: `サムネイル画像。${blog.title}`,
+    isExternal: true,
+    marp: false,
+    theme: "default" as const,
+  }));
 };
 
 const sortPostsByDate = (posts: Post[]): Post[] => {
@@ -76,7 +57,7 @@ const sortPostsByDate = (posts: Post[]): Post[] => {
 export const getAllPosts = async (): Promise<Post[]> => {
   const localPostsCollection = await getCollection("posts");
   const localPosts = processLocalPosts(localPostsCollection);
-  const externalPosts = await getExternalPosts();
+  const externalPosts = getExternalPosts();
 
   const allPosts = [...localPosts, ...externalPosts];
 

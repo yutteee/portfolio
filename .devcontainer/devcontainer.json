@@ -1,55 +1,15 @@
 {
-  "name": "astro-portfolio-devcontainer",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "astro-build.astro-vscode",
-        "biomejs.biome",
-        "unifiedjs.vscode-mdx"
-      ],
-      "settings": {
-        "terminal.integrated.defaultProfile.linux": "zsh",
-        "editor.defaultFormatter": "biomejs.biome",
-        "editor.formatOnSave": true,
-        "editor.codeActionsOnSave": {
-          "quickfix.biome": "explicit"
-        }
-      }
-    }
-  },
-  "forwardPorts": [4321, 6006],
-  "portsAttributes": {
-    "4321": {
-      "label": "Astro Dev Server",
-      "onAutoForward": "notify"
-    },
-    "6006": {
-      "label": "Storybook",
-      "onAutoForward": "notify"
-    }
-  },
-  "postCreateCommand": "pnpm install",
-  "remoteUser": "node",
+  "name": "portfolio",
+  "image": "claude-dev:latest",
+  "remoteUser": "vscode",
   "workspaceFolder": "/workspace",
   "mounts": [
     "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
   ],
-  "features": {
-    "ghcr.io/devcontainers/features/common-utils:2": {
-      "installZsh": true,
-      "username": "node",
-      "userUid": "1000",
-      "userGid": "1000"
-    }
-  }
+  "forwardPorts": [4321, 6006],
+  "portsAttributes": {
+    "4321": { "label": "Astro Dev Server", "onAutoForward": "notify" },
+    "6006": { "label": "Storybook", "onAutoForward": "notify" }
+  },
+  "postCreateCommand": "npm install -g pnpm@10.27 && pnpm install"
 }
-
-
-
-
-
-
-

@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import type { MarkdownInstance } from "astro";
-import TiltImage from "./TiltImage.astro";
+import { SITE_URL } from "../../../../consts";
 import TableOfContents from "./TableOfContents.astro";
 import "./content.css";
 
@@ -20,7 +20,25 @@ const { post, Content, headings } = Astro.props;
       <span>{post.data.pubDate}</span>
     </div>
     <h1 class="title">{post.data.title}</h1>
-    <TiltImage post={post} />
+    {
+      post.data.image ? (
+        <img
+          src={post.data.image.url}
+          alt={post.data.image.alt}
+          width="720"
+          height="378"
+          class="image"
+        />
+      ) : (
+        <img
+          src={`${SITE_URL}/ogp/${post.slug}.png`}
+          alt=""
+          width="720"
+          height="378"
+          class="image"
+        />
+      )
+    }
   </div>
 
   <TableOfContents headings={headings} />
@@ -86,6 +104,14 @@ const { post, Content, headings } = Astro.props;
       .title {
         font-size: 2rem;
         font-weight: 900;
+      }
+
+      .image {
+        width: 100%;
+        height: auto;
+        border: 8px solid var(--color-white);
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
     }
   }

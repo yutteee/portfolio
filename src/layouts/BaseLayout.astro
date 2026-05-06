@@ -6,6 +6,7 @@ import { Footer } from "../features/Footer";
 import "../styles/global.css";
 import { SEO } from "astro-seo";
 import { SITE_URL } from "../consts";
+import ThemeScript from "../components/ThemeScript.astro";
 
 interface Props {
   title: string;
@@ -18,18 +19,7 @@ const { title, description, ogpType = "website" } = Astro.props;
 
 <html lang="ja">
   <head>
-    <script is:inline>
-      // ブロッキングスクリプト: DOMが表示される前にテーマを適用
-      (function () {
-        const theme = localStorage.getItem("theme");
-        const isOsDark = window.matchMedia(
-          "(prefers-color-scheme: dark)",
-        ).matches;
-        if (theme === "dark" || (theme === null && isOsDark)) {
-          document.documentElement.classList.add("dark");
-        }
-      })();
-    </script>
+    <ThemeScript />
     <link rel="icon" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <SEO

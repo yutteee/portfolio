@@ -15,9 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 10
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -25,7 +25,5 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
-      - name: Install Playwright
-        run: pnpm exec playwright install
       - name: Run unit test and storybook test
         run: pnpm run test

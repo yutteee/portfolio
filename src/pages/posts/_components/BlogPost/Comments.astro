@@ -1,0 +1,67 @@
+---
+---
+
+<section class="comments" aria-label="コメント">
+  <h2 class="heading">コメント</h2>
+  <giscus-comments></giscus-comments>
+</section>
+
+<script>
+  class GiscusComments extends HTMLElement {
+    connectedCallback() {
+      const getTheme = () =>
+        document.documentElement.classList.contains("dark") ? "dark" : "light";
+
+      const script = document.createElement("script");
+      script.src = "https://giscus.app/client.js";
+      script.async = true;
+      script.crossOrigin = "anonymous";
+      script.setAttribute("data-repo", "yutteee/portfolio");
+      script.setAttribute("data-repo-id", "R_kgDOLxiJFQ");
+      script.setAttribute("data-category", "Announcements");
+      script.setAttribute("data-category-id", "DIC_kwDOLxiJFc4C8bth");
+      script.setAttribute("data-mapping", "pathname");
+      script.setAttribute("data-strict", "0");
+      script.setAttribute("data-reactions-enabled", "1");
+      script.setAttribute("data-emit-metadata", "0");
+      script.setAttribute("data-input-position", "bottom");
+      script.setAttribute("data-theme", getTheme());
+      script.setAttribute("data-lang", "ja");
+      this.appendChild(script);
+
+      // サイトのテーマ切り替え（<html> の .dark クラス変更）に giscus を追従させる
+      const observer = new MutationObserver(() => {
+        const iframe = document.querySelector<HTMLIFrameElement>(
+          "iframe.giscus-frame",
+        );
+        if (!iframe?.contentWindow) return;
+        iframe.contentWindow.postMessage(
+          { giscus: { setConfig: { theme: getTheme() } } },
+          "https://giscus.app",
+        );
+      });
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
+    }
+  }
+
+  if (!customElements.get("giscus-comments")) {
+    customElements.define("giscus-comments", GiscusComments);
+  }
+</script>
+
+<style>
+  .comments {
+    width: 100%;
+    max-width: 40rem;
+    margin: 4rem auto 0;
+  }
+
+  .heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+</style>

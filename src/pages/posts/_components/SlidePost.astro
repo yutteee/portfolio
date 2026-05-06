@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import { Marp } from "@marp-team/marp-core";
 import { marpThemes } from "../../../marp-themes";
+import Comments from "./Comments.astro";
 
 interface Props {
   post: CollectionEntry<"posts">;
@@ -32,6 +33,8 @@ slideCss = slideCss || result.css;
 
 <div class="slide-container" set:html={slideHtml} />
 <style set:html={slideCss}></style>
+
+<Comments />
 
 <style>
   .slide-container {

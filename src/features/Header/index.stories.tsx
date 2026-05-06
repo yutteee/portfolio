@@ -113,13 +113,13 @@ export const ThemeToggleInteraction: Story = {
     // ダークモードにするボタンを押す
     const darkButton = await canvas.findByLabelText("ダークモードにする");
     await userEvent.click(darkButton);
-    // 同じボタンがラベル変更されフォーカスを維持している
+    // 表示が切り替わり、新たに表示されたライトモードボタンにフォーカスが移動している
     const lightButton = await canvas.findByLabelText("ライトモードにする");
     await expect(lightButton).toBeInTheDocument();
     await expect(lightButton).toHaveFocus();
     // ライトモードにするボタンを押す
     await userEvent.click(lightButton);
-    // 同じボタンがラベル変更されフォーカスを維持している
+    // 表示が切り替わり、新たに表示されたダークモードボタンにフォーカスが移動している
     const darkButtonAfter = await canvas.findByLabelText("ダークモードにする");
     await expect(darkButtonAfter).toHaveFocus();
   },

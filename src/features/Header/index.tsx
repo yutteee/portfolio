@@ -3,7 +3,19 @@ import type { CurrentPage } from "./presenter";
 import { useRef } from "react";
 import { useFocusTrap } from "./hooks/useFocusTrap";
 import { useMenu } from "./hooks/useMenu";
-import { useThemeMode } from "./hooks/useThemeMode";
+
+const toggleTheme = () => {
+  const willBeDark = !document.documentElement.classList.contains("dark");
+  if (willBeDark) {
+    document.documentElement.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+    document.getElementById("theme-toggle-light")?.focus();
+  } else {
+    document.documentElement.classList.remove("dark");
+    localStorage.setItem("theme", "light");
+    document.getElementById("theme-toggle-dark")?.focus();
+  }
+};
 
 export const Header: React.FC<{ currentPage?: CurrentPage }> = ({
   currentPage,
@@ -16,7 +28,6 @@ export const Header: React.FC<{ currentPage?: CurrentPage }> = ({
     closeBtnRef,
     hamburgerRef,
   });
-  const { isDark, toggleTheme } = useThemeMode();
 
   useFocusTrap(spMenuRef, menuOpen);
 
@@ -26,7 +37,6 @@ export const Header: React.FC<{ currentPage?: CurrentPage }> = ({
       onOpen={openMenu}
       onClose={closeMenu}
       closeBtnRef={closeBtnRef}
-      isDark={isDark}
       onThemeToggle={toggleTheme}
       currentPage={currentPage}
       spMenuRef={spMenuRef}

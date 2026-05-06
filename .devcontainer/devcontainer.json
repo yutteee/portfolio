@@ -6,6 +6,7 @@
   "mounts": [
     "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
   ],
+  "appPort": [4321, 6006],
   "forwardPorts": [4321, 6006],
   "portsAttributes": {
     "4321": { "label": "Astro Dev Server", "onAutoForward": "notify" },

@@ -11,5 +11,5 @@
     "4321": { "label": "Astro Dev Server", "onAutoForward": "notify" },
     "6006": { "label": "Storybook", "onAutoForward": "notify" }
   },
-  "postCreateCommand": "npm install -g pnpm@10.27 && pnpm install"
+  "postCreateCommand": "npm install -g pnpm@10.27 && pnpm install && pnpm exec playwright install --with-deps chromium"
 }

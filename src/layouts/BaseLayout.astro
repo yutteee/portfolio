@@ -30,6 +30,18 @@ const { title, description, ogpType = "website" } = Astro.props;
         }
       })();
     </script>
+    <script is:inline>
+      // ブロッキングスクリプト: DOMが表示される前にアニメーション設定を適用
+      (function () {
+        const animation = localStorage.getItem("animation");
+        const isReduced = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+        if (animation === "stop" || (animation === null && isReduced)) {
+          document.documentElement.classList.add("stop");
+        }
+      })();
+    </script>
     <link rel="icon" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <SEO

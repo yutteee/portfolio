@@ -6,6 +6,7 @@ import { Footer } from "../features/Footer";
 import "../styles/global.css";
 import { SEO } from "astro-seo";
 import { SITE_URL } from "../consts";
+import AnimationScript from "../components/AnimationScript.astro";
 import ThemeScript from "../components/ThemeScript.astro";
 
 interface Props {
@@ -19,6 +20,7 @@ const { title, description, ogpType = "website" } = Astro.props;
 
 <html lang="ja">
   <head>
+    <AnimationScript />
     <ThemeScript />
     <link rel="icon" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />

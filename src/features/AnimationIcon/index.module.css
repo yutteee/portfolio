@@ -1,3 +1,15 @@
-.container {
+/*
+ * <html> の `.stop` クラスで表示するボタンを切り替える。
+ * Why: SSR 時には localStorage が読めず初期状態が定まらない。React の state
+ * で出し分けると、SSR HTML が常に「再生中」想定になりハイドレーション時に
+ * アイコンが切り替わるちらつきが発生する。両方のボタンを常に DOM に置き、
+ * BaseLayout の inline script が paint 前に付与する `.stop` を CSS で参照
+ * することで、SSR HTML と最終状態を一致させる。
+ */
+:global(html:not(.stop)) .playButton {
+  display: none;
+}
 
-} 
+:global(html.stop) .stopButton {
+  display: none;
+}

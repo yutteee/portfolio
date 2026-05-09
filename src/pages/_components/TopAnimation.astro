@@ -1,5 +1,5 @@
 ---
-import AnimationIcon from "./AnimationIcon.astro";
+import { AnimationIcon } from "../../features/AnimationIcon";
 ---
 
 <div class="container" id="container">
@@ -8,7 +8,7 @@ import AnimationIcon from "./AnimationIcon.astro";
   <div class="title absolute" id="title" lang="en">Hi! I'm Yutteee!</div>
   <div class="scroll" id="scroll">Scroll</div>
   <div class="animation-button">
-    <AnimationIcon />
+    <AnimationIcon client:load />
   </div>
 </div>
 <script>
@@ -59,13 +59,12 @@ import AnimationIcon from "./AnimationIcon.astro";
   // 初期状態の設定
   updateAnimation();
 
-  // アニメーション切り替えイベントのリスナーを追加
-  document
-    ?.getElementById("togglePlayAnimation")
-    ?.addEventListener("click", updateAnimation);
-  document
-    ?.getElementById("toggleStopAnimation")
-    ?.addEventListener("click", updateAnimation);
+  // <html> の `.stop` クラス変化を監視して GSAP の有効/無効を切り替え
+  const observer = new MutationObserver(updateAnimation);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
 </script>
 
 <style>

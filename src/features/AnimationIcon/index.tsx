@@ -1,18 +1,37 @@
+import { useRef } from "react";
+import { FiPause, FiPlay } from "react-icons/fi";
 import { IconButton } from "../../ui/IconButton";
-import { FiPlay, FiPause } from "react-icons/fi";
-import { useAnimationMode } from "./hooks/useAnimationMode";
+import styles from "./index.module.css";
 
 export const AnimationIcon: React.FC = () => {
-  const { isStopped, toggleAnimation } = useAnimationMode();
+  const stopButtonRef = useRef<HTMLButtonElement>(null);
+  const playButtonRef = useRef<HTMLButtonElement>(null);
+
+  const toggleAnimation = () => {
+    const html = document.documentElement;
+    const willStop = !html.classList.contains("stop");
+    html.classList.toggle("stop", willStop);
+    localStorage.setItem("animation", willStop ? "stop" : "play");
+    // display:none で外れる focus を、表示側のボタンへ移す
+    (willStop ? playButtonRef : stopButtonRef).current?.focus();
+  };
+
   return (
-    <IconButton
-      label={
-        isStopped ? "アニメーションを有効にする" : "アニメーションを停止する"
-      }
-      icon={isStopped ? FiPlay : FiPause}
-      id={isStopped ? "togglePlayAnimation" : "toggleStopAnimation"}
-      handleClick={toggleAnimation}
-      aria-pressed={isStopped}
-    />
+    <>
+      <IconButton
+        ref={stopButtonRef}
+        label="アニメーションを停止する"
+        icon={FiPause}
+        handleClick={toggleAnimation}
+        className={styles.stopButton}
+      />
+      <IconButton
+        ref={playButtonRef}
+        label="アニメーションを有効にする"
+        icon={FiPlay}
+        handleClick={toggleAnimation}
+        className={styles.playButton}
+      />
+    </>
   );
 };

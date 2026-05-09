@@ -1,101 +1,70 @@
-import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, it, expect, afterEach, beforeEach, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { AnimationIcon } from ".";
 
 describe("AnimationIcon", () => {
-  const originalMatchMedia = window.matchMedia;
-
   beforeEach(() => {
     localStorage.clear();
     document.documentElement.className = "";
-    window.matchMedia = vi.fn().mockImplementation((query) => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addListener: vi.fn(),
-      removeListener: vi.fn(),
-      addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
-      dispatchEvent: vi.fn(),
-    }));
   });
 
   afterEach(() => {
-    window.matchMedia = originalMatchMedia;
+    document.documentElement.className = "";
   });
 
-  describe("初期表示", () => {
-    it("localStorageがplayの場合、停止ボタンが表示される", () => {
-      localStorage.setItem("animation", "play");
+  describe("レンダリング", () => {
+    it("停止ボタンと再生ボタンが両方ともDOMに存在する", () => {
       render(<AnimationIcon />);
-      expect(document.documentElement).not.toHaveClass("stop");
       expect(
         screen.getByRole("button", { name: "アニメーションを停止する" }),
       ).toBeInTheDocument();
-    });
-
-    it("localStorageがstopの場合、再生ボタンが表示される", () => {
-      localStorage.setItem("animation", "stop");
-      render(<AnimationIcon />);
-      expect(document.documentElement).toHaveClass("stop");
       expect(
         screen.getByRole("button", { name: "アニメーションを有効にする" }),
-      ).toBeInTheDocument();
-    });
-
-    it("localStorageに設定がなくOSがprefers-reduced-motionの場合、再生ボタンが表示される", () => {
-      window.matchMedia = vi.fn().mockImplementation((query) => ({
-        matches: query === "(prefers-reduced-motion: reduce)",
-        media: query,
-        onchange: null,
-        addListener: vi.fn(),
-        removeListener: vi.fn(),
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-        dispatchEvent: vi.fn(),
-      }));
-      render(<AnimationIcon />);
-      expect(document.documentElement).toHaveClass("stop");
-      expect(
-        screen.getByRole("button", { name: "アニメーションを有効にする" }),
-      ).toBeInTheDocument();
-    });
-
-    it("localStorageに設定がなくprefers-reduced-motionでもない場合、停止ボタンが表示される", () => {
-      render(<AnimationIcon />);
-      expect(document.documentElement).not.toHaveClass("stop");
-      expect(
-        screen.getByRole("button", { name: "アニメーションを停止する" }),
       ).toBeInTheDocument();
     });
   });
 
   describe("ユーザー操作", () => {
-    it("停止ボタンをクリックすると、localStorageにstopが保存され、再生ボタンに切り替わる", async () => {
+    it("停止ボタンをクリックすると、html要素にstopクラスが付与され、localStorageにstopが保存される", async () => {
       render(<AnimationIcon />);
       await userEvent.click(
         screen.getByRole("button", { name: "アニメーションを停止する" }),
       );
-      expect(localStorage.getItem("animation")).toBe("stop");
       expect(document.documentElement).toHaveClass("stop");
-      expect(
-        screen.getByRole("button", { name: "アニメーションを有効にする" }),
-      ).toBeInTheDocument();
+      expect(localStorage.getItem("animation")).toBe("stop");
     });
 
-    it("再生ボタンをクリックすると、localStorageにplayが保存され、停止ボタンに切り替わる", async () => {
-      localStorage.setItem("animation", "stop");
+    it("再生ボタンをクリックすると、html要素のstopクラスが除去され、localStorageにplayが保存される", async () => {
+      document.documentElement.classList.add("stop");
       render(<AnimationIcon />);
       await userEvent.click(
         screen.getByRole("button", { name: "アニメーションを有効にする" }),
       );
-      expect(localStorage.getItem("animation")).toBe("play");
       expect(document.documentElement).not.toHaveClass("stop");
+      expect(localStorage.getItem("animation")).toBe("play");
+    });
+
+    it("停止ボタンをクリックすると、再生ボタンへフォーカスが移る", async () => {
+      render(<AnimationIcon />);
+      await userEvent.click(
+        screen.getByRole("button", { name: "アニメーションを停止する" }),
+      );
+      expect(
+        screen.getByRole("button", { name: "アニメーションを有効にする" }),
+      ).toHaveFocus();
+    });
+
+    it("再生ボタンをクリックすると、停止ボタンへフォーカスが移る", async () => {
+      document.documentElement.classList.add("stop");
+      render(<AnimationIcon />);
+      await userEvent.click(
+        screen.getByRole("button", { name: "アニメーションを有効にする" }),
+      );
       expect(
         screen.getByRole("button", { name: "アニメーションを停止する" }),
-      ).toBeInTheDocument();
+      ).toHaveFocus();
     });
   });
 });

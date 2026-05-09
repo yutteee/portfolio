@@ -1,11 +1,11 @@
-import { userEvent, within, expect } from "storybook/test";
-import type { Meta, StoryObj, Decorator } from "@storybook/react";
+import type { Decorator, Meta, StoryObj } from "@storybook/react";
+import { expect, userEvent, within } from "storybook/test";
 import { AnimationIcon } from ".";
 
 const decorators: Decorator[] = [
   (Story) => {
     localStorage.clear();
-    document.documentElement.className = "";
+    document.documentElement.classList.remove("stop");
     return <Story />;
   },
 ];
@@ -19,9 +19,10 @@ const meta: Meta<typeof AnimationIcon> = {
       description: {
         component: [
           "アニメーションの再生/停止を切り替えるトグルボタン。",
-          "- `<html>`要素の`.stop`クラスをトグルし、ページ全体のアニメーションを制御する。",
-          "- 状態は localStorage の`animation`キーに永続化される。",
-          "- 設定がない場合は OS の prefers-reduced-motion を初期値に採用する。",
+          "- 停止ボタンと再生ボタンを両方DOMに置き、`<html>.stop`の有無でCSSが片方を`display: none`する設計。",
+          "- これにより、SSR出力と最終状態が一致し、ハイドレーション時のちらつき（FOUC）が発生しない。",
+          "- クリック時は`<html>`要素の`.stop`クラスをトグルし、localStorageの`animation`キーに永続化する。",
+          "- 初期状態（localStorage / prefers-reduced-motion）の解決はBaseLayoutのinline scriptが担う。",
         ].join("  \n"),
       },
     },
@@ -39,6 +40,8 @@ export const Stopped: Story = {
   decorators: [
     (Story) => {
       localStorage.setItem("animation", "stop");
+      // BaseLayout の inline script が paint 前に行う処理を再現
+      document.documentElement.classList.add("stop");
       return <Story />;
     },
   ],
@@ -49,31 +52,29 @@ export const Playing: Story = {
   decorators: [
     (Story) => {
       localStorage.setItem("animation", "play");
+      document.documentElement.classList.remove("stop");
       return <Story />;
     },
   ],
 };
 
 export const ToggleInteraction: Story = {
-  name: "トグルボタンがフォーカスを保持したまま切り替わる",
+  name: "クリックで表示ボタンが切り替わりフォーカスを保持する",
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement.ownerDocument.body);
     const stopButton = await canvas.findByLabelText("アニメーションを停止する");
     await userEvent.click(stopButton);
+    await expect(document.documentElement.classList.contains("stop")).toBe(
+      true,
+    );
     const playButton = await canvas.findByLabelText(
       "アニメーションを有効にする",
     );
     await expect(playButton).toHaveFocus();
-    await expect(document.documentElement.classList.contains("stop")).toBe(
-      true,
-    );
     await userEvent.click(playButton);
-    const stopButtonAfter = await canvas.findByLabelText(
-      "アニメーションを停止する",
-    );
-    await expect(stopButtonAfter).toHaveFocus();
     await expect(document.documentElement.classList.contains("stop")).toBe(
       false,
     );
+    await expect(stopButton).toHaveFocus();
   },
 };

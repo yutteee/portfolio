@@ -6,6 +6,8 @@ import { Footer } from "../features/Footer";
 import "../styles/global.css";
 import { SEO } from "astro-seo";
 import { SITE_URL } from "../consts";
+import AnimationScript from "../components/AnimationScript.astro";
+import ThemeScript from "../components/ThemeScript.astro";
 
 interface Props {
   title: string;
@@ -18,30 +20,8 @@ const { title, description, ogpType = "website" } = Astro.props;
 
 <html lang="ja">
   <head>
-    <script is:inline>
-      // ブロッキングスクリプト: DOMが表示される前にテーマを適用
-      (function () {
-        const theme = localStorage.getItem("theme");
-        const isOsDark = window.matchMedia(
-          "(prefers-color-scheme: dark)",
-        ).matches;
-        if (theme === "dark" || (theme === null && isOsDark)) {
-          document.documentElement.classList.add("dark");
-        }
-      })();
-    </script>
-    <script is:inline>
-      // ブロッキングスクリプト: DOMが表示される前にアニメーション設定を適用
-      (function () {
-        const animation = localStorage.getItem("animation");
-        const isReduced = window.matchMedia(
-          "(prefers-reduced-motion: reduce)",
-        ).matches;
-        if (animation === "stop" || (animation === null && isReduced)) {
-          document.documentElement.classList.add("stop");
-        }
-      })();
-    </script>
+    <AnimationScript />
+    <ThemeScript />
     <link rel="icon" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <SEO

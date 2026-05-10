@@ -1,14 +1,6 @@
-import type { Decorator, Meta, StoryObj } from "@storybook/react";
-import { expect, userEvent, within } from "storybook/test";
+import type { Meta, StoryObj } from "@storybook/react";
+import { expect, userEvent, waitFor, within } from "storybook/test";
 import { AnimationIcon } from ".";
-
-const decorators: Decorator[] = [
-  (Story) => {
-    localStorage.clear();
-    document.documentElement.classList.remove("stop");
-    return <Story />;
-  },
-];
 
 const meta: Meta<typeof AnimationIcon> = {
   title: "features/AnimationIcon",
@@ -27,7 +19,10 @@ const meta: Meta<typeof AnimationIcon> = {
       },
     },
   },
-  decorators,
+  beforeEach: () => {
+    localStorage.clear();
+    document.documentElement.classList.remove("stop");
+  },
 };
 export default meta;
 
@@ -37,25 +32,19 @@ export const Default: Story = {};
 
 export const Stopped: Story = {
   name: "停止状態の見た目",
-  decorators: [
-    (Story) => {
-      localStorage.setItem("animation", "stop");
-      // BaseLayout の inline script が paint 前に行う処理を再現
-      document.documentElement.classList.add("stop");
-      return <Story />;
-    },
-  ],
+  beforeEach: () => {
+    localStorage.setItem("animation", "stop");
+    // BaseLayout の inline script が paint 前に行う処理を再現
+    document.documentElement.classList.add("stop");
+  },
 };
 
 export const Playing: Story = {
   name: "再生状態の見た目",
-  decorators: [
-    (Story) => {
-      localStorage.setItem("animation", "play");
-      document.documentElement.classList.remove("stop");
-      return <Story />;
-    },
-  ],
+  beforeEach: () => {
+    localStorage.setItem("animation", "play");
+    document.documentElement.classList.remove("stop");
+  },
 };
 
 export const ToggleInteraction: Story = {
@@ -76,5 +65,7 @@ export const ToggleInteraction: Story = {
       false,
     );
     await expect(stopButton).toHaveFocus();
+    // useEffect / state flush をテスト終了前に待ち切る
+    await waitFor(() => expect(localStorage.getItem("animation")).toBe("play"));
   },
 };

@@ -1,14 +1,6 @@
-import { userEvent, within, expect, fn } from "storybook/test";
-import type { Meta, StoryObj, Decorator } from "@storybook/react";
+import { userEvent, within, expect, waitFor } from "storybook/test";
+import type { Meta, StoryObj } from "@storybook/react";
 import { Header } from ".";
-
-const decorators: Decorator[] = [
-  (Story) => {
-    localStorage.clear();
-    document.documentElement.className = "";
-    return <Story />;
-  },
-];
 
 const meta: Meta<typeof Header> = {
   title: "features/Header",
@@ -37,7 +29,10 @@ const meta: Meta<typeof Header> = {
       },
     },
   },
-  decorators,
+  beforeEach: () => {
+    localStorage.clear();
+    document.documentElement.className = "";
+  },
 };
 export default meta;
 
@@ -100,6 +95,10 @@ export const SpMenu: Story = {
     await userEvent.click(closeButton);
     // 開くボタンにフォーカスが移動する
     await expect(openButton).toHaveFocus();
+    // useFocusTrap の cleanup を含む effect flush を待つ
+    await waitFor(() =>
+      expect(canvas.queryByTestId("sp-menu")).not.toBeVisible(),
+    );
   },
 };
 
@@ -122,6 +121,8 @@ export const ThemeToggleInteraction: Story = {
     // 同じボタンがラベル変更されフォーカスを維持している
     const darkButtonAfter = await canvas.findByLabelText("ダークモードにする");
     await expect(darkButtonAfter).toHaveFocus();
+    // useThemeMode の useEffect が完全に flush されるのを待つ（テスト終了後の concurrent re-render 防止）
+    await waitFor(() => expect(localStorage.getItem("theme")).toBe("light"));
   },
 };
 
@@ -144,5 +145,6 @@ export const DarkModeAndLightMode: Story = {
     await expect(document.documentElement.classList.contains("dark")).toBe(
       false,
     );
+    await waitFor(() => expect(localStorage.getItem("theme")).toBe("light"));
   },
 };

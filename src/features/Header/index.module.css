@@ -61,6 +61,22 @@
   }
 }
 
+.themeToggleDark {
+  display: inline-flex;
+}
+
+.themeToggleLight {
+  display: none;
+}
+
+:global(html.dark) .themeToggleDark {
+  display: none;
+}
+
+:global(html.dark) .themeToggleLight {
+  display: inline-flex;
+}
+
 .current {
   color: var(--color-link);
   position: relative;

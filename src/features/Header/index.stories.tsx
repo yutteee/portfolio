@@ -1,4 +1,4 @@
-import { userEvent, within, expect, fn } from "storybook/test";
+import { userEvent, within, expect, fn, waitFor } from "storybook/test";
 import type { Meta, StoryObj, Decorator } from "@storybook/react";
 import { Header } from ".";
 
@@ -107,21 +107,20 @@ export const ThemeToggleInteraction: Story = {
   args: {
     currentPage: undefined,
   },
-  name: "テーマトグルボタンがフォーカスを保持したまま切り替わる",
+  name: "テーマトグル時に表示が切り替わる側のボタンにフォーカスが移る",
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement.ownerDocument.body);
-    // ダークモードにするボタンを押す
+    // 初期状態の「ダークモードにする」ボタンを押す
     const darkButton = await canvas.findByLabelText("ダークモードにする");
     await userEvent.click(darkButton);
-    // 同じボタンがラベル変更されフォーカスを維持している
+    // 表示が切り替わり「ライトモードにする」ボタンにフォーカスが移る
     const lightButton = await canvas.findByLabelText("ライトモードにする");
-    await expect(lightButton).toBeInTheDocument();
-    await expect(lightButton).toHaveFocus();
-    // ライトモードにするボタンを押す
+    await waitFor(() => expect(lightButton).toHaveFocus());
+    // 「ライトモードにする」ボタンを押す
     await userEvent.click(lightButton);
-    // 同じボタンがラベル変更されフォーカスを維持している
+    // 表示が切り替わり「ダークモードにする」ボタンにフォーカスが戻る
     const darkButtonAfter = await canvas.findByLabelText("ダークモードにする");
-    await expect(darkButtonAfter).toHaveFocus();
+    await waitFor(() => expect(darkButtonAfter).toHaveFocus());
   },
 };
 

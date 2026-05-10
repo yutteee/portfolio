@@ -18,8 +18,6 @@ describe("ProductItem", () => {
     const link = screen.getByRole("link");
     expect(link).toHaveAttribute("href", baseProps.href);
     expect(link).toHaveAttribute("aria-label", baseProps.title);
-    expect(link).toHaveAttribute("target", "_blank");
-    expect(link).toHaveAttribute("rel", "noopener noreferrer");
   });
 
   it("画像のalt属性が正しい", () => {

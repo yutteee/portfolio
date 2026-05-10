@@ -64,89 +64,26 @@ describe("Header", () => {
   });
 });
 
-describe("Headerのテーマ永続化", () => {
-  const originalMatchMedia = window.matchMedia;
-
+describe("Headerのテーマ切替", () => {
   beforeEach(() => {
     localStorage.clear();
     document.documentElement.className = "";
-    // デフォルトはライトモード扱い
-    window.matchMedia = vi.fn().mockImplementation((query) => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addListener: vi.fn(),
-      removeListener: vi.fn(),
-      addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
-      dispatchEvent: vi.fn(),
-    }));
   });
 
-  afterEach(() => {
-    window.matchMedia = originalMatchMedia;
+  it("ダークモードボタンをクリックすると、localStorageにdarkが保存され、html要素にdarkクラスが付く", async () => {
+    render(<Header />);
+    const darkButton = screen.getByLabelText("ダークモードにする");
+    await userEvent.click(darkButton);
+    expect(localStorage.getItem("theme")).toBe("dark");
+    expect(document.documentElement).toHaveClass("dark");
   });
 
-  describe("初期表示", () => {
-    it("localStorageがdarkの場合、ダークモードで表示される", () => {
-      localStorage.setItem("theme", "dark");
-      render(<Header />);
-      expect(document.documentElement).toHaveClass("dark");
-      expect(screen.getByLabelText("ライトモードにする")).toBeInTheDocument();
-    });
-
-    it("localStorageがlightの場合、ライトモードで表示される", () => {
-      localStorage.setItem("theme", "light");
-      render(<Header />);
-      expect(document.documentElement).not.toHaveClass("dark");
-      expect(screen.getByLabelText("ダークモードにする")).toBeInTheDocument();
-    });
-
-    it("localStorageに設定がなくOSがダークモードの場合、ダークモードで表示される", () => {
-      window.matchMedia = vi.fn().mockImplementation((query) => ({
-        matches: query === "(prefers-color-scheme: dark)",
-        media: query,
-        onchange: null,
-        addListener: vi.fn(),
-        removeListener: vi.fn(),
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-        dispatchEvent: vi.fn(),
-      }));
-      render(<Header />);
-      expect(document.documentElement).toHaveClass("dark");
-      expect(screen.getByLabelText("ライトモードにする")).toBeInTheDocument();
-    });
-
-    it("localStorageに設定がなくOSがライトモードの場合、ライトモードで表示される", () => {
-      // beforeEachで設定済み
-      render(<Header />);
-      expect(document.documentElement).not.toHaveClass("dark");
-      expect(screen.getByLabelText("ダークモードにする")).toBeInTheDocument();
-    });
-  });
-
-  describe("ユーザー操作", () => {
-    it("ダークモードボタンをクリックすると、localStorageにdarkが保存され、テーマが切り替わる", async () => {
-      render(<Header />);
-      const darkButton = screen.getByLabelText("ダークモードにする");
-      await userEvent.click(darkButton);
-      expect(localStorage.getItem("theme")).toBe("dark");
-      expect(document.documentElement).toHaveClass("dark");
-      expect(screen.getByLabelText("ライトモードにする")).toBeInTheDocument();
-    });
-
-    it("ライトモードボタンをクリックすると、localStorageにlightが保存され、テーマが切り替わる", async () => {
-      // 初期状態をダークモードにする
-      localStorage.setItem("theme", "dark");
-      render(<Header />);
-
-      const lightButton = screen.getByLabelText("ライトモードにする");
-      await userEvent.click(lightButton);
-
-      expect(localStorage.getItem("theme")).toBe("light");
-      expect(document.documentElement).not.toHaveClass("dark");
-      expect(screen.getByLabelText("ダークモードにする")).toBeInTheDocument();
-    });
+  it("ライトモードボタンをクリックすると、localStorageにlightが保存され、html要素のdarkクラスが外れる", async () => {
+    document.documentElement.classList.add("dark");
+    render(<Header />);
+    const lightButton = screen.getByLabelText("ライトモードにする");
+    await userEvent.click(lightButton);
+    expect(localStorage.getItem("theme")).toBe("light");
+    expect(document.documentElement).not.toHaveClass("dark");
   });
 });

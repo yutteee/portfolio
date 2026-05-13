@@ -3,7 +3,9 @@ import { ProductItem } from "../../ui/ProductItem";
 import { getCollection } from "astro:content";
 import { LinkButton } from "../../ui/LinkButton";
 
-const productsCollection = await getCollection("products");
+const productsCollection = (await getCollection("products")).sort((a, b) =>
+  b.data.period.localeCompare(a.data.period),
+);
 ---
 
 <section class="container">

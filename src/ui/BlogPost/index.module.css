@@ -43,7 +43,7 @@
 .title {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
   font-size: 1.125rem;
   font-weight: 700;
 }

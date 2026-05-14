@@ -145,6 +145,9 @@ const totalSlides = (slideHtml.match(/<section/g) || []).length;
 <style is:global>
   [data-slide-track] {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
@@ -164,20 +167,12 @@ const totalSlides = (slideHtml.match(/<section/g) || []).length;
   }
 
   [data-slide-track] .marpit {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    width: max-content;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    gap: 0;
+    display: contents;
   }
 
-  [data-slide-track] .marpit > section {
+  [data-slide-track] section {
     flex: 0 0 100%;
     width: 100%;
-    max-width: 100%;
     aspect-ratio: 16 / 9;
     height: auto;
     min-height: 0;

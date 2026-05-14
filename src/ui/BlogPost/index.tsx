@@ -45,8 +45,8 @@ export const BlogPost: React.FC<BlogPostProps> = ({
             {marp && <span className={styles.slideBadge}>スライド</span>}
           </div>
           <div className={styles.title}>
-            {title}
-            {isExternal && <FiExternalLink style={{ marginLeft: 4 }} />}
+            <span>{title}</span>
+            {isExternal && <FiExternalLink aria-hidden />}
           </div>
         </div>
       </a>

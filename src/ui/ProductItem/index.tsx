@@ -10,13 +10,16 @@ export type ProductItemProps = {
   alt: string;
 };
 
-export const ProductItem: React.FC<ProductItemProps> = ({ image, index, title, description, href, alt }) => {
+export const ProductItem: React.FC<ProductItemProps> = ({
+  image,
+  index,
+  title,
+  description,
+  href,
+  alt,
+}) => {
   return (
-    <a
-      className={styles.product}
-      href={href}
-      aria-label={title}
-    >
+    <a className={styles.product} href={href} aria-label={title}>
       <div className={styles["index-parent"]}>
         <span className={styles.mask}>
           <img

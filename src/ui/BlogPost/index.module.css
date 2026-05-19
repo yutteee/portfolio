@@ -41,11 +41,13 @@
   font-weight: bold;
 }
 .title {
-  display: flex;
-  align-items: center;
-  gap: 2px;
   font-size: 1.125rem;
   font-weight: 700;
+}
+.icon {
+  display: inline;
+  vertical-align: -0.125em;
+  margin-left: 2px;
 }
 .link:hover .image {
   transform: scale(1.1);

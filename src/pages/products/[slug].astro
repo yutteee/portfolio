@@ -21,15 +21,13 @@ import { Header } from "../../features/Header";
 import { Footer } from "../../features/Footer";
 import ProductPost from "./_components/ProductPost/index.astro";
 import { Icon } from "astro-icon/components";
-import ThemeScript from "../../components/ThemeScript.astro";
+import CommonHead from "../../components/CommonHead.astro";
 ---
 
 <!doctype html>
 <html lang="ja">
   <head>
-    <ThemeScript />
-    <link rel="icon" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
+    <CommonHead />
     <SEO
       charset="UTF-8"
       title={`${product.data.title} | yutteee-portfolio`}

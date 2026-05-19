@@ -30,15 +30,13 @@ import BlogPost from "./_components/BlogPost/index.astro";
 import SlidePost from "./_components/SlidePost.astro";
 import { Breadcrumb } from "../../ui/Breadcrumb";
 import { SITE_URL } from "../../consts";
-import ThemeScript from "../../components/ThemeScript.astro";
+import CommonHead from "../../components/CommonHead.astro";
 ---
 
 <!doctype html>
 <html lang="ja">
   <head>
-    <ThemeScript />
-    <link rel="icon" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
+    <CommonHead />
     <SEO
       charset="UTF-8"
       title={`${post.data.title} | yutteee-portfolio`}

@@ -46,7 +46,9 @@ export const BlogPost: React.FC<BlogPostProps> = ({
           </div>
           <div className={styles.title}>
             <span>{title}</span>
-            {isExternal && <FiExternalLink aria-hidden />}
+            {isExternal && (
+              <FiExternalLink aria-hidden className={styles.icon} />
+            )}
           </div>
         </div>
       </a>

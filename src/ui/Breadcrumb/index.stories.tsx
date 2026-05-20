@@ -36,3 +36,22 @@ export const ThreeLevels: Story = {
     currentLabel: "記事タイトル",
   },
 };
+
+export const LongCurrentLabel: Story = {
+  name: "現在ラベルが長い場合（テキストがインラインで折り返される）",
+  args: {
+    items: [
+      { label: "トップ", href: "/" },
+      { label: "記事", href: "/posts" },
+    ],
+    currentLabel:
+      "Claude Code 主軸の開発に合わせて Dev Container をカスタマイズする",
+  },
+  decorators: [
+    (StoryFn) => (
+      <div style={{ maxWidth: "32rem" }}>
+        <StoryFn />
+      </div>
+    ),
+  ],
+};

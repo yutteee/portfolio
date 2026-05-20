@@ -19,9 +19,7 @@
   display: inline;
 }
 
-/* 祖先アイテムはラベルとシェブロンを分けず一塊として扱う */
 .item:not(:last-child) {
-  white-space: nowrap;
   margin-right: 0.5rem;
 }
 

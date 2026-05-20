@@ -1,8 +1,4 @@
 .breadcrumbs {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
   padding: 0.5rem 1rem;
   background-color: var(--color-white);
   height: fit-content;
@@ -20,12 +16,21 @@
 }
 
 .item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  display: inline;
+}
+
+/* 祖先アイテムはラベルとシェブロンを分けず一塊として扱う */
+.item:not(:last-child) {
+  white-space: nowrap;
+  margin-right: 0.5rem;
 }
 
 .item a {
   color: var(--color-link);
   text-decoration: underline;
+}
+
+.item svg {
+  vertical-align: middle;
+  margin-left: 0.5rem;
 }

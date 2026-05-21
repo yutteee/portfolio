@@ -4,6 +4,94 @@
   --color-text: #041b47;
   --color-blue: #84c5ea;
   --color-link: #023aa2;
+
+  /* Font Sizes - Title */
+  --font-size-title-lg: 3rem;
+  --font-size-title-lg--line-height: 1.5;
+  --font-size-title-lg--letter-spacing: 0.01em;
+  --font-size-title-md: 2.5rem;
+  --font-size-title-md--line-height: 1.5;
+  --font-size-title-md--letter-spacing: 0.02em;
+
+  /* Font Sizes - Heading */
+  --font-size-heading-xl: 2rem;
+  --font-size-heading-xl--line-height: 1.53;
+  --font-size-heading-xl--letter-spacing: 0.02em;
+  --font-size-heading-lg: 1.75rem;
+  --font-size-heading-lg--line-height: 1.57;
+  --font-size-heading-lg--letter-spacing: 0.02em;
+  --font-size-heading-md: 1.5rem;
+  --font-size-heading-md--line-height: 1.67;
+  --font-size-heading-md--letter-spacing: 0.03em;
+  --font-size-heading-sm: 1.25rem;
+  --font-size-heading-sm--line-height: 1.6;
+  --font-size-heading-sm--letter-spacing: 0.03em;
+  --font-size-heading-xs: 1rem;
+  --font-size-heading-xs--line-height: 1.75;
+  --font-size-heading-xs--letter-spacing: 0.03em;
+
+  /* Font Sizes - Body */
+  --font-size-body-lg: 1.25rem;
+  --font-size-body-lg--line-height: 1.6;
+  --font-size-body-lg--letter-spacing: 0.03em;
+  --font-size-body-md: 1rem;
+  --font-size-body-md--line-height: 1.75;
+  --font-size-body-md--letter-spacing: 0.03em;
+  --font-size-body-sm: 0.875rem;
+  --font-size-body-sm--line-height: 1.71;
+  --font-size-body-sm--letter-spacing: 0.03em;
+  --font-size-body-xs: 0.75rem;
+  --font-size-body-xs--line-height: 1.67;
+  --font-size-body-xs--letter-spacing: 0.04em;
+
+  /* Font Sizes - Label */
+  --font-size-label-md: 1rem;
+  --font-size-label-md--line-height: 1;
+  --font-size-label-md--letter-spacing: 0.03em;
+  --font-size-label-sm: 0.875rem;
+  --font-size-label-sm--line-height: 1;
+  --font-size-label-sm--letter-spacing: 0.03em;
+  --font-size-label-xs: 0.75rem;
+  --font-size-label-xs--line-height: 1;
+  --font-size-label-xs--letter-spacing: 0.04em;
+
+  /* Spacing */
+  --spacing-none: 0px;
+  --spacing-xxxs: 2px;
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 64px;
+
+  /* Border Radius */
+  --radius-none: 0px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-infinity: 999px;
+
+  /* Border Width */
+  --border-width-none: 0px;
+  --border-width-sm: 0.5px;
+  --border-width-md: 1px;
+  --border-width-lg: 2px;
+
+  /* Box Shadow */
+  --shadow-elevation-2: 0px 2px 6px 0px rgba(0, 0, 0, 0.15);
+  --shadow-elevation-4: 0px 4px 10px 0px rgba(0, 0, 0, 0.15);
+  --shadow-elevation-8: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  --shadow-elevation-12: 0px 16px 30px 0px rgba(0, 0, 0, 0.15);
+
+  /* Font Family */
+  --font-family-default: "BIZ UDPGothic", sans-serif;
+
+  /* Font Weight */
+  --font-weight-normal: 400;
 }
 
 :root.dark {

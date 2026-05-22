@@ -17,14 +17,6 @@ export const accounts: Account[] = [
     isWantedly: false,
   },
   {
-    name: "X(旧Twitter)",
-    url: "https://x.com/yutteeeeeeeee",
-    img: "/x.png",
-    alt: "X(旧Twitter)",
-    darkImg: "/x_dark.png",
-    isWantedly: false,
-  },
-  {
     name: "Qiita",
     url: "https://qiita.com/yutteee",
     img: "/qiita.png",

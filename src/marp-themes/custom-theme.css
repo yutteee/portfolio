@@ -19,28 +19,58 @@ section {
   line-height: 1.6;
 }
 
-/* タイトルスライド */      
+/* タイトルスライド */
 section.title {
-  background: linear-gradient(135deg, #84c5ea 0%, rgb(170, 219, 216) 60%, #FFD156 100%);
-  display: flex;
+  background-color: var(--color-blue);
+  position: relative;
+  align-items: flex-start;
   justify-content: center;
-  align-items: start;
+  color: #041b47;
+  padding-right: 30%;
+}
+
+/* PCモニター - 画面 */
+section.title::before {
+  content: '';
+  position: absolute;
+  top: 25%;
+  right: -75%;
+  width: 100%;
+  height: 50%;
+  background-color: #eeeeee;
+  border-radius: 20px;
+}
+
+/* PCモニター - 台座（トラペゾイド） */
+section.title::after {
+  content: '';
+  position: absolute;
+  top: 80%;
+  right: -35%;
+  width: 50%;
+  height: 7%;
+  background-color: #eeeeee;
+  clip-path: polygon(5% 0, 85% 0, 100% 100%, 0% 100%);
 }
 
 section.title h1 {
-  font-size: 5rem;
+  font-size: 4rem;
   font-weight: bold;
-  margin-bottom: 2rem;
+  text-align: left;
 }
 
 section.title p {
   font-size: 2rem;
-  margin-bottom: 2rem;
+  text-align: left;
+  font-weight: bold;
+  position: absolute;
+  bottom: 3rem;
+  left: 3rem;
 }
 
 /* 強調用スライド */
 section.strong {
-  background: linear-gradient(135deg, #84c5ea 0%, rgb(170, 219, 216) 60%, #FFD156 100%);
+  background-color: var(--color-blue);
   position: relative;
   padding: 4.5rem;
   display: flex;
@@ -182,17 +212,6 @@ section strong {
 section em {
   color: #e74c3c;
   font-style: italic;
-}
-
-/* フッター */
-section::after {
-  content: "yutteee-portfolio";
-  position: absolute;
-  bottom: 1rem;
-  right: 2rem;
-  font-size: 0.8rem;
-  color: #999;
-  font-weight: bold;
 }
 
 /* カスタムクラス */

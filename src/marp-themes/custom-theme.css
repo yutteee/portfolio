@@ -156,6 +156,17 @@ section img {
   border-radius: 8px;
 }
 
+/* 絵文字 (Marp Twemoji) は文字サイズに合わせる */
+section img.emoji {
+  display: inline;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
 /* テーブル */
 section table {
   border-collapse: collapse;

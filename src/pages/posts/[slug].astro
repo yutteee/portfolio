@@ -34,7 +34,7 @@ import CommonHead from "../../components/CommonHead.astro";
 ---
 
 <!doctype html>
-<html lang="ja">
+<html lang="ja" class={isSlide ? "slide-mode" : ""}>
   <head>
     <CommonHead />
     <SEO
@@ -63,23 +63,22 @@ import CommonHead from "../../components/CommonHead.astro";
   </head>
   <body>
     <Header currentPage="記事" client:load />
-    <main class="container">
-      <Breadcrumb
-        items={[
-          { label: "トップ", href: "/" },
-          { label: "記事", href: "/posts" },
-        ]}
-        currentLabel={post.data.title}
-      />
-
-      {
-        isSlide ? (
-          <SlidePost post={post} />
-        ) : (
+    {
+      isSlide ? (
+        <SlidePost post={post} />
+      ) : (
+        <main class="container">
+          <Breadcrumb
+            items={[
+              { label: "トップ", href: "/" },
+              { label: "記事", href: "/posts" },
+            ]}
+            currentLabel={post.data.title}
+          />
           <BlogPost post={post} Content={Content} headings={headings} />
-        )
-      }
-    </main>
+        </main>
+      )
+    }
     <Footer client:only />
 
     <style>
@@ -88,6 +87,12 @@ import CommonHead from "../../components/CommonHead.astro";
         max-width: calc(70rem + 2rem);
         margin: 0 auto;
         padding: 96px 16px;
+      }
+    </style>
+
+    <style is:global>
+      html.slide-mode {
+        scroll-snap-type: y proximity;
       }
     </style>
   </body>

@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import { Marp } from "@marp-team/marp-core";
 import { marpThemes } from "../../../marp-themes";
 import Comments from "./Comments.astro";
+import { SlideControls } from "./SlideControls";
 
 interface Props {
   post: CollectionEntry<"posts">;
@@ -29,10 +30,14 @@ if (theme === "custom-theme") {
 const result = marp.render(processedBody);
 slideHtml = result.html;
 slideCss = slideCss || result.css;
+
+const totalSlides = result.comments.length;
 ---
 
-<div class="slide-container" set:html={slideHtml} />
+<div class="slide-container slide-deck" set:html={slideHtml} />
 <style set:html={slideCss}></style>
+
+{totalSlides > 1 && <SlideControls total={totalSlides} client:visible />}
 
 <Comments />
 

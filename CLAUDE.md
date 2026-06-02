@@ -70,6 +70,24 @@ src/
 - 推奨リントルールを有効化
 - コミット前に `pnpm check` を実行すること
 
+### 関数引数のオブジェクト化
+
+関数の引数は **1個でも必ずオブジェクト形式** で受け取る。
+
+```ts
+// NG
+function scrollToSlide(target: number) { ... }
+scrollToSlide(3);
+
+// OK
+function scrollToSlide({ target }: { target: number }) { ... }
+scrollToSlide({ target: 3 });
+```
+
+理由: 呼び出し側で引数名が明示されるため可読性が高く、順序ミスを防げる。将来引数が増えた時の差分も最小になる。
+
+例外: DOM/React のイベントハンドラなど、シグネチャがフレームワーク側で固定されている関数（`(e: KeyboardEvent) => void` 等）。
+
 ## テストについて
 
 - ユニットテストは `src/**/*.test.tsx` に配置し、jsdom 環境で実行

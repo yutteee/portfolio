@@ -30,3 +30,5 @@ public/posts/
 
 .pnpm-store/
 package-lock.json
+
+pr.md

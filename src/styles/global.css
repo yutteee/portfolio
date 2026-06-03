@@ -112,7 +112,7 @@ html {
     "Hiragino Sans",
     Meiryo,
     sans-serif;
-  font-size: 1rem;
+  font-size: 1rem; /* stylelint-disable-line scale-unlimited/declaration-strict-value */
   line-height: 1.5;
 
   body {

@@ -64,7 +64,7 @@ import CommonHead from "../../components/CommonHead.astro";
         width: 100%;
         max-width: calc(50rem + 2rem);
         margin: 0 auto;
-        padding: 96px 16px;
+        padding: 96px var(--spacing-md);
       }
       .breadcrumbs {
         display: flex;
@@ -75,7 +75,7 @@ import CommonHead from "../../components/CommonHead.astro";
         background-color: var(--color-white);
         height: fit-content;
         width: fit-content;
-        border-radius: 9999px;
+        border-radius: var(--radius-infinity);
 
         @media screen and (max-width: 1000px) {
           width: 100%;

@@ -3,26 +3,26 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
-  padding: 96px 16px;
+  gap: var(--spacing-xl);
+  padding: 96px var(--spacing-md);
   position: relative;
   z-index: 100;
 }
 
 .title {
-  font-size: 2rem;
+  font-size: var(--font-size-heading-xl);
   font-weight: 900;
 }
 
 .accounts {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 40px; /* stylelint-disable-line scale-unlimited/declaration-strict-value */
 }
 
 @media screen and (max-width: 1000px) {
   .accounts {
-    gap: 24px;
+    gap: var(--spacing-lg);
   }
   .icon {
     width: 44px;
@@ -43,5 +43,5 @@
   color: var(--color-link);
   text-decoration: underline;
   position: absolute;
-  bottom: 16px;
+  bottom: var(--spacing-md);
 } 

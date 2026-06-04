@@ -1,0 +1,32 @@
+{
+  "plugins": ["stylelint-declaration-strict-value"],
+  "rules": {
+    "scale-unlimited/declaration-strict-value": [
+      [
+        "color",
+        "background-color",
+        "border-color",
+        "font-size",
+        "border-radius",
+        "gap",
+        "box-shadow"
+      ],
+      {
+        "ignoreValues": [
+          "inherit",
+          "initial",
+          "unset",
+          "currentColor",
+          "transparent",
+          "none",
+          "0",
+          "50%",
+          "100%"
+        ],
+        "disableFix": true,
+        "message": "Use a CSS custom property (var(--...)) instead of a hardcoded value for \"${property}\""
+      }
+    ]
+  },
+  "ignoreFiles": ["src/marp-themes/**", "dist/**", "node_modules/**"]
+}

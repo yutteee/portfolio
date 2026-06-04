@@ -83,7 +83,7 @@ import { AnimationIcon } from "../../features/AnimationIcon";
     height: 20vh;
     min-height: 180px;
     background-color: var(--color-background);
-    border-radius: 16px;
+    border-radius: var(--radius-xl);
     border: 8px solid var(--color-background);
     position: fixed;
     top: 50%;
@@ -138,7 +138,7 @@ import { AnimationIcon } from "../../features/AnimationIcon";
       top: 1.8rem;
       left: 50%;
       transform: translateX(-50%);
-      width: 2px;
+      width: var(--spacing-xxxs);
       height: 36px;
       background: var(--color-text);
       animation: pathmove 1.5s ease-in-out infinite;
@@ -168,12 +168,12 @@ import { AnimationIcon } from "../../features/AnimationIcon";
 
   .animation-button {
     position: fixed;
-    bottom: 32px;
-    right: 32px;
+    bottom: var(--spacing-xl);
+    right: var(--spacing-xl);
 
     @media screen and (max-width: 1000px) {
-      bottom: 16px;
-      right: 16px;
+      bottom: var(--spacing-md);
+      right: var(--spacing-md);
     }
   }
 </style>

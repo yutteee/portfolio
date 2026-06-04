@@ -15,7 +15,7 @@
 @media screen and (max-width: 1000px) {
   .wrapper {
     flex-direction: column;
-    gap: 2rem;
+    gap: var(--spacing-xl);
     align-items: flex-start;
   }
 }
@@ -24,7 +24,7 @@
   z-index: 1;
 }
 .title {
-  font-size: 96px;
+  font-size: 96px; /* stylelint-disable-line scale-unlimited/declaration-strict-value */
   font-weight: 700;
   line-height: 1;
   background-color: var(--color-background);
@@ -33,7 +33,7 @@
 }
 @media screen and (max-width: 1000px) {
   .title {
-    font-size: 2rem;
+    font-size: var(--font-size-heading-xl);
   }
 }
 .line {

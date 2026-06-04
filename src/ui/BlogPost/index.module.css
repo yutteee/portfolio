@@ -4,7 +4,7 @@
 .link {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--spacing-md);
   width: 100%;
 }
 .mask {
@@ -24,30 +24,30 @@
 .texts {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--spacing-xs);
 }
 .meta {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-body-sm);
 }
 .slideBadge {
   background-color: var(--color-link);
   color: var(--color-background);
   padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  font-size: 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-body-xs);
   font-weight: bold;
 }
 .title {
-  font-size: 1.125rem;
+  font-size: 1.125rem; /* stylelint-disable-line scale-unlimited/declaration-strict-value */
   font-weight: 700;
 }
 .icon {
   display: inline;
   vertical-align: -0.125em;
-  margin-left: 2px;
+  margin-left: var(--spacing-xxxs);
 }
 .link:hover .image {
   transform: scale(1.1);

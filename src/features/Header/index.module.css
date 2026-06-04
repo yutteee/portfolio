@@ -6,43 +6,43 @@
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: var(--font-size-heading-md);
   font-weight: bold;
   line-height: 1;
   position: fixed;
   top: 21px;
-  left: 32px;
+  left: var(--spacing-xl);
   z-index: 10000000;
 }
 
 @media screen and (max-width: 1000px) {
   .logo {
-    left: 16px;
+    left: var(--spacing-md);
   }
 }
 
 .nav {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--spacing-md);
   position: fixed;
-  top: 16px;
-  right: 32px;
+  top: var(--spacing-md);
+  right: var(--spacing-xl);
   z-index: 10000000;
   font-weight: bold;
 }
 
 @media screen and (max-width: 1000px) {
   .nav {
-    gap: 8px;
-    top: 8px;
-    right: 16px;
+    gap: var(--spacing-xs);
+    top: var(--spacing-xs);
+    right: var(--spacing-md);
   }
 }
 
 .navLinks {
   display: flex;
-  gap: 16px;
+  gap: var(--spacing-md);
 }
 
 @media screen and (max-width: 1000px) {
@@ -85,10 +85,10 @@
   content: "";
   display: block;
   width: 100%;
-  height: 4px;
+  height: var(--spacing-xxs);
   background-color: var(--color-link);
   position: absolute;
-  bottom: -8px;
+  bottom: calc(-1 * var(--spacing-xs));
 }
 
 .spMenu {
@@ -107,23 +107,23 @@
   left: 0;
   right: 0;
   background-color: var(--color-background);
-  padding: 16px;
+  padding: var(--spacing-md);
   z-index: 10000001;
 }
 
 .close {
     position: fixed;
-    top: 8px;
-    right: 16px;
+    top: var(--spacing-xs);
+    right: var(--spacing-md);
   }
 
   .spNav {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: var(--spacing-xl);
 
     a {
-      font-size: 1.5rem;
+      font-size: var(--font-size-heading-md);
       font-weight: bold;
       width: fit-content;
 

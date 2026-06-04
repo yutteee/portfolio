@@ -37,23 +37,23 @@ const productsCollection = (await getCollection("products")).sort((a, b) =>
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0rem 16px;
+      padding: 0rem var(--spacing-md);
 
       .products {
         /* grid 2つ並べて折り返す*/
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         max-width: 70rem;
-        padding-top: 64px;
+        padding-top: var(--spacing-xxl);
         padding-bottom: 96px;
         width: 100%;
 
         > *:nth-child(odd) {
-          padding: 32px 24px 64px 0;
+          padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-xxl) 0;
         }
 
         > *:nth-child(even) {
-          padding: 96px 0 0 24px;
+          padding: 96px 0 0 var(--spacing-lg);
         }
 
         @media screen and (max-width: 1000px) {

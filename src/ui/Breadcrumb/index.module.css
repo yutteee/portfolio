@@ -3,7 +3,7 @@
   background-color: var(--color-white);
   height: fit-content;
   width: fit-content;
-  border-radius: 9999px;
+  border-radius: var(--radius-infinity);
   list-style: none;
   margin: 0;
 }

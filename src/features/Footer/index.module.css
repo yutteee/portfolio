@@ -6,7 +6,7 @@
   gap: var(--spacing-xl);
   padding: 96px var(--spacing-md);
   position: relative;
-  z-index: 100;
+  z-index: var(--z-index-content);
 }
 
 .title {

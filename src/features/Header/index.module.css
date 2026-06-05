@@ -12,7 +12,7 @@
   position: fixed;
   top: 21px;
   left: var(--spacing-xl);
-  z-index: 10000000;
+  z-index: var(--z-index-header);
 }
 
 @media screen and (max-width: 1000px) {
@@ -28,7 +28,7 @@
   position: fixed;
   top: var(--spacing-md);
   right: var(--spacing-xl);
-  z-index: 10000000;
+  z-index: var(--z-index-header);
   font-weight: bold;
 }
 
@@ -108,7 +108,7 @@
   right: 0;
   background-color: var(--color-background);
   padding: var(--spacing-md);
-  z-index: 10000001;
+  z-index: var(--z-index-modal);
 }
 
 .close {

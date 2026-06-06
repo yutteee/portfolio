@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import type { RefObject } from "react";
 
-export function useFocusTrap(ref: RefObject<HTMLElement>, enabled: boolean) {
+export function useFocusTrap(
+  ref: RefObject<HTMLElement | null>,
+  enabled: boolean,
+) {
   useEffect(() => {
     if (!enabled) return;
     const container = ref.current;

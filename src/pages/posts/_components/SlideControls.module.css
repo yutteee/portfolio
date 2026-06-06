@@ -1,19 +1,19 @@
 .controls {
   position: fixed;
-  bottom: 24px;
+  bottom: var(--spacing-lg);
   left: 50%;
   transform: translateX(-50%);
-  z-index: 9999;
+  z-index: var(--z-index-toast);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--spacing-xs);
   background-color: rgba(4, 27, 71, 0.78);
-  color: #fff;
-  padding: 8px 14px;
-  border-radius: 999px;
+  color: var(--color-white);
+  padding: var(--spacing-xs) 14px;
+  border-radius: var(--radius-infinity);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18); /* stylelint-disable-line scale-unlimited/declaration-strict-value */
 }
 
 .btn {
@@ -24,8 +24,8 @@
   justify-content: center;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.16);
-  color: #fff;
-  font-size: 1.1rem;
+  color: var(--color-white);
+  font-size: 1.1rem; /* stylelint-disable-line scale-unlimited/declaration-strict-value */
   border: none;
   cursor: pointer;
   transition: background-color 0.15s ease;
@@ -36,8 +36,8 @@
 }
 
 .btn:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 2px;
+  outline: var(--border-width-lg) solid var(--color-white);
+  outline-offset: var(--spacing-xxxs);
 }
 
 .btn:disabled {
@@ -46,7 +46,7 @@
 }
 
 .indicator {
-  font-size: 0.875rem;
+  font-size: var(--font-size-body-sm);
   font-weight: 700;
   min-width: 56px;
   text-align: center;

@@ -35,14 +35,14 @@ const allPosts = await getAllPosts();
   .container {
     display: flex;
     flex-direction: column;
-    padding: 0 16px;
+    padding: 0 var(--spacing-md);
     align-items: center;
     .articles {
-      padding-top: 64px;
+      padding-top: var(--spacing-xxl);
       padding-bottom: 96px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 64px 48px;
+      gap: var(--spacing-xxl) 48px;
       list-style: none;
       max-width: 70rem;
       width: 100%;

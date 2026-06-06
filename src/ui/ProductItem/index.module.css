@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: end;
   justify-content: center;
-  gap: 24px;
+  gap: var(--spacing-lg);
 }
 .index-parent {
   position: relative;
@@ -13,7 +13,7 @@
   height: auto;
 }
 .index {
-  font-size: 96px;
+  font-size: 96px; /* stylelint-disable-line scale-unlimited/declaration-strict-value */
   font-weight: 700;
   position: absolute;
   bottom: -64px;
@@ -23,12 +23,12 @@
   overflow: hidden;
   display: block;
   line-height: 0;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   width: 100%;
   aspect-ratio: 8/5;
 }
 .image {
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   aspect-ratio: 8/5;
   width: 100%;
   height: 100%;
@@ -39,13 +39,13 @@
   display: flex;
   flex-direction: column;
   align-items: end;
-  gap: 16px;
+  gap: var(--spacing-md);
   text-align: right;
 }
 .link {
   text-decoration: none;
   color: inherit;
-  font-size: 1.5rem;
+  font-size: var(--font-size-heading-md);
   font-weight: 700;
 }
 .product:hover .image {

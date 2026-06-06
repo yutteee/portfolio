@@ -1,19 +1,19 @@
-name: Unit Test
+name: Interaction Test
 
 on:
   pull_request:
     paths:
       - 'src/features/**/*.tsx'
       - 'src/ui/**/*.tsx'
-      - '!src/**/*.stories.tsx'
-      - 'vitest.unit.config.ts'
+      - '.storybook/**'
+      - 'vitest.storybook.config.ts'
       - 'package.json'
       - 'pnpm-lock.yaml'
   push:
     branches: [main]
 
 jobs:
-  unit-test:
+  interaction-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,9 +22,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version-file: '.nvmrc'
+          node-version: 24
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
-      - name: Run unit tests
-        run: pnpm run test:unit
+      - name: Install Playwright
+        run: pnpm exec playwright install
+      - name: Run interaction tests
+        run: pnpm run test:storybook

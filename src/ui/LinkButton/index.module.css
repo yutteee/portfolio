@@ -3,7 +3,7 @@
   border: solid 1px var(--color-text);
   color: var(--color-text);
   background-color: var(--color-white);
-  border-radius: 9999px;
+  border-radius: var(--radius-infinity);
   width: fit-content;
   display: flex;
   align-items: center;

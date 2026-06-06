@@ -87,6 +87,13 @@
   --shadow-elevation-8: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
   --shadow-elevation-12: 0px 16px 30px 0px rgba(0, 0, 0, 0.15);
 
+  /* z-index */
+  --z-index-background: 0;
+  --z-index-content: 10;
+  --z-index-header: 100;
+  --z-index-modal: 200;
+  --z-index-toast: 300;
+
   /* Font Family */
   --font-family-default: "BIZ UDPGothic", sans-serif;
 
@@ -112,7 +119,7 @@ html {
     "Hiragino Sans",
     Meiryo,
     sans-serif;
-  font-size: 1rem;
+  font-size: 1rem; /* stylelint-disable-line scale-unlimited/declaration-strict-value */
   line-height: 1.5;
 
   body {

@@ -15,9 +15,9 @@ let slideCss = "";
 
 // 画像パスを絶対パスに変換
 // 例: ![画像の説明](image.png) -> ![画像の説明](/posts/20250812/image.png)
-const processedBody = post.body.replace(
+const processedBody = (post.body ?? "").replace(
   /!\[([^\]]*)\]\(([^)]+)\)/g,
-  `![$1](/posts/${post.slug}/$2)`,
+  `![$1](/posts/${post.id.replace(/\/index$/, "")}/$2)`,
 );
 
 const marp = new Marp();

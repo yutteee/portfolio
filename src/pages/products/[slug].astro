@@ -2,18 +2,18 @@
 // TODO: この詳細ページはMarkdown移行PRで暫定作成。デザイン・実装を別途検討する
 import { SEO } from "astro-seo";
 import type { CollectionEntry } from "astro:content";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
   const products = await getCollection("products");
   return products.map((product: CollectionEntry<"products">) => ({
-    params: { slug: product.slug },
+    params: { slug: product.id },
     props: { product },
   }));
 }
 
 const { product } = Astro.props;
-const { Content } = await product.render();
+const { Content } = await render(product);
 
 import "destyle.css";
 import "../../styles/global.css";

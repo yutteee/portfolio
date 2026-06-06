@@ -24,6 +24,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
   return (
     <nav aria-label="パンくずリスト">
       {/* MEMO: CSSでlist-style: none;を設定するとスクリーンリーダーにリストとして通知されないため、role="list"を設定する。 */}
+      {/* biome-ignore lint/a11y/noRedundantRoles: list-style:none で <ol> がリストとして扱われなくなる Safari/VoiceOver の挙動に対する意図的な指定 */}
       <ol className={styles.breadcrumbs} role="list">
         {items.map((item) => (
           <li key={item.href} className={styles.item}>

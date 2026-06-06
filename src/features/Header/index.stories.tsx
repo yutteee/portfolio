@@ -1,4 +1,4 @@
-import { userEvent, within, expect, fn, waitFor } from "storybook/test";
+import { userEvent, within, expect, waitFor } from "storybook/test";
 import type { Meta, StoryObj, Decorator } from "@storybook/react";
 import { Header } from ".";
 

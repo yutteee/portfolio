@@ -1,18 +1,19 @@
 // @ts-nocheck
 import type { APIContext } from "astro";
-import { getCollection, getEntryBySlug } from "astro:content";
+import { getCollection } from "astro:content";
 import { createOgImage } from "../../utils/CreateOgImage";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts" as never);
 
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id.replace(/\/index$/, "") },
+    props: { post },
   }));
 }
 
-export async function GET({ params }: APIContext) {
-  const post = await getEntryBySlug("posts" as never, params.slug as string);
+export async function GET({ props }: APIContext) {
+  const { post } = props as { post: { data: { title: string } } };
 
   const ogImage = await createOgImage(post?.data.title);
 

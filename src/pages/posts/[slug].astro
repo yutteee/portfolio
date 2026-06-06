@@ -1,7 +1,7 @@
 ---
 import { SEO } from "astro-seo";
 import type { CollectionEntry } from "astro:content";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 interface Props {
   post: CollectionEntry<"posts">;
 }
@@ -9,7 +9,7 @@ interface Props {
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
   return posts.map((post: CollectionEntry<"posts">) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id.replace(/\/index$/, "") },
     props: {
       post,
     },
@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content, headings } = await post.render();
+const { Content, headings } = await render(post);
 
 // スライドかどうかを判定
 const isSlide = post.data.marp;
@@ -45,7 +45,7 @@ import CommonHead from "../../components/CommonHead.astro";
         basic: {
           title: post.data.title,
           type: "article",
-          image: `${SITE_URL}/ogp/${post.slug}.png`,
+          image: `${SITE_URL}/ogp/${post.id.replace(/\/index$/, "")}.png`,
         },
         image: {
           alt: post.data.title,

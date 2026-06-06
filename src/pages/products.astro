@@ -23,7 +23,7 @@ const productsCollection = (await getCollection("products")).sort((a, b) =>
               image={product.data.image.url}
               title={product.data.title}
               description={product.data.description}
-              href={`/products/${product.slug}`}
+              href={`/products/${product.id}`}
               alt={product.data.image.alt}
             />
           </li>

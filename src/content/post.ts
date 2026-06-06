@@ -32,7 +32,7 @@ const getOgpImageFromUrl = async (url: string) => {
 
 const processLocalPosts = (posts: CollectionEntry<"posts">[]): Post[] => {
   return posts.map((post) => {
-    const slug = post.slug.replace(/\/index$/, "");
+    const slug = post.id.replace(/\/index$/, "");
     return {
       url: `/posts/${slug}`,
       title: post.data.title,

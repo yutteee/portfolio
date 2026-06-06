@@ -19,7 +19,7 @@ const allPosts = await getCollection("posts");
         {
           allPosts.map((post) => (
             <li>
-              <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+              <a href={`/posts/${post.id.replace(/\/index$/, "")}`}>{post.data.title}</a>
             </li>
           ))
         }

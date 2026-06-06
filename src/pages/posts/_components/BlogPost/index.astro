@@ -32,7 +32,7 @@ const { post, Content, headings } = Astro.props;
         />
       ) : (
         <img
-          src={`${SITE_URL}/ogp/${post.slug}.png`}
+          src={`${SITE_URL}/ogp/${post.id.replace(/\/index$/, "")}.png`}
           alt=""
           width="720"
           height="378"

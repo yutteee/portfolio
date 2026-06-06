@@ -16,7 +16,16 @@ onlyBuiltDependencies:
 minimumReleaseAge: 10080 # 7日 = 168時間 = 10080分
 
 # 1.3. 新しいバージョンの認証レベルが古いバージョンより低い場合、インストールを拒否
-trustPolicy: no-downgrade
+# 暫定: Astro 6 系の推移的依存（chokidar/semver 等）が新しい trust 評価に
+# 未対応のため off にして警告のみ。各 OSS が provenance attestation を
+# 出し直したら no-downgrade に戻す。
+trustPolicy: off
 
 # 1.4. 間接的な依存関係のGitリポジトリやURL直リンクをダウンロードしようとした場合にブロックする
 blockExoticSubdeps: true
+
+allowBuilds:
+  '@biomejs/biome': true
+  '@swc/core': true
+  esbuild: true
+  sharp: true

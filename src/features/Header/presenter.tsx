@@ -9,11 +9,11 @@ export type HeaderPresenterProps = {
   menuOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
-  closeBtnRef: React.RefObject<HTMLButtonElement>;
+  closeBtnRef: React.RefObject<HTMLButtonElement | null>;
   onThemeToggle: () => void;
   currentPage?: CurrentPage;
-  spMenuRef: React.RefObject<HTMLDivElement>;
-  hamburgerRef: React.RefObject<HTMLButtonElement>;
+  spMenuRef: React.RefObject<HTMLDivElement | null>;
+  hamburgerRef: React.RefObject<HTMLButtonElement | null>;
 };
 
 export const HeaderPresenter: React.FC<HeaderPresenterProps> = ({

@@ -2,8 +2,8 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import type { RefObject } from "react";
 
 type UseMenuProps = {
-  closeBtnRef: RefObject<HTMLButtonElement>;
-  hamburgerRef: RefObject<HTMLButtonElement>;
+  closeBtnRef: RefObject<HTMLButtonElement | null>;
+  hamburgerRef: RefObject<HTMLButtonElement | null>;
 };
 
 export function useMenu({ closeBtnRef, hamburgerRef }: UseMenuProps) {

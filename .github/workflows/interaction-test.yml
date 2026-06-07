@@ -27,6 +27,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Install Playwright
-        run: npx playwright install chromium
+        run: pnpm exec playwright install chromium
       - name: Run interaction tests
         run: pnpm run test:storybook

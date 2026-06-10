@@ -2,6 +2,10 @@
 import type { CollectionEntry } from "astro:content";
 import { Marp } from "@marp-team/marp-core";
 import { marpThemes } from "../../../marp-themes";
+import {
+  resolveSlideImagePaths,
+  toPostSlug,
+} from "../../../utils/slidePostImage";
 import Comments from "./Comments.astro";
 import { SlideControls } from "./SlideControls";
 
@@ -13,12 +17,12 @@ const { post } = Astro.props;
 let slideHtml = "";
 let slideCss = "";
 
-// 画像パスを絶対パスに変換
-// 例: ![画像の説明](image.png) -> ![画像の説明](/posts/20250812/image.png)
-const processedBody = (post.body ?? "").replace(
-  /!\[([^\]]*)\]\(([^)]+)\)/g,
-  `![$1](/posts/${post.id.replace(/\/index$/, "")}/$2)`,
-);
+// Marp は Astro の画像解決を通らないため、本文中の相対画像パスを
+// public 配下の絶対パスへ書き換える（コピー先は scripts/copy-images.js と共通）
+const processedBody = resolveSlideImagePaths({
+  body: post.body ?? "",
+  slug: toPostSlug({ id: post.id }),
+});
 
 const marp = new Marp();
 // カスタムテーマを設定

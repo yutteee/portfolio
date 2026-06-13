@@ -1,9 +1,89 @@
-# Please see the documentation for all configuration options:
+# Dependabot configuration
 # https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 
 version: 2
 updates:
-  - package-ecosystem: "pnpm" # See documentation for possible values
+  # npm/pnpm 依存
+  # patch/minor はエコシステム単位でグループ化して PR 数を抑制する。
+  # major は破壊的変更を含むため意図的に個別 PR で扱う。
+  - package-ecosystem: "pnpm"
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 10
+    groups:
+      astro:
+        patterns:
+          - "astro"
+          - "@astrojs/*"
+          - "astro-icon"
+          - "astro-seo"
+        update-types:
+          - "minor"
+          - "patch"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+        update-types:
+          - "minor"
+          - "patch"
+      storybook:
+        patterns:
+          - "storybook"
+          - "@storybook/*"
+          - "storybook-addon-*"
+        update-types:
+          - "minor"
+          - "patch"
+      vitest:
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+        update-types:
+          - "minor"
+          - "patch"
+      testing:
+        patterns:
+          - "@testing-library/*"
+          - "jsdom"
+          - "@types/jsdom"
+          - "playwright"
+        update-types:
+          - "minor"
+          - "patch"
+      iconify:
+        patterns:
+          - "@iconify-json/*"
+          - "react-icons"
+        update-types:
+          - "minor"
+          - "patch"
+      tooling:
+        patterns:
+          - "typescript"
+          - "@biomejs/biome"
+          - "stylelint"
+          - "stylelint-*"
+          - "plop"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # GitHub Actions の更新も自動化
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    groups:
+      actions:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"

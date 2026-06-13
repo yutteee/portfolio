@@ -33,32 +33,28 @@ const allPosts = await getAllPosts();
   .container {
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    gap: var(--space-2xl);
 
     .titles {
       display: flex;
       flex-wrap: wrap;
       flex-direction: row;
       align-items: end;
-      gap: 1.5rem;
+      gap: var(--space-m);
 
       .title {
-        font-size: 4rem;
+        font-size: var(--step-5);
         font-weight: 900;
         line-height: 1;
-
-        @media screen and (max-width: 1000px) {
-          font-size: var(--font-size-heading-xl);
-        }
       }
     }
 
     .articles {
       display: flex;
-      gap: 3rem;
+      gap: var(--space-xl);
       width: 100%;
 
-      @media screen and (max-width: 1000px) {
+      @media screen and (max-width: 1024px) /* sync with --bp-md */ {
         flex-direction: column;
       }
     }

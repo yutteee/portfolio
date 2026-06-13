@@ -29,11 +29,11 @@ import { LinkButton } from "../../ui/LinkButton";
 <style>
   .about {
     display: flex;
-    gap: var(--spacing-xxl);
+    gap: var(--space-2xl);
     justify-content: center;
     align-items: center;
 
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1024px) /* sync with --bp-md */ {
       flex-direction: column;
     }
 
@@ -43,7 +43,7 @@ import { LinkButton } from "../../ui/LinkButton";
       display: flex;
       align-items: center;
       flex-direction: column;
-      gap: 48px;
+      gap: var(--space-xl);
       .monitor {
         width: 300px;
         height: 187.5px;
@@ -75,15 +75,11 @@ import { LinkButton } from "../../ui/LinkButton";
     .texts {
       display: flex;
       flex-direction: column;
-      gap: 48px;
-      max-width: 40rem;
+      gap: var(--space-xl);
+      max-width: var(--text-max-width);
       .title {
-        font-size: 4rem;
+        font-size: var(--step-5);
         font-weight: 900;
-
-        @media screen and (max-width: 1000px) {
-          font-size: var(--font-size-heading-xl);
-        }
       }
     }
   }

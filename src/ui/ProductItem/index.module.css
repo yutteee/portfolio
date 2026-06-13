@@ -4,16 +4,16 @@
   flex-direction: column;
   align-items: end;
   justify-content: center;
-  gap: var(--spacing-lg);
+  gap: var(--space-m);
 }
 .index-parent {
   position: relative;
-  padding-left: 48px;
+  padding-left: var(--space-xl);
   width: 100%;
   height: auto;
 }
 .index {
-  font-size: 96px; /* stylelint-disable-line scale-unlimited/declaration-strict-value */
+  font-size: var(--step-6);
   font-weight: 700;
   position: absolute;
   bottom: -64px;
@@ -39,13 +39,13 @@
   display: flex;
   flex-direction: column;
   align-items: end;
-  gap: var(--spacing-md);
+  gap: var(--space-s);
   text-align: right;
 }
 .link {
   text-decoration: none;
   color: inherit;
-  font-size: var(--font-size-heading-md);
+  font-size: var(--step-1);
   font-weight: 700;
 }
 .product:hover .image {

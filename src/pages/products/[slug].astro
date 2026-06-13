@@ -62,22 +62,22 @@ import CommonHead from "../../components/CommonHead.astro";
     <style>
       .container {
         width: 100%;
-        max-width: calc(50rem + 2rem);
+        max-width: 90rem;
         margin: 0 auto;
-        padding: 96px var(--spacing-md);
+        padding: var(--space-3xl) var(--space-s);
       }
       .breadcrumbs {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 1rem;
+        gap: var(--space-2xs);
+        padding: var(--space-2xs) var(--space-s);
         background-color: var(--color-white);
         height: fit-content;
         width: fit-content;
         border-radius: var(--radius-infinity);
 
-        @media screen and (max-width: 1000px) {
+        @media screen and (max-width: 1024px) /* sync with --bp-md */ {
           width: 100%;
         }
 

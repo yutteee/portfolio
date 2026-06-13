@@ -54,10 +54,10 @@ const { post, Content, headings } = Astro.props;
 <style>
   .wrapper {
     display: grid;
-    gap: 2rem;
+    gap: var(--space-l);
     width: 100%;
     margin: 0 auto;
-    padding-top: 2rem;
+    padding-top: var(--space-l);
     align-items: start;
 
     /* SP: 縦1列 (title -> toc -> content) */
@@ -66,17 +66,16 @@ const { post, Content, headings } = Astro.props;
       "title"
       "toc"
       "content";
-    max-width: 40rem;
+    max-width: var(--text-max-width);
 
-    /* PC: 2カラム (title が上に跨ぐ, content左 + toc右) */
-    @media screen and (min-width: 1001px) {
-      grid-template-columns: 1fr 280px;
+    /* PC: 2カラム (title が上に跨ぐ, content左 + toc右)
+       wrapper max は: text-max-width + (content padding * 2 + grid gap) * space-l + TOC */
+    @media screen and (min-width: 1025px) /* sync with --bp-md-plus */ {
+      grid-template-columns: 1fr 360px;
       grid-template-areas:
         "title title"
         "content toc";
-      max-width: calc(
-        44rem + 280px + 2rem
-      ); /* 44rem = 40rem + 2rem (padding) */
+      max-width: calc(var(--text-max-width) + var(--space-l) * 3 + 360px);
     }
 
     .title-wrapper {
@@ -84,28 +83,28 @@ const { post, Content, headings } = Astro.props;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1rem;
+      gap: var(--space-s);
       width: 100%;
-      max-width: 40rem;
+      max-width: var(--text-max-width);
       margin: 0 auto;
 
       .post-meta {
         display: flex;
         align-items: center;
-        gap: 1rem;
+        gap: var(--space-s);
       }
 
       .slide-badge {
         background-color: var(--color-link);
         color: var(--color-background);
-        padding: 0.25rem 0.5rem;
-        border-radius: 0.25rem;
-        font-size: var(--font-size-body-sm);
+        padding: var(--space-3xs) var(--space-2xs);
+        border-radius: var(--radius-sm);
+        font-size: var(--step--1);
         font-weight: bold;
       }
 
       .title {
-        font-size: var(--font-size-heading-xl);
+        font-size: var(--step-2);
         font-weight: 900;
       }
 
@@ -115,7 +114,7 @@ const { post, Content, headings } = Astro.props;
         aspect-ratio: 720 / 378;
         object-fit: cover;
         border: 8px solid var(--color-white);
-        border-radius: 0.5rem;
+        border-radius: var(--radius-md);
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
     }

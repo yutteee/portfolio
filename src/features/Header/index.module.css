@@ -6,46 +6,46 @@
 }
 
 .logo {
-  font-size: var(--font-size-heading-md);
+  font-size: var(--step-1);
   font-weight: bold;
   line-height: 1;
   position: fixed;
   top: 21px;
-  left: var(--spacing-xl);
+  left: var(--space-l);
   z-index: var(--z-index-header);
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1024px) /* sync with --bp-md */ {
   .logo {
-    left: var(--spacing-md);
+    left: var(--space-s);
   }
 }
 
 .nav {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: var(--space-s);
   position: fixed;
-  top: var(--spacing-md);
-  right: var(--spacing-xl);
+  top: var(--space-s);
+  right: var(--space-l);
   z-index: var(--z-index-header);
   font-weight: bold;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1024px) /* sync with --bp-md */ {
   .nav {
-    gap: var(--spacing-xs);
-    top: var(--spacing-xs);
-    right: var(--spacing-md);
+    gap: var(--space-2xs);
+    top: var(--space-2xs);
+    right: var(--space-s);
   }
 }
 
 .navLinks {
   display: flex;
-  gap: var(--spacing-md);
+  gap: var(--space-s);
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1024px) /* sync with --bp-md */ {
   .navLinks {
     display: none;
   }
@@ -55,7 +55,7 @@
   display: none;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1024px) /* sync with --bp-md */ {
   .hamburger {
     display: inline-flex;
   }
@@ -85,10 +85,10 @@
   content: "";
   display: block;
   width: 100%;
-  height: var(--spacing-xxs);
+  height: var(--space-3xs);
   background-color: var(--color-link);
   position: absolute;
-  bottom: calc(-1 * var(--spacing-xs));
+  bottom: calc(-1 * var(--space-2xs));
 }
 
 .spMenu {
@@ -107,23 +107,23 @@
   left: 0;
   right: 0;
   background-color: var(--color-background);
-  padding: var(--spacing-md);
+  padding: var(--space-s);
   z-index: var(--z-index-modal);
 }
 
 .close {
     position: fixed;
-    top: var(--spacing-xs);
-    right: var(--spacing-md);
+    top: var(--space-2xs);
+    right: var(--space-s);
   }
 
   .spNav {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xl);
+    gap: var(--space-l);
 
     a {
-      font-size: var(--font-size-heading-md);
+      font-size: var(--step-1);
       font-weight: bold;
       width: fit-content;
 

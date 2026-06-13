@@ -35,22 +35,22 @@ const allPosts = await getAllPosts();
   .container {
     display: flex;
     flex-direction: column;
-    padding: 0 var(--spacing-md);
+    padding: 0 var(--space-s);
     align-items: center;
     .articles {
-      padding-top: var(--spacing-xxl);
-      padding-bottom: 96px;
+      padding-top: var(--space-2xl);
+      padding-bottom: var(--space-3xl);
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: var(--spacing-xxl) 48px;
+      gap: var(--space-2xl) var(--space-xl);
       list-style: none;
-      max-width: 70rem;
+      max-width: 90rem;
       width: 100%;
 
-      @media screen and (max-width: 1000px) {
+      @media screen and (max-width: 1024px) /* sync with --bp-md */ {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
+        gap: var(--space-l);
       }
     }
   }

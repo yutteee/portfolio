@@ -29,12 +29,12 @@ const { headings } = Astro.props;
   /* 目次スタイル */
   .toc {
     grid-area: toc;
-    padding: 1.5rem;
+    padding: var(--space-m);
     background-color: var(--color-white);
-    border-radius: 0.5rem;
+    border-radius: var(--radius-md);
 
     /* PC: 右サイドバー固定 */
-    @media screen and (min-width: 1001px) {
+    @media screen and (min-width: 1025px) /* sync with --bp-md-plus */ {
       position: sticky;
       top: 2rem;
       max-height: calc(100vh - 4rem);
@@ -42,15 +42,15 @@ const { headings } = Astro.props;
     }
 
     .toc-title {
-      font-size: var(--font-size-heading-sm);
+      font-size: var(--step-0);
       font-weight: 700;
-      margin-bottom: 1rem;
+      margin-bottom: var(--space-s);
     }
 
     .toc-list {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: var(--space-2xs);
       list-style: none;
       padding: 0;
     }
@@ -60,8 +60,8 @@ const { headings } = Astro.props;
         display: inline-block;
         color: var(--color-link);
         text-decoration: none;
-        padding: 0.25rem 0.5rem;
-        border-radius: 0.25rem;
+        padding: var(--space-3xs) var(--space-2xs);
+        border-radius: var(--radius-sm);
         transition: background-color 0.2s;
         line-height: 1.5;
         text-decoration: underline;
@@ -74,15 +74,15 @@ const { headings } = Astro.props;
 
     /* 階層インデント */
     .toc-depth-2 a {
-      margin-left: 0.5rem;
+      margin-left: var(--space-2xs);
     }
 
     .toc-depth-3 a {
-      margin-left: 1.5rem;
+      margin-left: var(--space-m);
     }
 
     .toc-depth-4 a {
-      margin-left: 2.5rem;
+      margin-left: var(--space-l);
     }
   }
 </style>

@@ -115,13 +115,9 @@ import { AnimationIcon } from "../../features/AnimationIcon";
   }
 
   .title {
-    font-size: 96px;
+    font-size: var(--step-6);
     font-weight: 900;
-    margin-bottom: 48px;
-
-    @media screen and (max-width: 1000px) {
-      font-size: 40px;
-    }
+    margin-bottom: var(--space-xl);
   }
 
   .scroll {
@@ -138,7 +134,7 @@ import { AnimationIcon } from "../../features/AnimationIcon";
       top: 1.8rem;
       left: 50%;
       transform: translateX(-50%);
-      width: var(--spacing-xxxs);
+      width: var(--space-4xs);
       height: 36px;
       background: var(--color-text);
       animation: pathmove 1.5s ease-in-out infinite;
@@ -168,12 +164,12 @@ import { AnimationIcon } from "../../features/AnimationIcon";
 
   .animation-button {
     position: fixed;
-    bottom: var(--spacing-xl);
-    right: var(--spacing-xl);
+    bottom: var(--space-l);
+    right: var(--space-l);
 
-    @media screen and (max-width: 1000px) {
-      bottom: var(--spacing-md);
-      right: var(--spacing-md);
+    @media screen and (max-width: 1024px) /* sync with --bp-md */ {
+      bottom: var(--space-s);
+      right: var(--space-s);
     }
   }
 </style>

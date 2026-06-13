@@ -79,34 +79,39 @@ const { product, Content } = Astro.props;
   .wrapper {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: var(--space-l);
     width: 100%;
-    max-width: 40rem;
+    max-width: var(--text-max-width);
     margin: 0 auto;
-    padding-top: 2rem;
+    padding-top: var(--space-l);
+
+    /* PC では content.css の padding 分（space-l * 2）を加味して text 領域が text-max-width に届くようにする */
+    @media screen and (min-width: 1025px) /* sync with --bp-md-plus */ {
+      max-width: calc(var(--text-max-width) + var(--space-l) * 2);
+    }
   }
 
   .title-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: var(--space-s);
     width: 100%;
 
     .post-meta {
-      font-size: var(--font-size-body-sm);
+      font-size: var(--step--1);
       color: var(--color-text);
       opacity: 0.6;
     }
 
     .title {
-      font-size: var(--font-size-heading-xl);
+      font-size: var(--step-2);
       font-weight: 900;
       text-align: center;
     }
 
     .description {
-      font-size: 1rem;
+      font-size: var(--step-0);
       text-align: center;
     }
   }
@@ -120,14 +125,14 @@ const { product, Content } = Astro.props;
       aspect-ratio: 720 / 450;
       object-fit: cover;
       border: 8px solid var(--color-white);
-      border-radius: 0.5rem;
+      border-radius: var(--radius-md);
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
   }
 
   .links {
     display: flex;
-    gap: 1rem;
+    gap: var(--space-s);
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -135,8 +140,8 @@ const { product, Content } = Astro.props;
   .link-button {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1rem;
+    gap: var(--space-2xs);
+    padding: var(--space-xs) var(--space-s);
     border: solid 1px var(--color-text);
     border-radius: var(--radius-infinity);
     text-decoration: none;
@@ -152,15 +157,15 @@ const { product, Content } = Astro.props;
 
   .tech-stack {
     display: flex;
-    gap: 0.5rem;
+    gap: var(--space-2xs);
     flex-wrap: wrap;
     justify-content: center;
   }
 
   .tech-badge {
-    padding: 0.25rem 0.75rem;
+    padding: var(--space-3xs) var(--space-xs);
     background-color: var(--color-white);
     border-radius: var(--radius-infinity);
-    font-size: var(--font-size-label-sm);
+    font-size: var(--step--1);
   }
 </style>

@@ -5,66 +5,61 @@
   --color-blue: #84c5ea;
   --color-link: #023aa2;
 
-  /* Font Sizes - Title */
-  --font-size-title-lg: 3rem;
-  --font-size-title-lg--line-height: 1.5;
-  --font-size-title-lg--letter-spacing: 0.01em;
-  --font-size-title-md: 2.5rem;
-  --font-size-title-md--line-height: 1.5;
-  --font-size-title-md--letter-spacing: 0.02em;
+  /* Fluid Type Scale (Utopia.fyi)
+     Min viewport: 320px / Min font: 16px / Min scale: 1.2 (Minor Third)
+     Max viewport: 1440px / Max font: 20px / Max scale: 1.25 (Major Third) */
+  --step--2: clamp(0.6944rem, 0.6642rem + 0.1508vw, 0.8rem);
+  --step--1: clamp(0.8333rem, 0.7857rem + 0.2381vw, 1rem);
+  --step-0: clamp(1rem, 0.9286rem + 0.3571vw, 1.25rem);
+  --step-1: clamp(1.2rem, 1.0964rem + 0.5179vw, 1.5625rem);
+  --step-2: clamp(1.44rem, 1.2934rem + 0.733vw, 1.9531rem);
+  --step-3: clamp(1.728rem, 1.5242rem + 1.0192vw, 2.4414rem);
+  --step-4: clamp(2.0736rem, 1.7941rem + 1.3974vw, 3.0518rem);
+  --step-5: clamp(2.4883rem, 2.1093rem + 1.8949vw, 3.8147rem);
+  /* step-6 はカスタム値（hero 専用、PageTitle SP の現状 32px を維持） */
+  --step-6: clamp(2rem, 0.8571rem + 5.7143vw, 6rem);
 
-  /* Font Sizes - Heading */
-  --font-size-heading-xl: 2rem;
-  --font-size-heading-xl--line-height: 1.53;
-  --font-size-heading-xl--letter-spacing: 0.02em;
-  --font-size-heading-lg: 1.75rem;
-  --font-size-heading-lg--line-height: 1.57;
-  --font-size-heading-lg--letter-spacing: 0.02em;
-  --font-size-heading-md: 1.5rem;
-  --font-size-heading-md--line-height: 1.67;
-  --font-size-heading-md--letter-spacing: 0.03em;
-  --font-size-heading-sm: 1.25rem;
-  --font-size-heading-sm--line-height: 1.6;
-  --font-size-heading-sm--letter-spacing: 0.03em;
-  --font-size-heading-xs: 1rem;
-  --font-size-heading-xs--line-height: 1.75;
-  --font-size-heading-xs--letter-spacing: 0.03em;
+  /* Line-height (用途別) */
+  --leading-tight: 1;
+  --leading-snug: 1.5;
+  --leading-relaxed: 1.6;
+  --leading-loose: 1.75;
+  --leading-paragraph: 2;
 
-  /* Font Sizes - Body */
-  --font-size-body-lg: 1.25rem;
-  --font-size-body-lg--line-height: 1.6;
-  --font-size-body-lg--letter-spacing: 0.03em;
-  --font-size-body-md: 1rem;
-  --font-size-body-md--line-height: 1.75;
-  --font-size-body-md--letter-spacing: 0.03em;
-  --font-size-body-sm: 0.875rem;
-  --font-size-body-sm--line-height: 1.71;
-  --font-size-body-sm--letter-spacing: 0.03em;
-  --font-size-body-xs: 0.75rem;
-  --font-size-body-xs--line-height: 1.67;
-  --font-size-body-xs--letter-spacing: 0.04em;
+  /* Letter-spacing (用途別) */
+  --tracking-tight: 0.01em;
+  --tracking-normal: 0.02em;
+  --tracking-wide: 0.03em;
+  --tracking-wider: 0.04em;
 
-  /* Font Sizes - Label */
-  --font-size-label-md: 1rem;
-  --font-size-label-md--line-height: 1;
-  --font-size-label-md--letter-spacing: 0.03em;
-  --font-size-label-sm: 0.875rem;
-  --font-size-label-sm--line-height: 1;
-  --font-size-label-sm--letter-spacing: 0.03em;
-  --font-size-label-xs: 0.75rem;
-  --font-size-label-xs--line-height: 1;
-  --font-size-label-xs--letter-spacing: 0.04em;
+  /* Fluid Space Scale (Utopia.fyi)
+     Base: step-0 = 16→20px。標準 T-shirt サイズ + 拡張 4xs (2→2.5px) */
+  --space-4xs: clamp(0.125rem, 0.1161rem + 0.0446vw, 0.1563rem);
+  --space-3xs: clamp(0.25rem, 0.2321rem + 0.0893vw, 0.3125rem);
+  --space-2xs: clamp(0.5rem, 0.4643rem + 0.1786vw, 0.625rem);
+  --space-xs: clamp(0.75rem, 0.6964rem + 0.2679vw, 0.9375rem);
+  --space-s: clamp(1rem, 0.9286rem + 0.3571vw, 1.25rem);
+  --space-m: clamp(1.5rem, 1.3929rem + 0.5357vw, 1.875rem);
+  --space-l: clamp(2rem, 1.8571rem + 0.7143vw, 2.5rem);
+  --space-xl: clamp(3rem, 2.7857rem + 1.0714vw, 3.75rem);
+  --space-2xl: clamp(4rem, 3.7143rem + 1.4286vw, 5rem);
+  --space-3xl: clamp(6rem, 5.5714rem + 2.1429vw, 7.5rem);
 
-  /* Spacing */
-  --spacing-none: 0px;
-  --spacing-xxxs: 2px;
-  --spacing-xxs: 4px;
-  --spacing-xs: 8px;
-  --spacing-sm: 12px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  --spacing-xxl: 64px;
+  /* Space Pairs (小ビューポートで小側、大ビューポートで大側に開く動的スペース) */
+  --space-s-m: clamp(1rem, 0.75rem + 1.25vw, 1.875rem);
+  --space-m-l: clamp(1.5rem, 1.2143rem + 1.4286vw, 2.5rem);
+  --space-l-xl: clamp(2rem, 1.5rem + 2.5vw, 3.75rem);
+
+  /* Breakpoints
+     値の管理のみ。@media クエリ内はリテラル値を残し、`sync with --bp-*` コメントで同期させる */
+  --bp-sm: 40rem;
+  --bp-md: 64rem;
+  --bp-md-plus: 64.0625rem;
+
+  /* Text measure (本文の読みやすい行長)
+     全角 40 文字を基準に body font-size (step-0 = 16→20px) に合わせて fluid 化
+     320px viewport: 40rem (= 16px × 40字)、1440px viewport: 50rem (= 20px × 40字) */
+  --text-max-width: clamp(40rem, 37.1429rem + 14.2857vw, 50rem);
 
   /* Border Radius */
   --radius-none: 0px;
@@ -119,28 +114,29 @@ html {
     "Hiragino Sans",
     Meiryo,
     sans-serif;
-  font-size: 1rem; /* stylelint-disable-line scale-unlimited/declaration-strict-value */
-  line-height: 1.5;
+  font-size: 100%;
+  line-height: var(--leading-snug);
 
   body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    font-size: var(--step-0);
   }
-  
+
   footer {
     margin-top: auto;
   }
 
   p {
-    line-height: 2;
-    max-width: 40rem;
+    line-height: var(--leading-paragraph);
+    max-width: var(--text-max-width);
   }
 
   p br {
     content: "";
     display: block;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-s);
   }
 }
 

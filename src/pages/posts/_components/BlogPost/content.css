@@ -2,13 +2,13 @@
   grid-area: content;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: var(--space-s);
   width: 100%;
 
   /* pc */
-  @media screen and (min-width: 1001px) {
+  @media screen and (min-width: 1025px) /* sync with --bp-md-plus */ {
     background-color: var(--color-white);
-    padding: 2rem;
+    padding: var(--space-l);
     border-radius: var(--radius-md);
   }
 
@@ -18,8 +18,8 @@
     overflow: hidden;
 
     :global(section) {
-      margin-bottom: 2rem;
-      padding: 2rem;
+      margin-bottom: var(--space-l);
+      padding: var(--space-l);
       background: var(--color-background);
       border: 1px solid var(--color-text);
       border-radius: var(--radius-md);
@@ -27,37 +27,37 @@
     }
 
     :global(h1) {
-      font-size: var(--font-size-title-md);
+      font-size: var(--step-3);
       font-weight: 900;
-      margin-bottom: 1rem;
+      margin-bottom: var(--space-s);
       color: var(--color-link);
     }
 
     :global(h2) {
-      font-size: var(--font-size-heading-xl);
+      font-size: var(--step-2);
       font-weight: 700;
-      margin-bottom: 1rem;
+      margin-bottom: var(--space-s);
     }
 
     :global(h3) {
-      font-size: var(--font-size-heading-md);
+      font-size: var(--step-0);
       font-weight: 600;
-      margin-bottom: 0.5rem;
+      margin-bottom: var(--space-2xs);
     }
 
     :global(ul) {
-      margin: 1rem 0;
-      padding-left: 2rem;
+      margin: var(--space-s) 0;
+      padding-left: var(--space-l);
     }
 
     :global(li) {
-      margin-bottom: 0.5rem;
+      margin-bottom: var(--space-2xs);
     }
 
     :global(code) {
       background-color: var(--color-text);
       color: var(--color-background);
-      padding: 0.25rem 0.5rem;
+      padding: var(--space-3xs) var(--space-2xs);
       border-radius: var(--radius-sm);
       font-family: "Courier New", monospace;
     }
@@ -65,10 +65,10 @@
     :global(pre) {
       background-color: var(--color-text);
       color: var(--color-background);
-      padding: 1rem;
+      padding: var(--space-s);
       border-radius: var(--radius-md);
       overflow-x: auto;
-      margin: 1rem 0;
+      margin: var(--space-s) 0;
     }
 
     :global(pre code) {
@@ -78,20 +78,20 @@
   }
 
   h2 {
-    margin-top: 2rem;
-    font-size: var(--font-size-heading-xl);
+    margin-top: var(--space-l);
+    font-size: var(--step-2);
     font-weight: 900;
   }
 
   h3 {
-    margin-top: 1rem;
-    font-size: var(--font-size-heading-md);
+    margin-top: var(--space-s);
+    font-size: var(--step-1);
     font-weight: 900;
   }
 
   h4 {
-    margin-top: 0.5rem;
-    font-size: var(--font-size-heading-sm);
+    margin-top: var(--space-2xs);
+    font-size: var(--step-1);
     font-weight: 900;
   }
 
@@ -103,26 +103,26 @@
   ul {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xs);
-    padding-left: 1.5rem;
+    gap: var(--space-2xs);
+    padding-left: var(--space-m);
 
     li {
       /* 点をつける */
       list-style: disc;
-      padding-left: 0.5rem;
+      padding-left: var(--space-2xs);
     }
   }
 
   ol {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xs);
-    padding-left: 1.5rem;
+    gap: var(--space-2xs);
+    padding-left: var(--space-m);
 
     li {
       /* 番号をつける */
       list-style: decimal;
-      padding-left: 0.5rem;
+      padding-left: var(--space-2xs);
     }
   }
 
@@ -133,12 +133,12 @@
 
   em {
     font-style: normal;
-    font-size: var(--font-size-body-sm);
+    font-size: var(--step--1);
   }
 
   th,
   td {
-    padding: 0.5rem;
+    padding: var(--space-2xs);
     border: 1px solid var(--color-text);
   }
 
@@ -151,14 +151,14 @@
   :not(pre) > code {
     background-color: var(--color-text);
     color: var(--color-background);
-    padding: 0.25rem 0.5rem;
+    padding: var(--space-3xs) var(--space-2xs);
     border-radius: var(--radius-sm);
-    margin: 0 0.25rem;
-    font-size: var(--font-size-body-sm);
+    margin: 0 var(--space-3xs);
+    font-size: var(--step--1);
   }
 
   pre {
-    padding: 1rem;
+    padding: var(--space-s);
   }
 }
 

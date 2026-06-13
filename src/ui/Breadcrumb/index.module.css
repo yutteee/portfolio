@@ -1,5 +1,5 @@
 .breadcrumbs {
-  padding: 0.5rem 1rem;
+  padding: var(--space-2xs) var(--space-s);
   background-color: var(--color-white);
   height: fit-content;
   width: fit-content;
@@ -9,7 +9,7 @@
 }
 
 /* TODO: コンポーネントが画面を気にしているのが気持ち悪いため見直す。 */
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1024px) /* sync with --bp-md */ {
   .breadcrumbs {
     width: 100%;
   }
@@ -20,7 +20,7 @@
 }
 
 .item:not(:last-child) {
-  margin-right: 0.5rem;
+  margin-right: var(--space-2xs);
 }
 
 .item a {
@@ -30,5 +30,5 @@
 
 .item svg {
   vertical-align: middle;
-  margin-left: 0.5rem;
+  margin-left: var(--space-2xs);
 }

@@ -9,7 +9,17 @@
         "font-size",
         "border-radius",
         "gap",
-        "box-shadow"
+        "box-shadow",
+        "padding",
+        "padding-top",
+        "padding-bottom",
+        "padding-left",
+        "padding-right",
+        "margin",
+        "margin-top",
+        "margin-bottom",
+        "margin-left",
+        "margin-right"
       ],
       {
         "ignoreValues": [
@@ -19,9 +29,11 @@
           "currentColor",
           "transparent",
           "none",
+          "auto",
           "0",
           "50%",
-          "100%"
+          "100%",
+          "50vh"
         ],
         "disableFix": true,
         "message": "Use a CSS custom property (var(--...)) instead of a hardcoded value for \"${property}\""

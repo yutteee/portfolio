@@ -3,26 +3,26 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-xl);
-  padding: 96px var(--spacing-md);
+  gap: var(--space-l);
+  padding: var(--space-3xl) var(--space-s);
   position: relative;
   z-index: var(--z-index-content);
 }
 
 .title {
-  font-size: var(--font-size-heading-xl);
+  font-size: var(--step-2);
   font-weight: 900;
 }
 
 .accounts {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px; /* stylelint-disable-line scale-unlimited/declaration-strict-value */
+  gap: var(--space-l);
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1024px) /* sync with --bp-md */ {
   .accounts {
-    gap: var(--spacing-lg);
+    gap: var(--space-m);
   }
   .icon {
     width: 44px;
@@ -43,5 +43,5 @@
   color: var(--color-link);
   text-decoration: underline;
   position: absolute;
-  bottom: var(--spacing-md);
+  bottom: var(--space-s);
 } 

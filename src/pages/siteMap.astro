@@ -34,17 +34,17 @@ const allPosts = await getCollection("posts");
   .container {
     display: flex;
     flex-direction: column;
-    padding: 0 var(--spacing-md);
+    padding: 0 var(--space-s);
     align-items: center;
     .links {
-      padding-top: var(--spacing-xxl);
-      padding-bottom: 96px;
+      padding-top: var(--space-2xl);
+      padding-bottom: var(--space-3xl);
       width: 100%;
-      max-width: 70rem;
+      max-width: 90rem;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      padding-left: 1.5rem;
+      gap: var(--space-s);
+      padding-left: var(--space-m);
 
       li {
         list-style: disc;
@@ -53,10 +53,10 @@ const allPosts = await getCollection("posts");
       }
 
       .childLinks {
-        padding-left: 1.5rem;
+        padding-left: var(--space-m);
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: var(--space-2xs);
       }
     }
   }

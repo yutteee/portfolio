@@ -40,7 +40,7 @@ describe("Footer", () => {
     render(<Footer />);
     expect(screen.getByText("サイトマップ")).toHaveAttribute(
       "href",
-      "/siteMap",
+      "/sitemap",
     );
   });
 });

@@ -29,7 +29,7 @@ export const FooterPresenter: React.FC<FooterPresenterProps> = ({ isDark }) => (
         </a>
       ))}
     </div>
-    <a href="/siteMap" className={styles.link}>
+    <a href="/sitemap" className={styles.link}>
       サイトマップ
     </a>
   </footer>

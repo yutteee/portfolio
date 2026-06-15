@@ -1,6 +1,6 @@
 .breadcrumbs {
   padding: var(--space-2xs) var(--space-s);
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   height: fit-content;
   width: fit-content;
   border-radius: var(--radius-infinity);

@@ -1,9 +1,26 @@
 :root {
+  /* === Primitives ===
+     生の色値。ダーク/ライトに関係なく不変。
+     セマンティック層から参照することを基本とし、1〜2 箇所しか使わない例外的なケースのみ直接参照する。 */
   --color-white: #fff;
-  --color-background: #f0f0f0;
-  --color-text: #041b47;
-  --color-blue: #84c5ea;
-  --color-link: #023aa2;
+  --color-black: #000;
+  --color-pale: #f0f0f0;
+  --color-navy: #041b47;
+  --color-deep-navy: #04345c;
+  --color-sky: #84c5ea;
+  --color-blue: #023aa2;
+  --color-mint: #a8fff5;
+  --color-dark-cyan: #015483;
+
+  /* === Semantics ===
+     用途を表す名前。ライト/ダークでマッピング先のプリミティブを切り替える。 */
+  --color-background: var(--color-pale);
+  --color-surface: var(--color-white);
+  --color-text: var(--color-navy);
+  --color-text-inverse: var(--color-pale);
+  --color-border: var(--color-navy);
+  --color-link: var(--color-blue);
+  --color-accent: var(--color-sky);
 
   /* Fluid Type Scale (Utopia.fyi)
      Min viewport: 320px / Min font: 16px / Min scale: 1.2 (Minor Third)
@@ -97,11 +114,13 @@
 }
 
 :root.dark {
-  --color-white: #000;
-  --color-background: #04345c;
-  --color-text: #f0f0f0;
-  --color-blue: #015483;
-  --color-link: #A8FFF5;
+  --color-background: var(--color-deep-navy);
+  --color-surface: var(--color-black);
+  --color-text: var(--color-pale);
+  --color-text-inverse: var(--color-deep-navy);
+  --color-border: var(--color-pale);
+  --color-link: var(--color-mint);
+  --color-accent: var(--color-dark-cyan);
 }
 
 html {

@@ -1,8 +1,8 @@
 .button {
   padding: var(--space-xs) var(--space-s);
-  border: solid 1px var(--color-text);
+  border: solid 1px var(--color-border);
   color: var(--color-text);
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   border-radius: var(--radius-infinity);
   width: fit-content;
   display: flex;
@@ -11,5 +11,5 @@
 }
 .button:hover,
 .button:focus {
-  background-color: var(--color-blue);
+  background-color: var(--color-accent);
 } 

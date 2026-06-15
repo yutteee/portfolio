@@ -34,7 +34,7 @@
 }
 .slideBadge {
   background-color: var(--color-link);
-  color: var(--color-background);
+  color: var(--color-text-inverse);
   padding: var(--space-3xs) var(--space-2xs);
   border-radius: var(--radius-sm);
   font-size: var(--step--2);

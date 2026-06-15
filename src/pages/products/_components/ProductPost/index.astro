@@ -124,7 +124,7 @@ const { product, Content } = Astro.props;
       height: auto;
       aspect-ratio: 720 / 450;
       object-fit: cover;
-      border: 8px solid var(--color-white);
+      border: 8px solid var(--color-surface);
       border-radius: var(--radius-md);
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
@@ -142,16 +142,16 @@ const { product, Content } = Astro.props;
     align-items: center;
     gap: var(--space-2xs);
     padding: var(--space-xs) var(--space-s);
-    border: solid 1px var(--color-text);
+    border: solid 1px var(--color-border);
     border-radius: var(--radius-infinity);
     text-decoration: none;
     color: var(--color-text);
-    background-color: var(--color-white);
+    background-color: var(--color-surface);
     transition: background-color 0.2s;
 
     &:hover,
     &:focus {
-      background-color: var(--color-blue);
+      background-color: var(--color-accent);
     }
   }
 
@@ -164,7 +164,7 @@ const { product, Content } = Astro.props;
 
   .tech-badge {
     padding: var(--space-3xs) var(--space-xs);
-    background-color: var(--color-white);
+    background-color: var(--color-surface);
     border-radius: var(--radius-infinity);
     font-size: var(--step--1);
   }

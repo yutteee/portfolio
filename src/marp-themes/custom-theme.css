@@ -21,7 +21,7 @@ section {
 
 /* タイトルスライド */
 section.title {
-  background-color: var(--color-blue);
+  background-color: var(--color-accent);
   position: relative;
   align-items: flex-start;
   justify-content: center;
@@ -70,7 +70,7 @@ section.title p {
 
 /* 強調用スライド */
 section.strong {
-  background-color: var(--color-blue);
+  background-color: var(--color-accent);
   position: relative;
   padding: 4.5rem;
   display: flex;

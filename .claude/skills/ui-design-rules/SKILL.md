@@ -28,12 +28,5 @@ UI を作る前に、まず以下を読むこと。ここには**それらに書
   - `presenter.tsx` … props を受け取って描画するだけ（純粋）
 - props 型は `export type <Name>Props` で公開。
 - スタイルは `index.module.css`（CSS Modules）。インライン style は原則使わない。
-- アイコンは `react-icons`（`Fi*` 系）。装飾アイコンには `aria-hidden`。
+- アイコンは `react-icons`（`Fi*` 系）。
 - よく使う見た目: ホバーで画像ズーム（親 `.mask{overflow:hidden}` + `.image{transition:transform .3s}` → `:hover .image{transform:scale(1.1)}`）、ホバーでテキストを `--color-link`、ピルボタンは `--radius-infinity` + ホバー背景 `--color-accent`。
-
-## アクセシビリティ（必須）
-
-- ボタンは `<button type="button">` + `aria-label`、トグルは `aria-pressed`。
-- 外部リンクは `target="_blank"` + `rel="noopener noreferrer"`、現在地は `aria-current="page"`、ナビは `<nav aria-label="...">`。
-- `list-style:none` の `<ol>/<ul>` には `role="list"` を付与（Safari/VoiceOver 対策。意図を `biome-ignore` コメントで明示）。
-- 画像には意味のある `alt`。タップターゲットは最低 44×44px。

@@ -31,8 +31,8 @@
   "componentSrcMap": {
     "BlogPost": "src/ui/BlogPost/index.tsx",
     "Breadcrumb": "src/ui/Breadcrumb/index.tsx",
+    "Button": "src/ui/Button/index.tsx",
     "IconButton": "src/ui/IconButton/index.tsx",
-    "LinkButton": "src/ui/LinkButton/index.tsx",
     "PageTitle": "src/ui/PageTitle/index.tsx",
     "ProductItem": "src/ui/ProductItem/index.tsx",
     "Footer": "src/features/Footer/index.tsx",

@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { Icon } from "astro-icon/components";
+import { FiLink, FiGithub } from "react-icons/fi";
+import { Button } from "../../../../ui/Button";
 import "../../../posts/_components/BlogPost/content.css";
 
 interface Props {
@@ -33,28 +34,26 @@ const { product, Content } = Astro.props;
     <div class="links">
       {
         product.data.url && (
-          <a
+          <Button
             href={product.data.url}
             target="_blank"
             rel="noopener noreferrer"
-            class="link-button"
+            startIcon={FiLink}
           >
-            <Icon name="weui:link-outlined" />
             サイト
-          </a>
+          </Button>
         )
       }
       {
         product.data.github && (
-          <a
+          <Button
             href={product.data.github}
             target="_blank"
             rel="noopener noreferrer"
-            class="link-button"
+            startIcon={FiGithub}
           >
-            <Icon name="mdi:github" />
             GitHub
-          </a>
+          </Button>
         )
       }
     </div>
@@ -135,24 +134,6 @@ const { product, Content } = Astro.props;
     gap: var(--space-s);
     flex-wrap: wrap;
     justify-content: center;
-  }
-
-  .link-button {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2xs);
-    padding: var(--space-xs) var(--space-s);
-    border: solid 1px var(--color-border);
-    border-radius: var(--radius-infinity);
-    text-decoration: none;
-    color: var(--color-text);
-    background-color: var(--color-surface);
-    transition: background-color 0.2s;
-
-    &:hover,
-    &:focus {
-      background-color: var(--color-accent);
-    }
   }
 
   .tech-stack {

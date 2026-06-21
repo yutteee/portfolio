@@ -1,7 +1,8 @@
 ---
+import { FiArrowRight } from "react-icons/fi";
 import { ProductItem } from "../../ui/ProductItem";
 import { getCollection } from "astro:content";
-import { LinkButton } from "../../ui/LinkButton";
+import { Button } from "../../ui/Button";
 
 const productsCollection = (await getCollection("products")).sort((a, b) =>
   b.data.period.localeCompare(a.data.period),
@@ -11,7 +12,9 @@ const productsCollection = (await getCollection("products")).sort((a, b) =>
 <section class="container">
   <div class="titles">
     <h2 class="title">プロダクト</h2>
-    <LinkButton text="一覧" url="/products/" ariaLabel="プロダクト一覧" />
+    <Button href="/products/" aria-label="プロダクト一覧" endIcon={FiArrowRight}>
+      一覧
+    </Button>
   </div>
   <div class="products">
     {

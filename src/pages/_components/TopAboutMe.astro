@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
-import { LinkButton } from "../../ui/LinkButton";
+import { FiArrowRight } from "react-icons/fi";
+import { Button } from "../../ui/Button";
 ---
 
 <div class="about">
@@ -23,7 +24,9 @@ import { LinkButton } from "../../ui/LinkButton";
       都内でエンジニアをしています。フロントエンドとデザインが好きです。<br />
       また、株式会社KANNONでデザインエンジニアとしても活動しています。
     </p>
-    <LinkButton text="私について" url="/about/" ariaLabel="私について" />
+    <Button href="/about/" aria-label="私について" endIcon={FiArrowRight}>
+      私について
+    </Button>
   </section>
 </div>
 <style>

@@ -60,3 +60,22 @@ the sync uses a few adaptations beyond the converter defaults.
   fixed-position renders) — confirmed rendering correctly.
 - **Header/Footer/AnimationIcon are app-specific** (own nav routes, hardcoded social
   links, animation toggle) — useful as references but not generic building blocks.
+- **`@kind` comments in `src/styles/global.css` are load-bearing for claude.ai/design's
+  token classification** (`check_design_system`). The `--step-*` font tokens carry
+  `/* @kind font */` and the `--z-index-*` tokens carry `/* @kind other */`. The converter
+  passes CSS comments through to `_ds_bundle.css` verbatim (it doesn't process `@kind` —
+  the app-side checker reads them), so **never strip these trailing comments**; without
+  them the design panel re-flags 14 unclassified tokens. The `--text-max-width` clamp's
+  `+ 14.2857vw` fragment trips a false font-family warning in the panel — ignore it, the
+  token is correct.
+- **`Button` is the generic action/link component.** `Button` (ui) renders `<a>` when given
+  `href`, else `<button>` (discriminated union), with `startIcon`/`endIcon` (react-icons).
+  The old `LinkButton` wrapper was REMOVED (it only forwarded `aria-label` + a fixed right
+  arrow — no value over `Button` directly); "一覧/詳細" list links now compose `Button`
+  inline (`<Button href aria-label endIcon={FiArrowRight}>`) in the app `.astro` files.
+  The synced project still carried `components/ui/LinkButton/**` + `_preview/LinkButton.js`
+  from the prior sync — the next driver run reports it as `removed`; let the upload delete
+  those paths (don't hand-keep them).
+- A `reference_drift` canary fires on every driver run after a full `sb-reference` rebuild
+  (the remote anchor predates it) and clears only on upload — confirm the spot-check sheets
+  match and proceed; it is not a real grade gap.

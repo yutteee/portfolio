@@ -1,7 +1,7 @@
 export { BlogPost } from "../src/ui/BlogPost";
 export { Breadcrumb } from "../src/ui/Breadcrumb";
+export { Button } from "../src/ui/Button";
 export { IconButton } from "../src/ui/IconButton";
-export { LinkButton } from "../src/ui/LinkButton";
 export { PageTitle } from "../src/ui/PageTitle";
 export { ProductItem } from "../src/ui/ProductItem";
 export { Footer } from "../src/features/Footer";

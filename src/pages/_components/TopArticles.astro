@@ -1,6 +1,7 @@
 ---
+import { FiArrowRight } from "react-icons/fi";
 import { BlogPost } from "../../ui/BlogPost";
-import { LinkButton } from "../../ui/LinkButton";
+import { Button } from "../../ui/Button";
 import { getAllPosts } from "../../content/post";
 
 const allPosts = await getAllPosts();
@@ -9,7 +10,9 @@ const allPosts = await getAllPosts();
 <section class="container">
   <div class="titles">
     <h2 class="title">記事</h2>
-    <LinkButton text="一覧" url="/posts/" ariaLabel="記事一覧" />
+    <Button href="/posts/" aria-label="記事一覧" endIcon={FiArrowRight}>
+      一覧
+    </Button>
   </div>
   <ul class="articles">
     {

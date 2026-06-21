@@ -1,0 +1,42 @@
+{
+  "pkg": "purple-proxima",
+  "globalName": "PurpleProxima",
+  "projectId": "14717430-4296-4b30-8d57-3af604ae19a3",
+  "shape": "storybook",
+  "storybookConfigDir": ".storybook",
+  "storybookStatic": ".design-sync/sb-reference",
+  "buildCmd": "npx storybook build -c .storybook -o .design-sync/sb-reference",
+  "cssEntry": "src/styles/global.css",
+  "readmeHeader": ".design-sync/conventions.md",
+  "docsDir": ".design-sync/docs",
+  "tokensPkg": "destyle.css",
+  "tokensGlob": "destyle.css",
+  "overrides": {
+    "Header": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "viewport": "1200x100",
+      "skip": [
+        "features-header--sp-menu",
+        "features-header--theme-toggle-interaction",
+        "features-header--dark-mode-and-light-mode"
+      ]
+    },
+    "AnimationIcon": {
+      "cardMode": "single",
+      "primaryStory": "Default",
+      "skip": ["features-animationicon--toggle-interaction"]
+    }
+  },
+  "componentSrcMap": {
+    "BlogPost": "src/ui/BlogPost/index.tsx",
+    "Breadcrumb": "src/ui/Breadcrumb/index.tsx",
+    "Button": "src/ui/Button/index.tsx",
+    "IconButton": "src/ui/IconButton/index.tsx",
+    "PageTitle": "src/ui/PageTitle/index.tsx",
+    "ProductItem": "src/ui/ProductItem/index.tsx",
+    "Footer": "src/features/Footer/index.tsx",
+    "AnimationIcon": "src/features/AnimationIcon/index.tsx",
+    "Header": "src/features/Header/index.tsx"
+  }
+}

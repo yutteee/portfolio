@@ -8,6 +8,7 @@
   "buildCmd": "npx storybook build -c .storybook -o .design-sync/sb-reference",
   "cssEntry": "src/styles/global.css",
   "readmeHeader": ".design-sync/conventions.md",
+  "docsDir": ".design-sync/docs",
   "tokensPkg": "destyle.css",
   "tokensGlob": "destyle.css",
   "overrides": {

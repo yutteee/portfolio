@@ -1,57 +1,42 @@
-# yutteee Portfolio UI — conventions
+# yutteee Portfolio UI — 規約
 
-These React components come from a personal portfolio (Astro + React). They are
-**standalone** — there is no React context/provider to wrap. All theming is done
-through global CSS (design tokens + a reset) that ships in `styles.css`, plus one
-`<html>` class for dark mode. Load `styles.css` and the components are styled.
+これらの React コンポーネントはポートフォリオサイト（Astro + React）由来です。各コンポーネントは**スタンドアロン**で、ラップすべき React の Context / Provider はありません。テーマ設定はすべて `styles.css` で配信されるグローバル CSS（デザイントークン + リセット）と、ダークモード用の `<html>` クラス1つで行います。`styles.css` を読み込めばコンポーネントはスタイルされます。
 
-## Setup & theming
+## セットアップとテーマ
 
-- **Load `styles.css`.** It `@import`s `tokens/destyle.css` (a CSS reset — components
-  assume it; without it native `<button>`/`<a>`/list styles leak), the brand font
-  **BIZ UDPGothic** (remote `@import`), and `_ds_bundle.css` (every `--*` token
-  definition + component styles). No provider, no JS theme setup.
-- **Dark mode:** add the class `dark` to the root `<html>` element
-  (`document.documentElement.classList.add("dark")`). Light is the default (no class).
-  The semantic `--color-*` tokens remap automatically — never hardcode hex.
-- **Fonts:** `--font-family-default` is `"BIZ UDPGothic", sans-serif`, already applied
-  to `html`.
+- **`styles.css` を読み込む。** このファイルは `tokens/destyle.css`（CSS リセット — コンポーネントはこれを前提とします。無いとネイティブの `<button>`/`<a>`/リスト のスタイルが漏れます）、ブランドフォント **BIZ UDPGothic**（リモート `@import`）、`_ds_bundle.css`（全 `--*` トークン定義 + コンポーネントスタイル）を `@import` します。Provider も JS のテーマ設定も不要です。
+- **ダークモード:** ルートの `<html>` 要素に `dark` クラスを付与します（`document.documentElement.classList.add("dark")`）。ライトがデフォルト（クラス無し）です。セマンティックな `--color-*` トークンが自動で切り替わります — 色を直接ハードコードしないでください。
+- **フォント:** `--font-family-default` は `"BIZ UDPGothic", sans-serif` で、`html` に適用済みです。
 
-## Styling idiom — CSS custom properties (design tokens)
+## スタイリングの作法 — CSS カスタムプロパティ（デザイントークン）
 
-There are **no utility classes and no CSS-in-JS**. Components carry their own styles;
-you style your own layout glue with `var(--token)`. Always use the **semantic**
-color tokens (theme-aware), not the raw primitives (`--color-navy`, etc.).
+**ユーティリティクラスも CSS-in-JS もありません。** コンポーネントは自身のスタイルを持ちます。あなた自身のレイアウト用スタイルは `var(--token)` で組んでください。色は必ず**セマンティック**トークン（テーマ対応）を使い、生のプリミティブ（`--color-navy` など）は使わないでください。
 
-| Family | Tokens |
+| 種別 | トークン |
 |---|---|
-| Color (semantic) | `--color-background` `--color-surface` `--color-text` `--color-text-inverse` `--color-border` `--color-link` `--color-accent` |
-| Font size (fluid) | `--step--2` `--step--1` `--step-0` `--step-1` … `--step-6` |
-| Spacing (fluid) | `--space-4xs` `--space-3xs` `--space-2xs` `--space-xs` `--space-s` `--space-m` `--space-l` `--space-xl` `--space-2xl` `--space-3xl` (+ pairs `--space-s-m`, `--space-m-l`, `--space-l-xl`) |
-| Radius | `--radius-none` `--radius-xs` `--radius-sm` `--radius-md` `--radius-lg` `--radius-xl` `--radius-infinity` |
-| Line height | `--leading-tight` `--leading-snug` `--leading-relaxed` `--leading-loose` `--leading-paragraph` |
-| Letter spacing | `--tracking-tight` `--tracking-normal` `--tracking-wide` `--tracking-wider` |
-| Border width | `--border-width-none` `--border-width-sm` `--border-width-md` `--border-width-lg` |
-| Shadow | `--shadow-elevation-2` `--shadow-elevation-4` `--shadow-elevation-8` `--shadow-elevation-12` |
+| 色（セマンティック） | `--color-background` `--color-surface` `--color-text` `--color-text-inverse` `--color-border` `--color-link` `--color-accent` |
+| フォントサイズ（流動的） | `--step--2` `--step--1` `--step-0` `--step-1` … `--step-6` |
+| 余白（流動的） | `--space-4xs` `--space-3xs` `--space-2xs` `--space-xs` `--space-s` `--space-m` `--space-l` `--space-xl` `--space-2xl` `--space-3xl`（ペア `--space-s-m`, `--space-m-l`, `--space-l-xl` も） |
+| 角丸 | `--radius-none` `--radius-xs` `--radius-sm` `--radius-md` `--radius-lg` `--radius-xl` `--radius-infinity` |
+| 行送り | `--leading-tight` `--leading-snug` `--leading-relaxed` `--leading-loose` `--leading-paragraph` |
+| 字間 | `--tracking-tight` `--tracking-normal` `--tracking-wide` `--tracking-wider` |
+| 線幅 | `--border-width-none` `--border-width-sm` `--border-width-md` `--border-width-lg` |
+| 影 | `--shadow-elevation-2` `--shadow-elevation-4` `--shadow-elevation-8` `--shadow-elevation-12` |
 | z-index | `--z-index-background` `--z-index-content` `--z-index-header` `--z-index-modal` `--z-index-toast` |
-| Breakpoints | `--bp-sm` (40rem) `--bp-md` (64rem) `--bp-md-plus` |
-| Misc | `--text-max-width` `--font-weight-normal` |
+| ブレークポイント | `--bp-sm`（40rem）`--bp-md`（64rem）`--bp-md-plus` |
+| その他 | `--text-max-width` `--font-weight-normal` |
 
-## Where the truth lives
+## 正となる情報の場所
 
-- `styles.css` and its `@import` closure (`tokens/destyle.css`, `_ds_bundle.css`) —
-  the authoritative token values and component CSS. Read these before styling.
-- Per-component API + usage: `components/<group>/<Name>/<Name>.prompt.md` and `.d.ts`.
-- Groups: **ui/** = `BlogPost` `Breadcrumb` `IconButton` `LinkButton` `PageTitle`
-  `ProductItem`; **features/** = `Header` `Footer` `AnimationIcon`.
-- `IconButton`'s `icon` prop takes a **react-icons** `IconType` (e.g. `FiMenu` from
-  `react-icons/fi`). `Header`/`Footer`/`AnimationIcon` are app-specific (own nav,
-  social links, animation toggle).
+- `styles.css` とその `@import` クロージャ（`tokens/destyle.css`, `_ds_bundle.css`）— トークンの実値とコンポーネント CSS の正本。スタイリング前に参照してください。
+- コンポーネントごとの API と使い方: `components/<group>/<Name>/<Name>.prompt.md` と `.d.ts`。
+- グループ: **ui/** = `BlogPost` `Breadcrumb` `IconButton` `LinkButton` `PageTitle` `ProductItem`；**features/** = `Header` `Footer` `AnimationIcon`。
+- `IconButton` の `icon` prop は **react-icons** の `IconType` を取ります（例: `react-icons/fi` の `FiMenu`）。`Header`/`Footer`/`AnimationIcon` はアプリ固有です（独自のナビ・ソーシャルリンク・アニメーション切替）。
 
-## Idiomatic build snippet
+## 慣用的な実装例
 
 ```tsx
-import { IconButton } from "<this package>";
+import { IconButton } from "<このパッケージ>";
 import { FiMenu } from "react-icons/fi";
 
 export function Toolbar() {

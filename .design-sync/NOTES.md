@@ -61,13 +61,31 @@ the sync uses a few adaptations beyond the converter defaults.
 - **Header/Footer/AnimationIcon are app-specific** (own nav routes, hardcoded social
   links, animation toggle) — useful as references but not generic building blocks.
 - **`@kind` comments in `src/styles/global.css` are load-bearing for claude.ai/design's
-  token classification** (`check_design_system`). The `--step-*` font tokens carry
-  `/* @kind font */` and the `--z-index-*` tokens carry `/* @kind other */`. The converter
-  passes CSS comments through to `_ds_bundle.css` verbatim (it doesn't process `@kind` —
-  the app-side checker reads them), so **never strip these trailing comments**; without
-  them the design panel re-flags 14 unclassified tokens. The `--text-max-width` clamp's
-  `+ 14.2857vw` fragment trips a false font-family warning in the panel — ignore it, the
-  token is correct.
+  token classification** (`check_design_system`). The converter passes CSS comments through
+  to `_ds_bundle.css` verbatim (it doesn't process `@kind` — the app-side checker reads
+  them), so **never strip these trailing comments**; without them the design panel re-flags
+  the tokens as unclassified.
+  - Current kinds: ALL 15 classified tokens carry `/* @kind other */` — the 9 `--step-*`,
+    `--text-max-width`, and the 5 `--z-index-*`.
+  - **Why not `@kind font`:** with `@kind font` (and with NO annotation), the panel parsed
+    each `clamp()` token's middle term (`min + Nvw`, e.g. `+ 0.1508vw`) as a font-family and
+    raised a recurring false **"Missing brand fonts"** warning listing those fragments. There
+    is no real missing font (BIZ UDPGothic loads via `styles.css`'s remote `@import`).
+  - **History 2026-06-27:** briefly tried `@kind font-size` (steps) / `@kind size`
+    (`--text-max-width`), then the owner chose to settle on `/* @kind other */` for all 10
+    fluid-type tokens. `other` is the proven-valid kind — the `--z-index-*` tokens always
+    used it and never trip the warning — so it reliably clears the false font warning.
+    Trade-off: these show under "other" in the panel, not a typography group. Stick with
+    `other` unless a future run confirms a real size-kind in the panel.
+  - **The checker also reads NEARBY comment TEXT, not just `@kind` (confirmed 2026-06-27):**
+    after switching all 10 tokens to `@kind other`, the 9 `--step-*` cleared but
+    `--text-max-width` STILL flagged — its preceding descriptive comment contained the literal
+    string **`font-size`** (and a `step-0` reference). The `--step-*` block's preceding comment
+    says `font` (e.g. "Min font: 16px") and was harmless, but the hyphenated `font-size` was
+    picked up as a font signal. Removing `font-size`/`step` wording from that comment cleared
+    it (owner-verified in the panel). **Keep `font`/`font-size`/`font-family` out of comments
+    sitting directly above a `clamp()` token** — the trailing `@kind other` alone isn't enough
+    if the preceding prose names a font property.
 - **`Button` is the generic action/link component.** `Button` (ui) renders `<a>` when given
   `href`, else `<button>` (discriminated union), with `startIcon`/`endIcon` (react-icons).
   The old `LinkButton` wrapper was REMOVED (it only forwarded `aria-label` + a fixed right

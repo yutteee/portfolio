@@ -25,16 +25,16 @@
   /* Fluid Type Scale (Utopia.fyi)
      Min viewport: 320px / Min font: 16px / Min scale: 1.2 (Minor Third)
      Max viewport: 1440px / Max font: 20px / Max scale: 1.25 (Major Third) */
-  --step--2: clamp(0.6944rem, 0.6642rem + 0.1508vw, 0.8rem); /* @kind font */
-  --step--1: clamp(0.8333rem, 0.7857rem + 0.2381vw, 1rem); /* @kind font */
-  --step-0: clamp(1rem, 0.9286rem + 0.3571vw, 1.25rem); /* @kind font */
-  --step-1: clamp(1.2rem, 1.0964rem + 0.5179vw, 1.5625rem); /* @kind font */
-  --step-2: clamp(1.44rem, 1.2934rem + 0.733vw, 1.9531rem); /* @kind font */
-  --step-3: clamp(1.728rem, 1.5242rem + 1.0192vw, 2.4414rem); /* @kind font */
-  --step-4: clamp(2.0736rem, 1.7941rem + 1.3974vw, 3.0518rem); /* @kind font */
-  --step-5: clamp(2.4883rem, 2.1093rem + 1.8949vw, 3.8147rem); /* @kind font */
+  --step--2: clamp(0.6944rem, 0.6642rem + 0.1508vw, 0.8rem); /* @kind other */
+  --step--1: clamp(0.8333rem, 0.7857rem + 0.2381vw, 1rem); /* @kind other */
+  --step-0: clamp(1rem, 0.9286rem + 0.3571vw, 1.25rem); /* @kind other */
+  --step-1: clamp(1.2rem, 1.0964rem + 0.5179vw, 1.5625rem); /* @kind other */
+  --step-2: clamp(1.44rem, 1.2934rem + 0.733vw, 1.9531rem); /* @kind other */
+  --step-3: clamp(1.728rem, 1.5242rem + 1.0192vw, 2.4414rem); /* @kind other */
+  --step-4: clamp(2.0736rem, 1.7941rem + 1.3974vw, 3.0518rem); /* @kind other */
+  --step-5: clamp(2.4883rem, 2.1093rem + 1.8949vw, 3.8147rem); /* @kind other */
   /* step-6 はカスタム値（hero 専用、PageTitle SP の現状 32px を維持） */
-  --step-6: clamp(2rem, 0.8571rem + 5.7143vw, 6rem); /* @kind font */
+  --step-6: clamp(2rem, 0.8571rem + 5.7143vw, 6rem); /* @kind other */
 
   /* Line-height (用途別) */
   --leading-tight: 1;
@@ -74,9 +74,9 @@
   --bp-md-plus: 64.0625rem;
 
   /* Text measure (本文の読みやすい行長)
-     全角 40 文字を基準に body font-size (step-0 = 16→20px) に合わせて fluid 化
-     320px viewport: 40rem (= 16px × 40字)、1440px viewport: 50rem (= 20px × 40字) */
-  --text-max-width: clamp(40rem, 37.1429rem + 14.2857vw, 50rem);
+     全角 40 文字を基準に viewport 幅へ流動化
+     320px viewport: 40rem、1440px viewport: 50rem */
+  --text-max-width: clamp(40rem, 37.1429rem + 14.2857vw, 50rem); /* @kind other */
 
   /* Border Radius */
   --radius-none: 0px;

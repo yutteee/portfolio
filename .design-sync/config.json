@@ -35,6 +35,7 @@
     "IconButton": "src/ui/IconButton/index.tsx",
     "PageTitle": "src/ui/PageTitle/index.tsx",
     "ProductItem": "src/ui/ProductItem/index.tsx",
+    "Scrap": "src/ui/Scrap/index.tsx",
     "Footer": "src/features/Footer/index.tsx",
     "AnimationIcon": "src/features/AnimationIcon/index.tsx",
     "Header": "src/features/Header/index.tsx"

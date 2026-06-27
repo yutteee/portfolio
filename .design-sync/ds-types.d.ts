@@ -8,6 +8,7 @@ export { Button, type ButtonProps } from "../src/ui/Button";
 export { IconButton, type IconButtonProps } from "../src/ui/IconButton";
 export { PageTitle, type PageTitleProps } from "../src/ui/PageTitle";
 export { ProductItem, type ProductItemProps } from "../src/ui/ProductItem";
+export { Scrap, type ScrapProps } from "../src/ui/Scrap";
 export { Footer } from "../src/features/Footer";
 export { AnimationIcon } from "../src/features/AnimationIcon";
 export { Header } from "../src/features/Header";

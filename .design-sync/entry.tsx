@@ -4,6 +4,7 @@ export { Button } from "../src/ui/Button";
 export { IconButton } from "../src/ui/IconButton";
 export { PageTitle } from "../src/ui/PageTitle";
 export { ProductItem } from "../src/ui/ProductItem";
+export { Scrap } from "../src/ui/Scrap";
 export { Footer } from "../src/features/Footer";
 export { AnimationIcon } from "../src/features/AnimationIcon";
 export { Header } from "../src/features/Header";

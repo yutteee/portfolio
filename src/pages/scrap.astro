@@ -1,0 +1,57 @@
+---
+import { render } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { PageTitle } from "../ui/PageTitle";
+import { Scrap } from "../ui/Scrap";
+import { getAllScraps } from "../content/scrap";
+
+const pageTitle = "スクラップ";
+const pageDescription = "著者によるスクラップ一覧です。";
+
+const scraps = await getAllScraps();
+const rendered = await Promise.all(
+  scraps.map(async (scrap) => ({
+    scrap,
+    Content: (await render(scrap)).Content,
+  })),
+);
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <main class="container">
+    <PageTitle title="スクラップ" />
+    <div class="feed">
+      {
+        rendered.map(({ scrap, Content }) => (
+          <Scrap
+            pubDate={scrap.data.pubDate}
+            title={scrap.data.title}
+            description={scrap.data.description}
+          >
+            <Content />
+          </Scrap>
+        ))
+      }
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 var(--space-s);
+    width: 100%;
+  }
+
+  .feed {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-l);
+    width: 100%;
+    max-width: var(--text-max-width);
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-3xl);
+  }
+</style>

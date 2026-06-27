@@ -34,7 +34,18 @@ const productsCollection = defineCollection({
   }),
 });
 
+// スクラップ: ブログより粒度の細かい学びのメモ。
+const scrapsCollection = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/scraps" }),
+  schema: z.object({
+    title: z.string(),
+    pubDate: z.string(),
+    description: z.string(),
+  }),
+});
+
 export const collections = {
   posts: postsCollection,
   products: productsCollection,
+  scraps: scrapsCollection,
 };

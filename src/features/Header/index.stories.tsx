@@ -93,6 +93,10 @@ export const SpMenu: Story = {
     await expect(
       within(spMenu).getByRole("link", { name: "記事" }),
     ).toHaveFocus();
+    await userEvent.tab();
+    await expect(
+      within(spMenu).getByRole("link", { name: "スクラップ" }),
+    ).toHaveFocus();
     // さらにTabで最初（閉じるボタン）に戻る
     await userEvent.tab();
     await expect(closeButton).toHaveFocus();

@@ -2,7 +2,12 @@ import styles from "./index.module.css";
 import { IconButton } from "../../ui/IconButton";
 import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi";
 
-export const NAV_PAGES = ["私について", "プロダクト", "記事"] as const;
+export const NAV_PAGES = [
+  "私について",
+  "プロダクト",
+  "記事",
+  "スクラップ",
+] as const;
 export type CurrentPage = (typeof NAV_PAGES)[number];
 
 export type HeaderPresenterProps = {
@@ -55,6 +60,14 @@ export const HeaderPresenter: React.FC<HeaderPresenterProps> = ({
           >
             記事
           </a>
+          <a
+            href="/scrap/"
+            className={
+              currentPage === "スクラップ" ? styles.current : undefined
+            }
+          >
+            スクラップ
+          </a>
         </nav>
         <div className={styles.hamburger}>
           <IconButton
@@ -103,6 +116,7 @@ export const HeaderPresenter: React.FC<HeaderPresenterProps> = ({
           <a href="/about/">私について</a>
           <a href="/products/">プロダクト</a>
           <a href="/posts/">記事</a>
+          <a href="/scrap/">スクラップ</a>
         </nav>
       </div>
     </header>

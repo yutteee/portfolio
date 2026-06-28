@@ -49,6 +49,14 @@ the sync uses a few adaptations beyond the converter defaults.
   `cp public/github.png public/github_dark.png public/qiita.png public/zenn.svg public/wantedly.png public/wantedly_dark.png ds-bundle/`
   and ensure they're in the upload plan's writes/deletes. If skipped, the Footer card and
   any design using `<Footer/>` show broken images.
+- **ガイドラインの日本語化は後処理（`emit.mjs` がフォーク禁止のため）。** 変換ツールは
+  README 本文と各 `.prompt.md` の定型文（"X from purple-proxima. Use via …" / `## Props`）を
+  毎ビルド英語で生成する。owner の方針で全ガイドラインを日本語に統一しているため、**毎ビルド後・
+  upload 前に必ず**: `node .design-sync/localize.mjs --out ./ds-bundle` を実行し、書き換わる
+  `README.md` と全 `components/**/<Name>.prompt.md` を upload に含める（冪等）。スキップすると
+  英語の定型文が再び出る。`localize.mjs` は構造（`# <Global> (` 見出し・1行目定型・`## Props`）に
+  アンカーしているので、変換ツール側の文言が大きく変わったら要追従。`_ds_sync.json` は英語ビルドの
+  ハッシュで安定するため（build=英語→localize=日本語→upload の順が前提）、アンカーは触らない。
 - **Header / AnimationIcon-Stopped graded by manual capture.** The compare harness can't
   auto-capture `position:fixed;height:0` (Header) or the `html.stop` class-toggled button
   (AnimationIcon Stopped) — `waitForSelector` visibility fails → `sb-error`. Both were

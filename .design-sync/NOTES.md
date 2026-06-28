@@ -5,7 +5,7 @@ the sync uses a few adaptations beyond the converter defaults.
 
 ## How this repo is wired for design-sync
 
-- **Runtime entry**: `.design-sync/entry.tsx` — a barrel re-exporting the 9 storied
+- **Runtime entry**: `.design-sync/entry.tsx` — a barrel re-exporting the 10 storied
   React components. Passed via `--entry`; esbuild bundles it into `window.PurpleProxima`.
 - **Types entry**: `.design-sync/ds-types.d.ts` — a declaration barrel re-exporting the
   components + their `*Props`. `package.json` `"types"` points at it. **Required**: the
@@ -97,3 +97,11 @@ the sync uses a few adaptations beyond the converter defaults.
 - A `reference_drift` canary fires on every driver run after a full `sb-reference` rebuild
   (the remote anchor predates it) and clears only on upload — confirm the spot-check sheets
   match and proceed; it is not a real grade gap.
+- **Re-sync 2026-06-28:** Scrap was already storied/uploaded; this run added the missing
+  `.design-sync/docs/Scrap.md` (cleared `[DOCS_UNMAPPED] Scrap`) and added Scrap to the
+  `conventions.md` ui/ group list. `Header` showed as `changed` because its story file moved
+  (commit 60b1782 added a スクラップ tab assertion to the **skipped** SpMenu focus-trap play
+  function) — the visual `Default` render is unaffected. Header's desktop nav now legitimately
+  includes a スクラップ link; manual full-viewport capture confirmed preview == storybook
+  (auto-compare still `sb-error`s on the fixed/0-height header, as documented above). Token
+  `@kind` edits + Scrap CSS changed `styleSha` (styling re-shipped, grades carried).

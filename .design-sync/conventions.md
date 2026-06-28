@@ -30,7 +30,7 @@
 
 - `styles.css` とその `@import` クロージャ（`tokens/destyle.css`, `_ds_bundle.css`）— トークンの実値とコンポーネント CSS の正本。スタイリング前に参照してください。
 - コンポーネントごとの API と使い方: `components/<group>/<Name>/<Name>.prompt.md` と `.d.ts`。
-- グループ: **ui/** = `BlogPost` `Breadcrumb` `Button` `IconButton` `PageTitle` `ProductItem`；**features/** = `Header` `Footer` `AnimationIcon`。
+- グループ: **ui/** = `BlogPost` `Breadcrumb` `Button` `IconButton` `PageTitle` `ProductItem` `Scrap`；**features/** = `Header` `Footer` `AnimationIcon`。`Scrap` は日付・タイトル・概要を常に表示し、本文をネイティブ `details`/`summary` で展開する記録カードです（hydration 不要）。
 - `IconButton` の `icon` prop は **react-icons** の `IconType` を取ります（例: `react-icons/fi` の `FiMenu`）。`Header`/`Footer`/`AnimationIcon` はアプリ固有です（独自のナビ・ソーシャルリンク・アニメーション切替）。
 
 ## 慣用的な実装例

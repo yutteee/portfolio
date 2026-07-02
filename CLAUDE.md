@@ -93,6 +93,7 @@ scrollToSlide({ target: 3 });
 - ユニットテストは `src/**/*.test.tsx` に配置し、jsdom 環境で実行
 - Storybook テストは vitest storybook 設定を使用
 - Header のテーマ永続化テストが一部失敗中（既存の問題でセッション設定とは無関係）
+- **意味のあるテスト項目がある場合のみ `index.test.tsx` を作成する**。渡した props がそのまま出力されるかを確認するだけの自明なテスト（検証価値のないテスト）は作らない
 
 ## セッション開始フック
 

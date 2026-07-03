@@ -21,7 +21,9 @@
     "test:unit": "vitest --config vitest.unit.config.ts",
     "test:storybook": "vitest --config vitest.storybook.config.ts",
     "plop": "plop",
-    "copy-images": "node scripts/copy-images.js"
+    "copy-images": "node scripts/copy-images.js",
+    "blog:import": "node scripts/import-from-obsidian.js",
+    "blog:export": "node scripts/export-to-obsidian.js"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
@@ -69,6 +71,7 @@
     "@vitest/browser": "^4.1.8",
     "@vitest/browser-playwright": "^4.1.7",
     "@vitest/coverage-v8": "^4.1.7",
+    "gray-matter": "^4.0.3",
     "playwright": "^1.52.0",
     "plop": "^4.0.1",
     "storybook": "^10.4.1",

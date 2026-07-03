@@ -1,0 +1,23 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-3xs) var(--space-s);
+  border-radius: var(--radius-infinity);
+  font-size: var(--step--1);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: var(--tracking-wide);
+  white-space: nowrap;
+  border: var(--border-width-md) solid transparent;
+}
+
+.primary {
+  background-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.secondary {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}

@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import { FiLink, FiGithub } from "react-icons/fi";
 import { Button } from "../../../../ui/Button";
+import { Tag } from "../../../../ui/Tag";
 import "../../../posts/_components/BlogPost/content.css";
 
 interface Props {
@@ -62,7 +63,7 @@ const { product, Content } = Astro.props;
       product.data.tech && product.data.tech.length > 0 && (
         <div class="tech-stack">
           {product.data.tech.map((t: string) => (
-            <span class="tech-badge">{t}</span>
+            <Tag variant="secondary">{t}</Tag>
           ))}
         </div>
       )
@@ -141,12 +142,5 @@ const { product, Content } = Astro.props;
     gap: var(--space-2xs);
     flex-wrap: wrap;
     justify-content: center;
-  }
-
-  .tech-badge {
-    padding: var(--space-3xs) var(--space-xs);
-    background-color: var(--color-surface);
-    border-radius: var(--radius-infinity);
-    font-size: var(--step--1);
   }
 </style>

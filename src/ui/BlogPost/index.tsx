@@ -1,6 +1,7 @@
 import type React from "react";
 import styles from "./index.module.css";
 import { FiExternalLink } from "react-icons/fi";
+import { Tag } from "../Tag";
 
 export type BlogPostProps = {
   title: string;
@@ -42,7 +43,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
         <div className={styles.texts}>
           <div className={styles.meta}>
             <div>{date}</div>
-            {marp && <span className={styles.slideBadge}>スライド</span>}
+            {marp && <Tag variant="primary">スライド</Tag>}
           </div>
           <div className={styles.title}>
             <span>{title}</span>

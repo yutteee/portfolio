@@ -1,0 +1,100 @@
+.timeline {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.item {
+  position: relative;
+  padding-left: var(--space-xl);
+  padding-bottom: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.item:last-child {
+  padding-bottom: 0;
+}
+
+/* 項目同士をつなぐ縦のライン */
+.item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--space-m) / 2);
+  width: var(--border-width-lg);
+  transform: translateX(-50%);
+  background-color: var(--color-border);
+}
+
+.item:last-child::before {
+  display: none;
+}
+
+/* マーカー: PC モチーフを応用したミニモニター（8/5 の角丸矩形） */
+.item::after {
+  content: "";
+  position: absolute;
+  top: var(--space-4xs);
+  left: 0;
+  width: var(--space-m);
+  aspect-ratio: 8 / 5;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-accent);
+  border: var(--border-width-lg) solid var(--color-border);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+}
+
+.period {
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-wide);
+}
+
+.title {
+  font-size: var(--step-1);
+  font-weight: 900;
+}
+
+.body {
+  display: flex;
+  gap: var(--space-l);
+  align-items: flex-start;
+  width: 100%;
+}
+
+@media screen and (max-width: 40rem) /* sync with --bp-sm */ {
+  .body {
+    flex-direction: column;
+    gap: var(--space-s);
+  }
+}
+
+.description {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  max-width: var(--text-max-width);
+}
+
+.imageWrapper {
+  flex: 1;
+  min-width: 0;
+  max-width: 25rem;
+  width: 100%;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 8/5;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}

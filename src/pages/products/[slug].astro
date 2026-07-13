@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 }
 
 const { product } = Astro.props;
-const { Content } = await render(product);
+const { Content, headings } = await render(product);
 
 import "destyle.css";
 import "../../styles/global.css";
@@ -55,7 +55,7 @@ import CommonHead from "../../components/CommonHead.astro";
         <div>{product.data.title}</div>
       </div>
 
-      <ProductPost product={product} Content={Content} />
+      <ProductPost product={product} Content={Content} headings={headings} />
     </main>
     <Footer client:only />
 

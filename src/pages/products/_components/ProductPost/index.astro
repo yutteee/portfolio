@@ -3,18 +3,21 @@ import type { CollectionEntry } from "astro:content";
 import { FiLink, FiGithub } from "react-icons/fi";
 import { Button } from "../../../../ui/Button";
 import { Tag } from "../../../../ui/Tag";
+import TableOfContents from "../../../../components/TableOfContents.astro";
 import "../../../posts/_components/BlogPost/content.css";
 
 interface Props {
   product: CollectionEntry<"products">;
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   Content: any;
+  headings: { depth: number; slug: string; text: string }[];
 }
 
-const { product, Content } = Astro.props;
+const { product, Content, headings } = Astro.props;
+const hasToc = headings.length > 0;
 ---
 
-<div class="wrapper">
+<div class:list={["wrapper", { "has-toc": hasToc }]}>
   <div class="title-wrapper">
     <div class="post-meta">
       <span>{product.data.period}</span>
@@ -70,6 +73,8 @@ const { product, Content } = Astro.props;
     }
   </div>
 
+  <TableOfContents headings={headings} />
+
   <div class="main-wrapper">
     <Content />
   </div>
@@ -77,26 +82,52 @@ const { product, Content } = Astro.props;
 
 <style>
   .wrapper {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     gap: var(--space-l);
     width: 100%;
-    max-width: var(--text-max-width);
     margin: 0 auto;
     padding-top: var(--space-l);
+    align-items: start;
+
+    /* SP: 縦1列 (title -> toc -> content) */
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "content";
+    max-width: var(--text-max-width);
+
+    &.has-toc {
+      grid-template-areas:
+        "title"
+        "toc"
+        "content";
+    }
 
     /* PC では content.css の padding 分（space-l * 2）を加味して text 領域が text-max-width に届くようにする */
     @media screen and (min-width: 1025px) /* sync with --bp-md-plus */ {
       max-width: calc(var(--text-max-width) + var(--space-l) * 2);
+
+      /* PC: 2カラム (title が上に跨ぐ, content左 + toc右)
+         wrapper max は: text-max-width + (content padding * 2 + grid gap) * space-l + TOC */
+      &.has-toc {
+        grid-template-columns: 1fr 360px;
+        grid-template-areas:
+          "title title"
+          "content toc";
+        max-width: calc(var(--text-max-width) + var(--space-l) * 3 + 360px);
+      }
     }
   }
 
   .title-wrapper {
+    grid-area: title;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--space-s);
     width: 100%;
+    max-width: var(--text-max-width);
+    margin: 0 auto;
 
     .post-meta {
       font-size: var(--step--1);

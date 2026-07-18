@@ -1,15 +1,8 @@
----
-import { AnimationIcon } from "../../features/AnimationIcon";
----
-
 <div class="container" id="container">
   <div class="monitor" id="monitor"></div>
   <div class="keyboard"></div>
   <div class="title absolute" id="title" lang="en">Hi! I'm Yutteee!</div>
   <div class="scroll" id="scroll">Scroll</div>
-  <div class="animation-button">
-    <AnimationIcon client:load />
-  </div>
 </div>
 <script>
   import { gsap } from "gsap";
@@ -162,14 +155,4 @@ import { AnimationIcon } from "../../features/AnimationIcon";
     animation-play-state: paused;
   }
 
-  .animation-button {
-    position: fixed;
-    bottom: var(--space-l);
-    right: var(--space-l);
-
-    @media screen and (max-width: 1024px) /* sync with --bp-md */ {
-      bottom: var(--space-s);
-      right: var(--space-s);
-    }
-  }
 </style>

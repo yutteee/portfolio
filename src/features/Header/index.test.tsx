@@ -41,6 +41,16 @@ describe("Header", () => {
     expect(document.activeElement).not.toBe(menuButton);
   });
 
+  it("アニメーションの停止・再生ボタンが存在する", () => {
+    render(<Header />);
+    expect(
+      screen.getByRole("button", { name: "アニメーションを停止する" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "アニメーションを有効にする" }),
+    ).toBeInTheDocument();
+  });
+
   it("Yutteeeという名前のリンクが存在し、homeに戻る", () => {
     render(<Header />);
     const link = screen.getByRole("link", { name: "トップ" });

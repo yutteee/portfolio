@@ -1,6 +1,7 @@
 import styles from "./index.module.css";
 import { IconButton } from "../../ui/IconButton";
 import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi";
+import { AnimationIcon } from "../AnimationIcon";
 
 export const NAV_PAGES = [
   "私について",
@@ -78,6 +79,7 @@ export const HeaderPresenter: React.FC<HeaderPresenterProps> = ({
             ref={hamburgerRef}
           />
         </div>
+        <AnimationIcon />
         <span className={styles.themeToggleDark}>
           <IconButton
             label="ダークモードにする"

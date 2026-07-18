@@ -2,76 +2,155 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "私について";
 const pageDescription = "中村優作の自己紹介ページです。";
+import { Image } from "astro:assets";
 import { histories } from "../data/history";
 import { PageTitle } from "../ui/PageTitle";
-import { Image } from "astro:assets";
+
+const face = {
+  image: "/yutteee.png",
+  alt: "顔写真：黒い服を着た、黒髪を分けている男性(中村優作)が座ってパソコンの画面を見ている。",
+};
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
   <main class="container">
     <PageTitle title="私について" />
     <div class="wrapper">
-      <section class="section-2">
-        <h2 class="h2">中村優作</h2>
-        <div class="section-flex">
-          <div class="description">
+      {/* 各セクションの画像を映すモニター。実体の画像は各セクション側にあるため支援技術には露出しない */}
+      <div class="pc-column" aria-hidden="true">
+        <div class="monitor" id="about-monitor">
+          <Image
+            src={face.image}
+            width="400"
+            height="250"
+            alt=""
+            loading="eager"
+            class="screen-image face is-active"
+          />
+          {
+            histories.map((history, index) => (
+              <Image
+                src={history.image}
+                width="400"
+                height="250"
+                alt=""
+                loading="eager"
+                class="screen-image"
+                data-screen-idx={index}
+              />
+            ))
+          }
+        </div>
+        <div class="keyboard"></div>
+      </div>
+
+      <div class="content">
+        <section class="intro">
+          <h2 class="name">中村優作</h2>
+          <div class="description intro-description">
             <p>
-              都内でエンジニアをしています。フロントエンドとデザインが好きです。
-            </p>
-            <p>
-              また、株式会社KANNONでデザインエンジニアとしても活動しています。
+              都内でエンジニアをしています。フロントエンドとデザインが好きです。また、株式会社KANNONでデザインエンジニアとしても活動しています。
             </p>
             <p>
               誰にとっても使いやすいプロダクトを開発することがしたいです。そのために必要なことは全部やりたいというスタンスで開発しています。フロントエンドの開発を軸に、プロダクトの技術的な意思決定を行うことができるエンジニアを目指しています。
             </p>
             <p>お笑い、読書、ランニング、コストコが好きです。</p>
           </div>
-          <div class="image-wrapper">
-            <Image
-              src="/yutteee.png"
-              width="400"
-              height="250"
-              id="screen0"
-              alt="顔写真：黒い服を着た、黒髪を分けている男性(中村優作)が座ってパソコンの画面を見ている。"
-              class="image"
-            />
+          <div class="intro-figure">
+            <div class="intro-monitor">
+              <Image
+                src={face.image}
+                width="400"
+                height="250"
+                alt={face.alt}
+                class="section-image"
+              />
+            </div>
+            <div class="intro-keyboard"></div>
           </div>
-        </div>
-      </section>
-      <section class="section-2">
+        </section>
+
         <h2 class="h2">経歴</h2>
         <div class="histories">
           {
             histories.map((history, index) => (
-              <section id={`history-item${index}`}>
+              <section class="history" data-tl-idx={index}>
                 <div class="title-flex">
                   <h3 class="h3">{history.title}</h3>
                   <div>{history.period}</div>
                 </div>
-                <div class="section-flex">
-                  <div class="description">
-                    {history.description.map((desc) => (
-                      <p>{desc}</p>
-                    ))}
-                  </div>
-                  <div class="image-wrapper">
-                    <Image
-                      src={history.image}
-                      width="400"
-                      height="250"
-                      id={`screen${histories.length - index}`}
-                      alt={history.alt}
-                      class="image"
-                    />
-                  </div>
+                <div class="description history-description">
+                  {history.description.map((desc) => (
+                    <p>{desc}</p>
+                  ))}
                 </div>
+                <Image
+                  src={history.image}
+                  width="400"
+                  height="250"
+                  alt={history.alt}
+                  class="section-image"
+                />
               </section>
             ))
           }
         </div>
-      </section>
+      </div>
     </div>
   </main>
+
+  <script>
+    const monitor = document.getElementById("about-monitor");
+    const pcColumn = document.querySelector<HTMLElement>(".pc-column");
+    const sections = document.querySelectorAll<HTMLElement>("[data-tl-idx]");
+    const screens = monitor?.querySelectorAll<HTMLElement>(".screen-image");
+
+    // スクロール最初のPCがビューポートの上下中央に来るよう、フロー上の開始位置を下げる。
+    // sticky の top はそのままなので、スクロールすると自然に上へ流れて画面上部で固定される
+    const alignInitialPosition = () => {
+      if (!pcColumn || pcColumn.offsetHeight === 0) return;
+      const flowTop =
+        (pcColumn.parentElement?.getBoundingClientRect().top ?? 0) +
+        window.scrollY;
+      const centerTop = (window.innerHeight - pcColumn.offsetHeight) / 2;
+      pcColumn.style.marginTop = `${Math.max(0, centerTop - flowTop)}px`;
+    };
+
+    // スクロール位置に応じてモニターに映す画像を切り替える
+    const update = () => {
+      if (!screens || document.documentElement.classList.contains("stop")) {
+        return;
+      }
+      const anchor = window.innerHeight * 0.45;
+      let active = -1;
+      sections.forEach((section) => {
+        if (section.getBoundingClientRect().top < anchor) {
+          active = Number(section.dataset.tlIdx);
+        }
+      });
+      screens.forEach((screen) => {
+        const idx = screen.dataset.screenIdx;
+        const isActive =
+          active === -1 ? idx === undefined : Number(idx) === active;
+        screen.classList.toggle("is-active", isActive);
+      });
+    };
+
+    alignInitialPosition();
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", alignInitialPosition);
+
+    // <html> の `.stop` クラス変化を監視して、再生に戻ったとき表示を同期する
+    const observer = new MutationObserver(() => {
+      alignInitialPosition();
+      update();
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  </script>
 
   <style>
     .container {
@@ -84,33 +163,84 @@ import { Image } from "astro:assets";
 
     .wrapper {
       display: flex;
-      flex-direction: column;
+      gap: var(--space-2xl);
       max-width: 90rem;
       width: 100%;
-      align-items: center;
+      margin-top: var(--space-xl);
       padding-bottom: var(--space-3xl);
     }
 
-    .section-2 {
-      width: 100%;
+    .pc-column {
+      width: 400px;
+      flex: none;
+      position: sticky;
+      top: var(--space-xl);
+      align-self: flex-start;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-s);
+
+      @media screen and (max-width: 1024px) /* sync with --bp-md */ {
+        display: none;
+      }
     }
 
-    .title-flex {
-      margin-top: var(--space-xl);
+    :global(.stop) .pc-column {
+      display: none;
+    }
+
+    .monitor {
+      width: 360px;
+      height: 225px;
+      background-color: var(--color-surface);
+      border-radius: var(--radius-xl);
+      border: 8px solid var(--color-surface);
+      position: relative;
+      box-sizing: content-box;
+    }
+
+    .screen-image {
+      display: none;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      background-color: var(--color-surface);
+    }
+
+    .screen-image.is-active {
+      display: block;
+    }
+
+    .keyboard {
+      width: 180px;
+      border-bottom: 30px solid var(--color-surface);
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+    }
+
+    .content {
+      min-width: 0;
+      max-width: var(--text-max-width);
       display: flex;
-      flex-direction: row;
-      gap: var(--space-2xs);
-      align-items: end;
+      flex-direction: column;
+    }
+
+    .name {
+      font-size: var(--step-3);
+      font-weight: 900;
     }
 
     .description {
       display: flex;
       flex-direction: column;
       gap: var(--space-2xs);
-      margin-top: var(--space-2xs);
-      width: 100%;
-      max-width: var(--text-max-width);
+      margin-top: var(--space-s);
     }
+
     .h2 {
       margin-top: var(--space-2xl);
       font-size: var(--step-2);
@@ -122,35 +252,162 @@ import { Image } from "astro:assets";
       font-weight: 900;
     }
 
-    .section-flex {
-      display: flex;
-      gap: var(--space-l);
-      width: 100%;
+    .history {
+      position: relative;
+      padding-left: 56px;
+      margin-top: var(--space-xl);
+      padding-bottom: var(--space-l);
 
-      @media screen and (max-width: 40rem) /* sync with --bp-sm */ {
-        flex-direction: column;
-        gap: var(--space-s);
-        align-items: center;
+      /* タイムラインの縦線（最後の項目には引かない） */
+      &:not(:last-child)::before {
+        content: "";
+        position: absolute;
+        left: 9px;
+        top: 14px;
+        bottom: calc(var(--space-xl) * -1);
+        width: 2px;
+        background: var(--color-border);
+      }
+
+      /* タイムラインの点 */
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 4px;
+        width: 20px;
+        height: 20px;
+        border-radius: var(--radius-infinity);
+        background: var(--color-accent);
+        border: var(--border-width-lg) solid var(--color-border);
+        box-sizing: border-box;
+      }
+
+      @media screen and (max-width: 1024px) /* sync with --bp-md */ {
+        padding-left: 40px;
       }
     }
 
-    .image-wrapper {
-      flex: 1;
-      min-width: 0;
-      position: relative;
-      aspect-ratio: 8/5;
+    .title-flex {
+      display: flex;
+      gap: var(--space-2xs);
+      align-items: end;
+      flex-wrap: wrap;
+    }
 
-      @media screen and (max-width: 40rem) /* sync with --bp-sm */ {
-        width: 100%;
+    .section-image {
+      width: 340px;
+      max-width: 100%;
+      height: auto;
+      aspect-ratio: 8/5;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      border: var(--border-width-sm) solid var(--color-border);
+      margin-top: var(--space-s);
+    }
+
+    /* 自己紹介の顔写真はモニターの中に入れて表示する */
+    .intro-figure {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2xs);
+      margin-top: var(--space-s);
+    }
+
+    .intro-monitor {
+      width: 340px;
+      max-width: 100%;
+      aspect-ratio: 8/5;
+      background-color: var(--color-surface);
+      border-radius: var(--radius-xl);
+      border: 8px solid var(--color-surface);
+      position: relative;
+    }
+
+    .intro-monitor .section-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      border: 0;
+    }
+
+    .intro-keyboard {
+      width: 160px;
+      border-bottom: 26px solid var(--color-surface);
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+    }
+
+    @media screen and (min-width: 64.0625rem) /* sync with --bp-md-plus */ {
+      /* アニメーション再生中は左のPCに映すため、自己紹介側のモニター枠は畳む */
+      :global(html:not(.stop)) .intro-figure,
+      :global(html:not(.stop)) .intro-monitor {
+        display: contents;
       }
 
-      .image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: var(--radius-md);
-        position: sticky;
-        top: 5rem;
+      :global(html:not(.stop)) .intro-keyboard {
+        display: none;
+      }
+
+      /* アニメーション再生中はモニター側に映すため視覚的にのみ隠す。
+         display: none にせず、スクリーンリーダーには本文の順序どおり読まれるようにする */
+      :global(html:not(.stop)) .section-image {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: 0;
+        border: 0;
+        clip-path: inset(50%);
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      /* 停止中はPCカラムが消えるため、コンテンツを左右中央に寄せる */
+      :global(.stop) .wrapper {
+        justify-content: center;
+      }
+
+      /* 停止中は画像をテキストの左に並べる */
+      :global(.stop) .content {
+        max-width: calc(var(--text-max-width) + 340px + var(--space-l));
+      }
+
+      :global(.stop) .intro,
+      :global(.stop) .history {
+        display: grid;
+        grid-template-columns: 340px minmax(0, 1fr);
+        grid-template-areas:
+          "image title"
+          "image description";
+        align-items: start;
+        column-gap: var(--space-l);
+      }
+
+      /* 自己紹介はPC（顔写真）をテキストに対して上下中央に揃える */
+      :global(.stop) .intro .intro-figure {
+        align-self: center;
+      }
+
+      :global(.stop) .name,
+      :global(.stop) .title-flex {
+        grid-area: title;
+      }
+
+      :global(.stop) .description {
+        grid-area: description;
+      }
+
+      :global(.stop) .intro-figure {
+        grid-area: image;
+        margin-top: 0;
+      }
+
+      :global(.stop) .history .section-image {
+        grid-area: image;
+        margin-top: 0;
       }
     }
   </style>

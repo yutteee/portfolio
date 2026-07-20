@@ -1,7 +1,7 @@
 ---
-title: 'link rel="preconnect"'
-pubDate: "2026-05-17"
-description: 'preconnect キーワードを rel 属性に指定すると、 <link> 要素はブラウザにそのオリジンへの接続を事前に開始することを命令することで、処理を高速化できる。'
+title: link rel="preconnect"
+pubDate: '2026-05-17'
+description: preconnect キーワードを rel 属性に指定すると、 <link> 要素はブラウザにそのオリジンへの接続を事前に開始することを命令することで、処理を高速化できる。
 ---
 
 ## 詳細

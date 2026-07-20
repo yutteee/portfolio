@@ -1,7 +1,7 @@
 ---
-title: 'Shai-Hulud 2.0 攻撃を受けての反省と対策'
-pubDate: "2025-12-27"
-description: 'Shai-Hulud 2.0 攻撃を受けました。自身のセキュリティ意識の低さを反省し、開発環境のセキュリティ周りを見直し、ブログ記事としてまとめました。'
+title: Shai-Hulud 2.0 攻撃を受けての反省と対策
+pubDate: '2025-12-27'
+description: Shai-Hulud 2.0 攻撃を受けました。自身のセキュリティ意識の低さを反省し、開発環境のセキュリティ周りを見直し、ブログ記事としてまとめました。
 ---
 
 ## はじめに
@@ -34,7 +34,7 @@ description: 'Shai-Hulud 2.0 攻撃を受けました。自身のセキュリテ
 
 さらに、被害者がnpmパッケージのメンテナだった場合、.npmrcから盗んだnpmトークンを使ってそのパッケージにも悪意あるバージョンが公開され、連鎖的に被害が広がります。
 
-![Shai-Hulud 2.0の攻撃フロー図。1.実行：感染したnpmパッケージをインストールするとPCでマルウェアが実行される。2.認証情報アクセス：GitHubのSSHキー、NPMトークン、AWS/GCP/Azureのシークレットが収集され外部に送信される。3.サプライチェーン侵害：盗んだNPMトークンで被害者のパッケージに不正バージョンが公開され、さらに感染が連鎖する。](shai-hulud-flow.png)
+![Shai-Hulud 2.0の攻撃フロー図。1.実行：感染したnpmパッケージをインストールするとPCでマルウェアが実行される。2.認証情報アクセス：GitHubのSSHキー、NPMトークン、AWS/GCP/Azureのシークレットが収集され外部に送信される。3.サプライチェーン侵害：盗んだNPMトークンで被害者のパッケージに不正バージョンが公開され、さらに感染が連鎖する。](./shai-hulud-flow.png)
 
 詳細は、[Shai-Hulud 2.0キャンペーンがクラウドと開発者エコシステムを標的に](https://www.trendmicro.com/ja_jp/research/25/k/shai-hulud-2-0-targets-cloud-and-developer-systems.html)をご覧ください。
 

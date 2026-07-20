@@ -1,10 +1,10 @@
 ---
-title: 'オレオレデザインシステムを作る'
-pubDate: "2026-05-28"
-description: '趣味開発のプロダクトにデザインシステムを導入しました。Figmaでデザインシステムを作成する具体事例を紹介します。'
-type: 'slide'
-theme: 'custom-theme'
+title: オレオレデザインシステムを作る
+pubDate: '2026-05-28'
+description: 趣味開発のプロダクトにデザインシステムを導入しました。Figmaでデザインシステムを作成する具体事例を紹介します。
+type: slide
 marp: true
+theme: custom-theme
 ---
 
 <!-- _class: title -->
@@ -19,7 +19,7 @@ marp: true
 
 <div class="flex-container">
 
-![オカメインコの写真。机の上に載ってこちらを見上げている。 w:300 h:300](icon.png)
+![オカメインコの写真。机の上に載ってこちらを見上げている。 w:300 h:300](20260527-icon.png)
 
 <div>
 
@@ -48,7 +48,7 @@ noshに飽きて食事が迷走しています。
 
 </div>
 
-![Figmaで作成したデザインシステムのスクリーンショット。カラーとタイポグラフィーのルールが定義されている。 w:610 h:full](./design-system-image.png)
+![Figmaで作成したデザインシステムのスクリーンショット。カラーとタイポグラフィーのルールが定義されている。 w:610 h:full](design-system-image.png)
 
 </div>
 
@@ -77,7 +77,7 @@ noshに飽きて食事が迷走しています。
 
 <div class="flex-container">
 
-![OriCubeのスクリーンショット。折り紙で作成したヨットが3Dモデルで表示されている。 w:750 h:full](./oricube.png)
+![OriCubeのスクリーンショット。折り紙で作成したヨットが3Dモデルで表示されている。 w:750 h:full](oricube.png)
 
 </div>
 
@@ -100,9 +100,9 @@ noshに飽きて食事が迷走しています。
 
 <div class="flex-container">
 
-![Figmaのスクリーンショット。様々な見た目のボタンが一覧で表示されている w:500 h:full](./old-buttons.png)
+![Figmaのスクリーンショット。様々な見た目のボタンが一覧で表示されている w:500 h:full](old-buttons.png)
 
-![Figmaのスクリーンショット。様々な見た目のテキストフィールドが一覧で表示されている w:500 h:full](./old-inputs.png)
+![Figmaのスクリーンショット。様々な見た目のテキストフィールドが一覧で表示されている w:500 h:full](old-inputs.png)
 
 </div>
 
@@ -145,7 +145,7 @@ Figma for デザインシステムという書籍を参考に作成しました�
 
 </div>
 
-![書籍の表紙。Figma for デザインシステムというタイトルが書かれている。。 w:800 h:full](./figma-for-design-system.png)
+![書籍の表紙。Figma for デザインシステムというタイトルが書かれている。。 w:800 h:full](figma-for-design-system.png)
 
 </div>
 
@@ -218,7 +218,7 @@ Figma for デザインシステムという書籍を参考に作成しました�
 揺れがあったが
 一番使われてた`#324FB1`に統一
 
-![プライマリーカラーがずれていることを示す図。ロゴに使われる青色が他に比べ鮮やかで、レンジバーに使われる青色が薄くなっている。 w:600 h:full](./color-issue.png)
+![プライマリーカラーがずれていることを示す図。ロゴに使われる青色が他に比べ鮮やかで、レンジバーに使われる青色が薄くなっている。 w:600 h:full](color-issue.png)
 
 </div>
 
@@ -236,7 +236,7 @@ Figma for デザインシステムという書籍を参考に作成しました�
 [Color Shades](https://www.figma.com/community/plugin/929607085343688745/color-shades) Figmaプラグインでいい感じに作成。
 </div>
 
-![プライマリーカラー(青色)を元にした階調。薄い青から濃い青までがグラデーションのように定義されている。　w:900 h:full](./gradation.png)
+![プライマリーカラー(青色)を元にした階調。薄い青から濃い青までがグラデーションのように定義されている。　w:900 h:full](gradation.png)
 
 </div>
 
@@ -246,7 +246,7 @@ Figma for デザインシステムという書籍を参考に作成しました�
 
 <div class="flex-container">
 
-![グレー、青、赤、緑の階調 w:1100 h:full](./colors.png)
+![グレー、青、赤、緑の階調 w:1100 h:full](colors.png)
 
 </div>
 
@@ -264,7 +264,7 @@ WCAGの達成基準（4.5：1以上）に準拠する組み合わせを選ぶ。
 
 </div>
 
-![コントラストグリッド。青とグレーの諧調を全て組み合わせた表。 w:900 h:full](./contrast-grid.png)
+![コントラストグリッド。青とグレーの諧調を全て組み合わせた表。 w:900 h:full](contrast-grid.png)
 
 </div>
 
@@ -276,7 +276,7 @@ WCAGの達成基準（4.5：1以上）に準拠する組み合わせを選ぶ。
 
 <div class="flex-container">
 
-![blue/30はプリミィティブカラーと呼ばれ、text/primaryはセマンティックカラーと呼ばれる。セマンティックカラーはプリミティブカラーを参照している。 w:700 h:full](./color-token.png)
+![blue/30はプリミィティブカラーと呼ばれ、text/primaryはセマンティックカラーと呼ばれる。セマンティックカラーはプリミティブカラーを参照している。 w:700 h:full](color-token.png)
 
 </div>
 
@@ -291,7 +291,7 @@ WCAGの達成基準（4.5：1以上）に準拠する組み合わせを選ぶ。
 
 <div class="flex-container">
 
-![oricubeのセマンティックカラー一覧。 w:800 h:full](./semantic-color.png)
+![oricubeのセマンティックカラー一覧。 w:800 h:full](semantic-color.png)
 
 </div>
 
@@ -309,7 +309,7 @@ WCAGの達成基準（4.5：1以上）に準拠する組み合わせを選ぶ。
 
 <div class="flex-container">
 
-![文字の読みやすさの3つの軸。視認性は文字の形のわかりやすさ、判読性は読み間違いの起こりにくさ、可読性は文章の読みやすさ。 w:800 h:full](./readable-font.png)
+![文字の読みやすさの3つの軸。視認性は文字の形のわかりやすさ、判読性は読み間違いの起こりにくさ、可読性は文章の読みやすさ。 w:800 h:full](readable-font.png)
 
 </div>
 
@@ -324,7 +324,7 @@ OriCubeでは文章がほとんどなくタイトルなどに文字が使われ�
 
 <div class="flex-container">
 
-![UDフォントの説明。一般のフォントは空きが狭く作られており6と8を誤認しやすいが、UDフォントは空きが広く作られて6と8を判別しやすい。 w:700 h:full](./ud-font.png)
+![UDフォントの説明。一般のフォントは空きが狭く作られており6と8を誤認しやすいが、UDフォントは空きが広く作られて6と8を判別しやすい。 w:700 h:full](ud-font.png)
 
 </div>
 
@@ -338,7 +338,7 @@ OriCubeでは文章がほとんどなくタイトルなどに文字が使われ�
 
 <div class="flex-container">
 
-![oricubeで定義したセマンティックフォント一覧 w:900 h:full](./semantic-font.png)
+![oricubeで定義したセマンティックフォント一覧 w:900 h:full](semantic-font.png)
 
 </div>
 
@@ -351,7 +351,7 @@ OriCubeでは文章がほとんどなくタイトルなどに文字が使われ�
 影、角丸、余白なども同様に
 階調を作り一貫性が出るように定義
 
-![影、角丸、余白、ボーダーの定義一覧。 w:500 h:full](./other-tokens.png)
+![影、角丸、余白、ボーダーの定義一覧。 w:500 h:full](other-tokens.png)
 
 </div>
 
@@ -369,7 +369,7 @@ OriCubeでは文章がほとんどなくタイトルなどに文字が使われ�
 
 <div class="flex-container">
 
-![類似しているボタンをグルーピングしており、かつテキストフィールドのラベルやプレースホルダーの使い方が適切でないことのグルーピング w:1000 h:full](./components-old.png)
+![類似しているボタンをグルーピングしており、かつテキストフィールドのラベルやプレースホルダーの使い方が適切でないことのグルーピング w:1000 h:full](components-old.png)
 
 </div>
 
@@ -381,7 +381,7 @@ OriCubeでは文章がほとんどなくタイトルなどに文字が使われ�
 
 <div class="flex-container">
 
-![定義したボタンコンポーネント一覧 w:1200 h:full](./buttons.png)
+![定義したボタンコンポーネント一覧 w:1200 h:full](buttons.png)
 
 </div>
 
@@ -398,7 +398,7 @@ Figmaでも汎用性の高いコンポーネントを作ることができる
 
 <div class="flex-container">
 
-![figmaのバリアントの入力欄 w:1000 h:full](./button-variant.png)
+![figmaのバリアントの入力欄 w:1000 h:full](button-variant.png)
 
 </div>
 
@@ -410,7 +410,7 @@ Figmaでも汎用性の高いコンポーネントを作ることができる
 
 <div class="flex-container">
 
-![テキストフィールドの使用原則。ラベル、サポートテキスト、プレースホルダーの役割を明示している。 w:1200 h:full](./input.png)
+![テキストフィールドの使用原則。ラベル、サポートテキスト、プレースホルダーの役割を明示している。 w:1200 h:full](input.png)
 
 </div>
 
@@ -428,7 +428,7 @@ Variablesに登録したデザイントークンはプラグインでcss変換�
 
 <div class="flex-container">
 
-![プラグインでバリアブルスをcss変数に変換している w:700 h:full](./variables-to-css.png)
+![プラグインでバリアブルスをcss変数に変換している w:700 h:full](variables-to-css.png)
 
 </div>
 
@@ -442,7 +442,7 @@ Storybook上に必要なパターンを全ておこす
 
 <div class="flex-container">
 
-![テキストフィールドをストーリーブック上に実装を起こした図 w:900 h:full](./storybook.png)
+![テキストフィールドをストーリーブック上に実装を起こした図 w:900 h:full](20260527-storybook.png)
 
 </div>
 

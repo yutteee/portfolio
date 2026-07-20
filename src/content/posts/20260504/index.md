@@ -1,7 +1,7 @@
 ---
-title: 'Claude Code 主軸の開発に合わせて Dev Container をカスタマイズする'
-pubDate: "2026-05-04"
-description: 'Shai-Hulud 2.0 攻撃を受けての対策として導入した Dev Container を、devcontainer CLI と git worktree で運用するためにカスタマイズしました。ベースイメージ・dcup 関数・worktree 対応など、現時点の構成をまとめます。'
+title: Claude Code 主軸の開発に合わせて Dev Container をカスタマイズする
+pubDate: '2026-05-04'
+description: Shai-Hulud 2.0 攻撃を受けての対策として導入した Dev Container を、devcontainer CLI と git worktree で運用するためにカスタマイズしました。ベースイメージ・dcup 関数・worktree 対応など、現時点の構成をまとめます。
 ---
 
 ## はじめに

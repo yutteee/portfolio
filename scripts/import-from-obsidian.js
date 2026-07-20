@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import {
   dateToFolder,
   findImageRefs,
+  normalizePubDate,
   resolvePaths,
   sanitizeImageName,
 } from "./lib/obsidian.js";
@@ -60,7 +61,7 @@ const requireFields = ({ data, source, fields }) => {
 const buildPostFrontmatter = ({ data }) => {
   const fm = {
     title: data.title,
-    pubDate: data.pubDate,
+    pubDate: normalizePubDate({ pubDate: data.pubDate }) ?? data.pubDate,
     description: data.description,
   };
   if (data.image) fm.image = data.image;
@@ -72,7 +73,7 @@ const buildPostFrontmatter = ({ data }) => {
 
 const buildScrapFrontmatter = ({ data }) => ({
   title: data.title,
-  pubDate: data.pubDate,
+  pubDate: normalizePubDate({ pubDate: data.pubDate }) ?? data.pubDate,
   description: data.description,
 });
 
@@ -150,7 +151,11 @@ const importEntry = async ({ file, kind, attachmentsIndex, vaultIndex }) => {
     body = body.split(ref.raw).join(`![${ref.alt}](${link})`);
   }
 
-  const output = matter.stringify(body, config.frontmatter({ data }));
+  // lineWidth: -1 で description の折り畳み（>-）を無効化し、
+  // 再インポート時に frontmatter の差分が出ない決定論的な出力にする。
+  const output = matter.stringify(body, config.frontmatter({ data }), {
+    lineWidth: -1,
+  });
   await fs.writeFile(path.join(targetDir, "index.md"), output);
   return { slug: folder, copiedImages };
 };

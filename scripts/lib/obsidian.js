@@ -31,10 +31,26 @@ export const resolvePaths = () => {
   };
 };
 
+/**
+ * pubDate を "YYYY-MM-DD" 文字列に正規化する。
+ * Obsidian でクォート無しに書いた日付（`pubDate: 2026-07-20`）は js-yaml が
+ * Date として解釈するため、Date / 文字列どちらでも受け付ける。不正なら null。
+ */
+export const normalizePubDate = ({ pubDate }) => {
+  if (pubDate instanceof Date && !Number.isNaN(pubDate.getTime())) {
+    const y = pubDate.getUTCFullYear();
+    const m = String(pubDate.getUTCMonth() + 1).padStart(2, "0");
+    const d = String(pubDate.getUTCDate()).padStart(2, "0");
+    return `${y}-${m}-${d}`;
+  }
+  const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(pubDate ?? ""));
+  return match ? `${match[1]}-${match[2]}-${match[3]}` : null;
+};
+
 /** "2024-07-29" → "20240729"。日付として不正なら null。 */
 export const dateToFolder = ({ pubDate }) => {
-  const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(pubDate ?? ""));
-  return match ? `${match[1]}${match[2]}${match[3]}` : null;
+  const normalized = normalizePubDate({ pubDate });
+  return normalized ? normalized.replace(/-/g, "") : null;
 };
 
 /**

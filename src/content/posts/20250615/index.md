@@ -1,7 +1,7 @@
 ---
-title: 'UIコンポーネント開発の個人的テスト戦略'
-pubDate: "2025-06-15"
-description: 'TDD・Storybook・Vitest・CI/CDで堅牢なUI開発環境を紹介します。'
+title: UIコンポーネント開発の個人的テスト戦略
+pubDate: '2025-06-15'
+description: TDD・Storybook・Vitest・CI/CDで堅牢なUI開発環境を紹介します。
 ---
 
 Storybook v9のリリースもあり、Storybookはテストツールとしても大きく進化しています。ビジュアルリグレッションやインタラクションテスト、アクセシビリティチェックなど、UIコンポーネント開発における多角的な品質保証がStorybook上で完結できるようになりつつあります。

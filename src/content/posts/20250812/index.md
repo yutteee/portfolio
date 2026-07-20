@@ -1,10 +1,10 @@
 ---
-title: 'astroブログでmarp対応した'
-pubDate: "2025-08-12"
-description: 'astroで作成したブログサイトでmarpで作成したスライドを公開できる仕組みを作りました。'
-type: 'slide'
-theme: 'custom-theme'
+title: astroブログでmarp対応した
+pubDate: '2025-08-12'
+description: astroで作成したブログサイトでmarpで作成したスライドを公開できる仕組みを作りました。
+type: slide
 marp: true
+theme: custom-theme
 ---
 
 <!-- _class: title -->

@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/Users/yutteee/dev/portfolio/portfolio/.codex/hooks/session-start.sh'"
+          }
+        ]
+      }
+    ]
+  }
+}

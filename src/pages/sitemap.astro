@@ -5,6 +5,9 @@ const pageTitle = "サイトマップ";
 const pageDescription = "中村優作のポートフォリオサイトのサイトマップです。";
 import { PageTitle } from "../ui/PageTitle";
 const allPosts = await getCollection("posts");
+const allProducts = (await getCollection("products")).sort((a, b) =>
+  b.data.period.localeCompare(a.data.period),
+);
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -13,17 +16,30 @@ const allPosts = await getCollection("posts");
     <ul class="links">
       <li><a href="/">トップ</a></li>
       <li><a href="/about/">私について</a></li>
-      <li><a href="/products/">プロダクト</a></li>
-      <li><a href="/posts/">記事</a></li>
-      <ul class="childLinks">
-        {
-          allPosts.map((post) => (
-            <li>
-              <a href={`/posts/${post.id.replace(/\/index$/, "")}`}>{post.data.title}</a>
-            </li>
-          ))
-        }
-      </ul>
+      <li>
+        <a href="/products/">プロダクト</a>
+        <ul class="childLinks">
+          {
+            allProducts.map((product) => (
+              <li>
+                <a href={`/products/${product.id}`}>{product.data.title}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </li>
+      <li>
+        <a href="/posts/">記事</a>
+        <ul class="childLinks">
+          {
+            allPosts.map((post) => (
+              <li>
+                <a href={`/posts/${post.id.replace(/\/index$/, "")}`}>{post.data.title}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </li>
     </ul>
   </main>
 </BaseLayout>
@@ -53,6 +69,7 @@ const allPosts = await getCollection("posts");
       }
 
       .childLinks {
+        margin-top: var(--space-2xs);
         padding-left: var(--space-m);
         display: flex;
         flex-direction: column;

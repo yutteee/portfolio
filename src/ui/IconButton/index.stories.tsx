@@ -1,3 +1,4 @@
+import usageGuide from "../../../docs/components/IconButton.md?raw";
 import type { Meta, StoryObj } from "@storybook/react";
 import { IconButton } from ".";
 import { FiMenu, FiArrowRight, FiGithub } from "react-icons/fi";
@@ -9,8 +10,7 @@ const meta: Meta<typeof IconButton> = {
   parameters: {
     docs: {
       description: {
-        component:
-          "react-iconsのアイコンコンポーネントを渡して表示できるボタン。IconButtonを並べて使用したい場合、4px以上の余白を設けてください。",
+        component: usageGuide,
       },
     },
   },

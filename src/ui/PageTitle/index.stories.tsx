@@ -1,3 +1,4 @@
+import usageGuide from "../../../docs/components/PageTitle.md?raw";
 import type { Meta, StoryObj } from "@storybook/react";
 import { PageTitle } from ".";
 
@@ -8,8 +9,7 @@ const meta: Meta<typeof PageTitle> = {
   parameters: {
     docs: {
       description: {
-        component:
-          "ページタイトルとパンくずを表示するコンポーネント。各ページで使用してください。タイトルはh1要素のため、PageTitleを使用しているページではh1要素は使用しないでください。",
+        component: usageGuide,
       },
     },
   },

@@ -1,3 +1,4 @@
+import usageGuide from "../../../docs/components/ProductItem.md?raw";
 import type { Meta, StoryObj } from "@storybook/react";
 import { ProductItem } from ".";
 
@@ -8,7 +9,7 @@ const meta: Meta<typeof ProductItem> = {
   parameters: {
     docs: {
       description: {
-        component: "プロダクト情報を表示するカード型リンク。",
+        component: usageGuide,
       },
     },
   },

@@ -1,3 +1,4 @@
+import usageGuide from "../../../docs/components/BlogPost.md?raw";
 import type { Meta, StoryObj } from "@storybook/react";
 import { BlogPost } from ".";
 
@@ -8,8 +9,7 @@ const meta: Meta<typeof BlogPost> = {
   parameters: {
     docs: {
       description: {
-        component:
-          "ブログ記事のリンクを表示するコンポーネントです。list要素のため、ul要素でラップして使用してください。",
+        component: usageGuide,
       },
     },
   },

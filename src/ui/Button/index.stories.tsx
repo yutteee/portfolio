@@ -1,3 +1,4 @@
+import usageGuide from "../../../docs/components/Button.md?raw";
 import type { Meta, StoryObj } from "@storybook/react";
 import { FiArrowRight, FiGithub } from "react-icons/fi";
 import { Button } from ".";
@@ -9,8 +10,7 @@ const meta: Meta<typeof Button> = {
   parameters: {
     docs: {
       description: {
-        component:
-          "汎用ボタン。href を渡すと a 要素、渡さなければ button 要素としてレンダリングされます。startIcon / endIcon に react-icons のアイコンを渡せます。",
+        component: usageGuide,
       },
     },
   },

@@ -1,16 +1,16 @@
-import 'destyle.css';
-import '../src/styles/global.css';
-import type { Preview } from '@storybook/react-vite'
-import type { Decorator } from '@storybook/react';
+import "destyle.css";
+import "../src/styles/global.css";
+import type { Preview } from "@storybook/react-vite";
+import type { Decorator } from "@storybook/react";
 
 const withHtmlClass: Decorator = (Story, context) => {
   const mode = context.parameters.mode;
-  if (mode === 'dark') {
-    document.documentElement.classList.remove('light');
-    document.documentElement.classList.add('dark');
+  if (mode === "dark") {
+    document.documentElement.classList.remove("light");
+    document.documentElement.classList.add("dark");
   } else {
-    document.documentElement.classList.add('light');
-    document.documentElement.classList.remove('dark');
+    document.documentElement.classList.add("light");
+    document.documentElement.classList.remove("dark");
   }
   return Story();
 };
@@ -18,15 +18,31 @@ const withHtmlClass: Decorator = (Story, context) => {
 const preview: Preview = {
   decorators: [withHtmlClass],
   parameters: {
+    options: {
+      storySort: {
+        order: [
+          "Design System",
+          [
+            "はじめに",
+            "デザイン原則",
+            "ライティングガイド",
+            "実装ガイド",
+            "トークン",
+          ],
+          "ui",
+          "features",
+        ],
+      },
+    },
     controls: {
       matchers: {
-       color: /(background|color)$/i,
-       date: /Date$/i,
+        color: /(background|color)$/i,
+        date: /Date$/i,
       },
     },
 
     a11y: {
-      test: 'error'
+      test: "error",
     },
   },
 };

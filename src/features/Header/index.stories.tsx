@@ -1,3 +1,4 @@
+import usageGuide from "../../../docs/components/Header.md?raw";
 import { userEvent, within, expect, waitFor } from "storybook/test";
 import type { Meta, StoryObj, Decorator } from "@storybook/react";
 import { Header } from ".";
@@ -17,12 +18,7 @@ const meta: Meta<typeof Header> = {
   parameters: {
     docs: {
       description: {
-        component: [
-          "グローバルナビゲーションを表示するヘッダーコンポーネント。",
-          "- spサイズではメニューが表示される。",
-          "- ライトモード/ダークモードの切り替えをする。",
-          "- currentPageパラメータで「私について」「プロダクト」「記事」を切り替え可能。",
-        ].join("  \n"),
+        component: usageGuide,
       },
     },
   },

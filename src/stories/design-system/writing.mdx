@@ -1,0 +1,8 @@
+import { Meta, Markdown } from "@storybook/addon-docs/blocks";
+import content from "../../../docs/writing-guidelines.md?raw";
+
+<Meta title="Design System/ライティングガイド" />
+
+<Markdown options={{ overrides: { a: { props: { target: "_top" } } } }}>
+  {content.replace("(./design-principles.md)", "(?path=/docs/design-system-デザイン原則--docs)")}
+</Markdown>

@@ -1,3 +1,4 @@
+import usageGuide from "../../../docs/components/Scrap.md?raw";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Scrap } from ".";
 
@@ -8,8 +9,7 @@ const meta: Meta<typeof Scrap> = {
   parameters: {
     docs: {
       description: {
-        component:
-          "スクラップ1件を表示するコンポーネントです。日付・タイトル・説明は常に表示し、本文（children）は「詳細を見る」で一括展開します。本文には詳細・参考など自由なセクションを含められます。",
+        component: usageGuide,
       },
     },
   },

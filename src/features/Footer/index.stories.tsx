@@ -1,3 +1,4 @@
+import usageGuide from "../../../docs/components/Footer.md?raw";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Footer } from ".";
 
@@ -8,8 +9,7 @@ const meta: Meta<typeof Footer> = {
   parameters: {
     docs: {
       description: {
-        component:
-          "SNSアカウント一覧とサイトマップを表示するフッターコンポーネント。ダークモード対応。",
+        component: usageGuide,
       },
     },
   },

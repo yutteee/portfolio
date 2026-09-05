@@ -1,3 +1,4 @@
+import usageGuide from "../../../docs/components/Breadcrumb.md?raw";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Breadcrumb } from ".";
 
@@ -8,8 +9,7 @@ const meta: Meta<typeof Breadcrumb> = {
   parameters: {
     docs: {
       description: {
-        component:
-          "パンくずリストコンポーネント。itemsに祖先ページのラベルとhrefを指定し、currentLabelに現在のページ名を指定します。",
+        component: usageGuide,
       },
     },
   },

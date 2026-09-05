@@ -1,3 +1,4 @@
+import usageGuide from "../../../docs/components/AnimationIcon.md?raw";
 import type { Decorator, Meta, StoryObj } from "@storybook/react";
 import { expect, userEvent, within } from "storybook/test";
 import { AnimationIcon } from ".";
@@ -17,13 +18,7 @@ const meta: Meta<typeof AnimationIcon> = {
   parameters: {
     docs: {
       description: {
-        component: [
-          "アニメーションの再生/停止を切り替えるトグルボタン。",
-          "- 停止ボタンと再生ボタンを両方DOMに置き、`<html>.stop`の有無でCSSが片方を`display: none`する設計。",
-          "- これにより、SSR出力と最終状態が一致し、ハイドレーション時のちらつき（FOUC）が発生しない。",
-          "- クリック時は`<html>`要素の`.stop`クラスをトグルし、localStorageの`animation`キーに永続化する。",
-          "- 初期状態（localStorage / prefers-reduced-motion）の解決はBaseLayoutのinline scriptが担う。",
-        ].join("  \n"),
+        component: usageGuide,
       },
     },
   },

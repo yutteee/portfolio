@@ -120,13 +120,13 @@
     transform: translateX(-50%);
     letter-spacing: 0.1rem;
 
-    /* after */
     &::after {
       content: "";
       position: absolute;
       top: 1.8rem;
       left: 50%;
-      transform: translateX(-50%);
+      translate: -50% 0;
+      transform-origin: top;
       width: var(--space-4xs);
       height: 36px;
       background: var(--color-border);
@@ -136,17 +136,17 @@
   }
   @keyframes pathmove {
     0% {
-      height: 20px;
-      top: 1.8rem;
+      translate: -50% 0;
+      scale: 1 calc(20 / 36);
       opacity: 0;
     }
     30% {
-      height: 36px;
+      scale: 1 1;
       opacity: 1;
     }
     100% {
-      height: 20px;
-      top: calc(1.8rem + 30px);
+      translate: -50% 30px;
+      scale: 1 calc(20 / 36);
       opacity: 0;
     }
   }

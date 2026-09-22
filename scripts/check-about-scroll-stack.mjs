@@ -20,6 +20,18 @@ const settle = () =>
   evaluate({
     code: "new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve(true))))",
   });
+const waitFor = ({ code }) => run({ args: ["wait", "--fn", code] });
+const viewport = ({ width, height }) => {
+  run({ args: ["set", "viewport", String(width), String(height)] });
+  settle();
+};
+const clickButton = ({ name }) =>
+  run({ args: ["find", "role", "button", "click", "--name", name] });
+const scrollTo = ({ top }) => {
+  evaluate({ code: `window.scrollTo({top: ${top}, behavior: 'instant'})` });
+  settle();
+};
+const check = ({ code, message }) => assert.ok(evaluate({ code }), message);
 const state = () =>
   evaluate({
     code: `(() => {
@@ -36,12 +48,6 @@ const state = () =>
       const text = section.querySelector('.description').getBoundingClientRect();
       return { sideBySide: image.right <= text.left, vertical: image.top >= text.bottom };
     }),
-    pcCount: document.querySelectorAll('.pc-column').length,
-    images: rows.map(row => {
-      const image = row.querySelector('img');
-      const rect = image.getBoundingClientRect();
-      return { width: rect.width, height: rect.height, alt: image.alt, clip: getComputedStyle(image).clipPath };
-    }),
   };
 })()`,
   });
@@ -49,12 +55,8 @@ const state = () =>
 try {
   run({ args: ["set", "viewport", "1440", "1000"] });
   run({ args: ["open", process.argv[2] ?? "http://127.0.0.1:4321/about/"] });
-  run({
-    args: [
-      "wait",
-      "--fn",
-      "document.querySelector('.histories.is-stacking') !== null",
-    ],
+  waitFor({
+    code: "document.querySelector('.histories.is-stacking') !== null",
   });
   evaluate({
     code: "document.documentElement.classList.remove('stop'); window.scrollTo(0, 0)",
@@ -72,16 +74,16 @@ try {
     [390, 844],
     [320, 844],
   ]) {
-    run({ args: ["set", "viewport", String(width), String(height)] });
-    settle();
-    assert.equal(state().overflow, false);
-    assert.deepEqual(state().text, initial.text);
+    viewport({ width, height });
+    const current = state();
+    assert.equal(current.overflow, false);
+    assert.deepEqual(current.text, initial.text);
     assert.ok(
-      state().positions.every(
+      current.positions.every(
         (position) => position === "sticky" || position === "relative",
       ),
     );
-    assert.ok(state().transforms.every((transform) => transform === "none"));
+    assert.ok(current.transforms.every((transform) => transform === "none"));
     const failures = evaluate({
       code: `(async () => {
       const settle = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
@@ -116,22 +118,17 @@ try {
     assert.deepEqual(failures, [], `Native reveal failed at ${width}px`);
   }
 
-  run({ args: ["set", "viewport", "1440", "1000"] });
-  evaluate({
-    code: "window.scrollTo(0, document.querySelector('.career').getBoundingClientRect().top + scrollY - 120)",
+  viewport({ width: 1440, height: 1000 });
+  scrollTo({
+    top: "document.querySelector('.career').getBoundingClientRect().top + scrollY - 120",
   });
-  settle();
   const beforeHover = evaluate({ code: "scrollY" });
   run({ args: ["hover", ".career-nav li:last-child a"] });
   assert.equal(evaluate({ code: "scrollY" }), beforeHover);
   for (const number of [4, 1, 3, 2]) {
     run({ args: ["click", `.career-nav a[href="#career-${number}"]`] });
-    run({
-      args: [
-        "wait",
-        "--fn",
-        `Math.abs(document.getElementById('career-${number}').getBoundingClientRect().top - Number.parseFloat(getComputedStyle(document.querySelector('.histories')).getPropertyValue('--stack-top'))) < 2`,
-      ],
+    waitFor({
+      code: `Math.abs(document.getElementById('career-${number}').getBoundingClientRect().top - Number.parseFloat(getComputedStyle(document.querySelector('.histories')).getPropertyValue('--stack-top'))) < 2`,
     });
     settle();
     assert.equal(
@@ -141,114 +138,73 @@ try {
       `#career-${number}`,
     );
   }
-  assert.ok(
-    evaluate({
-      code: "getComputedStyle(document.querySelector('.history')).position === 'sticky'",
-    }),
-  );
-  evaluate({
-    code: "window.scrollTo({top: document.querySelector('.history-stage').getBoundingClientRect().top + scrollY - 120 + 40, behavior: 'instant'})",
+  check({
+    code: "getComputedStyle(document.querySelector('.history')).position === 'sticky'",
   });
-  settle();
+  scrollTo({
+    top: "document.querySelector('.history-stage').getBoundingClientRect().top + scrollY - 120 + 40",
+  });
   assert.ok(Math.abs(state().rects[0].top - state().stackTop) < 2);
-  evaluate({
-    code: "window.scrollTo({top: document.querySelectorAll('.history-stage')[1].getBoundingClientRect().top + scrollY - 120 - document.querySelector('.history-card').offsetHeight / 4, behavior: 'instant'})",
+  scrollTo({
+    top: "document.querySelectorAll('.history-stage')[1].getBoundingClientRect().top + scrollY - 120 - document.querySelector('.history-card').offsetHeight / 4",
   });
-  settle();
-  const halfwayOpacity = evaluate({
+  const fadeStartOpacity = evaluate({
     code: "Number(getComputedStyle(document.querySelector('.history-card')).opacity)",
   });
   assert.ok(
-    Math.abs(halfwayOpacity - 1) < 0.02,
+    Math.abs(fadeStartOpacity - 1) < 0.02,
     "The previous card should remain opaque until three quarters covered",
   );
-  evaluate({
-    code: "window.scrollTo({top: document.querySelectorAll('.history-stage')[1].getBoundingClientRect().top + scrollY - 120, behavior: 'instant'})",
+  scrollTo({
+    top: "document.querySelectorAll('.history-stage')[1].getBoundingClientRect().top + scrollY - 120",
   });
-  settle();
   assert.ok(
     Math.abs(state().rects[0].top - state().rects[1].top) < 2,
     "Next card should reach the previous card's top before it leaves",
   );
-  evaluate({
-    code: "window.scrollTo({top: document.querySelector('.history-stage:last-child').getBoundingClientRect().bottom + scrollY, behavior: 'instant'})",
+  scrollTo({
+    top: "document.querySelector('.history-stage:last-child').getBoundingClientRect().bottom + scrollY",
   });
-  settle();
-  assert.ok(
-    evaluate({
-      code: "[...document.querySelectorAll('.history-card')].slice(0, -1).every(card => getComputedStyle(card).opacity === '0')",
-    }),
-    "Covered cards must not reappear above the final card",
-  );
-  run({
-    args: [
-      "find",
-      "role",
-      "button",
-      "click",
-      "--name",
-      "アニメーションを停止する",
-    ],
+  check({
+    code: "[...document.querySelectorAll('.history-card')].slice(0, -1).every(card => getComputedStyle(card).opacity === '0')",
+    message: "Covered cards must not reappear above the final card",
   });
+  clickButton({ name: "アニメーションを停止する" });
   settle();
-  assert.ok(
-    evaluate({
-      code: "[...document.querySelectorAll('.history')].every(row => getComputedStyle(row).position === 'relative')",
-    }),
-  );
+  check({
+    code: "[...document.querySelectorAll('.history')].every(row => getComputedStyle(row).position === 'relative')",
+  });
   assert.deepEqual(state().text, initial.text);
-  assert.ok(
-    evaluate({
-      code: "[...document.querySelectorAll('.history-card')].every(card => getComputedStyle(card).opacity === '1')",
-    }),
-  );
-  run({
-    args: [
-      "find",
-      "role",
-      "button",
-      "click",
-      "--name",
-      "アニメーションを有効にする",
-    ],
+  check({
+    code: "[...document.querySelectorAll('.history-card')].every(card => getComputedStyle(card).opacity === '1')",
   });
+  clickButton({ name: "アニメーションを有効にする" });
 
-  run({ args: ["set", "viewport", "390", "844"] });
-  settle();
+  viewport({ width: 390, height: 844 });
   assert.ok(state().layouts.every((layout) => layout.vertical));
-  evaluate({
-    code: "window.scrollTo(0, document.querySelector('.career').getBoundingClientRect().top + scrollY - 64)",
+  scrollTo({
+    top: "document.querySelector('.career').getBoundingClientRect().top + scrollY - 64",
   });
-  settle();
-  evaluate({
-    code: "window.scrollTo({top: document.querySelector('.history-stage:last-child').getBoundingClientRect().top + scrollY - 40, behavior: 'instant'})",
+  scrollTo({
+    top: "document.querySelector('.history-stage:last-child').getBoundingClientRect().top + scrollY - 40",
   });
-  settle();
-  assert.ok(
-    evaluate({
-      code: `(() => {
+  check({
+    code: `(() => {
       const nav = document.querySelector('.career-nav').getBoundingClientRect();
       return !document.elementsFromPoint(nav.left + 20, nav.top - 8)
         .some(element => element.closest('.histories'));
     })()`,
-    }),
-    "Mobile cards must be clipped above the career navigation",
-  );
+    message: "Mobile cards must be clipped above the career navigation",
+  });
   run({ args: ["select", ".career-select", "3"] });
-  run({
-    args: [
-      "wait",
-      "--fn",
-      "document.querySelector('.career-nav [aria-current]').hash === '#career-4'",
-    ],
+  waitFor({
+    code: "document.querySelector('.career-nav [aria-current]').hash === '#career-4'",
   });
   run({ args: ["set", "media", "light", "reduced-motion"] });
   settle();
-  assert.ok(
-    evaluate({
-      code: "[...document.querySelectorAll('.history')].every(row => getComputedStyle(row).position === 'relative')",
-    }),
-  );
+  check({
+    code: "[...document.querySelectorAll('.history')].every(row => getComputedStyle(row).position === 'relative')",
+  });
   console.log(
     "PASS: native reveal of every heading, paragraph and image; bounded sticky cards; navigation; mobile; stop and reduced motion. VoiceOver rotor requires a separate manual check.",
   );

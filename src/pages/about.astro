@@ -16,34 +16,6 @@ const face = {
   <main class="container">
     <PageTitle title="私について" />
     <div class="wrapper">
-      {/* 各セクションの画像を映すモニター。実体の画像は各セクション側にあるため支援技術には露出しない */}
-      <div class="pc-column" aria-hidden="true">
-        <div class="monitor" id="about-monitor">
-          <Image
-            src={face.image}
-            width="400"
-            height="250"
-            alt=""
-            loading="eager"
-            class="screen-image face is-active"
-          />
-          {
-            histories.map((history, index) => (
-              <Image
-                src={history.image}
-                width="400"
-                height="250"
-                alt=""
-                loading="eager"
-                class="screen-image"
-                data-screen-idx={index}
-              />
-            ))
-          }
-        </div>
-        <div class="keyboard"></div>
-      </div>
-
       <div class="content">
         <section class="intro">
           <h2 class="name">中村優作</h2>
@@ -70,95 +42,215 @@ const face = {
           </div>
         </section>
 
-        <h2 class="h2">経歴</h2>
-        <div class="histories">
-          {
-            histories.map((history, index) => (
-              <section class="history" data-tl-idx={index}>
-                <div class="title-flex">
-                  <h3 class="h3">{history.title}</h3>
-                  <div>{history.period}</div>
+        <div class="career">
+          <nav class="career-nav" aria-label="経歴の目次">
+            <h2 class="h2" id="career-heading">経歴</h2>
+            <select class="career-select" aria-labelledby="career-heading">
+              {histories.map((history, index) => (
+                <option value={index}>{index + 1} / {histories.length}　{history.title}</option>
+              ))}
+            </select>
+            <ol>
+              {histories.map((history, index) => (
+                <li>
+                  <a href={`#career-${index + 1}`} aria-current={index === 0 ? "location" : undefined}>
+                    <span class="career-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                    <span class="career-label">
+                      {history.title.split(" ").map((phrase, index) => (
+                        <Fragment>{index > 0 ? " " : ""}<span class="career-phrase">{phrase}</span></Fragment>
+                      ))}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+          <div class="histories">
+            {
+              histories.map((history, index) => (
+                <div class="history-stage">
+                  <div class="history-anchor" id={`career-${index + 1}`}></div>
+                  <section class="history" tabindex="-1" aria-labelledby={`career-title-${index + 1}`}>
+                    <div class="history-card">
+                      <div class="title-flex">
+                        <h3 class="h3" id={`career-title-${index + 1}`}>{history.title}</h3>
+                        <div>{history.period}</div>
+                      </div>
+                      <div class="description history-description">
+                        {history.description.map((desc) => (
+                          <p>{desc}</p>
+                        ))}
+                      </div>
+                      <Image
+                        src={history.image}
+                        width="400"
+                        height="250"
+                        alt={history.alt}
+                        class="section-image"
+                      />
+                    </div>
+                  </section>
                 </div>
-                <div class="description history-description">
-                  {history.description.map((desc) => (
-                    <p>{desc}</p>
-                  ))}
-                </div>
-                <Image
-                  src={history.image}
-                  width="400"
-                  height="250"
-                  alt={history.alt}
-                  class="section-image"
-                />
-              </section>
-            ))
-          }
+              ))
+            }
+          </div>
         </div>
       </div>
     </div>
   </main>
 
   <script>
-    const monitor = document.getElementById("about-monitor");
-    const pcColumn = document.querySelector<HTMLElement>(".pc-column");
-    const intro = document.querySelector<HTMLElement>(".intro");
-    const sections = document.querySelectorAll<HTMLElement>("[data-tl-idx]");
-    const screens = monitor?.querySelectorAll<HTMLElement>(".screen-image");
+    const sections = document.querySelectorAll<HTMLElement>(".history");
+    const career = document.querySelector<HTMLElement>(".career");
+    const navigation = document.querySelector<HTMLElement>(".career-nav");
+    const links = document.querySelectorAll<HTMLAnchorElement>(".career-nav a");
+    const selector = document.querySelector<HTMLSelectElement>(".career-select");
+    const anchors = document.querySelectorAll<HTMLElement>(".history-anchor");
+    const stack = document.querySelector<HTMLElement>(".histories");
+    const cards = Array.from(sections, (section) =>
+      section.querySelector<HTMLElement>(".history-card"),
+    );
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frame = 0;
 
-    const alignPcPosition = () => {
-      if (!pcColumn || !intro || pcColumn.offsetHeight === 0) return;
-
-      const initialOffset = Math.max(
-        0,
-        (intro.offsetHeight - pcColumn.offsetHeight) / 2,
+    const measureStack = () => {
+      if (!stack || !career || !navigation) return;
+      career.style.setProperty(
+        "--last-card-height",
+        `${cards.at(-1)?.offsetHeight ?? 0}px`,
       );
-
-      pcColumn.style.setProperty(
-        "--pc-initial-offset",
-        `${initialOffset}px`,
+      const navigationTop = Number.parseFloat(getComputedStyle(navigation).top);
+      career.style.setProperty(
+        "--stack-top",
+        `${getComputedStyle(career).display === "grid" ? navigationTop : navigationTop + navigation.offsetHeight + 16}px`,
       );
-      pcColumn.style.setProperty(
-        "--pc-height",
-        `${pcColumn.offsetHeight}px`,
+      const top = Number.parseFloat(
+        getComputedStyle(career).getPropertyValue("--stack-top"),
       );
+      career.style.setProperty("--stack-card-height", "0px");
+      const fittingHeights = cards
+        .filter((card) => card && card.offsetHeight + top + 24 <= window.innerHeight)
+        .map((card) => card?.offsetHeight ?? 0);
+      career.style.setProperty(
+        "--stack-card-height",
+        `${Math.max(0, ...fittingHeights)}px`,
+      );
+      cards.forEach((card, index) => {
+        if (!card) return;
+        const stage = sections[index].parentElement;
+        stage?.style.setProperty("--overlap", `${card.offsetHeight}px`);
+        const cardTop = card.getBoundingClientRect().top;
+        card.querySelectorAll<HTMLElement>("h3, p, img").forEach((target) => {
+          target.style.setProperty(
+            "--card-content-offset",
+            `${target.getBoundingClientRect().top - cardTop}px`,
+          );
+        });
+        stage?.classList.toggle(
+          "can-stick",
+          card.offsetHeight + top + 24 <= window.innerHeight,
+        );
+      });
+      stack.classList.toggle("is-stacking", !reducedMotion.matches);
     };
 
-    // スクロール位置に応じてモニターに映す画像を切り替える
     const update = () => {
-      if (!screens || document.documentElement.classList.contains("stop")) {
-        return;
+      frame = 0;
+      if (stack && navigation) {
+        stack.style.setProperty(
+          "--history-clip-top",
+          `${Math.max(0, navigation.getBoundingClientRect().bottom - stack.getBoundingClientRect().top)}px`,
+        );
       }
-      const anchor = window.innerHeight * 0.45;
-      let active = -1;
-      sections.forEach((section) => {
-        if (section.getBoundingClientRect().top < anchor) {
-          active = Number(section.dataset.tlIdx);
-        }
+      sections.forEach((section, index) => {
+        section.style.setProperty(
+          "--sticky-offset",
+          `${Math.max(0, section.getBoundingClientRect().top - anchors[index].getBoundingClientRect().top)}px`,
+        );
       });
-      screens.forEach((screen) => {
-        const idx = screen.dataset.screenIdx;
-        const isActive =
-          active === -1 ? idx === undefined : Number(idx) === active;
-        screen.classList.toggle("is-active", isActive);
+      const stackTop = stack
+        ? Number.parseFloat(getComputedStyle(stack).getPropertyValue("--stack-top"))
+        : 0;
+      sections.forEach((section, index) => {
+        const nextAnchor = anchors[index + 1];
+        const opacity = nextAnchor
+          ? Math.max(
+              0,
+              Math.min(
+                1,
+                (nextAnchor.getBoundingClientRect().top - stackTop) /
+                  ((cards[index]?.offsetHeight || 1) * 0.25),
+              ),
+            )
+          : 1;
+        section.style.setProperty("--stack-opacity", String(opacity));
+      });
+      let active = 0;
+      anchors.forEach((anchor, index) => {
+        if (anchor.getBoundingClientRect().top <= stackTop + 80) active = index;
+      });
+      if (selector) selector.value = String(active);
+      links.forEach((link, index) => {
+        if (index === active) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
       });
     };
 
-    alignPcPosition();
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-
-    const resizeObserver = new ResizeObserver(alignPcPosition);
-    if (pcColumn && intro) {
-      resizeObserver.observe(pcColumn);
-      resizeObserver.observe(intro);
-    }
-
-    // <html> の `.stop` クラス変化を監視して、再生に戻ったとき表示を同期する
-    const observer = new MutationObserver(() => {
-      alignPcPosition();
-      update();
+    const scheduleUpdate = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    const refresh = () => {
+      measureStack();
+      scheduleUpdate();
+    };
+    const navigate = ({ index }: { index: number }) => {
+      const anchor = anchors[index];
+      const section = sections[index];
+      const link = links[index];
+      if (!anchor || !section || !stack || !link) return;
+      const top = Number.parseFloat(
+        getComputedStyle(stack).getPropertyValue("--stack-top"),
+      );
+      section.focus({ preventScroll: true });
+      window.scrollTo({
+        top: anchor.getBoundingClientRect().top + window.scrollY - top,
+        behavior:
+          reducedMotion.matches ||
+          document.documentElement.classList.contains("stop")
+            ? "instant"
+            : "smooth",
+      });
+      history.pushState(null, "", link.hash);
+    };
+    links.forEach((link, index) => {
+      link.addEventListener("click", (event) => {
+        if (
+          event.button !== 0 ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey
+        )
+          return;
+        event.preventDefault();
+        navigate({ index });
+      });
     });
+    selector?.addEventListener("change", () =>
+      navigate({ index: Number(selector.value) }),
+    );
+    refresh();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", refresh);
+    reducedMotion.addEventListener("change", refresh);
+
+    const resizeObserver = new ResizeObserver(refresh);
+    if (navigation) resizeObserver.observe(navigation);
+    cards.forEach((card) => {
+      if (card) resizeObserver.observe(card);
+    });
+    // <html> の `.stop` クラス変化を監視して、再生に戻ったとき表示を同期する
+    const observer = new MutationObserver(refresh);
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["class"],
@@ -176,67 +268,15 @@ const face = {
 
     .wrapper {
       display: flex;
-      gap: var(--space-2xl);
-      max-width: 90rem;
+      justify-content: center;
+      max-width: var(--text-max-width);
       width: 100%;
-      margin-top: var(--space-xl);
-      padding-bottom: var(--space-3xl);
-    }
-
-    .pc-column {
-      width: 400px;
-      flex: none;
-      position: sticky;
-      top: max(0px, calc(50vh - var(--pc-height) / 2));
-      margin-top: var(--pc-initial-offset, 0);
-      align-self: flex-start;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: var(--space-s);
-
-      @media screen and (max-width: 1024px) /* sync with --bp-md */ {
-        display: none;
-      }
-    }
-
-    :global(.stop) .pc-column {
-      display: none;
-    }
-
-    .monitor {
-      width: 360px;
-      height: 225px;
-      background-color: var(--color-surface);
-      border-radius: var(--radius-xl);
-      border: 8px solid var(--color-surface);
-      position: relative;
-      box-sizing: content-box;
-    }
-
-    .screen-image {
-      display: none;
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: var(--radius-md);
-      background-color: var(--color-surface);
-    }
-
-    .screen-image.is-active {
-      display: block;
-    }
-
-    .keyboard {
-      width: 180px;
-      border-bottom: 30px solid var(--color-surface);
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
+      margin-top: var(--space-2xl);
+      padding-bottom: var(--space-4xl);
     }
 
     .content {
+      width: 100%;
       min-width: 0;
       max-width: var(--text-max-width);
       display: flex;
@@ -251,12 +291,12 @@ const face = {
     .description {
       display: flex;
       flex-direction: column;
-      gap: var(--space-2xs);
-      margin-top: var(--space-s);
+      gap: var(--space-s);
+      margin-top: var(--space-m);
     }
 
     .h2 {
-      margin-top: var(--space-2xl);
+      margin: 0;
       font-size: var(--step-2);
       font-weight: 900;
     }
@@ -266,43 +306,170 @@ const face = {
       font-weight: 900;
     }
 
+    .career {
+      --stack-top: 200px;
+      margin-top: var(--space-4xl);
+    }
+
+    .career-nav {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: var(--space-xs);
+      position: sticky;
+      top: 64px;
+      z-index: var(--z-index-content);
+      background: var(--color-background);
+      padding-block: var(--space-xs);
+      border-bottom: var(--border-width-md) solid var(--color-border);
+    }
+
+    .career-nav ol {
+      display: none;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-2xs);
+      list-style: none;
+    }
+
+    .career-select {
+      display: block;
+      width: 100%;
+      min-height: 44px;
+      margin-top: 0;
+      padding: var(--space-2xs) var(--space-xs);
+      border: var(--border-width-md) solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-size: var(--step--1);
+      appearance: auto;
+    }
+
+    .career-nav a {
+      display: grid;
+      grid-template-columns: 2ch minmax(0, 1fr);
+      align-items: baseline;
+      gap: var(--space-2xs);
+      height: 100%;
+      padding: var(--space-xs);
+      border-radius: var(--radius-md);
+      font-size: var(--step--1);
+      text-decoration: none;
+      min-height: 44px;
+    }
+
+    .career-nav a[aria-current="location"] {
+      background: var(--color-accent);
+    }
+
+    .career-nav a:hover {
+      text-decoration: underline;
+    }
+
+    .career-nav a:focus-visible,
+    .history:focus-visible {
+      outline: var(--border-width-lg) solid var(--color-link);
+      outline-offset: 4px;
+    }
+
+    .career-number {
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .career-label {
+      min-width: 0;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
+
+    .career-phrase {
+      display: inline-block;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    @supports (word-break: auto-phrase) {
+      .career-label {
+        word-break: auto-phrase;
+        overflow-wrap: normal;
+      }
+    }
+
+    .history-anchor {
+      scroll-margin-top: var(--stack-top);
+    }
+
+    .histories {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2xl);
+      margin-top: var(--space-l-xl);
+      isolation: isolate;
+    }
+
     .history {
       position: relative;
-      padding-left: 56px;
-      margin-top: var(--space-xl);
-      padding-bottom: var(--space-l);
+    }
 
-      /* タイムラインの縦線（最後の項目には引かない） */
-      &:not(:last-child)::before {
-        content: "";
-        position: absolute;
-        left: 9px;
-        top: 14px;
-        bottom: calc(var(--space-xl) * -1);
-        width: 2px;
-        background: var(--color-border);
+    .history-card {
+      padding: var(--space-m-l);
+      border: var(--border-width-md) solid var(--color-border);
+      border-radius: var(--radius-xl);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-elevation-4);
+    }
+
+    .history,
+    .history :is(h3, p, img) {
+      scroll-margin-top: calc(var(--stack-top) + var(--space-s));
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      :global(html:not(.stop)) .is-stacking .history-card {
+        min-height: var(--stack-card-height, 0px);
       }
 
-      /* タイムラインの点 */
-      &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 4px;
-        width: 20px;
-        height: 20px;
-        border-radius: var(--radius-infinity);
-        background: var(--color-accent);
-        border: var(--border-width-lg) solid var(--color-border);
-        box-sizing: border-box;
+      :global(html:not(.stop)) .is-stacking .can-stick .history .history-card {
+        opacity: var(--stack-opacity, 1);
       }
 
-      @media screen and (max-width: 1024px) /* sync with --bp-md */ {
-        padding-left: 40px;
+      :global(html:not(.stop)) .histories.is-stacking {
+        gap: 0;
+      }
+
+      :global(html:not(.stop)) .is-stacking .history-stage {
+        margin-bottom: calc(-1 * var(--overlap));
+      }
+
+      :global(html:not(.stop)) .is-stacking .history-stage::after {
+        content: "";
+        display: block;
+        height: calc(35vh + var(--overlap));
+      }
+
+      :global(html:not(.stop)) .is-stacking .history-stage:last-child {
+        margin-bottom: 0;
+      }
+
+      :global(html:not(.stop)) .is-stacking .history-stage:last-child::after {
+        height: max(35vh, calc(100vh - var(--stack-top) - var(--last-card-height)));
+      }
+
+      :global(html:not(.stop)) .is-stacking .can-stick .history,
+      :global(html:not(.stop)) .is-stacking .can-stick .history :is(h3, p, img) {
+        scroll-margin-top: calc(var(--stack-top) + var(--sticky-offset, 0px) + var(--card-content-offset, 0px) + var(--space-s));
+      }
+
+      :global(html:not(.stop)) .is-stacking .can-stick .history {
+        position: sticky;
+        top: var(--stack-top);
+        margin-bottom: 0;
       }
     }
 
     .title-flex {
+      align-self: start;
       display: flex;
       gap: var(--space-2xs);
       align-items: end;
@@ -317,7 +484,19 @@ const face = {
       object-fit: cover;
       border-radius: var(--radius-md);
       border: var(--border-width-sm) solid var(--color-border);
-      margin-top: var(--space-s);
+      margin-top: var(--space-m);
+    }
+
+    @media screen and (max-width: 1024px) /* sync with --bp-md */ {
+      .histories {
+        /* ナビを通過したカードが、その上側へ再露出するのを防ぐ。 */
+        clip-path: inset(min(100%, var(--history-clip-top, 0px)) -40px -40px);
+      }
+
+      .history-card .section-image {
+        display: block;
+        margin-inline: auto;
+      }
     }
 
     /* 自己紹介の顔写真はモニターの中に入れて表示する */
@@ -326,7 +505,7 @@ const face = {
       flex-direction: column;
       align-items: center;
       gap: var(--space-2xs);
-      margin-top: var(--space-s);
+      margin-top: var(--space-l-xl);
     }
 
     .intro-monitor {
@@ -356,72 +535,77 @@ const face = {
     }
 
     @media screen and (min-width: 64.0625rem) /* sync with --bp-md-plus */ {
-      /* アニメーション再生中は左のPCに映すため、自己紹介側のモニター枠は畳む */
-      :global(html:not(.stop)) .intro-figure,
-      :global(html:not(.stop)) .intro-monitor {
-        display: contents;
+      .career {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        align-items: start;
+        gap: var(--space-l);
       }
 
-      :global(html:not(.stop)) .intro-keyboard {
+      .career-select {
         display: none;
       }
 
-      /* アニメーション再生中はモニター側に映すため視覚的にのみ隠す。
-         display: none にせず、スクリーンリーダーには本文の順序どおり読まれるようにする */
-      :global(html:not(.stop)) .section-image {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        margin: 0;
-        border: 0;
-        clip-path: inset(50%);
-        overflow: hidden;
-        white-space: nowrap;
-      }
-
-      /* 停止中はPCカラムが消えるため、コンテンツを左右中央に寄せる */
-      :global(.stop) .wrapper {
-        justify-content: center;
-      }
-
-      /* 停止中は画像をテキストの左に並べる */
-      :global(.stop) .content {
-        max-width: calc(var(--text-max-width) + 340px + var(--space-l));
-      }
-
-      :global(.stop) .intro,
-      :global(.stop) .history {
+      .career-nav ol {
         display: grid;
-        grid-template-columns: 340px minmax(0, 1fr);
+        margin-top: var(--space-l-xl);
+      }
+
+      .career-nav {
+        display: block;
+        top: 120px;
+        padding-block: 0;
+        border-bottom: 0;
+      }
+
+      .histories {
+        min-width: 0;
+        margin-top: 0;
+      }
+
+      .wrapper,
+      .content {
+        max-width: calc(var(--text-max-width) + 400px + var(--space-2xl));
+      }
+
+      .intro,
+      .history-card {
+        display: grid;
+        grid-template-columns: 400px minmax(0, 1fr);
+        grid-template-rows: auto 1fr;
         grid-template-areas:
           "image title"
           "image description";
-        align-items: start;
+        column-gap: var(--space-2xl);
+      }
+
+      .history-card {
+        grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
         column-gap: var(--space-l);
       }
 
-      /* 自己紹介はPC（顔写真）をテキストに対して上下中央に揃える */
-      :global(.stop) .intro .intro-figure {
-        align-self: center;
-      }
-
-      :global(.stop) .name,
-      :global(.stop) .title-flex {
+      .name,
+      .title-flex {
         grid-area: title;
       }
 
-      :global(.stop) .description {
+      .description {
         grid-area: description;
       }
 
-      :global(.stop) .intro-figure {
+      .intro-figure,
+      .history-card .section-image {
         grid-area: image;
+        align-self: center;
         margin-top: 0;
       }
 
-      :global(.stop) .history .section-image {
-        grid-area: image;
-        margin-top: 0;
+      .intro-monitor {
+        width: 376px;
+      }
+
+      .intro-keyboard {
+        width: 180px;
       }
     }
   </style>

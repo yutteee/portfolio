@@ -83,10 +83,10 @@ const hasToc = headings.length > 0;
 <style>
   .wrapper {
     display: grid;
-    gap: var(--space-l);
+    gap: var(--space-2xl) var(--space-l);
     width: 100%;
     margin: 0 auto;
-    padding-top: var(--space-l);
+    padding-top: var(--space-l-xl);
     align-items: start;
 
     /* SP: 縦1列 (title -> toc -> content) */
@@ -148,6 +148,7 @@ const hasToc = headings.length > 0;
   }
 
   .image-container {
+    margin-top: var(--space-m);
     width: 100%;
 
     .image {
@@ -162,6 +163,7 @@ const hasToc = headings.length > 0;
   }
 
   .links {
+    margin-top: var(--space-s);
     display: flex;
     gap: var(--space-s);
     flex-wrap: wrap;

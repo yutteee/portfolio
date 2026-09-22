@@ -120,6 +120,7 @@ const face = {
       if (getComputedStyle(career).display !== "grid")
         top += navigation.offsetHeight + 16;
       stack.classList.toggle("is-stacking", !reducedMotion.matches);
+      // 以前の最小高さを解除して実寸を測る。固定できるカードだけ高さを揃え、背面の下端が露出するのを防ぐ。
       gsap.set(career, { "--stack-top": `${top}px`, "--stack-card-height": "0px" });
       const heights = cards.map((card) => card.offsetHeight);
       const fitting = heights.filter((height) => height + top + 24 <= innerHeight);
@@ -127,6 +128,7 @@ const face = {
       cards.forEach((card, index) => {
         const stage = anchors[index].parentElement;
         gsap.set(stage, { "--overlap": `${card.offsetHeight}px` });
+        // 画面高に収まらないカードは固定せず、末尾まで通常スクロールで読めるようにする。
         stage?.classList.toggle(
           "can-stick",
           card.offsetHeight + top + 24 <= innerHeight,
@@ -142,7 +144,8 @@ const face = {
         "--last-card-height": `${cards.at(-1)?.offsetHeight ?? 0}px`,
       });
     };
-    // Stickyで移動した距離を標準スクロールの余白へ戻し、読み上げ対象を隠さない。
+    // sticky後の座標へスクロールすると、読み上げ対象が次のカードの裏に残ることがある。
+    // 通常位置を保つanchorとの差分とカード内の要素位置をscroll-margin-topに足し、カードの先頭へ戻す。
     const syncGeometry = () => {
       gsap.set(stack, {
         "--history-clip-top": `${Math.max(0, navigation.getBoundingClientRect().bottom - stack.getBoundingClientRect().top)}px`,
@@ -162,6 +165,7 @@ const face = {
     };
 
     measure();
+    // 高さの変化が固定範囲とフェード開始位置に影響するため、GSAPの境界計算より先に測り直す。
     ScrollTrigger.addEventListener("refreshInit", measure);
     ScrollTrigger.create({
       start: 0,
@@ -169,6 +173,7 @@ const face = {
       onUpdate: syncGeometry,
       onRefresh: syncGeometry,
     });
+    // stickyで止まるカードではなく、通常フローに残るanchorをスクロールの基準にする。
     anchors.forEach((anchor, index) => {
       ScrollTrigger.create({
         trigger: anchor,
@@ -178,6 +183,7 @@ const face = {
         onLeaveBack: () => activate({ index: Math.max(0, index - 1) }),
       });
       if (!index) return;
+      // 次のカードが75%覆うまでは読みやすさを保ち、残り25%で前のカードを消す。
       gsap.fromTo(
         sections[index - 1],
         { "--stack-opacity": 1 },
@@ -195,6 +201,7 @@ const face = {
     });
     const navigate = ({ index }: { index: number }) => {
       if (!anchors[index]) return;
+      // ナビから本文へフォーカスを渡す際の自動スクロールと、下の位置指定が競合しないようにする。
       sections[index].focus({ preventScroll: true });
       window.scrollTo({
         top: anchors[index].getBoundingClientRect().top + scrollY - top,
@@ -224,6 +231,7 @@ const face = {
       navigate({ index: Number(selector.value) }),
     );
     const refresh = () => ScrollTrigger.refresh();
+    // ウィンドウ幅以外にも、画像・フォントの読み込みや停止設定で高さが変わる。
     const resizeObserver = new ResizeObserver(refresh);
     [navigation, ...cards].forEach((element) => resizeObserver.observe(element));
     reducedMotion.addEventListener("change", refresh);
@@ -415,6 +423,7 @@ const face = {
         gap: 0;
       }
 
+      /* 次のカードを重ねる距離とstickyの固定区間を両立させる。親の終端を過ぎるとカードは上へ流れる。 */
       :global(html:not(.stop)) .is-stacking .history-stage {
         margin-bottom: calc(-1 * var(--overlap));
       }

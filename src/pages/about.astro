@@ -100,127 +100,111 @@ const face = {
   </main>
 
   <script>
-    const sections = document.querySelectorAll<HTMLElement>(".history");
-    const career = document.querySelector<HTMLElement>(".career");
-    const navigation = document.querySelector<HTMLElement>(".career-nav");
-    const links = document.querySelectorAll<HTMLAnchorElement>(".career-nav a");
-    const selector = document.querySelector<HTMLSelectElement>(".career-select");
-    const anchors = document.querySelectorAll<HTMLElement>(".history-anchor");
-    const stack = document.querySelector<HTMLElement>(".histories");
-    const cards = Array.from(sections, (section) =>
-      section.querySelector<HTMLElement>(".history-card"),
-    );
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let frame = 0;
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-    const measureStack = () => {
-      if (!stack || !career || !navigation) return;
-      career.style.setProperty(
-        "--last-card-height",
-        `${cards.at(-1)?.offsetHeight ?? 0}px`,
-      );
-      const navigationTop = Number.parseFloat(getComputedStyle(navigation).top);
-      career.style.setProperty(
-        "--stack-top",
-        `${getComputedStyle(career).display === "grid" ? navigationTop : navigationTop + navigation.offsetHeight + 16}px`,
-      );
-      const top = Number.parseFloat(
-        getComputedStyle(career).getPropertyValue("--stack-top"),
-      );
-      career.style.setProperty("--stack-card-height", "0px");
-      const fittingHeights = cards
-        .filter((card) => card && card.offsetHeight + top + 24 <= window.innerHeight)
-        .map((card) => card?.offsetHeight ?? 0);
-      career.style.setProperty(
-        "--stack-card-height",
-        `${Math.max(0, ...fittingHeights)}px`,
-      );
+    gsap.registerPlugin(ScrollTrigger);
+    const sections = gsap.utils.toArray<HTMLElement>(".history");
+    const cards = gsap.utils.toArray<HTMLElement>(".history-card");
+    const anchors = gsap.utils.toArray<HTMLElement>(".history-anchor");
+    const links = gsap.utils.toArray<HTMLAnchorElement>(".career-nav a");
+    const career = document.querySelector<HTMLElement>(".career")!;
+    const stack = document.querySelector<HTMLElement>(".histories")!;
+    const navigation = document.querySelector<HTMLElement>(".career-nav")!;
+    const selector = document.querySelector<HTMLSelectElement>(".career-select")!;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let top = 0;
+
+    const measure = () => {
+      top = Number.parseFloat(getComputedStyle(navigation).top);
+      if (getComputedStyle(career).display !== "grid")
+        top += navigation.offsetHeight + 16;
+      stack.classList.toggle("is-stacking", !reducedMotion.matches);
+      gsap.set(career, { "--stack-top": `${top}px`, "--stack-card-height": "0px" });
+      const heights = cards.map((card) => card.offsetHeight);
+      const fitting = heights.filter((height) => height + top + 24 <= innerHeight);
+      gsap.set(career, { "--stack-card-height": `${Math.max(0, ...fitting)}px` });
       cards.forEach((card, index) => {
-        if (!card) return;
-        const stage = sections[index].parentElement;
-        stage?.style.setProperty("--overlap", `${card.offsetHeight}px`);
-        const cardTop = card.getBoundingClientRect().top;
-        card.querySelectorAll<HTMLElement>("h3, p, img").forEach((target) => {
-          target.style.setProperty(
-            "--card-content-offset",
-            `${target.getBoundingClientRect().top - cardTop}px`,
-          );
-        });
+        const stage = anchors[index].parentElement;
+        gsap.set(stage, { "--overlap": `${card.offsetHeight}px` });
         stage?.classList.toggle(
           "can-stick",
-          card.offsetHeight + top + 24 <= window.innerHeight,
+          card.offsetHeight + top + 24 <= innerHeight,
         );
+        const cardTop = card.getBoundingClientRect().top;
+        card.querySelectorAll<HTMLElement>("h3, p, img").forEach((target) => {
+          gsap.set(target, {
+            "--card-content-offset": `${target.getBoundingClientRect().top - cardTop}px`,
+          });
+        });
       });
-      stack.classList.toggle("is-stacking", !reducedMotion.matches);
+      gsap.set(career, {
+        "--last-card-height": `${cards.at(-1)?.offsetHeight ?? 0}px`,
+      });
     };
-
-    const update = () => {
-      frame = 0;
-      if (stack && navigation) {
-        stack.style.setProperty(
-          "--history-clip-top",
-          `${Math.max(0, navigation.getBoundingClientRect().bottom - stack.getBoundingClientRect().top)}px`,
-        );
-      }
+    // Stickyで移動した距離を標準スクロールの余白へ戻し、読み上げ対象を隠さない。
+    const syncGeometry = () => {
+      gsap.set(stack, {
+        "--history-clip-top": `${Math.max(0, navigation.getBoundingClientRect().bottom - stack.getBoundingClientRect().top)}px`,
+      });
       sections.forEach((section, index) => {
-        section.style.setProperty(
-          "--sticky-offset",
-          `${Math.max(0, section.getBoundingClientRect().top - anchors[index].getBoundingClientRect().top)}px`,
-        );
+        gsap.set(section, {
+          "--sticky-offset": `${Math.max(0, section.getBoundingClientRect().top - anchors[index].getBoundingClientRect().top)}px`,
+        });
       });
-      const stackTop = stack
-        ? Number.parseFloat(getComputedStyle(stack).getPropertyValue("--stack-top"))
-        : 0;
-      sections.forEach((section, index) => {
-        const nextAnchor = anchors[index + 1];
-        const opacity = nextAnchor
-          ? Math.max(
-              0,
-              Math.min(
-                1,
-                (nextAnchor.getBoundingClientRect().top - stackTop) /
-                  ((cards[index]?.offsetHeight || 1) * 0.25),
-              ),
-            )
-          : 1;
-        section.style.setProperty("--stack-opacity", String(opacity));
-      });
-      let active = 0;
-      anchors.forEach((anchor, index) => {
-        if (anchor.getBoundingClientRect().top <= stackTop + 80) active = index;
-      });
-      if (selector) selector.value = String(active);
-      links.forEach((link, index) => {
-        if (index === active) link.setAttribute("aria-current", "location");
+    };
+    const activate = ({ index }: { index: number }) => {
+      selector.value = String(index);
+      links.forEach((link, current) => {
+        if (current === index) link.setAttribute("aria-current", "location");
         else link.removeAttribute("aria-current");
       });
     };
 
-    const scheduleUpdate = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
-    const refresh = () => {
-      measureStack();
-      scheduleUpdate();
-    };
-    const navigate = ({ index }: { index: number }) => {
-      const anchor = anchors[index];
-      const section = sections[index];
-      const link = links[index];
-      if (!anchor || !section || !stack || !link) return;
-      const top = Number.parseFloat(
-        getComputedStyle(stack).getPropertyValue("--stack-top"),
+    measure();
+    ScrollTrigger.addEventListener("refreshInit", measure);
+    ScrollTrigger.create({
+      start: 0,
+      end: "max",
+      onUpdate: syncGeometry,
+      onRefresh: syncGeometry,
+    });
+    anchors.forEach((anchor, index) => {
+      ScrollTrigger.create({
+        trigger: anchor,
+        start: () => `top ${top + 80}px`,
+        end: "max",
+        onEnter: () => activate({ index }),
+        onLeaveBack: () => activate({ index: Math.max(0, index - 1) }),
+      });
+      if (!index) return;
+      gsap.fromTo(
+        sections[index - 1],
+        { "--stack-opacity": 1 },
+        {
+          "--stack-opacity": 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: anchor,
+            start: () => `top ${top + cards[index - 1].offsetHeight * 0.25}px`,
+            end: () => `top ${top}px`,
+            scrub: true,
+          },
+        },
       );
-      section.focus({ preventScroll: true });
+    });
+    const navigate = ({ index }: { index: number }) => {
+      if (!anchors[index]) return;
+      sections[index].focus({ preventScroll: true });
       window.scrollTo({
-        top: anchor.getBoundingClientRect().top + window.scrollY - top,
+        top: anchors[index].getBoundingClientRect().top + scrollY - top,
         behavior:
           reducedMotion.matches ||
           document.documentElement.classList.contains("stop")
             ? "instant"
             : "smooth",
       });
-      history.pushState(null, "", link.hash);
+      history.pushState(null, "", links[index].hash);
     };
     links.forEach((link, index) => {
       link.addEventListener("click", (event) => {
@@ -236,25 +220,18 @@ const face = {
         navigate({ index });
       });
     });
-    selector?.addEventListener("change", () =>
+    selector.addEventListener("change", () =>
       navigate({ index: Number(selector.value) }),
     );
-    refresh();
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", refresh);
-    reducedMotion.addEventListener("change", refresh);
-
+    const refresh = () => ScrollTrigger.refresh();
     const resizeObserver = new ResizeObserver(refresh);
-    if (navigation) resizeObserver.observe(navigation);
-    cards.forEach((card) => {
-      if (card) resizeObserver.observe(card);
-    });
-    // <html> の `.stop` クラス変化を監視して、再生に戻ったとき表示を同期する
-    const observer = new MutationObserver(refresh);
-    observer.observe(document.documentElement, {
+    [navigation, ...cards].forEach((element) => resizeObserver.observe(element));
+    reducedMotion.addEventListener("change", refresh);
+    new MutationObserver(refresh).observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["class"],
     });
+    ScrollTrigger.refresh();
   </script>
 
   <style>

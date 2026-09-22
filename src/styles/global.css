@@ -61,6 +61,7 @@
   --space-xl: clamp(3rem, 2.7857rem + 1.0714vw, 3.75rem);
   --space-2xl: clamp(4rem, 3.7143rem + 1.4286vw, 5rem);
   --space-3xl: clamp(6rem, 5.5714rem + 2.1429vw, 7.5rem);
+  --space-4xl: clamp(9rem, 8.3571rem + 3.2143vw, 11.25rem);
 
   /* Space Pairs (小ビューポートで小側、大ビューポートで大側に開く動的スペース) */
   --space-s-m: clamp(1rem, 0.75rem + 1.25vw, 1.875rem);

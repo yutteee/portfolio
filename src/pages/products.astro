@@ -40,27 +40,26 @@ const productsCollection = (await getCollection("products")).sort((a, b) =>
       padding: 0 var(--space-s);
 
       .products {
-        /* grid 2つ並べて折り返す*/
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-2xl) var(--space-xl);
         max-width: 90rem;
         padding-top: var(--space-2xl);
-        padding-bottom: var(--space-3xl);
+        padding-bottom: var(--space-4xl);
         width: 100%;
 
         > *:nth-child(odd) {
-          padding: var(--space-l) var(--space-m) var(--space-2xl) 0;
+          padding-top: var(--space-l);
         }
 
         > *:nth-child(even) {
-          padding: var(--space-3xl) 0 0 var(--space-m);
+          padding-top: var(--space-3xl);
         }
 
         @media screen and (max-width: 1024px) /* sync with --bp-md */ {
           display: flex;
           flex-direction: column;
-          gap: var(--space-l);
-          padding-bottom: var(--space-3xl);
+          gap: var(--space-2xl);
 
           > *:nth-child(odd) {
             padding: 0;

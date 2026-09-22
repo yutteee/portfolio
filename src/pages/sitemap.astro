@@ -54,12 +54,12 @@ const allProducts = (await getCollection("products")).sort((a, b) =>
     align-items: center;
     .links {
       padding-top: var(--space-2xl);
-      padding-bottom: var(--space-3xl);
+      padding-bottom: var(--space-4xl);
       width: 100%;
       max-width: 90rem;
       display: flex;
       flex-direction: column;
-      gap: var(--space-s);
+      gap: var(--space-l-xl);
       padding-left: var(--space-m);
 
       li {
@@ -69,11 +69,11 @@ const allProducts = (await getCollection("products")).sort((a, b) =>
       }
 
       .childLinks {
-        margin-top: var(--space-2xs);
+        margin-top: var(--space-s);
         padding-left: var(--space-m);
         display: flex;
         flex-direction: column;
-        gap: var(--space-2xs);
+        gap: var(--space-s);
       }
     }
   }

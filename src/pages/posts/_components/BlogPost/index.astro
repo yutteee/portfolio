@@ -54,10 +54,10 @@ const { post, Content, headings } = Astro.props;
 <style>
   .wrapper {
     display: grid;
-    gap: var(--space-l);
+    gap: var(--space-2xl) var(--space-l);
     width: 100%;
     margin: 0 auto;
-    padding-top: var(--space-l);
+    padding-top: var(--space-l-xl);
     align-items: start;
 
     /* SP: 縦1列 (title -> toc -> content) */
@@ -109,6 +109,7 @@ const { post, Content, headings } = Astro.props;
       }
 
       .image {
+        margin-top: var(--space-m);
         width: 100%;
         height: auto;
         aspect-ratio: 720 / 378;

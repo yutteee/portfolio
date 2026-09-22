@@ -39,7 +39,7 @@ const allPosts = await getAllPosts();
     align-items: center;
     .articles {
       padding-top: var(--space-2xl);
-      padding-bottom: var(--space-3xl);
+      padding-bottom: var(--space-4xl);
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: var(--space-2xl) var(--space-xl);
@@ -50,7 +50,7 @@ const allPosts = await getAllPosts();
       @media screen and (max-width: 1024px) /* sync with --bp-md */ {
         display: flex;
         flex-direction: column;
-        gap: var(--space-l);
+        gap: var(--space-2xl);
       }
     }
   }

@@ -18,6 +18,13 @@ trustLockfile: false
 blockExoticSubdeps: true
 verifyStoreIntegrity: true
 
+# 上流が要求する旧版を、信頼度条件や脆弱性修正に適合する公開済みの版へ置き換える。
+overrides:
+  chokidar@4.0.3: 5.0.0
+  semver@6.3.1: 7.8.5
+  '@xmldom/xmldom@0.9.10': 0.9.12
+  katex@0.17.0: 0.18.2
+
 allowBuilds:
   '@biomejs/biome': true
   '@swc/core': true

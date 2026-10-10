@@ -25,7 +25,8 @@ export default defineConfig({
     ],
   },
   test: {
-    include: ["src/**/*.test.tsx"],
+    // 同時に起動したページの接続タイムアウトを避け、全ストーリーを順に検証する。
+    fileParallelism: false,
     browser: {
       enabled: true,
       headless: true,
@@ -34,4 +35,4 @@ export default defineConfig({
     },
     setupFiles: ['.storybook/vitest.setup.ts'],
   },
-}); 
+});

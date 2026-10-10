@@ -6,12 +6,14 @@ updates:
   # npm/pnpm 依存
   # patch/minor はエコシステム単位でグループ化して PR 数を抑制する。
   # major は破壊的変更を含むため意図的に個別 PR で扱う。
-  - package-ecosystem: "pnpm"
+  - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "monday"
     open-pull-requests-limit: 10
+    cooldown:
+      default-days: 7
     groups:
       astro:
         patterns:

@@ -95,6 +95,20 @@ scrollToSlide({ target: 3 });
 - Header のテーマ永続化テストが一部失敗中（既存の問題でセッション設定とは無関係）
 - **意味のあるテスト項目がある場合のみ `index.test.tsx` を作成する**。渡した props がそのまま出力されるかを確認するだけの自明なテスト（検証価値のないテスト）は作らない
 
+## pnpmのセキュリティとインストールエラー
+
+- `pnpm-workspace.yaml`の対策は必須。エラー回避のために7日待機（`minimumReleaseAge: 10080`）を短縮したり、`minimumReleaseAgeStrict`、`trustPolicy`、`strictDepBuilds`、`blockExoticSubdeps`、完全性検査を弱めたりしない。`minimumReleaseAgeIgnoreMissingTime: true`、`trustLockfile: true`、`dangerouslyAllowAllBuilds: true`も禁止。
+- CLI・環境変数・グローバル設定による上書きや、`--no-frozen-lockfile`による検証回避も禁止。
+- 除外設定（`minimumReleaseAgeExclude`、`trustPolicyExclude`等）や`allowBuilds`の許可追加は、根拠と対象バージョンを提示し、ユーザーの明示的な承認を得てから行う。今回の作業の許可は、対策を弱める許可を含まない。
+- 依存更新後は`pnpm audit`を実行する。公開待機やスクリプト制限だけでは既知の脆弱性は解消しない。
+- 出典: https://pnpm.io/supply-chain-security
+
+エラー時の手順:
+1. エラーコード・対象パッケージ・バージョンを記録し、公式情報で原因を確認する。
+2. 公開待機中なら待つか、条件を満たす修正版を選ぶ。信頼度低下は適合する依存へ更新する。未承認スクリプトは内容を確認して承認を求める。通信障害は接続を確認する。
+3. ロック不整合は対策を維持した正規の更新操作で修正する。既存ロック自体が拒否される場合、退避して再解決し、失敗したら元に戻す。
+4. `pnpm install --frozen-lockfile`と関連チェックを再実行する。解決できない場合は原因と未完了事項を報告し、停止する。
+
 ## セッション開始フック
 
 `.Codex/hooks/session-start.sh` にセッション開始フックが設定されています：

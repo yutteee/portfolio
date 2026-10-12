@@ -12,7 +12,7 @@ on:
       - 'pnpm-workspace.yaml'
       - '.npmrc'
       - '.github/workflows/component-test.yml'
-      - 'scripts/dependency-compatibility.test.mjs'
+      - 'scripts/**'
       - 'tsconfig.json'
   push:
     branches: [main]

@@ -24,6 +24,8 @@ overrides:
   semver@6.3.1: 7.8.5
   '@xmldom/xmldom@0.9.10': 0.9.12
   katex@0.17.0: 0.18.2
+  http-cache-semantics@4.2.0: 4.3.0
+  'gray-matter@4.0.3>js-yaml': 4.3.2
 
 allowBuilds:
   '@biomejs/biome': true

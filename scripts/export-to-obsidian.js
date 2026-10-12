@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import matter from "gray-matter";
+import { parseFrontmatter, stringifyFrontmatter } from "./lib/frontmatter.js";
 import { findImageRefs, resolvePaths } from "./lib/obsidian.js";
 
 const paths = resolvePaths();
@@ -18,7 +18,7 @@ const listDirs = async (dir) => {
 const exportEntry = async ({ folder, sourceRoot, vaultDir, usedNames }) => {
   const entryDir = path.join(sourceRoot, folder);
   const raw = await fs.readFile(path.join(entryDir, "index.md"), "utf-8");
-  const { data, content } = matter(raw);
+  const { data, content } = parseFrontmatter({ raw });
 
   // 共有 attachments フォルダは vault 全体で名前が一意である必要があるため、
   // 別記事と同名の画像はフォルダ名を接頭辞に付けて衝突を避ける。
@@ -45,7 +45,10 @@ const exportEntry = async ({ folder, sourceRoot, vaultDir, usedNames }) => {
   }
 
   const noteName = safeFileName({ name: data.title || folder });
-  const output = matter.stringify(body, { ...data, slug: folder });
+  const output = stringifyFrontmatter({
+    content: body,
+    data: { ...data, slug: folder },
+  });
   await fs.writeFile(path.join(vaultDir, `${noteName}.md`), output);
   return { noteName, copiedImages };
 };

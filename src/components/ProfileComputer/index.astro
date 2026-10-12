@@ -1,0 +1,17 @@
+---
+import { Image } from "astro:assets";
+import styles from "./index.module.css";
+---
+
+<div class={styles.computer}>
+  <div class={styles.monitor}>
+    <Image
+      src="/yutteee.png"
+      width={400}
+      height={250}
+      class={styles.screen}
+      alt="顔写真：黒い服を着た、黒髪を分けている男性(中村優作)が座ってパソコンの画面を見ている。"
+    />
+  </div>
+  <div class={styles.keyboard} aria-hidden="true"></div>
+</div>

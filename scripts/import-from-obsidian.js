@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import matter from "gray-matter";
+import { parseFrontmatter, stringifyFrontmatter } from "./lib/frontmatter.js";
 import {
   dateToFolder,
   findImageRefs,
@@ -97,7 +97,7 @@ const KINDS = {
 const importEntry = async ({ file, kind, attachmentsIndex, vaultIndex }) => {
   const config = KINDS[kind];
   const raw = await fs.readFile(file, "utf-8");
-  const { data, content } = matter(raw);
+  const { data, content } = parseFrontmatter({ raw });
   const source = path.relative(paths.vaultRoot, file);
 
   if (data.draft === true) return { skipped: true };
@@ -153,8 +153,10 @@ const importEntry = async ({ file, kind, attachmentsIndex, vaultIndex }) => {
 
   // lineWidth: -1 で description の折り畳み（>-）を無効化し、
   // 再インポート時に frontmatter の差分が出ない決定論的な出力にする。
-  const output = matter.stringify(body, config.frontmatter({ data }), {
-    lineWidth: -1,
+  const output = stringifyFrontmatter({
+    content: body,
+    data: config.frontmatter({ data }),
+    options: { lineWidth: -1 },
   });
   await fs.writeFile(path.join(targetDir, "index.md"), output);
   return { slug: folder, copiedImages };

@@ -9,6 +9,11 @@ on:
       - 'vitest.unit.config.ts'
       - 'package.json'
       - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+      - '.npmrc'
+      - '.github/workflows/component-test.yml'
+      - 'scripts/**'
+      - 'tsconfig.json'
   push:
     branches: [main]
 
@@ -25,6 +30,8 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
       - name: Run unit tests
         run: pnpm run test:unit
+      - name: Run script regression tests
+        run: pnpm run test:scripts

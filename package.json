@@ -20,7 +20,6 @@
     "test": "vitest --config vitest.unit.config.ts && vitest --config vitest.storybook.config.ts",
     "test:unit": "vitest --config vitest.unit.config.ts",
     "test:scripts": "node --test scripts/*.test.mjs",
-    "test:profile-computer": "node scripts/check-profile-computer.mjs",
     "test:storybook": "vitest --config vitest.storybook.config.ts",
     "plop": "plop",
     "copy-images": "node scripts/copy-images.js",

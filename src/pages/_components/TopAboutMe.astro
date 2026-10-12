@@ -1,23 +1,11 @@
 ---
-import { Image } from "astro:assets";
+import ProfileComputer from "../../components/ProfileComputer/index.astro";
 import { FiArrowRight } from "react-icons/fi";
 import { Button } from "../../ui/Button";
 ---
 
 <div class="about">
-  <div class="pc">
-    <div class="monitor">
-      <Image
-        src="/yutteee.png"
-        width="300"
-        height="187.5"
-        id="screen0"
-        class="screen"
-        alt="顔写真：黒い服を着た、黒髪を分けている男性(中村優作)が座ってパソコンの画面を見ている。"
-      />
-    </div>
-    <div class="keyboard"></div>
-  </div>
+  <ProfileComputer />
   <section class="texts">
     <h1 class="title">中村 優作</h1>
     <p>
@@ -39,41 +27,6 @@ import { Button } from "../../ui/Button";
     @media screen and (max-width: 1024px) /* sync with --bp-md */ {
       flex-direction: column;
       gap: var(--space-l-xl);
-    }
-
-    .pc {
-      width: 100%;
-      max-width: 300px;
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      gap: var(--space-xl);
-      .monitor {
-        width: 300px;
-        height: 187.5px;
-        background-color: var(--color-surface);
-        border-radius: var(--radius-xl);
-        border: 8px solid var(--color-surface);
-        position: relative;
-
-        .screen {
-          position: absolute;
-          top: 0;
-          left: 0;
-          background-color: var(--color-surface);
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border-radius: var(--radius-md);
-        }
-      }
-
-      .keyboard {
-        width: 150px;
-        border-bottom: 30px solid var(--color-surface);
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-      }
     }
 
     .texts {

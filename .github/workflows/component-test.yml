@@ -33,5 +33,5 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Run unit tests
         run: pnpm run test:unit
-      - name: Verify dependency compatibility
-        run: pnpm run test:dependencies
+      - name: Run script regression tests
+        run: pnpm run test:scripts

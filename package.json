@@ -19,7 +19,7 @@
     "build-storybook": "storybook build",
     "test": "vitest --config vitest.unit.config.ts && vitest --config vitest.storybook.config.ts",
     "test:unit": "vitest --config vitest.unit.config.ts",
-    "test:dependencies": "node --test scripts/*.test.mjs",
+    "test:scripts": "node --test scripts/*.test.mjs",
     "test:storybook": "vitest --config vitest.storybook.config.ts",
     "plop": "plop",
     "copy-images": "node scripts/copy-images.js",

@@ -3,13 +3,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "私について";
 const pageDescription = "中村優作の自己紹介ページです。";
 import { Image } from "astro:assets";
+import ProfileComputer from "../components/ProfileComputer/index.astro";
 import { histories } from "../data/history";
 import { PageTitle } from "../ui/PageTitle";
-
-const face = {
-  image: "/yutteee.png",
-  alt: "顔写真：黒い服を着た、黒髪を分けている男性(中村優作)が座ってパソコンの画面を見ている。",
-};
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -29,16 +25,7 @@ const face = {
             <p>お笑い、読書、ランニング、コストコが好きです。</p>
           </div>
           <div class="intro-figure">
-            <div class="intro-monitor">
-              <Image
-                src={face.image}
-                width="400"
-                height="250"
-                alt={face.alt}
-                class="section-image"
-              />
-            </div>
-            <div class="intro-keyboard"></div>
+            <ProfileComputer />
           </div>
         </section>
 
@@ -485,39 +472,10 @@ const face = {
       }
     }
 
-    /* 自己紹介の顔写真はモニターの中に入れて表示する */
     .intro-figure {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: var(--space-2xs);
+      justify-content: center;
       margin-top: var(--space-l-xl);
-    }
-
-    .intro-monitor {
-      width: 340px;
-      max-width: 100%;
-      aspect-ratio: 8/5;
-      background-color: var(--color-surface);
-      border-radius: var(--radius-xl);
-      border: 8px solid var(--color-surface);
-      position: relative;
-    }
-
-    .intro-monitor .section-image {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      border: 0;
-    }
-
-    .intro-keyboard {
-      width: 160px;
-      border-bottom: 26px solid var(--color-surface);
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
     }
 
     @media screen and (min-width: 64.0625rem) /* sync with --bp-md-plus */ {
@@ -584,14 +542,6 @@ const face = {
         grid-area: image;
         align-self: center;
         margin-top: 0;
-      }
-
-      .intro-monitor {
-        width: 376px;
-      }
-
-      .intro-keyboard {
-        width: 180px;
       }
     }
   </style>

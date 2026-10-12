@@ -93,6 +93,13 @@
   --border-width-sm: 0.5px;
   --border-width-md: 1px;
   --border-width-lg: 2px;
+  --border-width-xl: 8px;
+
+  /* PCモチーフはモニター幅を基準に比率を揃える。 */
+  --computer-aspect-ratio: 1.6; /* @kind other */
+  --computer-gap-ratio: 0.1; /* @kind other */
+  --computer-keyboard-width-ratio: 0.5; /* @kind other */
+  --computer-keyboard-depth-ratio: 0.1; /* @kind other */
 
   /* Box Shadow */
   --shadow-elevation-2: 0px 2px 6px 0px rgba(0, 0, 0, 0.15);

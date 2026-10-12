@@ -31,7 +31,7 @@
     "@astrojs/mdx": "^6.0.1",
     "@astrojs/react": "^5.0.6",
     "@astrojs/rss": "^4.0.19",
-    "@astrojs/sitemap": "3.7.3",
+    "@astrojs/sitemap": "3.7.4",
     "@iconify-json/clarity": "^1.1.13",
     "@iconify-json/formkit": "^1.1.8",
     "@iconify-json/lets-icons": "^1.1.2",

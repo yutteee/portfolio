@@ -27,11 +27,11 @@
     "blog:export": "node scripts/export-to-obsidian.js"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.9",
+    "@astrojs/check": "^0.9.11",
     "@astrojs/mdx": "^6.0.1",
     "@astrojs/react": "^5.0.6",
     "@astrojs/rss": "^4.0.19",
-    "@astrojs/sitemap": "3.7.3",
+    "@astrojs/sitemap": "3.7.4",
     "@iconify-json/clarity": "^1.1.13",
     "@iconify-json/formkit": "^1.1.8",
     "@iconify-json/lets-icons": "^1.1.2",
@@ -39,7 +39,7 @@
     "@iconify-json/weui": "^1.1.0",
     "@marp-team/marp-core": "^4.1.0",
     "@resvg/resvg-js": "^2.6.2",
-    "astro": "^7.1.1",
+    "astro": "^7.4.1",
     "astro-icon": "^1.1.0",
     "astro-seo": "^1.1.0",
     "destyle.css": "^4.0.1",

@@ -39,7 +39,7 @@
     "@iconify-json/weui": "^1.1.0",
     "@marp-team/marp-core": "^4.1.0",
     "@resvg/resvg-js": "^2.6.2",
-    "astro": "^7.1.1",
+    "astro": "^7.4.7",
     "astro-icon": "^1.1.0",
     "astro-seo": "^1.1.0",
     "destyle.css": "^4.0.1",
